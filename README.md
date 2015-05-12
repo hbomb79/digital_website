@@ -13,10 +13,10 @@ Requirements:
  - footer
  - background image (blur)
 
-All game specific content must be contained in <div class="page" id="YOUR_PAGE_NAME">
+All game specific content must be contained in div with class page
 
 For example:
-
+<pre>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,6 +32,7 @@ For example:
 	</div>
 </body>
 </html>
+</pre>
 
 #WIREFRAME LINK
 ====
