@@ -4,7 +4,7 @@ Harry, Clayton and Brynns School Website
 Gaming site, includes Grand Theft Auto V, Assassin's Creed, TF2 and more!!
 
 
-Page Layout
+#Page Layout
 =====
 
 Requirements:
@@ -33,6 +33,6 @@ For example:
 </body>
 </html>
 
-WIREFRAME LINK
+#WIREFRAME LINK
 ====
 https://wireframe.cc/MfvhAU
