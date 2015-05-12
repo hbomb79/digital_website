@@ -16,7 +16,6 @@ Requirements:
 All game specific content must be contained in div with class page
 
 For example:
-<pre>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +31,6 @@ For example:
 	</div>
 </body>
 </html>
-</pre>
 
 #WIREFRAME LINK
 ====
