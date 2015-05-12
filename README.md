@@ -24,6 +24,8 @@ For example:
 	<title>Test Document</title>
 </head>
 <body>
+	<img src="assets/image/YOURIMAGE" class="page-bg" id="your-page-background" alt="background image">
+	<!--The background image must be contained on the outside of this div because it is being animated using other methods-->
 	<div class="page" id="home-page">
 		<h1>My page</h1>
 		<p>This is my page</p>
