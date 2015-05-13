@@ -197,7 +197,6 @@ function pop_start(page_url, from_url){
 			integer = scroll_to("header", false)
 		}
 		test_var = raw;
-		$(".about-background").fadeOut()
 		setTimeout(function(){
 			// Update the body of the current page with this ones.
 			if (!$(raw).filter(".page-container")[0] || !$(raw).filter(".page-bg")) {
