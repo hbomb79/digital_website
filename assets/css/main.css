@@ -36,6 +36,35 @@ html, body {
 	text-align: center;
 }
 
+.page-container{
+	transform: translate(100%, 0);
+    -webkit-transform: translate(100%, 0);
+    -moz-transform: translate(100%, 0);
+    transition: transform 1s ease, opacity 1s;
+    -webkit-transition: -webkit-transform 1s ease, opacity 1s;
+    -moz-transition: -moz-transform 1s ease, opacity 1s;
+    position: absolute;
+    width: 100%;
+    min-height: 100vh;
+    opacity: 0;
+}
+
+.page-container.current{
+	-webkit-transform: none;
+	-ms-transform: none;
+	-o-transform: none;
+	transform: none;
+	opacity: 1;
+}
+
+.page-container.leave {
+    transform: translate(-100%, 0);
+    -moz-transform: translate(-100%, 0);
+    -webkit-transform: translate(-100%, 0);
+    -o-transform: translate(-100%, 0);
+    opacity: 0;
+}
+
 a {
 	color:crimson;
 	text-decoration: none;
@@ -108,6 +137,12 @@ nav ul li:hover{
 
 .page-bg#main-page-bg {
 	background: url('../image/homepage.jpg') no-repeat center center;
+	background-size:cover;
+	-webkit-filter: blur(5px);
+}
+
+.page-bg#cs-page-bg {
+	background: url('../image/cs.png') no-repeat center center;
 	background-size:cover;
 	-webkit-filter: blur(5px);
 }

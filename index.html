@@ -6,6 +6,7 @@
 	<title>Home Page</title>
 	<link rel="stylesheet" href="assets/css/main.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="assets/javascript/ajax_dynamic.js"></script>
 	<script>
 		var timer_out = setTimeout(function(){
 			if ($("#loading").is(":visible")) {
@@ -37,14 +38,14 @@
 	<header><!--This header is fixed, meaning it will stay at the top of the page constantly, a media query will disable this on a mobile level-->
 		<nav>
 			<ul>
-				<a href="#" class="ajax_load active"><li>Home</li></a>
+				<a href="index.html" class="ajax_load active"><li>Home</li></a>
 				<a href="#" class="ajax_load"><li>About</li></a>
 				<a href="#" class="ajax_load"><li>Contact</li></a>
 			</ul>
 		</nav>
 	</header>
-	<div class="page-bg" id="main-page-bg"></div>
-	<div class="page">
+	<div class="page-bg" id="main-page-bg"> <!--Faded out and replaced using ajax--> </div>
+	<div class="page-container current" id="index"> <!-- Slide off screen, slide new page on screen using ajax -->
 		<div id="wrapper">
 			<div id="container">
 				<main>
@@ -64,7 +65,7 @@
 								<div class="game-title"><span>Assasins Creed</span></div></a>
 						</div>
 						<div class="game">
-							<a href="http://google.com"><div class="game-bg" id="TF"></div>
+							<a href="http://google.com" class="ajax_load"><div class="game-bg" id="TF"></div>
 								<div class="game-title"><span>Team Fortress 2</span></div></a>
 						</div>
 						<div class="game">
@@ -72,7 +73,7 @@
 								<div class="game-title"><span>Garrys Mod</span></div></a>
 						</div>
 						<div class="game">
-							<a href="http://google.com"><div class="game-bg" id="CS"></div>
+							<a href="csgo.html" class="ajax_load"><div class="game-bg" id="CS"></div>
 								<div class="game-title"><span>Counter Strike: Global Offensive</span></div></a>
 						</div>
 						<div class="game">
