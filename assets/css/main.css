@@ -63,6 +63,14 @@ html, body {
 }
 
 #bubblingG_1 {
+	-moz-animation-delay: 0.99s;
+	-webkit-animation-delay: 0.99s;
+	-ms-animation-delay: 0.99s;
+	-o-animation-delay: 0.99s;
+	animation-delay: 0.99s;
+}
+
+#bubblingG_2 {
 	-moz-animation-delay: 0.66s;
 	-webkit-animation-delay: 0.66s;
 	-ms-animation-delay: 0.66s;
@@ -70,20 +78,12 @@ html, body {
 	animation-delay: 0.66s;
 }
 
-#bubblingG_2 {
+#bubblingG_3 {
 	-moz-animation-delay: 0.33s;
 	-webkit-animation-delay: 0.33s;
 	-ms-animation-delay: 0.33s;
 	-o-animation-delay: 0.33s;
 	animation-delay: 0.33s;
-}
-
-#bubblingG_3 {
-	-moz-animation-delay: 0s;
-	-webkit-animation-delay: 0s;
-	-ms-animation-delay: 0s;
-	-o-animation-delay: 0s;
-	animation-delay: 0s;
 }
 
 @-moz-keyframes bubblingG {
