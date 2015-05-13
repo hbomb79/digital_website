@@ -4,5 +4,5 @@ function doc_load(){
 }
 
 $(document).ready(function(){
-	setTimeout(function() { $("#loading").fadeOut(250) }, 2000)
+	$("#loading").fadeOut(250)
 })
