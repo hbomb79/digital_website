@@ -32,7 +32,7 @@ For example:
 			</ul>
 		</nav>
 	</header>
-	<div class="page" id="home-page">
+	<div class="page-container” id="home-page">
 		<h1>My page</h1>
 		<p>This is my page</p>
 	</div>

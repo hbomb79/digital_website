@@ -1,8 +1,10 @@
+@import url(http://fonts.googleapis.com/css?family=Orbitron|Roboto:400,700,900);
 html, body {
 	padding: 0;
 	margin: 0;
 	color:black;
 	font-size: 16px;
+	font-family: 'Roboto', sans-serif;
 }
 
 #loading {
@@ -75,6 +77,10 @@ a:active, a:hover {
 	color:red;
 }
 
+header {
+	font-family: 'Orbitron', sans-serif;
+}
+
 header a {
 	color:white;
 	text-decoration: none;
@@ -82,6 +88,10 @@ header a {
 
 h1.large {
 	font-size: 3em;
+}
+
+.large {
+	font-family: 'Orbitron', sans-serif;
 }
 
 h1#title {
