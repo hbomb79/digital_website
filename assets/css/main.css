@@ -94,11 +94,16 @@ section.h1 {
 
 .game-container .game{
 	display:inline-block;
+	background: black;
 	width:250px;
 	height:200px;
 	text-align:center;
 	margin: 0.5em 0.5em;
 	position: relative;
+	border: solid 3px black;
+	box-shadow: 0 0 5px crimson;
+	overflow:hidden;
+	cursor:pointer;
 }
 
 .game > .game-bg{
@@ -107,9 +112,9 @@ section.h1 {
 	position: absolute;
 	top:0;
 	left:0;
-	-webkit-transition: all 300ms ease-in-out;
-	-o-transition: all 300ms ease-in-out;
-	transition: all 300ms ease-in-out;
+	-webkit-transition: all 150ms ease-in-out;
+	-o-transition: all 150ms ease-in-out;
+	transition: all 150ms ease-in-out;
 }
 
 .game > .game-bg#GTAV {
@@ -134,12 +139,13 @@ section.h1 {
  	position: relative;
  	z-index:2;
  	margin: 0 auto;
- 	font-size:2em;
+ 	font-size:2.1em;
+ 	text-shadow: 0 0 10px black;
  	color:white;
  	-webkit-transition: opacity 0.3s ease-in-out;
  	-o-transition: opacity 0.3s ease-in-out;
  	transition: opacity 0.3s ease-in-out;
- 	font-weight: bolder;
+ 	font-weight:bolder;
  	padding:5px;
 }
 
