@@ -24,6 +24,7 @@ header {
 	left:0;
 	right:0;
 	width:100%;
+	z-index: 1001;
 }
 
 nav ul{
@@ -95,30 +96,62 @@ section.h1 {
 	display:inline-block;
 	width:250px;
 	height:200px;
-	background:blue;
 	text-align:center;
 	margin: 0.5em 0.5em;
 	position: relative;
-	-webkit-transition: all 0.3s ease-in-out;
- 	-o-transition: all 0.3s ease-in-out;
- 	transition: all 0.3s ease-in-out;
 }
 
-.game#GTAV{
+.game > .game-bg{
+	width:100%;
+	height:100%;
+	position: absolute;
+	top:0;
+	left:0;
+	-webkit-transition: all 300ms ease-in-out;
+	-o-transition: all 300ms ease-in-out;
+	transition: all 300ms ease-in-out;
+}
+
+.game > .game-bg#GTAV {
 	background: url("../image/homepage.jpg") center center;
 	background-size: cover;
 }
 
-.game h1 {
-	display: table-cell;
- 	vertical-align: middle;
- 	opacity:0;
+.game > .game-bg#AC {
+	background: url("../image/ac.jpg") center center;
+	background-size: cover;
 }
 
-.game:hover > h1 {
+.game > .game-bg#TF {
+	background: url("../image/tf2.jpg") center center;
+	background-size: cover;
+}
+
+.game .game-title {
+	display: table;
+ 	height:100%;
+ 	opacity:0;
+ 	position: relative;
+ 	z-index:2;
+ 	margin: 0 auto;
+ 	font-size:2em;
+ 	color:white;
+ 	-webkit-transition: opacity 0.3s ease-in-out;
+ 	-o-transition: opacity 0.3s ease-in-out;
+ 	transition: opacity 0.3s ease-in-out;
+ 	font-weight: bolder;
+ 	padding:5px;
+}
+
+.game .game-title span {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.game:hover > .game-title {
 	opacity: 1;
 }
 
-.game:hover {
+.game:hover > .game-bg {
 	-webkit-filter: blur(5px);
 }
