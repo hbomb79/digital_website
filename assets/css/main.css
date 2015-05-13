@@ -238,6 +238,21 @@ section.h1 {
 	background-size: cover;
 }
 
+.game .game-bg#PORTAL2 {
+	background: url("../image/p2.jpg") center center;
+	background-size: cover;
+}
+
+.game .game-bg#L4D2 {
+	background: url("../image/l4d2.jpg") left center;
+	background-size: cover;
+}
+
+.game .game-bg#PAYDAY {
+	background: url("../image/payday.jpg") center center;
+	background-size: cover;
+}
+
 
 .game .game-title {
 	display: table;

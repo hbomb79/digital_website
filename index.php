@@ -31,15 +31,11 @@
 						</div>	
 						<div class="game">
 							<a href="http://google.com"><div class="game-bg" id="AC"></div>
-								<div class="game-title"><span>Assasins Creed</span></div></a>
+								<div class="game-title"><span>Assassin's Creed Unity</span></div></a>
 						</div>
 						<div class="game">
 							<a href="http://google.com" class="ajax_load"><div class="game-bg" id="TF"></div>
 								<div class="game-title"><span>Team Fortress 2</span></div></a>
-						</div>
-						<div class="game">
-							<a href="http://google.com"><div class="game-bg" id="GMOD"></div>
-								<div class="game-title"><span>Garrys Mod</span></div></a>
 						</div>
 						<div class="game">
 							<a href="csgo.php" class="ajax_load"><div class="game-bg" id="CS"></div>
@@ -47,7 +43,19 @@
 						</div>
 						<div class="game">
 							<a href="http://google.com"><div class="game-bg" id="SKY"></div>
-								<div class="game-title"><span>Skyrim</span></div></a>
+								<div class="game-title"><span>Elder Scrolls V: Skyrim</span></div></a>
+						</div>
+						<div class="game">
+							<a href="http://google.com"><div class="game-bg" id="PORTAL2"></div>
+								<div class="game-title"><span>Portal 2</span></div></a>
+						</div>
+						<div class="game">
+							<a href="http://google.com"><div class="game-bg" id="L4D2"></div>
+								<div class="game-title"><span>Left 4 Dead 2</span></div></a>
+						</div>
+						<div class="game">
+							<a href="http://google.com"><div class="game-bg" id="PAYDAY"></div>
+								<div class="game-title"><span>Payday: The Heist</span></div></a>
 						</div>
 					</div>
 				</main>
