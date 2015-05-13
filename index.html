@@ -6,7 +6,6 @@
 	<title>Home Page</title>
 	<link rel="stylesheet" href="assets/css/main.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script src="assets/javascript/page.js"></script>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 </head>
 <body>
@@ -15,18 +14,14 @@
 		<div id="diag">
 			<h1>Loading</h1>
 			<p>Please wait while we load the document</p>
-			<div class="bubblingG">
-				<span id="bubblingG_1">
-				</span>
-				<span id="bubblingG_2">
-				</span>
-				<span id="bubblingG_3">
-				</span>
-			</div>
+			<img src="assets/image/load.gif" alt="Loading Animation">
 		</div>
 	</div>
 	<script>
-		doc_load()
+		$("#loading").show()
+		$(window).load(function(){
+			$("#loading").fadeOut(500)
+		})
 	</script>
 	<header><!--This header is fixed, meaning it will stay at the top of the page constantly, a media query will disable this on a mobile level-->
 		<nav>
