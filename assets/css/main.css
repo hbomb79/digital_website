@@ -199,6 +199,7 @@ header {
 	right:0;
 	width:100%;
 	z-index: 1001;
+	box-shadow: 0 0 5px black;
 }
 
 nav ul{
