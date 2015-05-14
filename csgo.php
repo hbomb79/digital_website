@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- index.html Landing Page HARRY FELTON -->
+<!-- csgo.php Landing Page HARRY FELTON -->
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -7,55 +7,28 @@
 	<link rel="stylesheet" href="assets/css/main.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="assets/javascript/ajax_dynamic.js"></script>
-	<script>
-		var timer_out = setTimeout(function(){
-			if ($("#loading").is(":visible")) {
-				$("#loading").hide()
-			}
-		}, 15000)
-	</script>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 </head>
 <body>
-	<div id="loading">
-		<div id="shadow"></div>
-		<div id="diag">
-			<h1>Loading</h1>
-			<p>Please wait while we load the document</p>
-			<img src="http://i.imgur.com/6EkrPfM.gif?1" style="display:none;" id="load-spinner" title="Loading..." alt="Loading Animation" />
-		</div>
-	</div>
-	<script>
-		$("#load-spinner").load(function(){
-			$("#load-spinner").slideDown(250)
-		})
-		$("#loading").show()
-		$(window).load(function(){
-			setTimeout(function() { $("#loading").slideUp(500) } , 500)
-			clearTimeout(timer_out)
-		})
-	</script>
-	<header><!--This header is fixed, meaning it will stay at the top of the page constantly, a media query will disable this on a mobile level-->
-		<nav>
-			<ul>
-				<a href="index.html" class="ajax_load active"><li>Home</li></a>
-				<a href="#" class="ajax_load"><li>About</li></a>
-				<a href="#" class="ajax_load"><li>Contact</li></a>
-			</ul>
-		</nav>
-	</header>
+	<?php
+		require_once"assets/server/header_addin.php";
+	?>
 	<div class="page-bg" id="cs-page-bg"> <!--Faded out and replaced using ajax--> </div>
 	<div class="page-container current" id="csgo"> <!-- Slide off screen, slide new page on screen using ajax -->
 		<div id="wrapper">
 			<div id="container">
 				<main>
 					<h1 class="large" id="title">Counter Strike: Global Offensive</h1>
+					<div class="image-wrapper wide">
+						<img src="assets/image/cs1.jpg" class="center-image" alt="Picture of counter strike: global offensive">
+					</div>
 					<section>
 						<h1>What is Counter Strike?</h1>
-
+						<p>Counter Strike: Global Offensive, often refereed to as CSGO is an online tactical shooter, it contains multiple game modes such as competitive, arms race, demolition and casual, all entaling their own set of rules, although, the counter strike franchise is popular for a reason that isn't its game modes. <br>Lets be honest, CS:GO doesn't have many game modes. <br>You might be asking yourself, if it doesn't have an abundance of game modes, then why is it so popular...</p>
 					</section>
 					<section>
-						<h1>Example</h1>
+						<h1>Go on then, tell me</h1>
+						<p>CS:GO, is popular because its competitive game mode is tactical and well... competitive, not many first person shooter games are, most of them are like call of duty, very fast paced, not designed to be tactical, and often is not. Although CS:GO on the other hand, relies on your ability to communicate with your teammates, to formulate strategies. <br>In CS:GO competitive there are two teams, Terrorists, and Counter Terrorists, Abbreviated T and CT</p>
 					</section>
 					<section>
 						<h1>Example</h1>

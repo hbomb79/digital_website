@@ -88,6 +88,7 @@ header a {
 
 h1.large {
 	font-size: 3em;
+	text-decoration: underline;
 }
 
 .large {
@@ -283,6 +284,23 @@ section.h1 {
 .game:hover .game-bg {
 	-webkit-filter: blur(5px);
 }
+
+/* Game Pages 
+--------------------*/
+.image-wrapper {
+	text-align: center;
+}
+
+.center-image {
+	width:88%;
+	box-shadow: 0 5px 5px -5px black;
+}
+
+
+/* CSGO Page 
+--------------------*/
+
+
 
 footer {
 	text-align:center;
