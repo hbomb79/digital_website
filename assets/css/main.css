@@ -192,6 +192,40 @@ nav ul a.current li {
 	background: darkred;
 }
 
+.handle{
+	width:100%;
+	background:crimson;
+	color:white;
+	text-align:center;
+	box-sizing: border-box;
+	padding: 0px 10px;
+	cursor: pointer;
+	display: none;
+	height: 56px;
+}
+.handle #text{
+	text-align: left;
+	display: inline-block;
+	float:left;
+	padding:20px 9px;
+
+}
+.handle #icon{
+	text-align: right;
+	line-height: 0em;
+	display: inline-block;
+	float:right;
+	vertical-align: middle;
+	padding:9px;
+	margin-top: 1.04em;
+}
+.handle:hover{
+	background:darkred;
+}
+.handle.active{
+	background:darkred;
+}
+
 #container, footer {
 	width: 88%;
 	max-width:960px;
@@ -376,8 +410,6 @@ section.h1 {
 /* CSGO Page 
 --------------------*/
 
-
-
 footer {
 	text-align:center;
 	margin: 0 auto;
@@ -386,4 +418,56 @@ footer {
 
 footer #foot-contain {
 	font-size:0.7em;
+}
+
+.mobile-show {
+	display:none;
+}
+
+.clearfix:after{
+	visibility: hidden;
+	clear:both;
+	height:0;
+	display:block;
+	content:".";
+}
+
+@media screen and (max-width: 700px) {
+	/* Change css rules to ones that apply for a mobile device */
+	#container, footer {
+		width:100%;
+		margin: 0;
+		padding: 1em 0;
+	}
+
+	.page-bg {
+		display: none;
+	}
+
+	.mobile-hide {
+		display:none;
+	}
+
+	.mobile-show {
+		display:block;
+	}
+
+	.page-container{
+		min-width:0;
+	}
+
+	nav ul{
+		max-height:0px;
+	}
+	.showing{
+		max-height:15em;
+	}
+	.handle{
+		display:block;
+	}
+	nav ul li{
+		width:100%;
+		box-sizing: border-box;
+		text-align:center;
+	}
 }

@@ -31,6 +31,10 @@
 	</script>
 	<header><!--This header is fixed, meaning it will stay at the top of the page constantly, a media query will disable this on a mobile level-->
 		<nav>
+			<div class="handle clearfix">
+				<span id="text">Menu</span>
+				<span id="icon">&#9776;</span>
+			</div>
 			<ul>
 				<a href="index.php" class="ajax_load"><li>Home</li></a><a href="#" class="ajax_load"><li>About</li></a><a href="#" class="ajax_load"><li>Contact</li></a>
 			</ul>
