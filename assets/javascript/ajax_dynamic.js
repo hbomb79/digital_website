@@ -317,7 +317,7 @@ function pop_start(page_url, from_url){
 function pop_proceed(raw, $raw) {
 	$(".page-container.current").removeClass("current").addClass("leave")
 	$(".page-bg").fadeOut(200)
-	setTimeout(function(){ $(".page-bg").attr("id", $(raw).filter(".page-bg").attr("id"))
+	setTimeout(function(){ $(".page-bg").attr("id", $(raw).filter("#bg-wrapper").find(".page-bg").attr("id"))
 		$(".page-bg").fadeIn(200) 
 	}, 200)
 	setTimeout(function(){

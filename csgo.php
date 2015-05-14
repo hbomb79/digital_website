@@ -13,7 +13,9 @@
 	<?php
 		require_once"assets/server/header_addin.php";
 	?>
-	<div class="page-bg" id="cs-page-bg"> <!--Faded out and replaced using ajax--> </div>
+	<div id="bg-wrapper">
+	 	<div class="page-bg" id="cs-page-bg">
+	</div> <!--Faded out and replaced using ajax--> </div>
 	<div class="page-container current" id="csgo"> <!-- Slide off screen, slide new page on screen using ajax -->
 		<div id="wrapper">
 			<div id="container">

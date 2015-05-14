@@ -205,6 +205,15 @@ nav ul a.current li {
 	margin-top: 50px;
 }
 
+#bg-wrapper {
+	background: black;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+}
+
 .page-bg#main-page-bg {
 	background: url('../image/homepage.jpg') no-repeat center center;
 	background-size:cover;
