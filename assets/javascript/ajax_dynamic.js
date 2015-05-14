@@ -172,6 +172,9 @@ function getFileName() {
 	//return
 	if (url == "/digital_website/" || url == "" || !url) {
 		return "index.php";
+		// If the file name is blank, meaning you are in the root directory (Not valid if in another directory that is NOT root, for eg /assets/ would still return index.php)
+		// The reason is because this code gets the last part out of the href, if there is no file name, the next section is the directory, in this case digital_website.
+		// A possible fix would be to check if the file name has a dot in it, indicating somesort of file extension as filenames on this server cant and sholdn't contain more than one dot.
 	} else {
 		return url;
 	}

@@ -181,6 +181,7 @@ nav ul li{
 	padding:20px;
 	color:white;
 	cursor: pointer;
+	text-transform: uppercase;
 }
 
 nav ul li:hover{

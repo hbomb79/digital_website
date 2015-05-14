@@ -32,9 +32,7 @@
 	<header><!--This header is fixed, meaning it will stay at the top of the page constantly, a media query will disable this on a mobile level-->
 		<nav>
 			<ul>
-				<a href="index.php" class="ajax_load"><li>Home</li></a>
-				<a href="#" class="ajax_load"><li>About</li></a>
-				<a href="#" class="ajax_load"><li>Contact</li></a>
+				<a href="index.php" class="ajax_load"><li>Home</li></a><a href="#" class="ajax_load"><li>About</li></a><a href="#" class="ajax_load"><li>Contact</li></a>
 			</ul>
 		</nav>
 	</header>
