@@ -38,7 +38,7 @@
 						<h1>Hows it look?</h1>
 						<p>CS:GO is built on the Source engine... so not great, although we have become used to crystal clear graphics. When I first launched the game I was rather disappointed, but within minutes of the game play, I didn't give a sh*t about the graphics, the only thing on my mind was the bast*** on the balcony shooting at me.</p>
 					</section>
-					<section>
+					<section style="box-shadow:none;">
 						<h1>Final Verdict</h1>
 						<p>Counter Strike: Global Offensive is a great game, with no signs of dieing out in the near future, it is cheap if you don't gamble, but if you do you're screwed. The game play is great, never knowing what looms around the alley way or in the next room. Sound is a very important part of the game (<em>sorry what?</em>). The game has good and constant support from Valve and the community and has decent graphics. I suggest it to everyone, even if I don't know them.</p>
 					</section>
