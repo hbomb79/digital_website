@@ -95,22 +95,25 @@ function cg_clear(){
 	return true;
 }
 
-$(document).ready(function(){
+function force_load(){
+	window.addEventListener("popstate", function(e) {
+		e.preventDefault()
+		// Check if URL contains a HASH symbol. If it does then prevent popstate from firing, return true.
+		if (document.location.href.search("#") == -1) {
+	    	clearTimeout(pop_wait)
+	    	pop_wait = setTimeout(function(){
+	            pop_start(location.pathname, true);
+	        }, 50)
+	    }
+	    return false;
+	});
+}
+
+$(window).load(function(){
 	// Create event listener
 	done_load()
 	cg_timer("temp_ready", setTimeout(function() {
-        window.addEventListener("popstate", function(e) {
-        	// Check if URL contains a HASH symbol. If it does then prevent popstate from firing, return true.
-        	if (document.location.href.search("#") == -1) {
-	        	clearTimeout(pop_wait)
-		    	pop_wait = setTimeout(function(){
-		            pop_start(location.pathname, true);
-		        }, 50)
-		    } else {
-		    	e.preventDefault()
-		    	return false;
-		    }
-        });
+        force_load()
     }, 500));
 	// Prevent the popstate event being binded too early, without this Google Chomre and Safari (Certain Versions) would fire a popstate on page load.
 });
@@ -221,6 +224,10 @@ function pop_start(page_url, from_url){
 	$("html").addClass("waiting");
 	cg_erase_timer(_G.timer.reset_timer)
 	// Request page from AJAX
+	if (!$("#load-progress").is(":visible")) {
+		$("#load-progress").show()
+		setTimeout(function() { $("#load-progress").css({"width":"10%"}) }, 10)
+	}
 	_xhr = $.ajax({
 		url: page_url,
 		timeout: 5000,
@@ -228,10 +235,6 @@ function pop_start(page_url, from_url){
 	        var xhr = new window.XMLHttpRequest();
 	        //Download progress
 	        xhr.addEventListener("progress", function (evt) {
-	        	if (!$("#load-progress").is(":visible")) {
-	        		$("#load-progress").show()
-	        		$("#load-progress").css({"width":"0%"})
-	        	}
 	            if (evt.lengthComputable) {
 	                var percentComplete = evt.loaded / evt.total;
 	                setTimeout(function(){
@@ -323,7 +326,12 @@ function pop_proceed(raw, $raw) {
 	setTimeout(function(){
 		$($raw).addClass("current")
 		$("a.current").removeClass("current")
-		$("a.loading").removeClass("loading").addClass("current")
+		if ($("a.loading").length == 0) {
+			// No button pressed
+			$("header a[href='"+getFileName()+"']").addClass("current")
+		} else {
+			$("a.loading").removeClass("loading").addClass("current")
+		}
 		$("html").removeClass("waiting");
 		done_load()
 	}, 50)
