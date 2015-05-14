@@ -5,6 +5,49 @@ html, body {
 	color:black;
 	font-size: 16px;
 	font-family: 'Roboto', sans-serif;
+	overflow-x: hidden;
+}
+
+@-webkit-keyframes flash {
+	0%{opacity: 0.5;}
+	50%{opacity: 1;}
+	100%{opacity: 0.5;}
+}
+@-moz-keyframes flash {
+	0%{opacity: 0.5;}
+	50%{opacity: 1;}
+	100%{opacity: 0.5;}
+}
+@-ms-keyframes flash {
+	0%{opacity: 0.5;}
+	50%{opacity: 1;}
+	100%{opacity: 0.5;}
+}
+@-o-keyframes flash {
+	0%{opacity: 0.5;}
+	50%{opacity: 1;}
+	100%{opacity: 0.5;}
+}
+@keyframes flash {
+	0%{opacity: 0.5;}
+	50%{opacity: 1;}
+	100%{opacity: 0.5;}
+}
+
+a.loading {
+	-webkit-animation: flash 500ms infinite;
+	-moz-animation: flash 500ms infinite;
+	-ms-animation: flash 500ms infinite;
+	-o-animation: flash 500ms infinite;	
+	animation: flash 500ms infinite;
+}
+
+header a.loading li{
+	background: darkred;
+}
+
+a.current li{
+	background:darkred;
 }
 
 #loading {
@@ -36,6 +79,18 @@ html, body {
 	border-radius: 1em;
 	padding: 1em;
 	text-align: center;
+}
+
+#load-progress {
+	position: fixed;
+	z-index:10000;
+	width:0%;
+	background:white;
+	box-shadow: 10px 0 5px -2px black;
+	height:5px;
+	-webkit-transition: width 300ms ease-in-out;
+	-o-transition: width 300ms ease-in-out;
+	transition: width 300ms ease-in-out;
 }
 
 .page-container{
@@ -132,6 +187,10 @@ nav ul li:hover{
 	background:darkred;
 }
 
+nav ul a.current li {
+	background: darkred;
+}
+
 #container, footer {
 	width: 88%;
 	max-width:960px;
@@ -150,6 +209,8 @@ nav ul li:hover{
 	background: url('../image/homepage.jpg') no-repeat center center;
 	background-size:cover;
 	-webkit-filter: blur(5px);
+	-o-filter: blur(5px);
+	filter: blur(5px);
 }
 
 .page-bg#cs-page-bg {
@@ -283,6 +344,8 @@ section.h1 {
 
 .game:hover .game-bg {
 	-webkit-filter: blur(5px);
+	-o-filter: blur(5px);
+	filter: blur(5px);
 }
 
 /* Game Pages 
@@ -293,6 +356,7 @@ section.h1 {
 
 .center-image {
 	width:88%;
+	max-width: 1920px;
 	box-shadow: 0 5px 5px -5px black;
 }
 

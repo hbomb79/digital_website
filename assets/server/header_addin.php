@@ -1,5 +1,7 @@
 <!-- Created by Harry Felton, header addin includes the loading animation and ajax_loading scripts -->
 <div id="head-container">
+	<div id="load-progress"></div>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.waitforimages/1.5.0/jquery.waitforimages.min.js"></script>
 	<script>
 		var timer_out = setTimeout(function(){
 			if ($("#loading").is(":visible")) {
@@ -28,10 +30,14 @@
 	<header><!--This header is fixed, meaning it will stay at the top of the page constantly, a media query will disable this on a mobile level-->
 		<nav>
 			<ul>
-				<a href="index.php" class="ajax_load active"><li>Home</li></a>
+				<a href="index.php" class="ajax_load"><li>Home</li></a>
 				<a href="#" class="ajax_load"><li>About</li></a>
 				<a href="#" class="ajax_load"><li>Contact</li></a>
 			</ul>
 		</nav>
 	</header>
+	<script>
+		// Highlight the home, contact or about button depending on active page
+		$("header a[href='"+getFileName()+"']").addClass("current")
+	</script>
 </div>

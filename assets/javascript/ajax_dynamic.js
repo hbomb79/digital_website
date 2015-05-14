@@ -137,6 +137,15 @@ function scroll_to(object, offset, add_time)
     return interval;
 }
 
+function scroll_top(add_time){
+	var interval = 250;
+	if (add_time) { interval = interval + add_time };
+	$("html, body").animate({
+		'scrollTop': "0"
+	}, interval)
+	return interval;
+}
+
 function check_hash (hash) {
 	if (timer) { clearTimeout(timer) }
 	timer = setTimeout(function(){
@@ -147,12 +156,31 @@ function check_hash (hash) {
 	}, 50)
 }
 
+function getFileName() {
+	//this gets the full url
+	// If running on XAMPP this works, although a local machine will not as index.php is not always in the URL bar, to address this, a null pathname or a pathname of /digital_website/ (For local machines using XAMPP) will return index.php
+	var url = document.location.href;
+	//this removes the anchor at the end, if there is one
+	url = url.substring(0, (url.indexOf("#") == -1) ? url.length : url.indexOf("#"));
+	//this removes the query after the file name, if there is one
+	url = url.substring(0, (url.indexOf("?") == -1) ? url.length : url.indexOf("?"));
+	//this removes everything before the last slash in the path
+	url = url.substring(url.lastIndexOf("/") + 1, url.length);
+	//return
+	if (url == "/digital_website/" || url == "" || !url) {
+		return "index.php";
+	} else {
+		return url;
+	}
+}
+
 function done_load() {
-	console.log("Done Load")
+	$("#load-progress").slideUp(250)
+	setTimeout(function() { $("#load-progress").css({"width":"0%"}) }, 250)
     $('a.ajax_load').unbind("click").bind('click', function(event) {
         if (event.button === 0) {
             pageUrl = $(this).attr('href');
-            if (pageUrl == window.location.pathname || pageUrl == "#" || pageUrl == "" || !pageUrl) {
+            if (pageUrl == window.location.pathname || pageUrl == getFileName() || pageUrl == "#" || pageUrl == "" || !pageUrl) {
             	event.preventDefault();
             	return false;
             } else if (pageUrl){
@@ -164,7 +192,7 @@ function done_load() {
 		            }, '', pageUrl);
 		            pop_start(pageUrl, document.location.href);
 		            event.preventDefault();
-		        }, 50))
+		        }, 250))
 	            return false;
 	        }
         }
@@ -177,7 +205,12 @@ function done_load() {
     	}
     });
 }
-var xhr = false;
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+var _xhr = false;
 var test_var = false;
 function pop_start(page_url, from_url){
 	if (!page_url || page_url == "#" || page_url == "" || page_url == document.location.href) {
@@ -188,19 +221,36 @@ function pop_start(page_url, from_url){
 	$("html").addClass("waiting");
 	cg_erase_timer(_G.timer.reset_timer)
 	// Request page from AJAX
-	xhr = $.ajax({
+	_xhr = $.ajax({
 		url: page_url,
 		timeout: 5000,
+		xhr: function () {
+	        var xhr = new window.XMLHttpRequest();
+	        //Download progress
+	        xhr.addEventListener("progress", function (evt) {
+	        	if (!$("#load-progress").is(":visible")) {
+	        		$("#load-progress").show()
+	        		$("#load-progress").css({"width":"0%"})
+	        	}
+	            if (evt.lengthComputable) {
+	                var percentComplete = evt.loaded / evt.total;
+	                setTimeout(function(){
+	                	$("#load-progress").css({"width":(Math.round(percentComplete * 100) - getRandomInt(10, 30) + "%")})
+	                }, 10)
+	            }
+	        }, false);
+	        return xhr;
+	    },
 	}).done(function(raw){
 		var integer = 250;
-		if (!is_elem_visible("header")){
-			integer = scroll_to("header", false)
+		if ( $(document).scrollTop() > 200 || !is_elem_visible("#title") ){
+			integer = scroll_top()
 		}
 		test_var = raw;
 		setTimeout(function(){
 			// Update the body of the current page with this ones.
 			if (!$(raw).filter(".page-container")[0] || !$(raw).filter(".page-bg")) {
-				alert("This page is not configure correctly")
+				console.log("This page is not configured correctly")
 				window.location.href=page_url;
 			}
 			var $raw = $(raw).filter(".page-container")[0];
@@ -235,17 +285,20 @@ function pop_start(page_url, from_url){
 			$("body").append($raw)
 			//Replace body content with received ajax code, and fade back in.
 			setTimeout(function(){
-				$(".page-container.current").removeClass("current").addClass("leave")
-				$(".page-bg").fadeOut(200)
-				setTimeout(function(){ $(".page-bg").attr("id", $(raw).filter(".page-bg").attr("id"))
-				$(".page-bg").fadeIn(200) }, 200)
-				setTimeout(function(){
-					$($raw).addClass("current")
-					$("a.loading").removeClass("loading")
-					$("html").removeClass("waiting");
-					done_load()
-				}, 400)
-			}, 50)
+				var timedout = false;
+				var timer_out = setTimeout(function() {
+					console.log("Load Timed out while loading images")
+					pop_proceed(raw, $raw)
+				}, 10000)
+				$($raw).waitForImages(function() {
+					if (!timedout) {
+						$("#load-progress").css({"width":"100%"})
+						clearTimeout(timer_out)
+						console.log("Images Loaded")
+						pop_proceed(raw, $raw)
+					}
+				})
+			}, 400)
 			setTimeout(function(){
 				$(".page-container.leave").remove()
 			}, 1000)
@@ -261,8 +314,23 @@ function pop_start(page_url, from_url){
 	return false;
 }
 
+function pop_proceed(raw, $raw) {
+	$(".page-container.current").removeClass("current").addClass("leave")
+	$(".page-bg").fadeOut(200)
+	setTimeout(function(){ $(".page-bg").attr("id", $(raw).filter(".page-bg").attr("id"))
+		$(".page-bg").fadeIn(200) 
+	}, 200)
+	setTimeout(function(){
+		$($raw).addClass("current")
+		$("a.current").removeClass("current")
+		$("a.loading").removeClass("loading").addClass("current")
+		$("html").removeClass("waiting");
+		done_load()
+	}, 50)
+}
+
 function pop_terminate(pop, url){
-	xhr.abort();
+	_xhr.abort();
 	console.log("Ajax Request Aborted! Loading Page Using HREF "+url);
 	console.log(pop);
 	window.location.href=url;
@@ -271,8 +339,8 @@ function pop_terminate(pop, url){
 function pop_error(x, t, m){
 	$(".about-background").show()
 	console.log("")
-	if (xhr) {
-		xhr.abort();
+	if (_xhr) {
+		_xhr.abort();
 		console.log("XHR Request Aborted Due To An Error");
 	}
 	console.log("X: "+x+":: T:"+t+":: M:"+m);
