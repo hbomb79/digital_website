@@ -24,17 +24,23 @@
 					</div>
 					<section>
 						<h1>What is Counter Strike?</h1>
-						<p>Counter Strike: Global Offensive, often refereed to as CSGO is an online tactical shooter, it contains multiple game modes such as competitive, arms race, demolition and casual, all entaling their own set of rules, although, the counter strike franchise is popular for a reason that isn't its game modes. <br>Lets be honest, CS:GO doesn't have many game modes. <br>You might be asking yourself, if it doesn't have an abundance of game modes, then why is it so popular...</p>
+						<p>Counter Strike: Global Offensive, often refereed to as CSGO is an online tactical shooter, it contains multiple game modes such as competitive, arms race, demolition and casual, all entailing their own set of rules.<br><br>CS:GO is possibly one of the most, if not the most popular FPS game on Steam today, not only that, but its player base is growing over 2 times as fast a Call Of Duty<small>*</small>.</p>
 					</section>
 					<section>
-						<h1>Go on then, tell me</h1>
-						<p>CS:GO, is popular because its competitive game mode is tactical and well... competitive, not many first person shooter games are, most of them are like call of duty, very fast paced, not designed to be tactical, and often is not. Although CS:GO on the other hand, relies on your ability to communicate with your teammates, to formulate strategies. <br>In CS:GO competitive there are two teams, Terrorists, and Counter Terrorists, Abbreviated T and CT</p>
+						<h1>Popularity</h1>
+						<p>The reason CS:GO is so popular is because it brings a new meaning to tactical game play. The game relies on both your skill, and communication skills, if you can't communicate with your team, you are destined to lose. The games popularity is also due to the competitive eSport backing it, CS:GO competitions are held on a regular basis, paying out thousands of dollars to the winning team.<br><br>"But surely that isn't the only reason, there are other games that do this"... this is probably what you're thinking right now, the difference is the huge support from Valve, but most importantly the Community. Many community servers are online serving host to a multitude of custom plug-ins and maps, take your pick... there are plenty.</p>
 					</section>
 					<section>
-						<h1>Example</h1>
+						<h1>How much does this cost... allot right?</h1>
+						<p>Ah, of-course, you are interested in this, lucky you, this game is $20NZD**, but remember, steam is wonderful, sales are always about and this game, being created by Valve themselves often has its price slashed. 20 bucks isn't expensive, its the cases that get ya. CS:GO cases are dropped after a game, cases are lovely, if you can afford the <em>key</em> to open them. Cases are like the lottery, you get them for free***, but opening them requires a key. Once you have obtained said key, you can open the case, you then get a random chance of getting something that is complete and utter garbage, or a $1000 dollar knife, but bear in mind, RANDOM!!<br><br>These damn cases are where Valve make a fortune, you buy a key for as much as 30 dollars (immediately after case release, this price normally drops to about $2.59), and then you <em>might</em> get a good <em>skin</em>, thats right, these drops have no affect on the guns performance, which is a good thing if you are being shot at.</p>
 					</section>
 					<section>
-						<h1>Example</h1>
+						<h1>Hows it look?</h1>
+						<p>CS:GO is built on the Source engine... so not great, although we have become used to crystal clear graphics. When I first launched the game I was rather disappointed, but within minutes of the game play, I didn't give a sh*t about the graphics, the only thing on my mind was the bast*** on the balcony shooting at me.</p>
+					</section>
+					<section>
+						<h1>Final Verdict</h1>
+						<p>Counter Strike: Global Offensive is a great game, with no signs of dieing out in the near future, it is cheap if you don't gamble, but if you do you're screwed. The game play is great, never knowing what looms around the alley way or in the next room. Sound is a very important part of the game (<em>sorry what?</em>). The game has good and constant support from Valve and the community and has decent graphics. I suggest it to everyone, even if I don't know them.</p>
 					</section>
 				</main>
 			</div>

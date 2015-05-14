@@ -230,6 +230,9 @@ nav ul a.current li {
 
 section {
 	padding:1em;
+	border-bottom: 1px solid gray;
+	margin: 2em auto;
+	box-shadow: 0 5px 5px -5px black;
 }
 
 section.h1 {
