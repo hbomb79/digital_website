@@ -5,7 +5,9 @@
 	<script>
 		var timer_out = setTimeout(function(){
 			if ($("#loading").is(":visible")) {
-				$("#loading").hide()
+				$("#loading").slideUp(500)
+				console.log("Load Timed Out")
+				force_load()
 			}
 		}, 15000)
 	</script>
