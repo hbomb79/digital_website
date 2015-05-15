@@ -90,6 +90,7 @@ a.current li{
 	transition: width 500ms ease-in-out;
 	background:white;
 	z-index:1999;
+	width:0%;
 }
 #load-progress{
 	position: relative;
@@ -120,7 +121,6 @@ a.current li{
 #settings {
 	width:40%;
 	min-width:300px;
-	min-height:300px;
 	background:white;
 	z-index:1999;
 	position: fixed;
@@ -149,16 +149,12 @@ a.current li{
 }
 
 #settings #pane #inner{
-	padding:1em;
+	padding: 1em 0.5em 3em 0.5em;
 	text-align: center;
 }
 
 #settings #pane #inner .setting-content {
 	margin-top:3em;
-}
-
-#settings #pane #inner .setting-content:last-child {
-	margin-bottom: 1em;
 }
 
 #shadow {
@@ -556,6 +552,8 @@ footer #foot-contain {
 	-ms-transform: translate(0, -50%);
 	-o-transform: translate(0, -50%);
 	transform: translate(0, -50%);
+	max-width: 300px;
+	min-width: 100px;
 }
 
 .person h1 {
@@ -642,5 +640,54 @@ footer #foot-contain {
 
 	#wrapper {
 		margin:0;
+	}
+
+	.person {
+		width:100%;
+		margin: 0.5em auto;
+		position: relative;
+	}
+
+	.person img {
+		float: none;
+		clear:both;
+		display:block;
+		text-align: center;
+		margin:0 auto;
+		width:20%;
+		position: static;
+		-webkit-transform: none;
+		-ms-transform: none;
+		-o-transform: none;
+		transform: none;
+	}
+
+	.person h1 {
+		margin-top: 10px;
+	}
+
+	.person .content {
+		float: none;
+		width:80%;
+		text-align:center;
+		clear: both;
+		margin:0 auto;
+	}
+
+	.person:nth-child(odd) img {
+		float:none;
+	}
+
+	.person:nth-child(odd) .content {
+		float:none;
+		text-align: center;
+	}
+
+	.person {
+		border-bottom: dotted 2px crimson;
+	}
+
+	.person:last-child{
+		border-bottom: none;
 	}
 }

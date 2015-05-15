@@ -196,9 +196,10 @@ function done_load() {
 		})
 	}, 5000)
     $('a.ajax_load').unbind("click").bind('click', function(event) {
-    	if (_G.variable.updating) {
+    	if (_G.preserve.updating) {
     		return false;
     	}
+    	_G.preserve.updating = true;
         if (event.button === 0) {
         	if (get_cookie("animations_disable")) {
 				return true;
@@ -273,7 +274,6 @@ function pop_start(page_url, from_url){
 		$(".load-after:visible").each(function(){
 			$(this).fadeOut(150);
 		})
-		_G.variable.updating = true;
 		var integer = 250;
 		if ( $(document).scrollTop() > 200 || !is_elem_visible("#title") ){
 			integer = scroll_top()
@@ -332,6 +332,7 @@ function pop_start(page_url, from_url){
 			}, 400)
 		}, integer)
 	}).fail(function(x, t, m){
+		_G.preserve.updating = false;
 		pop_error(x, t, m)
 		console.log(x)
 		if (x.status != 404) {window.location.href = page_url;} else {console.log("404, Not Launching Page"); alert("Page Does Not Exist");
@@ -357,7 +358,7 @@ function pop_start(page_url, from_url){
 
 
 function pop_proceed(raw, $raw) {
-	cgt("wait", setTimeout(function(){ _G.variable.updating = false; }, 2000))
+	cgt("wait", setTimeout(function(){ _G.preserve.updating = false; }, 5000))
 	$("#load-container").css({"width":"100%"})
 	$(".page-container.current").removeClass("current").addClass("leave")
 	setTimeout(function(){
@@ -381,8 +382,8 @@ function pop_proceed(raw, $raw) {
 				$("#load-container").slideUp(100)
 				setTimeout(function(){
 					$("#load-container").css({"width":"0%"})
-					_G.variable.updating = false;
 					cge_t("wait")
+					_G.preserve.updating = false;
 				}, 100)
 			}, 200)
 		}, 500)

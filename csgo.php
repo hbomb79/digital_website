@@ -42,8 +42,8 @@
 						<h1>Hows it look?</h1>
 						<p>CS:GO is built on the Source engine... so not great, although we have become used to crystal clear graphics. When I first launched the game I was rather disappointed, but within minutes of the game play, I didn't give a sh*t about the graphics, the only thing on my mind was the bast*** on the balcony shooting at me.</p>
 					</section>
-					<section style="text-align:center; box-shadow:none;" class="mobile-hide load-after">
-						<iframe width="560" height="315" src="https://www.youtube.com/embed/edYCtaNueQY" frameborder="0" allowfullscreen></iframe>
+					<section style="text-align:center; box-shadow:none;" class="mobile-hide">
+						<iframe width="560" height="315" src="https://www.youtube.com/embed/edYCtaNueQY" class="load-after" frameborder="0" allowfullscreen></iframe>
 					</section>
 					<section style="text-align:center; box-shadow:none;" class="mobile-show">
 						Click <a href="https://www.youtube.com/watch?v=edYCtaNueQY">here</a> to watch the CS:GO trailer
