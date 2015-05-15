@@ -103,6 +103,9 @@ function cg_clear(){
 
 function force_load(){
 	window.addEventListener("popstate", function(e) {
+		if (get_cookie("animations_disable")) {
+			return;
+		}
 		e.preventDefault()
 		// Check if URL contains a HASH symbol. If it does then prevent popstate from firing, return true.
 		if (document.location.href.search("#") == -1) {
@@ -187,11 +190,19 @@ function getFileName() {
 }
 
 function done_load() {
+	setTimeout(function(){
+		$(".load-after:not(':visible')").each(function(){
+			$(this).fadeIn(150)
+		})
+	}, 5000)
     $('a.ajax_load').unbind("click").bind('click', function(event) {
     	if (_G.variable.updating) {
     		return false;
     	}
         if (event.button === 0) {
+        	if (get_cookie("animations_disable")) {
+				return true;
+			}
             pageUrl = $(this).attr('href');
             if (pageUrl == window.location.pathname || pageUrl == getFileName() || pageUrl == "#" || pageUrl == "" || !pageUrl) {
             	event.preventDefault();
@@ -199,11 +210,12 @@ function done_load() {
             } else if (pageUrl){
             	clearTimeout(_G.timer.temp_load)
 				$(this).addClass("loading")
+				var old = document.location.href;
             	cg_timer("temp_load", setTimeout(function(){
 		            window.history.pushState({
 		                path: pageUrl
 		            }, '', pageUrl);
-		            pop_start(pageUrl, document.location.href);
+		            pop_start(pageUrl, old);
 		            event.preventDefault();
 		        }, 250))
 	            return false;
@@ -226,6 +238,9 @@ function getRandomInt(min, max) {
 var _xhr = false;
 var test_var = false;
 function pop_start(page_url, from_url){
+	if (get_cookie("animations_disable")) {
+		return false;
+	}
 	if (!page_url || page_url == "#" || page_url == "" || page_url == document.location.href) {
 		console.log("Invalid Page")
 		return false;
@@ -240,7 +255,7 @@ function pop_start(page_url, from_url){
 	}
 	_xhr = $.ajax({
 		url: page_url,
-		timeout: 5000,
+		timeout: 10000,
 		xhr: function () {
 	        var xhr = new window.XMLHttpRequest();
 	        //Download progress
@@ -255,6 +270,9 @@ function pop_start(page_url, from_url){
 	        return xhr;
 	    },
 	}).done(function(raw){
+		$(".load-after:visible").each(function(){
+			$(this).fadeOut(150);
+		})
 		_G.variable.updating = true;
 		var integer = 250;
 		if ( $(document).scrollTop() > 200 || !is_elem_visible("#title") ){
@@ -312,14 +330,23 @@ function pop_start(page_url, from_url){
 					}
 				})
 			}, 400)
-			setTimeout(function(){
-				$(".page-container.leave").remove()
-			}, 1000)
 		}, integer)
 	}).fail(function(x, t, m){
 		pop_error(x, t, m)
 		console.log(x)
-		if (x.status != 404) {window.location.href = page_url;} else {console.log("404, Not Launching Page");}
+		if (x.status != 404) {window.location.href = page_url;} else {console.log("404, Not Launching Page"); alert("Page Does Not Exist");
+			setTimeout(function(){
+				$("#load-container").css({"width":"0%"});
+				if (from_url) {
+					console.log(from_url)
+					window.history.pushState({
+		                path: from_url
+		            }, '', from_url);
+				} else {
+					console.log(from_url)
+				}
+			}, 500)
+		}
 		$("a.loading").removeClass("loading")
 		$("html").removeClass("waiting");
 		// If the AJAX request fails, the load is using normal methods.
@@ -333,30 +360,33 @@ function pop_proceed(raw, $raw) {
 	cgt("wait", setTimeout(function(){ _G.variable.updating = false; }, 2000))
 	$("#load-container").css({"width":"100%"})
 	$(".page-container.current").removeClass("current").addClass("leave")
-	$(".page-bg").fadeOut(200)
-	setTimeout(function(){ $(".page-bg").attr("id", $(raw).filter("#bg-wrapper").find(".page-bg").attr("id"))
-		$(".page-bg").fadeIn(200)
-		setTimeout(function(){
-			$("#load-container").slideUp(100)
-			setTimeout(function(){
-				$("#load-container").css({"width":"0%"})
-				_G.variable.updating = false;
-				cge_t("wait")
-			}, 100)
-		}, 1000)
-	}, 200)
 	setTimeout(function(){
-		$($raw).addClass("current")
-		$("a.current").removeClass("current")
-		if ($("a.loading").length == 0) {
-			// No button pressed
-			$("header a[href='"+getFileName()+"']").addClass("current")
-		} else {
-			$("a.loading").removeClass("loading").addClass("current")
-		}
-		$("html").removeClass("waiting");
-		done_load()
-	}, 50)
+		$(".page-container.leave").remove()
+	}, 1500)
+	setTimeout(function(){ $($raw).addClass("current") }, 50)
+	setTimeout(function(){
+		setTimeout(function(){
+			$("a.current").removeClass("current")
+			if ($("a.loading").length == 0) {
+				// No button pressed
+				$("header a[href='"+getFileName()+"']").addClass("current")
+			} else {
+				$("a.loading").removeClass("loading").addClass("current")
+			}
+			$("html").removeClass("waiting");
+			done_load()
+			setTimeout(function(){
+				$(".page-bg").fadeOut(400)
+				setTimeout(function(){ $(".page-bg").attr("id", $(raw).filter("#bg-wrapper").find(".page-bg").attr("id")); $(".page-bg").fadeIn(400) }, 400)
+				$("#load-container").slideUp(100)
+				setTimeout(function(){
+					$("#load-container").css({"width":"0%"})
+					_G.variable.updating = false;
+					cge_t("wait")
+				}, 100)
+			}, 200)
+		}, 500)
+	}, 500)
 }
 
 function pop_terminate(pop, url){
@@ -376,4 +406,22 @@ function pop_error(x, t, m){
 	console.log("X: "+x+":: T:"+t+":: M:"+m);
 	console.log("Ajax Error, Could not complete request")
 	return false;
+}
+
+function create_cookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+
+function get_cookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+    }
+    return false;
 }

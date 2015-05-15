@@ -42,7 +42,7 @@
 						<h1>Hows it look?</h1>
 						<p>CS:GO is built on the Source engine... so not great, although we have become used to crystal clear graphics. When I first launched the game I was rather disappointed, but within minutes of the game play, I didn't give a sh*t about the graphics, the only thing on my mind was the bast*** on the balcony shooting at me.</p>
 					</section>
-					<section style="text-align:center;" class="mobile-hide">
+					<section style="text-align:center; box-shadow:none;" class="mobile-hide load-after">
 						<iframe width="560" height="315" src="https://www.youtube.com/embed/edYCtaNueQY" frameborder="0" allowfullscreen></iframe>
 					</section>
 					<section style="text-align:center; box-shadow:none;" class="mobile-show">
@@ -55,7 +55,7 @@
 					<section style="text-align:center; box-shadow:none;" class="mobile-hide">
 						<h1>I want more</h1>
 						<p>Want to see more of me playing CS:GO? I have embedded a video of me playing below</p>
-						<iframe width="560" height="315" src="https://www.youtube.com/embed/CSehEQiENEg" frameborder="0" allowfullscreen></iframe>
+						<iframe class="load-after" width="560" height="315" src="https://www.youtube.com/embed/CSehEQiENEg" frameborder="0" allowfullscreen></iframe>
 					</section>
 					<section style="text-align:center; box-shadow:none;" class="mobile-show">
 						<h1>I want more</h1>
