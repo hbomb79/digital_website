@@ -6,6 +6,7 @@ html, body {
 	font-size: 16px;
 	font-family: 'Roboto', sans-serif;
 	overflow-x: hidden;
+	background: black;
 }
 
 @-webkit-keyframes flash {
@@ -88,9 +89,9 @@ a.current li{
 	background:white;
 	box-shadow: 10px 0 5px -2px black;
 	height:5px;
-	-webkit-transition: width 300ms ease-in-out;
-	-o-transition: width 300ms ease-in-out;
-	transition: width 300ms ease-in-out;
+	-webkit-transition: width 500ms ease-in-out;
+	-o-transition: width 500ms ease-in-out;
+	transition: width 500ms ease-in-out;
 }
 
 .page-container{
@@ -469,5 +470,13 @@ footer #foot-contain {
 		width:100%;
 		box-sizing: border-box;
 		text-align:center;
+	}
+
+	header {
+		position: relative;
+	}
+
+	#wrapper {
+		margin:0;
 	}
 }

@@ -45,12 +45,18 @@ function is_elem_visible(elem)
 function cg_erase_timer(k){
 	clearTimeout(_G.timer[k]);
 	delete _G.timer[k];
+	for (var i = 0; i < _G.timer.inx.length; i++) {
+		if (_G.timer.inx[i] == k) { _G.timer.inx.splice(i, 1) }
+	}
 	return true;
 }
 
 function cg_erase_interval(k){
 	clearInterval(_G.interval[k]);
 	delete _G.interval[k];
+	for (var i = 0; i < _G.timer.inx.length; i++) {
+		if (_G.timer.inx[i] == k) { _G.timer.inx.splice(i, 1) }
+	}
 	return true;
 }
 
@@ -181,9 +187,10 @@ function getFileName() {
 }
 
 function done_load() {
-	$("#load-progress").slideUp(250)
-	setTimeout(function() { $("#load-progress").css({"width":"0%"}) }, 250)
     $('a.ajax_load').unbind("click").bind('click', function(event) {
+    	if (_G.variable.updating) {
+    		return false;
+    	}
         if (event.button === 0) {
             pageUrl = $(this).attr('href');
             if (pageUrl == window.location.pathname || pageUrl == getFileName() || pageUrl == "#" || pageUrl == "" || !pageUrl) {
@@ -248,6 +255,7 @@ function pop_start(page_url, from_url){
 	        return xhr;
 	    },
 	}).done(function(raw){
+		_G.variable.updating = true;
 		var integer = 250;
 		if ( $(document).scrollTop() > 200 || !is_elem_visible("#title") ){
 			integer = scroll_top()
@@ -298,7 +306,6 @@ function pop_start(page_url, from_url){
 				}, 10000)
 				$($raw).waitForImages(function() {
 					if (!timedout) {
-						$("#load-progress").css({"width":"100%"})
 						clearTimeout(timer_out)
 						console.log("Images Loaded")
 						pop_proceed(raw, $raw)
@@ -320,11 +327,23 @@ function pop_start(page_url, from_url){
 	return false;
 }
 
+
+
 function pop_proceed(raw, $raw) {
+	cgt("wait", setTimeout(function(){ _G.variable.updating = false; }, 2000))
+	$("#load-progress").css({"width":"100%"})
 	$(".page-container.current").removeClass("current").addClass("leave")
 	$(".page-bg").fadeOut(200)
 	setTimeout(function(){ $(".page-bg").attr("id", $(raw).filter("#bg-wrapper").find(".page-bg").attr("id"))
-		$(".page-bg").fadeIn(200) 
+		$(".page-bg").fadeIn(200)
+		setTimeout(function(){
+			$("#load-progress").slideUp(100)
+			setTimeout(function(){
+				$("#load-progress").css({"width":"0%"})
+				_G.variable.updating = false;
+				cge_t("wait")
+			}, 100)
+		}, 1000)
 	}, 200)
 	setTimeout(function(){
 		$($raw).addClass("current")
