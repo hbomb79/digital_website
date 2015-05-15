@@ -234,9 +234,9 @@ function pop_start(page_url, from_url){
 	$("html").addClass("waiting");
 	cg_erase_timer(_G.timer.reset_timer)
 	// Request page from AJAX
-	if (!$("#load-progress").is(":visible")) {
-		$("#load-progress").show()
-		setTimeout(function() { $("#load-progress").css({"width":"10%"}) }, 10)
+	if (!$("#load-container").is(":visible")) {
+		$("#load-container").show()
+		setTimeout(function() { $("#load-container").css({"width":"10%"}) }, 10)
 	}
 	_xhr = $.ajax({
 		url: page_url,
@@ -248,7 +248,7 @@ function pop_start(page_url, from_url){
 	            if (evt.lengthComputable) {
 	                var percentComplete = evt.loaded / evt.total;
 	                setTimeout(function(){
-	                	$("#load-progress").css({"width":(Math.round(percentComplete * 100) - getRandomInt(10, 30) + "%")})
+	                	$("#load-container").css({"width":(Math.round(percentComplete * 100) - getRandomInt(10, 30) + "%")})
 	                }, 10)
 	            }
 	        }, false);
@@ -331,15 +331,15 @@ function pop_start(page_url, from_url){
 
 function pop_proceed(raw, $raw) {
 	cgt("wait", setTimeout(function(){ _G.variable.updating = false; }, 2000))
-	$("#load-progress").css({"width":"100%"})
+	$("#load-container").css({"width":"100%"})
 	$(".page-container.current").removeClass("current").addClass("leave")
 	$(".page-bg").fadeOut(200)
 	setTimeout(function(){ $(".page-bg").attr("id", $(raw).filter("#bg-wrapper").find(".page-bg").attr("id"))
 		$(".page-bg").fadeIn(200)
 		setTimeout(function(){
-			$("#load-progress").slideUp(100)
+			$("#load-container").slideUp(100)
 			setTimeout(function(){
-				$("#load-progress").css({"width":"0%"})
+				$("#load-container").css({"width":"0%"})
 				_G.variable.updating = false;
 				cge_t("wait")
 			}, 100)

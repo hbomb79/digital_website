@@ -82,16 +82,39 @@ a.current li{
 	text-align: center;
 }
 
-#load-progress {
+#load-container{
 	position: fixed;
-	z-index:10000;
-	width:0%;
-	background:white;
-	box-shadow: 10px 0 5px -2px black;
 	height:5px;
 	-webkit-transition: width 500ms ease-in-out;
 	-o-transition: width 500ms ease-in-out;
 	transition: width 500ms ease-in-out;
+	background:white;
+	z-index:1999;
+}
+#load-progress{
+	position: relative;
+	background: white;
+	width:100%;
+	height:5px;
+}
+#load-progress:before{
+	z-index: -1;
+	position: absolute;
+	content: "";
+	bottom: 14px;
+	right: -8px;
+	width: 100%;
+	top: -20px;
+	max-width:200px;
+	background: red;
+	-webkit-box-shadow: 0 13px 10px rgb(66, 48, 48);
+	-moz-box-shadow: 0 13px 10px rgb(66, 48, 48);
+	box-shadow: 0 13px 10px rgb(66, 48, 48);
+	-webkit-transform: rotate(2deg);
+	-moz-transform: rotate(2deg);
+	-o-transform: rotate(2deg);
+	-ms-transform: rotate(2deg);
+	transform: rotate(2deg);
 }
 
 .page-container{

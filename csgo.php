@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<!-- csgo.php Landing Page HARRY FELTON -->
+<!-- csgo.php Landing Page HARRY FELTON 
+	https://wireframe.cc/kuJIVT
+-->
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -44,7 +46,7 @@
 						<iframe width="560" height="315" src="https://www.youtube.com/embed/edYCtaNueQY" frameborder="0" allowfullscreen></iframe>
 					</section>
 					<section style="text-align:center; box-shadow:none;" class="mobile-show">
-						Click <a href="https://www.youtube.com/watch?v=edYCtaNueQY">here</a> to watch to CS:GO trailer
+						Click <a href="https://www.youtube.com/watch?v=edYCtaNueQY">here</a> to watch the CS:GO trailer
 					</section>
 					<section>
 						<h1>Final Verdict</h1>
@@ -60,7 +62,7 @@
 						<p>Want to see more of me playing CS:GO? Click <a href="https://www.youtube.com/watch?v=CSehEQiENEg">here</a></p>
 					</section>
 					<section style="box-shadow:none; font-size:0.6em;">
-						<p>*This is relative the COD Black Ops 2, Ghosts and Advanced Warfare on the PC</p>
+						<p>*This is relative to COD Black Ops 2, Ghosts and Advanced Warfare on the PC</p>
 						<p>**$20NZD was the price of the game at the time of writing this article</p>
 						<p>***You can purchase cases on the Steam marketplace if you'd rather not wait to get one from playing</p>
 					</section>
