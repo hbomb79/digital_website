@@ -121,7 +121,6 @@ a.current li{
 #settings {
 	width:40%;
 	min-width:300px;
-	background:white;
 	z-index:1999;
 	position: fixed;
 	top:50%;
@@ -132,6 +131,9 @@ a.current li{
 	transform: translate(-50%, -50%);
 	border: solid 3px crimson;
 	display: none;
+}
+#settings #settings-inner {
+	background:white;
 }
 
 #settings #top-bar {

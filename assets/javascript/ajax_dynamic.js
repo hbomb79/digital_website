@@ -196,10 +196,6 @@ function done_load() {
 		})
 	}, 5000)
     $('a.ajax_load').unbind("click").bind('click', function(event) {
-    	if (_G.preserve.updating) {
-    		return false;
-    	}
-    	_G.preserve.updating = true;
         if (event.button === 0) {
         	if (get_cookie("animations_disable")) {
 				return true;
@@ -209,6 +205,16 @@ function done_load() {
             	event.preventDefault();
             	return false;
             } else if (pageUrl){
+				if (_G.preserve.updating) {
+					return false;
+				}
+				_G.preserve.updating = true;
+				// Set fifteen second timeout to reset updating varable in case of a glitch
+				cgt("temp_updating", setTimeout(function(){
+					_G.preserve.updating = false;
+					console.log("Safeguard Reset Activated")
+					cge_t("temp_updating")
+				}, 15000))
             	clearTimeout(_G.timer.temp_load)
 				$(this).addClass("loading")
 				var old = document.location.href;
@@ -333,6 +339,7 @@ function pop_start(page_url, from_url){
 		}, integer)
 	}).fail(function(x, t, m){
 		_G.preserve.updating = false;
+		cge_t("temp_updating")
 		pop_error(x, t, m)
 		console.log(x)
 		if (x.status != 404) {window.location.href = page_url;} else {console.log("404, Not Launching Page"); alert("Page Does Not Exist");
@@ -358,7 +365,6 @@ function pop_start(page_url, from_url){
 
 
 function pop_proceed(raw, $raw) {
-	cgt("wait", setTimeout(function(){ _G.preserve.updating = false; }, 5000))
 	$("#load-container").css({"width":"100%"})
 	$(".page-container.current").removeClass("current").addClass("leave")
 	setTimeout(function(){
@@ -382,7 +388,7 @@ function pop_proceed(raw, $raw) {
 				$("#load-container").slideUp(100)
 				setTimeout(function(){
 					$("#load-container").css({"width":"0%"})
-					cge_t("wait")
+					cge_t("temp_updating")
 					_G.preserve.updating = false;
 				}, 100)
 			}, 200)
