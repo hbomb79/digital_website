@@ -59,7 +59,7 @@
 					<span id="icon">&#9776;</span>
 				</div>
 				<ul>
-					<a href="index.php" class="ajax_load"><li>Home</li></a><a href="about.php" class="ajax_load"><li>About</li></a><a href="#" class="ajax_load"><li>Contact</li></a><a href="#" onclick="$('#settings').fadeIn(); $('#shadow').fadeIn()" class="float-right"><li>Settings</li></a>
+					<a href="index.php" class="ajax_load"><li>Home</li></a><a href="about.php" class="ajax_load"><li>About</li></a><a href="help.php" class="ajax_load"><li>Help</li></a><a href="#" onclick="$('#settings').fadeIn(); $('#shadow').fadeIn()" class="float-right"><li>Settings</li></a>
 				</ul>
 			</nav>
 		<div id="notification" style="display:none;">Undefined Content</div>

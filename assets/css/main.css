@@ -595,6 +595,80 @@ footer #foot-contain {
 	text-align: right;
 }
 
+
+/* Help Page
+--------------------*/
+
+#help main{
+	padding:1em;
+}
+
+.help-container {
+	width:100%;
+}
+
+.help-container section {
+	padding: 0;
+	border: 2px crimson solid;
+}
+
+.help-container #right {
+	float:right;
+	width:48%;
+}
+
+.help-container #left{
+	width:48%;
+	float:left;
+}
+
+.help-container .title-wrap {
+	background:red;
+}
+
+.help-container h2{
+	margin: 0;
+	background: red;
+}
+
+
+.form-container #right{
+	float:right;
+	width:48%;
+	text-align: center;
+}
+
+.form-container #left {
+	float:left;
+	width:48%;
+}
+
+.form-container #left input {
+	width:80%;
+	padding:0.5em;
+	font-size:1.1em;
+	border: 3px solid crimson;
+	border-radius: 0.5em;
+	outline: 0;
+}
+
+.form-container #right textarea, .form-container #left select {
+	width:80%;
+	padding:0.5em;
+	border: 3px solid crimson;
+	border-radius: 0.5em;
+	outline: 0;
+}
+
+.form-container select{
+	display: block;
+}
+
+.form-container #right textarea{
+	text-align: left;
+}
+
+
 @media screen and (max-width:700px), screen and (max-height:500px) {
 	#settings {
 		width:100%;
