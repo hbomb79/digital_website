@@ -13,6 +13,7 @@
 	<?php
 		require_once"assets/server/header_addin.php";
 	?>
+
 	<div id="bg-wrapper">
 	 	<div class="page-bg" id="main-page-bg">
 	</div> <!--Faded out and replaced using ajax--> </div>
@@ -70,5 +71,6 @@
 		</div>
 	</div>
 	<script src="assets/javascript/page.js"></script>
+	<script src="assets/javascript/slider.jquery.js"></script>
 </body>
 </html>
