@@ -32,7 +32,7 @@
 					</section>
 					<section>
 						<h1>Popularity</h1>
-						<p>The reason CS:GO is so popular is because it brings a new meaning to tactical game play. The game relies on both your skill, and communication skills, if you can't communicate with your team then you are destined to lose. The games popularity is also due to the competitive eSport backing it, CS:GO competitions are held on a regular basis, paying out thousands of dollars to the winning team.<br><br>"But surely that isn't the only reason, there are other games that do this"... this is probably what you're thinking right now, the difference is the huge support from Valve, but most importantly the Community. Many community servers are online serving host to a multitude of custom plug-ins and maps, take your pick... there are plenty.</p>
+						<p>The reason CS:GO is so popular is because it brings a new meaning to tactical game play. The game relies on both your skill, and communication skills, if you can't communicate with your team, you are destined to lose. The games popularity is also due to the competitive eSport backing it, CS:GO competitions are held on a regular basis, paying out thousands of dollars to the winning team.<br><br>"But surely that isn't the only reason, there are other games that do this"... this is probably what you're thinking right now, the difference is the huge support from Valve, but most importantly the Community. Many community servers are online serving host to a multitude of custom plug-ins and maps, take your pick... there are plenty.</p>
 					</section>
 					<section>
 						<h1>How much does this cost... a lot right?</h1>
