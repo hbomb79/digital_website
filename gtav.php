@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<!-- csgo.php Landing Page HARRY FELTON 
+<!--
+	Landing Page HARRY FELTON 
 	https://wireframe.cc/kuJIVT
 -->
 <html lang="en">
