@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="assets/css/main.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="assets/javascript/ajax_dynamic.js"></script>
+	<script src="assets/javascript/slider.jquery.js"></script>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 </head>
 <body>
@@ -29,7 +30,7 @@
 					</section>
 					<div class="game-container">
 						<div class="game">
-							<a href="http://google.com"><div class="game-bg" id="GTAV"></div>
+							<a href="gtav.php" class="ajax_load"><div class="game-bg" id="GTAV"></div>
 								<div class="game-title"><span>Grand Theft Auto V</span></div></a>
 						</div>	
 						<div class="game">

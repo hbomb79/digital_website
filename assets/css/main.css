@@ -510,6 +510,23 @@ section.h1 {
 	box-shadow: 0 5px 5px -5px black;
 }
 
+.warn {
+	width:80%;
+	background: rgba(236, 151, 39, 0.6);
+	padding: 1em;
+	text-align: center;
+	border: solid 3px rgba(236, 151, 39, 1);
+	margin: 0 auto;
+}
+
+.warn h1 {
+	margin: 0;
+}
+
+.warn p{
+	margin-bottom: 0;
+}
+
 
 /* CSGO Page 
 --------------------*/

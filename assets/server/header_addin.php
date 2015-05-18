@@ -36,6 +36,7 @@
 		<div id="head-container">
 			<div id="load-container" style="width:0%; display:none;"><div id="load-progress"></div></div>
 			<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.waitforimages/1.5.0/jquery.waitforimages.min.js"></script>
+			<script src="assets/javascript/color-animate.js"></script>
 			<script>
 				var timer_out = setTimeout(function(){
 					if ($("#loading").is(":visible")) {
