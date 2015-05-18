@@ -28,7 +28,7 @@
 					</section>
 					<div class="game-container">
 						<div class="game">
-							<a href="http://google.com"><div class="game-bg" id="GTAV"></div>
+							<a href="gtav.php" class="ajax_load"><div class="game-bg" id="GTAV"></div>
 								<div class="game-title"><span>Grand Theft Auto V</span></div></a>
 						</div>	
 						<div class="game">
