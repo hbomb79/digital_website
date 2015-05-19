@@ -65,22 +65,22 @@
 					<h1>Contact Us</h1>
 					<!-- Contact Form -->
 					<div class="form-container clearfix">
-						<form action="post">
+						<form action="assets/server/mail.php">
 							<div id="left">
 								<h2>Name</h2>
-								<input class="sl" type="text">
+								<input class="sl" name="name" id="name" type="text">
 								<h2>Type</h2>
-								<select name="sup" id="sup">
-									<option value="Inquiry">Inquiry</option>
-									<option value="Bug Report">Bug Report</option>
-									<option value="Feedback">Feedback</option>
-									<option value="Suggestion">Suggestion</option>
+								<select name="type" id="type">
+									<option value="inquiry">Inquiry</option>
+									<option value="bug_report">Bug Report</option>
+									<option value="feedback">Feedback</option>
+									<option value="suggestion">Suggestion</option>
 								</select>
 								<button>Send Message</button>
 							</div>
 							<div id="right">
 								<h2>Message</h2>
-								<textarea name="" id="" cols="30" rows="10"></textarea>
+								<textarea name="message" id="message" cols="30" rows="10"></textarea>
 							</div>
 						</form>
 					</div>

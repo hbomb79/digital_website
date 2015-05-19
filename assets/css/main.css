@@ -350,10 +350,19 @@ nav ul a.current li {
 .page-bg#main-page-bg {
 	background: url('../image/homepage.jpg') no-repeat center center;
 	background-size:cover;
+	-webkit-filter: blur(10px);
+	-o-filter: blur(10px);
+	filter: blur(10px);
+}
+
+.page-bg#gta-page-bg {
+	background: url('../image/gta.jpg') no-repeat center center;
+	background-size:cover;
 	-webkit-filter: blur(5px);
 	-o-filter: blur(5px);
 	filter: blur(5px);
 }
+
 
 .page-bg#cs-page-bg {
 	background: url('../image/cs.png') no-repeat center center;
@@ -366,7 +375,16 @@ nav ul a.current li {
 .page-bg#about-page-bg {
 	background: url('../image/about.jpg') no-repeat center center;
 	background-size:cover;
+	-webkit-filter: blur(10px);
+	-o-filter: blur(10px);
+	filter: blur(10px);
 }
+
+.page-bg#mail-page-bg {
+	background: url('../image/mail.jpg') no-repeat center center;
+	background-size:cover;
+}
+
 .page-bg {
 	position: fixed;
 	top:0;
@@ -421,7 +439,7 @@ section.h1 {
 }
 
 .game .game-bg#GTAV {
-	background: url("../image/homepage.jpg") center center;
+	background: url("../image/gta.jpg") center center;
 	background-size: cover;
 }
 
