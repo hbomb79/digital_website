@@ -25,7 +25,6 @@
 			die("200");
 		} elseif (!$js) {
 			// Return Response With CSS (Full Page)
-			$_SESSION['mail'] = true;
 			?>
 			<!DOCTYPE html>
 			<html lang="en">
@@ -69,6 +68,7 @@
 							<main>
 								<?php
 									if ( !isset($_SESSION['mail']) ) {
+									$_SESSION['mail'] = true;
 								?>
 								<div class="warn">
 									<h1>Mail Sent</h1>
