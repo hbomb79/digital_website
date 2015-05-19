@@ -43,14 +43,12 @@ a.loading {
 	animation: flash 500ms infinite;
 }
 
-header a.loading li{
-	background: darkred;
+header li a.loading{
+	background:#B90000;
 }
 
-a.current li{
-	background:darkred;
-}
-
+/* Pre-Load CSS
+-------------------*/
 #loading {
 	width:100%;
 	position:fixed;
@@ -76,12 +74,14 @@ a.current li{
 	-o-transform: translateY(-50%);
 	transform: translateY(-50%);
 	background:white;
-	border: crimson solid 3px;
+	border: #FF003F solid 3px;
 	border-radius: 1em;
 	padding: 1em;
 	text-align: center;
 }
 
+/* Loading Progress Bar
+-------------------*/
 #load-container{
 	position: fixed;
 	height:5px;
@@ -118,6 +118,8 @@ a.current li{
 	transform: rotate(2deg);
 }
 
+/* Settings Screen
+-------------------*/
 #settings {
 	width:40%;
 	min-width:300px;
@@ -129,7 +131,7 @@ a.current li{
 	-ms-transform: translate(-50%, -50%);
 	-o-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
-	border: solid 3px crimson;
+	border: solid 3px #FF003F;
 	display: none;
 }
 #settings #settings-inner {
@@ -159,6 +161,9 @@ a.current li{
 	margin-top:3em;
 }
 
+
+/* Overlay Shadow
+-------------------*/
 #shadow {
 	position: fixed;
 	top:0;
@@ -172,7 +177,7 @@ a.current li{
 .button {
 	padding:1em;
 	background: white;
-	border: 3px solid crimson;
+	border: 3px solid #FF003F;
 	text-decoration: none !important;
 	-webkit-transition: background 250ms ease, color 250ms ease;
 	-o-transition: background 250ms ease, color 250ms ease;
@@ -180,10 +185,12 @@ a.current li{
 }
 
 .button:hover {
-	background:crimson;
+	background:#FF003F;
 	color:white;
 }
 
+/* Page Dynamics And Structure
+-------------------*/
 .page-container{
 	transform: translate(100%, 0);
     -webkit-transform: translate(100%, 0);
@@ -208,119 +215,6 @@ a.current li{
     -moz-transform: translate(-100%, 0);
     -webkit-transform: translate(-100%, 0);
     -o-transform: translate(-100%, 0);
-}
-
-.load-after {
-	display:none;
-}
-
-a {
-	color:crimson;
-	text-decoration: none;
-}
-
-a:active, a:hover {
-	text-decoration: underline;
-	color:red;
-}
-
-header {
-	font-family: 'Orbitron', sans-serif;
-}
-
-header a {
-	color:white;
-	text-decoration: none;
-}
-
-h1.large {
-	font-size: 3em;
-	text-decoration: underline;
-}
-
-.large {
-	font-family: 'Orbitron', sans-serif;
-}
-
-h1#title {
-	text-align: center;
-}
-
-header {
-	position: fixed;
-	top:0;
-	left:0;
-	right:0;
-	width:100%;
-	z-index: 1001;
-	box-shadow: 0 0 5px black;
-}
-
-nav ul{
-	background-color:crimson;
-	overflow: hidden;
-	clear:both;
-	color:white;
-	margin: 0;
-	padding:0;
-	text-align:left;
-	-webkit-transition: max-height 0.4s;
-	-o-transition: max-height 0.4s;
-	transition: max-height 0.4s;
-}
-
-nav ul a.float-right {
-	float: right;
-}
-
-nav ul li{
-	display: inline-block;
-	padding:20px;
-	color:white;
-	cursor: pointer;
-	text-transform: uppercase;
-}
-
-nav ul li:hover{
-	background:darkred;
-}
-
-nav ul a.current li {
-	background: darkred;
-}
-
-.handle{
-	width:100%;
-	background:crimson;
-	color:white;
-	text-align:center;
-	box-sizing: border-box;
-	padding: 0px 10px;
-	cursor: pointer;
-	display: none;
-	height: 61px;
-}
-.handle #text{
-	text-align: left;
-	display: inline-block;
-	float:left;
-	padding:20px 9px;
-
-}
-.handle #icon{
-	text-align: right;
-	line-height: 0em;
-	display: inline-block;
-	float:right;
-	vertical-align: middle;
-	padding:9px;
-	margin-top: 1.04em;
-}
-.handle:hover{
-	background:darkred;
-}
-.handle.active{
-	background:darkred;
 }
 
 #container, footer {
@@ -363,6 +257,13 @@ nav ul a.current li {
 	filter: blur(5px);
 }
 
+.page-bg#help-page-bg {
+	background: url('../image/help.png') no-repeat center center;
+	background-size:cover;
+	-webkit-filter: blur(10px);
+	-o-filter: blur(10px);
+	filter: blur(10px);
+}
 
 .page-bg#cs-page-bg {
 	background: url('../image/cs.png') no-repeat center center;
@@ -385,6 +286,14 @@ nav ul a.current li {
 	background-size:cover;
 }
 
+.page-bg#bf4-page-bg {
+	background: url('../image/bf4bg.png') no-repeat center center;
+	background-size:cover;
+	-webkit-filter: blur(10px);
+	-o-filter: blur(10px);
+	filter: blur(10px);
+}
+
 .page-bg {
 	position: fixed;
 	top:0;
@@ -394,6 +303,177 @@ nav ul a.current li {
 	width:100%;
 }
 
+footer {
+	text-align:center;
+	margin: 0 auto;
+	padding: 0.5em 1em;
+}
+
+footer #foot-contain {
+	font-size:0.7em;
+}
+
+/* Extra Conditions
+-------------------*/
+.load-after {
+	/* Show something after Ajax Load has completed, hide before transition */
+	display:none;
+}
+
+a {
+	color:#FF003F;
+	text-decoration: none;
+}
+
+a:active, a:hover {
+	text-decoration: underline;
+	color:red;
+}
+
+h1.large {
+	font-size: 3em;
+	text-decoration: underline;
+}
+
+.large {
+	font-family: 'Orbitron', sans-serif;
+}
+
+h1#title {
+	text-align: center;
+}
+
+/* Header
+-------------------*/
+header {
+	position: fixed;
+	top:0;
+	left:0;
+	right:0;
+	width:100%;
+	z-index: 1001;
+	box-shadow: 0 0 5px black;
+	font-family: 'Orbitron', sans-serif;
+}
+
+header a {
+	color:white;
+	text-decoration: none;
+}
+
+/* Header Nav
+-------------------*/
+nav ul{
+	background-color:#FF003F;
+	overflow: hidden;
+	clear:both;
+	color:white;
+	margin: 0;
+	padding:0;
+	text-align:left;
+	-webkit-transition: max-height 0.4s;
+	-o-transition: max-height 0.4s;
+	transition: max-height 0.4s;
+}
+
+nav ul li.float-right {
+	float: right;
+}
+
+nav ul li{
+	display: inline-block;
+	color:white;
+	cursor: pointer;
+	text-transform: uppercase;
+}
+
+nav ul li a {
+	padding:20px;
+	display: block;
+	text-decoration: none !important;
+	color:white !important;
+}
+
+nav ul li:hover{
+	background:#B90000;
+}
+
+nav ul li a.current {
+	background: #B90000;
+}
+
+/* Sub Header Nav 
+-------------------*/
+nav ul li.has-drop:hover > ul{
+	display: block;
+}
+
+nav ul li.has-drop > ul {
+	position: absolute;
+	display: none;
+}
+
+nav ul li.has-drop > ul > li {
+	display: block;
+	text-transform: none;
+	border-bottom: solid 1px rgb(225, 0, 0);
+}
+
+nav ul li.has-drop > ul > li > a.loading {
+	background-color: #9D0027;
+}
+
+nav ul li.has-drop > ul > li:last-child {
+	border-bottom: none;
+}
+
+nav ul li.has-drop > ul > li:hover{
+	background-color: #9D0027;
+}
+
+nav ul li.has-drop > ul {
+	max-height: 60vh;
+	overflow: auto;
+}
+
+/* Mobile Nav Handle
+-------------------*/
+.handle{
+	width:100%;
+	background:#FF003F;
+	color:white;
+	text-align:center;
+	box-sizing: border-box;
+	padding: 0px 10px;
+	cursor: pointer;
+	display: none;
+	height: 61px;
+}
+.handle #text{
+	text-align: left;
+	display: inline-block;
+	float:left;
+	padding:20px 9px;
+
+}
+.handle #icon{
+	text-align: right;
+	line-height: 0em;
+	display: inline-block;
+	float:right;
+	vertical-align: middle;
+	padding:9px;
+	margin-top: 1.04em;
+}
+.handle:hover{
+	background:#FF003F;
+}
+.handle.active{
+	background:#FF003F;
+}
+
+/* Page Contents
+-------------------*/
 section {
 	padding:1em;
 	margin: 2em auto;
@@ -404,6 +484,25 @@ section.h1 {
 
 }
 
+.warn {
+	width:80%;
+	background: rgba(236, 151, 39, 0.6);
+	padding: 1em;
+	text-align: center;
+	border: solid 3px rgba(236, 151, 39, 1);
+	margin: 0 auto;
+}
+
+.warn h1 {
+	margin: 0;
+}
+
+.warn p{
+	margin-bottom: 0;
+}
+
+/* index.php
+-------------------*/
 .game-container {
 	margin:0 auto;
 	text-align: center;
@@ -483,6 +582,10 @@ section.h1 {
 	background-size: cover;
 }
 
+.game .game-bg#BF4 {
+	background: url("../image/bf4.jpg") center center;
+	background-size: cover;
+}
 
 .game .game-title {
 	display: table;
@@ -516,7 +619,7 @@ section.h1 {
 	filter: blur(5px);
 }
 
-/* Game Pages 
+/* Game Sub-Pages 
 --------------------*/
 .image-wrapper {
 	text-align: center;
@@ -526,37 +629,6 @@ section.h1 {
 	width:88%;
 	max-width: 1920px;
 	box-shadow: 0 5px 5px -5px black;
-}
-
-.warn {
-	width:80%;
-	background: rgba(236, 151, 39, 0.6);
-	padding: 1em;
-	text-align: center;
-	border: solid 3px rgba(236, 151, 39, 1);
-	margin: 0 auto;
-}
-
-.warn h1 {
-	margin: 0;
-}
-
-.warn p{
-	margin-bottom: 0;
-}
-
-
-/* CSGO Page 
---------------------*/
-
-footer {
-	text-align:center;
-	margin: 0 auto;
-	padding: 0.5em 1em;
-}
-
-footer #foot-contain {
-	font-size:0.7em;
 }
 
 .mobile-show {
@@ -627,7 +699,7 @@ footer #foot-contain {
 
 .help-container section {
 	padding: 0;
-	border: 2px crimson solid;
+	border: 2px #FF003F solid;
 }
 
 .help-container #right {
@@ -665,7 +737,7 @@ footer #foot-contain {
 	width:80%;
 	padding:0.5em;
 	font-size:1.1em;
-	border: 3px solid crimson;
+	border: 3px solid #FF003F;
 	border-radius: 0.5em;
 	outline: 0;
 }
@@ -673,7 +745,7 @@ footer #foot-contain {
 .form-container #right textarea, .form-container #left select {
 	width:80%;
 	padding:0.5em;
-	border: 3px solid crimson;
+	border: 3px solid #FF003F;
 	border-radius: 0.5em;
 	outline: 0;
 }
@@ -686,7 +758,8 @@ footer #foot-contain {
 	text-align: left;
 }
 
-
+/* Mobile Code
+-------------------*/
 @media screen and (max-width:700px), screen and (max-height:500px) {
 	#settings {
 		width:100%;
@@ -697,7 +770,7 @@ footer #foot-contain {
 		-ms-transform: none;
 		-o-transform: none;
 		transform: none;
-		border: solid 3px crimson;
+		border: solid 3px #FF003F;
 	}
 }
 
@@ -795,7 +868,7 @@ footer #foot-contain {
 	}
 
 	.person {
-		border-bottom: dotted 2px crimson;
+		border-bottom: dotted 2px #FF003F;
 	}
 
 	.person:last-child{

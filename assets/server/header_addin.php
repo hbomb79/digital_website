@@ -59,7 +59,27 @@
 					<span id="icon">&#9776;</span>
 				</div>
 				<ul>
-					<a href="index.php" class="ajax_load"><li>Home</li></a><a href="about.php" class="ajax_load"><li>About</li></a><a href="help.php" class="ajax_load"><li>Help</li></a><a href="#" onclick="$('#settings').fadeIn(); $('#shadow').fadeIn()" class="float-right"><li>Settings</li></a>
+					<!-- OLD NAV <a href="index.php" class="ajax_load"><li>Home</li></a><a href="about.php" class="ajax_load"><li>About</li></a><a href="help.php" class="ajax_load"><li>Help</li></a><a href="#" onclick="$('#settings').fadeIn(); $('#shadow').fadeIn()" class="float-right"><li>Settings</li></a>-->
+					
+					<!-- New NAV -->
+
+					<li><a href="index.php" class="ajax_load">Home</a></li><li>
+					<a href="about.php" class="ajax_load">About</a></li><li class="mobile-hide has-drop"> <!-- This nav button is hidden on mobile devices, there is simply not enough room to work with -->
+						<a href="#" id="games">Games</a>
+						<ul>
+							<li><a href="gtav.php" class="ajax_load">Grand Theft Auto V</a></li>
+							<li><a href="#">Assassin's Creed Unity</a></li>
+							<li><a href="#">Team Fortress 2</a></li>
+							<li><a href="csgo.php" class="ajax_load">Counter Strike: Global Offensive</a></li>
+							<li><a href="#">Elder Scrolls V: Skyrim</a></li>
+							<li><a href="#">Portal 2</a></li>
+							<li><a href="#">Left 4 Dead 2</a></li>
+							<li><a href="#">Payday: The Heist</a></li>
+							<li><a href="bf4.php" class="ajax_load">Battlefield 4</a></li>
+						</ul>
+					</li><li>
+					<a href="help.php" class="ajax_load">Help</a></li><li class="float-right">
+					<a href="#" onclick="$('#settings').fadeIn(); $('#shadow').fadeIn()">Settings</a></li>
 				</ul>
 			</nav>
 		<div id="notification" style="display:none;">Undefined Content</div>
@@ -68,6 +88,10 @@
 	<script>
 		// Highlight the home, contact or about button depending on active page
 		$("header a[href='"+getFileName()+"']").addClass("current")
+		if ( $("header a#games").siblings().filter("ul").find("li a.current").length > 0 ) {
+			$("header a#games").addClass("current")
+			// If the active tab is within the games dropdown, then highlight the dropdown parent as well.
+		}
 		// Setup settings *XD*
 
 		function settings() {

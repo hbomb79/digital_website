@@ -374,11 +374,13 @@ function pop_proceed(raw, $raw) {
 	setTimeout(function(){
 		setTimeout(function(){
 			$("a.current").removeClass("current")
-			if ($("a.loading").length == 0) {
-				// No button pressed
-				$("header a[href='"+getFileName()+"']").addClass("current")
-			} else {
+			if ($("a.loading").length > 0) {
+				//Button pressed
 				$("a.loading").removeClass("loading").addClass("current")
+			}
+			$("header a[href='"+getFileName()+"']").addClass("current")
+			if ( $("header a#games").siblings().filter("ul").find("li a.current").length > 0 ) {
+				$("header a#games").addClass("current")
 			}
 			$("html").removeClass("waiting");
 			done_load()

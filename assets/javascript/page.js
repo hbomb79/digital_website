@@ -1,6 +1,6 @@
 $(".handle").unbind("click").bind("click", function(){
-	$("nav ul").toggleClass("showing");
-	$(".handle").toggleClass("active");
+	$("nav > ul").toggleClass("showing");
+	$("nav > .handle").toggleClass("active");
 })
 
 function notify(message, color, tc, optional){
