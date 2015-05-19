@@ -404,7 +404,7 @@ nav ul li a.current {
 
 /* Sub Header Nav 
 -------------------*/
-nav ul li.has-drop:hover > ul{
+body:not(.JS) nav ul li.has-drop:hover > ul{
 	display: block;
 }
 
@@ -434,6 +434,8 @@ nav ul li.has-drop > ul > li:hover{
 nav ul li.has-drop > ul {
 	max-height: 60vh;
 	overflow: auto;
+	box-shadow: 5px 5px 50px 1px black;
+ 	z-index: -1;
 }
 
 /* Mobile Nav Handle
@@ -700,6 +702,7 @@ section.h1 {
 .help-container section {
 	padding: 0;
 	border: 2px #FF003F solid;
+	border-radius: 0.7em 0.7em 0 0;
 }
 
 .help-container #right {
@@ -714,6 +717,8 @@ section.h1 {
 
 .help-container .title-wrap {
 	background:red;
+	padding: 0.5em;
+	border-radius: 0.5em 0.5em 0 0;
 }
 
 .help-container h2{
@@ -783,7 +788,8 @@ section.h1 {
 	}
 
 	.page-bg {
-		display: none;
+		display: none !important;
+		background: none;
 	}
 
 	.mobile-hide {
