@@ -20,11 +20,8 @@
 	 	<div class="page-bg" id="help-page-bg">
 	</div> <!--Faded out and replaced using ajax--> </div>
 	<div class="page-container current" id="help">
-		<script>
-		$.getScript("assets/javascript/help.js");
-		</script>
 		<div id="wrapper">
-			<div id="container">
+			<div id="container" class="clearfix">
 				<main>
 					<h1>Help</h1>
 					<!-- FAQ Sections -->
@@ -65,28 +62,30 @@
 							</section>
 						</div>
 					</div>
-
-					<h1>Contact Us</h1>
+					<button id="contact-trigger" style="display:none">Contact Us</button>
+					<h1 id="contact-title">Contact Us</h1>
 					<!-- Contact Form -->
-					<div class="form-container clearfix">
-						<form action="assets/server/mail.php">
-							<div id="left">
-								<h2>Name</h2>
-								<input class="sl" name="name" id="name" type="text">
-								<h2>Type</h2>
-								<select name="type" id="type">
-									<option value="inquiry">Inquiry</option>
-									<option value="bug_report">Bug Report</option>
-									<option value="feedback">Feedback</option>
-									<option value="suggestion">Suggestion</option>
-								</select>
-								<button>Send Message</button>
-							</div>
-							<div id="right">
-								<h2>Message</h2>
-								<textarea name="message" id="message" cols="30" rows="10"></textarea>
-							</div>
-						</form>
+					<div id="contact-container">
+						<div id="contact-inner" class="clearfix">
+							<form action="assets/server/mail.php">
+								<div id="left">
+									<h2>Name</h2>
+									<input class="sl" name="name" id="name" type="text">
+									<h2>Type</h2>
+									<select name="type" id="type">
+										<option value="inquiry">Inquiry</option>
+										<option value="bug_report">Bug Report</option>
+										<option value="feedback">Feedback</option>
+										<option value="suggestion">Suggestion</option>
+									</select>
+									<button>Send Message</button>
+								</div>
+								<div id="right">
+									<h2>Message</h2>
+									<textarea name="message" id="message" cols="30" rows="10"></textarea>
+								</div>
+							</form>
+						</div>
 					</div>
 				</main>
 			</div>
@@ -98,5 +97,6 @@
 		</div>
 	</div>
 	<script src="assets/javascript/page.js"></script>
+	<script src="assets/javascript/help.js"></script>
 </body>
 </html>

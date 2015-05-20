@@ -732,18 +732,25 @@ section.h1 {
 }
 
 
-.form-container #right{
+#contact-container #right{
 	float:right;
 	width:48%;
 	text-align: center;
 }
 
-.form-container #left {
+#contact-container #contact-inner {
+	width:60%;
+	margin:0 auto;
+	background:white;
+	padding:2em;
+}
+
+#contact-container #left {
 	float:left;
 	width:48%;
 }
 
-.form-container #left input {
+#contact-container #left input {
 	width:80%;
 	padding:0.5em;
 	font-size:1.1em;
@@ -752,7 +759,7 @@ section.h1 {
 	outline: 0;
 }
 
-.form-container #right textarea, .form-container #left select {
+#contact-container #right textarea, .form-container #left select {
 	width:80%;
 	padding:0.5em;
 	border: 3px solid #FF003F;
@@ -760,11 +767,11 @@ section.h1 {
 	outline: 0;
 }
 
-.form-container select{
+#contact-container select{
 	display: block;
 }
 
-.form-container #right textarea{
+#contact-container #right textarea{
 	text-align: left;
 }
 
