@@ -119,5 +119,4 @@
 	} else { 
 		response(send());
 	}
-	die("308");
 ?>
