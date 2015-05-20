@@ -506,7 +506,7 @@ aj_page = {
 			// Done
 			aj_page.update_dom( raw ).done( function() { 
 				aj_page.scroll().done(function(){
-					aj_page.transition_page() 
+					setTimeout(function() { aj_page.transition_page() }, 500)
 				})
 			})
 		});
@@ -540,17 +540,15 @@ aj_page = {
         }, '', this.to);
 
 		$(".page-container.new").waitForImages(function() {
-
 			// Scroll user to the top of the page if they are too far down (scroll)
 			$(".page-container.current").removeClass("current").addClass("leave")
 			$(".page-container.new").removeClass("new").addClass("current")
-			$("#load-container").css("width", "100%")
+			$("#load-container").animate({"width": "100%"}, 250)
 			setTimeout(function(){
 				$("#load-container").slideUp(250).promise().done(function(){
-					$("#load-container").css("width", "0%");
 					aj_page.finish()
-				})
-			}, 1000)
+				});
+			}, 2000)
 		})
 	},
 
@@ -588,6 +586,7 @@ aj_page = {
 		if ( $("header a#games").siblings().filter("ul").find("li a.current").length > 0 ) {
 			$("header a#games").addClass("current")
 		}
+		$("#load-container").css("width", "0%");
 		cg_clear();
 		done_load();
 		_G.preserve.updating = false;
@@ -599,14 +598,13 @@ aj_page = {
 		// filter title text from content and replace current
 		$("title").html( $(content).filter("title").text() )
 		// filter page-bg from content and replace id of current with new
-		_G.preserve.test = content;
 		$(".page-bg").fadeOut(250)
 		setTimeout(function() {
 			$(".page-bg").attr( "id", $(content).find(".page-bg").attr("id") ).fadeIn(250)
 			setTimeout(function() {
 				r.resolve() //Resolve when page-bg transition complete 
-			}, 600)
-		}, 400)
+			}, 250)
+		}, 250)
 		return r;
 	}
 }
