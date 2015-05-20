@@ -577,9 +577,7 @@ aj_page = {
 	revert: function( to, from ) {
 		_G.preserve.updating = false;
 		$("a.loading").removeClass("loading");
-		setTimeout(function(){
-			$("#load-container").css({"width":"0%"})
-		}, 1000)
+		$("#load-container").css({"width":"0%"})
 	},
 
 	finish: function( ) {
