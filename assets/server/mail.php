@@ -22,7 +22,7 @@
 		global $js;
 		if ($js) {
 			// Return Ajax Response, mail has been sent
-			die("200");
+			echo($_SESSION["mail"] == true ? "304" : "200");
 		} elseif (!$js) {
 			// Return Response With CSS (Full Page)
 			?>
@@ -119,4 +119,5 @@
 	} else { 
 		response(send());
 	}
+	die("308");
 ?>

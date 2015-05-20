@@ -1,3 +1,8 @@
+/*
+Harry Felton CSS, Usage Under MIT License
+Clayton, Brynn... you must make your own ;(
+ */
+
 @import url(http://fonts.googleapis.com/css?family=Orbitron|Roboto:400,700,900);
 html, body {
 	padding: 0;
@@ -630,7 +635,8 @@ section.h1 {
 .center-image {
 	width:88%;
 	max-width: 1920px;
-	box-shadow: 0 5px 5px -5px black;
+	box-shadow: 0 10px 10px -7px black;
+	border: solid 3px black;
 }
 
 .mobile-show {
@@ -702,7 +708,7 @@ section.h1 {
 .help-container section {
 	padding: 0;
 	border: 2px #FF003F solid;
-	border-radius: 0.7em 0.7em 0 0;
+	border-radius: 0 0 0.7em 0.7em;
 }
 
 .help-container #right {
@@ -718,7 +724,6 @@ section.h1 {
 .help-container .title-wrap {
 	background:red;
 	padding: 0.5em;
-	border-radius: 0.5em 0.5em 0 0;
 }
 
 .help-container h2{

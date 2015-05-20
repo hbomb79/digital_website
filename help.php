@@ -7,8 +7,9 @@
 	<meta charset="UTF-8">
 	<title>Help | Contact</title>
 	<link rel="stylesheet" href="assets/css/main.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script src="assets/javascript/ajax_dynamic.js"></script>
+	<?php
+	require_once"assets/_module/imports.php";
+	?>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 </head>
 <body>
@@ -19,6 +20,9 @@
 	 	<div class="page-bg" id="help-page-bg">
 	</div> <!--Faded out and replaced using ajax--> </div>
 	<div class="page-container current" id="help">
+		<script>
+		$.getScript("assets/javascript/help.js");
+		</script>
 		<div id="wrapper">
 			<div id="container">
 				<main>
