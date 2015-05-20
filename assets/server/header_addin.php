@@ -63,7 +63,7 @@
 					
 					<!-- New NAV -->
 
-					<li><a href="index.php" class="ajax_load">Home</a></li><li>
+					<li><a href="index.phsssp" class="ajax_load">Home</a></li><li>
 					<a href="about.php" class="ajax_load">About</a></li><li class="mobile-hide has-drop"> <!-- This nav button is hidden on mobile devices, there is simply not enough room to work with -->
 						<a href="#" id="games">Games</a>
 						<ul>

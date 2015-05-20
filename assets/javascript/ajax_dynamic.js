@@ -121,6 +121,7 @@ function force_load(){
 $(window).load(function(){
 	// Create event listener
 	done_load()
+	cg_erase_timer("temp_ready")
 	cg_timer("temp_ready", setTimeout(function() {
         force_load()
     }, 500));
@@ -441,6 +442,9 @@ To start, simply run aj_page.start( currenturl, newurl, was_button_clicked, what
 */
 aj_page = {
 	start: function(from, to, click, elem) {
+		if (_G.preserve.updating) {
+			return false;
+		}
 		_G.preserve.updating = true;
 		// First, check if the user has animations enabled, if they dont, then return
 		if ( get_cookie( "animations_disable" ) ) {
@@ -480,7 +484,6 @@ aj_page = {
 		        xhr.addEventListener("progress", function (evt) {
 		            if (evt.lengthComputable) {
 		                var percentComplete = evt.loaded / evt.total;
-		                console.log(percentComplete)
 		                $("#load-container").css({"width":(Math.round(percentComplete * 100) - getRandomInt(10, 30) + "%")})
 		            }
 		        }, false);
@@ -489,9 +492,11 @@ aj_page = {
 		}).done(function( data ){
 			// When ajax request completed, then run add_page()
 			console.log("Done")
+			// Hide any load-after elements
+			$(".load-after").hide()
 			aj_page.add_page( data );
 		}).fail(function( x, t, m ){
-			error( x, t, m );
+			aj_page.error( x, t, m );
 		})
 	},
 
@@ -502,7 +507,7 @@ aj_page = {
 		content = $(content).removeClass("current").addClass("new");
 		content.insertAfter(".page-container.current");
 		// wait until ready, then update dom and transition
-		$(content).ready(function(){
+		$("page-container.new").ready(function(){
 			// Done
 			aj_page.update_dom( raw ).done( function() { 
 				aj_page.scroll().done(function(){
@@ -545,6 +550,7 @@ aj_page = {
 			$(".page-container.new").removeClass("new").addClass("current")
 			$("#load-container").animate({"width": "100%"}, 250)
 			setTimeout(function(){
+				$(".page-container.leave").remove()
 				$("#load-container").slideUp(250).promise().done(function(){
 					aj_page.finish()
 				});
@@ -554,22 +560,22 @@ aj_page = {
 
 	error: function( x, t, m ) {
 		alert(x,t,m)
+		console.log(x, t, m)
 
 		// Check error type
-
-		switch(m) {
-			case "timeout":
-				alert('timed out');
-				break;
-			default:
-				alert("default");
-				break;
+		if (x.status == 404) {
+			// Page not found
+			alert("Page Not Found!");
+			aj_page.revert()
+		} else if (m == "timeout") {
+			alert("Load Timed Out");
+			document.location.href = this.to;
 		}
 
 	},
 
 	revert: function( to, from ) {
-
+		alert("Reverted")
 	},
 
 	finish: function( ) {
@@ -586,10 +592,12 @@ aj_page = {
 		if ( $("header a#games").siblings().filter("ul").find("li a.current").length > 0 ) {
 			$("header a#games").addClass("current")
 		}
-		$("#load-container").css("width", "0%");
-		cg_clear();
-		done_load();
-		_G.preserve.updating = false;
+		$("#load-container").animate({"width": "0%"}, 10).promise().done(function(){
+			cg_clear();
+			done_load();
+			_G.preserve.updating = false;
+			$(".load-after").fadeIn(350)
+		});
 	},
 
 	update_dom: function( content ) {
