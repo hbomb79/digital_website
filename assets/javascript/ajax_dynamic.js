@@ -460,18 +460,42 @@ aj_page = {
 			// Highlight the element using loading class
 			$(elem).addClass( "loading" );
 			this.elem = elem;
+		} else {
+			this.elem = false;
 		}
 		// Advance the progress bar by 10% to indicate loading has begun.
-		$("#load-container").show()
-		setTimeout(function(){
-			$("#load-container").css({
-				width: "10%"
-			});
-		}, 100)
+		$("#load-container").css({
+			"width": "0%"
+		}).show()
+		if ( aj_page.return_percentage("#load-container") < 10 ) {
+			this.update_bar("10%", this.screen_percentage( 10 ) )
+		}
+		if ( !$("#load-container").is(":visible") ) {
+			$("#load-container").show()
+		}
 		// Checks complete, fetch page
 		this.to = to;
 		this.from = from;
 		aj_page.fetch( to );
+	},
+
+	return_percentage: function( element ) {
+		return ( $(element).width() * 100) / $(window).width()
+	},
+
+	screen_percentage: function( percentage ) {
+		return ( percentage / 100 ) * $(window).width()
+	},
+
+	update_bar: function( length, ltc) {
+		// Check current length of scroll bar, if current is higher than new, then simply do not change
+		lengthToCheck = ltc || length;
+		if ( $("#load-container").width() < lengthToCheck ) {
+			console.log(aj_page.return_percentage("#load-container") + " is less than "+lengthToCheck)
+			$("#load-container").css({
+				"width":length
+			})
+		}
 	},
 
 	fetch: function( to ) {
@@ -484,7 +508,9 @@ aj_page = {
 		        xhr.addEventListener("progress", function (evt) {
 		            if (evt.lengthComputable) {
 		                var percentComplete = evt.loaded / evt.total;
-		                $("#load-container").css({"width":(Math.round(percentComplete * 100) - getRandomInt(10, 30) + "%")})
+		                percentComplete = (Math.round(percentComplete * 100) - getRandomInt(10, 30))
+		                //$("#load-container").css({"width":(Math.round(percentComplete * 100) - getRandomInt(10, 30) + "%")})
+		                aj_page.update_bar( percentComplete + "%" , aj_page.screen_percentage( percentComplete ) )
 		            }
 		        }, false);
 		        return xhr;
