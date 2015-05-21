@@ -111,7 +111,7 @@ function force_load(){
 		if (document.location.href.search("#") == -1) {
 	    	clearTimeout(pop_wait)
 	    	pop_wait = setTimeout(function(){
-	            pop_start(location.pathname, true);
+	            aj_page.start(false, location.pathname, false, false);
 	        }, 50)
 	    }
 	    return false;
@@ -445,7 +445,6 @@ aj_page = {
 		if (_G.preserve.updating) {
 			return false;
 		}
-		_G.preserve.updating = true;
 		// First, check if the user has animations enabled, if they dont, then return
 		if ( get_cookie( "animations_disable" ) ) {
 			return true;
@@ -476,6 +475,7 @@ aj_page = {
 		// Checks complete, fetch page
 		this.to = to;
 		this.from = from;
+		_G.preserve.updating = true;
 		aj_page.fetch( to );
 	},
 
@@ -534,10 +534,10 @@ aj_page = {
 		content.insertAfter(".page-container.current");
 		// wait until ready, then update dom and transition
 		$("page-container.new").ready(function(){
-			// Done
+			// New Page Loaded
 			aj_page.update_dom( raw ).done( function() { 
 				aj_page.scroll().done(function(){
-					setTimeout(function() { aj_page.transition_page() }, 500)
+					aj_page.transition_page()
 				})
 			})
 		});
@@ -569,7 +569,6 @@ aj_page = {
 		window.history.pushState({
             path: this.to
         }, '', this.to);
-
 		$(".page-container.new").waitForImages(function() {
 			// Scroll user to the top of the page if they are too far down (scroll)
 			$(".page-container.current").removeClass("current").addClass("leave")
@@ -585,9 +584,7 @@ aj_page = {
 	},
 
 	error: function( x, t, m ) {
-		alert(x,t,m)
 		console.log(x, t, m)
-
 		// Check error type
 		if (x.status == 404) {
 			// Page not found
@@ -603,7 +600,8 @@ aj_page = {
 	revert: function( to, from ) {
 		_G.preserve.updating = false;
 		$("a.loading").removeClass("loading");
-		$("#load-container").css({"width":"0%"})
+		$("#load-container").css({"width":"0%"});
+		console.log("AJ_PAGE Reverted")
 	},
 
 	finish: function( ) {
@@ -634,13 +632,11 @@ aj_page = {
 		// filter title text from content and replace current
 		$("title").html( $(content).filter("title").text() )
 		// filter page-bg from content and replace id of current with new
-		$(".page-bg").fadeOut(250)
+		$(".page-bg").fadeOut(1000)
 		setTimeout(function() {
-			$(".page-bg").attr( "id", $(content).find(".page-bg").attr("id") ).fadeIn(250)
-			setTimeout(function() {
-				r.resolve() //Resolve when page-bg transition complete 
-			}, 250)
-		}, 250)
+			$(".page-bg").attr( "id", $(content).find(".page-bg").attr("id") ).fadeIn(1000)
+			r.resolve() //Resolve when page-bg transition complete 
+		}, 1000)
 		return r;
 	}
 }

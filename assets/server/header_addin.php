@@ -44,7 +44,7 @@
 						console.log("Load Timed Out")
 						force_load()
 					}
-				}, 20000)
+				}, 30000)
 			</script>
 			
 			<script>
