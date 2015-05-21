@@ -564,11 +564,6 @@ aj_page = {
 		if (width < 90) {
 			$("#load-container").css({"width":"90%"})
 		}
-		// push new url
-
-		window.history.pushState({
-            path: this.to
-        }, '', this.to);
 		$(".page-container.new").waitForImages(function() {
 			// Scroll user to the top of the page if they are too far down (scroll)
 			$(".page-container.current").removeClass("current").addClass("leave")
@@ -621,6 +616,11 @@ aj_page = {
 		$("#load-container").animate({"width": "0%"}, 10).promise().done(function(){
 			cg_clear();
 			done_load();
+			// push new url
+			window.history.pushState({
+	            path: this.to
+	        }, '', this.to);
+	        
 			_G.preserve.updating = false;
 			$(".load-after").fadeIn(350)
 		});
