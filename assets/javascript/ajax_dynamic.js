@@ -196,6 +196,11 @@ function done_load() {
 	}, 5000)
     $('a.ajax_load').unbind("click").bind('click', function(event) {
         if (event.button === 0) {
+        	if ( get_cookie( "animations_disable" ) ) {
+				return true;
+			} else {
+				event.preventDefault()
+			}
             var old, to, self;
             // Get href of click
             self = this;
@@ -205,7 +210,7 @@ function done_load() {
             cg_timer("temp_safe", setTimeout(function(){
 				aj_page.start( old, to, true, self );
 			}, 250));
-			event.preventDefault()
+			
         }
     });
     $("a.anchor").on('click', function(e){
@@ -220,187 +225,6 @@ function done_load() {
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
-/*
-
-THIS CODE IS DEPRECATED
-
-var _xhr = false;
-var test_var = false;
-function pop_start(page_url, from_url){
-	if (get_cookie("animations_disable")) {
-		return false;
-	}
-	if (!page_url || page_url == "#" || page_url == "" || page_url == document.location.href) {
-		console.log("Invalid Page")
-		return false;
-	}
-	// Display Loading Cursor
-	$("html").addClass("waiting");
-	cg_erase_timer(_G.timer.reset_timer)
-	// Request page from AJAX
-	if (!$("#load-container").is(":visible")) {
-		$("#load-container").show()
-		setTimeout(function() { $("#load-container").css({"width":"10%"}) }, 10)
-	}
-	_xhr = $.ajax({
-		url: page_url,
-		timeout: 10000,
-		xhr: function () {
-	        var xhr = new window.XMLHttpRequest();
-	        //Download progress
-	        xhr.addEventListener("progress", function (evt) {
-	            if (evt.lengthComputable) {
-	                var percentComplete = evt.loaded / evt.total;
-	                setTimeout(function(){
-	                	$("#load-container").css({"width":(Math.round(percentComplete * 100) - getRandomInt(10, 30) + "%")})
-	                }, 10)
-	            }
-	        }, false);
-	        return xhr;
-	    },
-	}).done(function(raw){
-		$(".load-after:visible").each(function(){
-			$(this).fadeOut(150);
-		})
-		var integer = 250;
-		if ( $(document).scrollTop() > 200 || !is_elem_visible("#title") ){
-			integer = scroll_top()
-		}
-		test_var = raw;
-		setTimeout(function(){
-			pop_preceed()
-		}, integer)
-	}).fail(function(x, t, m){
-		_G.preserve.updating = false;
-		cge_t("temp_updating")
-		pop_error(x, t, m)
-		console.log(x)
-		if (x.status != 404) {window.location.href = page_url;} else {console.log("404, Not Launching Page"); alert("Page Does Not Exist");
-			setTimeout(function(){
-				$("#load-container").css({"width":"0%"});
-				if (from_url) {
-					console.log(from_url)
-					window.history.pushState({
-		                path: from_url
-		            }, '', from_url);
-				} else {
-					console.log(from_url)
-				}
-			}, 500)
-		}
-		$("a.loading").removeClass("loading")
-		$("html").removeClass("waiting");
-		// If the AJAX request fails, the load is using normal methods.
-	});
-	return false;
-}
-
-function pop_preceed() {
-	// Update the body of the current page with this ones.
-	if (!$(raw).filter(".page-container")[0] || !$(raw).filter(".page-bg")) {
-		console.log("This page is not configured correctly")
-		window.location.href=page_url;
-	}
-	var $raw = $(raw).filter(".page-container")[0];
-	if ($($raw).hasClass("current")) {
-		$($raw).removeClass("current")
-	}
-	$("title").html($(raw).filter("title")[0].text)
-
-	var update_header = false;
-	if ( $($raw).attr("data-header-clear") ) {
-		// New Page Has Header Clear
-		$("header").slideUp(500)
-	} else if ( $($raw).attr("data-header-force") || $(".page-container").attr("data-header-clear") ) {
-		// New Page Has Header Force
-		update_header = true;
-	}
-	if (update_header) {
-		// Update header text, slide down if not visible
-		if ( $("header").length < 1) {
-			console.log("Cannot replace header, tag doesn't exist")
-		} else {
-			$("header").html($(raw).filter("header").find("#header-wrapper")[0])
-			if (!$("header").is(":visible")) {
-				$("header").slideDown(500)
-			}
-		}
-	}
-	// Get the script ID div, and evaluate it by replacing the div#script with the new content.
-	cg_clear()
-	var scripts = $($(raw).filter("#scripts")[0]).html();
-	$("#scripts").html(scripts)
-	$("body").append($raw)
-	//Replace body content with received ajax code, and fade back in.
-	setTimeout(function(){
-		var timedout = false;
-		var timer_out = setTimeout(function() {
-			console.log("Load Timed out while loading images")
-			pop_proceed(raw, $raw)
-		}, 10000)
-		$($raw).waitForImages(function() {
-			if (!timedout) {
-				clearTimeout(timer_out)
-				console.log("Images Loaded")
-				pop_proceed(raw, $raw)
-			}
-		})
-	}, 400)
-}
-
-function pop_proceed(raw, $raw) {
-	$("#load-container").css({"width":"100%"})
-	$(".page-container.current").removeClass("current").addClass("leave")
-	setTimeout(function(){
-		$(".page-container.leave").remove()
-	}, 1500)
-	setTimeout(function(){ $($raw).addClass("current") }, 50)
-	setTimeout(function(){
-		setTimeout(function(){
-			$("a.current").removeClass("current")
-			if ($("a.loading").length > 0) {
-				//Button pressed
-				$("a.loading").removeClass("loading").addClass("current")
-			}
-			$("header a[href='"+getFileName()+"']").addClass("current")
-			if ( $("header a#games").siblings().filter("ul").find("li a.current").length > 0 ) {
-				$("header a#games").addClass("current")
-			}
-			$("html").removeClass("waiting");
-			done_load()
-			setTimeout(function(){
-				$(".page-bg").fadeOut(400)
-				setTimeout(function(){ $(".page-bg").attr("id", $(raw).filter("#bg-wrapper").find(".page-bg").attr("id")); $(".page-bg").fadeIn(400) }, 400)
-				$("#load-container").slideUp(100)
-				setTimeout(function(){
-					$("#load-container").css({"width":"0%"})
-					cge_t("temp_updating")
-					_G.preserve.updating = false;
-				}, 100)
-			}, 200)
-		}, 500)
-	}, 500)
-}
-
-function pop_terminate(pop, url){
-	_xhr.abort();
-	console.log("Ajax Request Aborted! Loading Page Using HREF "+url);
-	console.log(pop);
-	window.location.href=url;
-}
-
-function pop_error(x, t, m){
-	$(".about-background").show()
-	console.log("")
-	if (_xhr) {
-		_xhr.abort();
-		console.log("XHR Request Aborted Due To An Error");
-	}
-	console.log("X: "+x+":: T:"+t+":: M:"+m);
-	console.log("Ajax Error, Could not complete request")
-	return false;
-}*/
 
 function create_cookie(cname, cvalue, exdays) {
     var d = new Date();
