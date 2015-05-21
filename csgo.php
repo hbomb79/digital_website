@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Home Page</title>
+	<title>Counter Strike: Global Offensive</title>
 	<link rel="stylesheet" href="assets/css/main.css">
 	<?php
 	require_once"assets/_module/imports.php";

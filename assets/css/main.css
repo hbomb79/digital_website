@@ -472,11 +472,9 @@ nav ul li.has-drop > ul {
 	padding:9px;
 	margin-top: 1.04em;
 }
-.handle:hover{
-	background:#FF003F;
-}
-.handle.active{
-	background:#FF003F;
+.handle:hover,
+.handle.active {
+	background: #B90000;
 }
 
 /* Page Contents
