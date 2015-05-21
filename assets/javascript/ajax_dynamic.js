@@ -25,7 +25,6 @@ function is_elem_visible(elem)
 	// Returns true if any of the elem is visible, this included the bottom and top of the element. The limit specifies how far into the element the user must scroll before this function returns true
     var $elem = $(elem);
     if ($elem.length < 1) {
-    	console.log("Cannot Find This Element")
     	return false;
     }
     var $window = $(window);
@@ -36,7 +35,6 @@ function is_elem_visible(elem)
     var elemBottom = elemTop + $elem.height();
     if (!$elem.is(":visible") || $elem.css("opacity") == 0){
     	return false;
-    	console.log("Element is not visible to viewport, returning false")
     }
     return ((elemTop <= docViewBottom) && (elemTop >= docViewTop) || (elemBottom <= docViewBottom) && (elemBottom >= docViewTop) || (elemTop <= docViewTop) && (elemBottom >= docViewBottom));
     // If the elements top and bottom are both off the screen, then we can assume the middle of the element is still visible, thus we accept this as a condition
@@ -452,7 +450,6 @@ aj_page = {
 		// User has animations enabled, continue checks.
 		// Check if new URL matches current.
 		if ( getFileName() == to ) {
-			console.log( "URL matches current, not moving!" );
 			return false;
 		}
 		if ( click && elem ) {
@@ -491,7 +488,6 @@ aj_page = {
 		// Check current length of scroll bar, if current is higher than new, then simply do not change
 		lengthToCheck = ltc || length;
 		if ( $("#load-container").width() < lengthToCheck ) {
-			console.log(aj_page.return_percentage("#load-container") + " is less than "+lengthToCheck)
 			$("#load-container").css({
 				"width":length
 			})
@@ -517,7 +513,6 @@ aj_page = {
 		    }
 		}).done(function( data ){
 			// When ajax request completed, then run add_page()
-			console.log("Done")
 			// Hide any load-after elements
 			$(".load-after").hide()
 			aj_page.add_page( data );
@@ -602,6 +597,9 @@ aj_page = {
 	finish: function( ) {
 		// Set header highlighting and remove any loading classes from elements.
 		// First, remove the loading class
+		window.history.pushState({
+	    	path: this.to
+        }, '', this.to);
 		$("a.loading").removeClass("loading")
 		$("a.current").removeClass("current")
 		if (this.elem) {
@@ -616,11 +614,6 @@ aj_page = {
 		$("#load-container").animate({"width": "0%"}, 10).promise().done(function(){
 			cg_clear();
 			done_load();
-			// push new url
-			window.history.pushState({
-	            path: this.to
-	        }, '', this.to);
-	        
 			_G.preserve.updating = false;
 			$(".load-after").fadeIn(350)
 		});
