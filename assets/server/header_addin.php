@@ -26,6 +26,9 @@
 						<a class="button" href="#" onclick="toggle_animations()" id="js_setting">An Error Occured, Enable Javascript</a><br>	
 					</div>
 					<div class="setting-content" id="load_content">
+						<a class="button" href="#" onclick="toggle_ajax()" id="ajax_setting">An Error Occured, Enable Javascript</a>
+					</div>
+					<div class="setting-content" id="load_content">
 						<a class="button" href="#" onclick="toggle_loading()" id="load_setting">An Error Occured, Enable Javascript</a>
 					</div>
 				</div>
@@ -132,5 +135,83 @@
 			}
 			settings()
 		}
+
+		var settings = {
+
+			init: function() {
+				this.update()
+				var base = this;
+			},
+
+			events: function() {
+				$(".setting-content > a").on("click", settings.trigger( this ))
+			},
+
+			trigger: function( self ) {
+				var $self, text;
+				$self = $(self)
+				switch ( $self.attr("id") ) {
+					case "ajax_setting":
+						text = "Ajax Loading";
+						break;
+					case "load_setting":
+						text = "Loading Animation";
+						break;
+					case "js_setting":
+						text = "Page Change Animations";
+						break;
+				}
+				base.toggle( $self.data("setup"), true, 30, text)
+				base.change_text( self, $self.data("title-name") )
+			},
+
+			toggle: function( setting, value, expiry, text) {
+				if (!get_cookie(setting)) {
+					create_cookie(setting, value, expiry)
+					text += " Disabled";
+				} else {
+					document.cookie = setting+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+					text += " Enabled";
+				}
+				base.tell( text )
+			},
+
+			vis: function( element, action ) {
+				$(element)[action]();
+			},
+
+			tell: function( text, tc, bg ) {
+				var t, b;
+				t = ( tc ) ? tc : "white";
+				b = ( bg ) ? bg : "limegreen";
+				notify( text, tc, bg )
+			}
+
+			change_text: function( element, text ) {
+				$(element).html( text )
+			}
+
+			update: function() {
+				if ( get_cookie("animations_disable") ) {
+					// Animations are disabled, display the button in the OFF state
+
+				} else {
+
+				}
+
+				if ( get_cookie("loading_disable") ) {
+
+				} else {
+
+				}
+
+				if ( get_cookie("ajax_disable") ) {
+
+				} else {
+
+				}
+			}
+		}
+
 	</script>
 </div>

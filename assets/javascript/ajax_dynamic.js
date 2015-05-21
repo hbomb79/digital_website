@@ -207,7 +207,9 @@ function done_load() {
             cg_timer("temp_safe", setTimeout(function(){
 				aj_page.start( old, to, true, self );
 			}, 250));
-			event.preventDefault()
+			if ( !get_cookie("ajax_disable") ) {
+				event.preventDefault()
+			}
         }
     });
     $("a.anchor").on('click', function(e){
@@ -447,7 +449,7 @@ aj_page = {
 		}
 		_G.preserve.updating = true;
 		// First, check if the user has animations enabled, if they dont, then return
-		if ( get_cookie( "animations_disable" ) ) {
+		if ( get_cookie( "ajax_disable" ) ) {
 			return true;
 		}
 		// User has animations enabled, continue checks.
@@ -501,20 +503,34 @@ aj_page = {
 	},
 
 	add_page: function( raw ) {
-		// Append to body, and wait until done.
 		content = $(raw).filter(".page-container")
-		// Filter page-container and store in current
-		content = $(content).removeClass("current").addClass("new");
-		content.insertAfter(".page-container.current");
-		// wait until ready, then update dom and transition
-		$("page-container.new").ready(function(){
-			// Done
-			aj_page.update_dom( raw ).done( function() { 
-				aj_page.scroll().done(function(){
-					setTimeout(function() { aj_page.transition_page() }, 500)
+		if ( !get_cookie("animations_disable") ) {
+			// Append to body, and wait until done.
+			// Filter page-container and store in current
+			content = $(content).removeClass("current").addClass("new");
+			content.insertAfter(".page-container.current");
+			// wait until ready, then update dom and transition
+			$("page-container.new").ready(function(){
+				aj_page.prepare( raw ).done(function(){
+					aj_page.transition_page() 
 				})
+			});
+		} else {
+			// No animate
+			aj_page.prepare( raw ).done(function(){
+				aj_page.transition_page( true, content ) 
 			})
-		});
+		}
+	},
+
+	prepare: function( raw ) {
+		var d = $.Deferred();
+		aj_page.update_dom( raw ).done( function() { 
+			aj_page.scroll().done(function(){
+				d.resolve()
+			})
+		})
+		return d;
 	},
 
 	scroll: function(){
@@ -529,7 +545,7 @@ aj_page = {
 		return a;
 	},
 
-	transition_page: function(){
+	transition_page: function( replace, content){
 		// Slide current page off screen, and new one on screen.
 		// .waitForImages is a 3rd party plugin!
 		var width, swidth;
@@ -544,18 +560,28 @@ aj_page = {
             path: this.to
         }, '', this.to);
 
-		$(".page-container.new").waitForImages(function() {
-			// Scroll user to the top of the page if they are too far down (scroll)
-			$(".page-container.current").removeClass("current").addClass("leave")
-			$(".page-container.new").removeClass("new").addClass("current")
+		if (!replace) {
+			$(".page-container.new").waitForImages(function() {
+				// Scroll user to the top of the page if they are too far down (scroll)
+				$(".page-container.current").removeClass("current").addClass("leave")
+				$(".page-container.new").removeClass("new").addClass("current")
+				$("#load-container").animate({"width": "100%"}, 250)
+				setTimeout(function(){
+					$(".page-container.leave").remove()
+					$("#load-container").slideUp(250).promise().done(function(){
+						aj_page.finish()
+					});
+				}, 2000)
+			})
+		} else {
+			$(".page-container").html(content)
 			$("#load-container").animate({"width": "100%"}, 250)
 			setTimeout(function(){
-				$(".page-container.leave").remove()
 				$("#load-container").slideUp(250).promise().done(function(){
 					aj_page.finish()
 				});
-			}, 2000)
-		})
+			}, 250)
+		}
 	},
 
 	error: function( x, t, m ) {
@@ -608,13 +634,18 @@ aj_page = {
 		// filter title text from content and replace current
 		$("title").html( $(content).filter("title").text() )
 		// filter page-bg from content and replace id of current with new
-		$(".page-bg").fadeOut(250)
-		setTimeout(function() {
-			$(".page-bg").attr( "id", $(content).find(".page-bg").attr("id") ).fadeIn(250)
+		if ( !get_cookie("animations_disable") ) {
+			$(".page-bg").fadeOut(250)
 			setTimeout(function() {
-				r.resolve() //Resolve when page-bg transition complete 
+				$(".page-bg").attr( "id", $(content).find(".page-bg").attr("id") ).fadeIn(250)
+				setTimeout(function() {
+					r.resolve() //Resolve when page-bg transition complete 
+				}, 250)
 			}, 250)
-		}, 250)
+		} else {
+			$(".page-bg").attr( "id", $(content).find(".page-bg").attr("id") )
+			r.resolve()
+		}
 		return r;
 	}
 }
