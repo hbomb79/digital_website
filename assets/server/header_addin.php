@@ -22,14 +22,14 @@
 				<div id="inner">
 					<h1>Settings</h1>
 					<p>Welcome to your settings page, any options changed here will revert automatically in 30 days afterwards.</p>
+					<div class="setting-content" id="ajax_content">
+						<a class="button" href="#" data-default="ON" data-required-set="[  ]" data-exclude-set="[  ]" data-c-name="ajax_disable" data-title-name="AJAX Loading" id="ajax_setting">An Error Occured, Enable Javascript</a>
+					</div>
 					<div class="setting-content">
-						<a class="button" href="#" onclick="toggle_animations()" id="js_setting">An Error Occured, Enable Javascript</a><br>	
+						<a class="button" href="#" data-default="ON" data-required-set="[  ]" data-exclude-set="[ 'ajax_disable' ]" data-c-name="animations_disable" data-title-name="Animated Transitions" id="js_setting">An Error Occured, Enable Javascript</a><br>	
 					</div>
 					<div class="setting-content" id="load_content">
-						<a class="button" href="#" onclick="toggle_ajax()" id="ajax_setting">An Error Occured, Enable Javascript</a>
-					</div>
-					<div class="setting-content" id="load_content">
-						<a class="button" href="#" onclick="toggle_loading()" id="load_setting">An Error Occured, Enable Javascript</a>
+						<a class="button" href="#" data-default="ON" data-required-set="[ 'ajax_disable' ]" data-exclude-set="[  ]" data-c-name="loading-disable" data-title-name="Animated Loading" id="load_setting">An Error Occured, Enable Javascript</a>
 					</div>
 				</div>
 			</div>
@@ -40,6 +40,7 @@
 			<div id="load-container" style="width:0%; display:none;"><div id="load-progress"></div></div>
 			<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.waitforimages/1.5.0/jquery.waitforimages.min.js"></script>
 			<script src="assets/javascript/color-animate.js"></script>
+			<script src="assets/javascript/page.js"></script>
 			<script>
 				var timer_out = setTimeout(function(){
 					if ($("#loading").is(":visible")) {
@@ -95,56 +96,15 @@
 			$("header a#games").addClass("current")
 			// If the active tab is within the games dropdown, then highlight the dropdown parent as well.
 		}
-		// Setup settings *XD*
-
-		function settings() {
-			if (get_cookie("animations_disable")) {
-				// Animations disabled.
-				$("#js_setting").html("Turn On Animations");
-				$("#load_content").show()
-			} else {
-				$("#js_setting").html("Turn Off Animations");
-				document.cookie = "loading_disable=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
-				$("#load_content").hide()
-			}
-			if (get_cookie("loading_disable")) {
-				// Animations disabled.
-				$("#load_setting").html("Turn On Loading");
-			} else {
-				$("#load_setting").html("Turn Off Loading");
-			}
-		}
-		settings()
-		function toggle_animations(){
-			if (get_cookie("animations_disable")) {
-				document.cookie = "animations_disable=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
-				notify("Animation setting enabled", "limegreen", "white", "#setting-notify")
-			} else {
-				create_cookie("animations_disable", "true", 30)
-				notify("Animation setting disabled", "limegreen", "white", "#setting-notify")
-			}
-			settings()
-		}
-		function toggle_loading(){
-			if (get_cookie("loading_disable")) {
-				document.cookie = "loading_disable=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
-				notify("Loading setting enabled", "limegreen", "white", "#setting-notify")
-			} else {
-				create_cookie("loading_disable", "true", 30)
-				notify("Loading setting disabled", "limegreen", "white", "#setting-notify")
-			}
-			settings()
-		}
-
 		var settings = {
 
 			init: function() {
+				this.events()
 				this.update()
-				var base = this;
 			},
 
 			events: function() {
-				$(".setting-content > a").on("click", settings.trigger( this ))
+				$(".setting-content > a").on("click", settings.trigger )
 			},
 
 			trigger: function( self ) {
@@ -161,19 +121,25 @@
 						text = "Page Change Animations";
 						break;
 				}
-				base.toggle( $self.data("setup"), true, 30, text)
-				base.change_text( self, $self.data("title-name") )
+				settings.toggle( $self.data("setup"), true, 30, text )
+				alert("Clicked")
+			},
+
+			remove_cookie: function( name ) {
+				document.cookie = name+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 			},
 
 			toggle: function( setting, value, expiry, text) {
 				if (!get_cookie(setting)) {
 					create_cookie(setting, value, expiry)
 					text += " Disabled";
+					settings.change_text( self, "Enable " + $(self).data("title-name") )
 				} else {
 					document.cookie = setting+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 					text += " Enabled";
+					settings.change_text( self, "Disable " + $(self).data("title-name"))
 				}
-				base.tell( text )
+				settings.tell( text )
 			},
 
 			vis: function( element, action ) {
@@ -184,34 +150,59 @@
 				var t, b;
 				t = ( tc ) ? tc : "white";
 				b = ( bg ) ? bg : "limegreen";
-				notify( text, tc, bg )
-			}
+				notify( text, bg, tc )
+			},
 
 			change_text: function( element, text ) {
 				$(element).html( text )
-			}
+			},
 
 			update: function() {
-				if ( get_cookie("animations_disable") ) {
-					// Animations are disabled, display the button in the OFF state
-
-				} else {
-
-				}
-
-				if ( get_cookie("loading_disable") ) {
-
-				} else {
-
-				}
-
-				if ( get_cookie("ajax_disable") ) {
-
-				} else {
-
-				}
+				var missing, req, exclude;
+				$(".setting-content > a").each(function( index, item ){
+					missing = false;
+					req = eval($(item).data("required-set"));
+					exclude = eval($(item).data("exclude-set"));
+					if ( req ) {
+						for ( var i = 0; i < req.length; i++) {
+							if ( !get_cookie( req[i] ) ) {
+								missing = true;
+							}
+						}
+					}
+					if (exclude) {
+						for ( var i = 0; i < exclude.length; i++) {
+							if ( get_cookie( exclude[i] ) ) {
+								missing = true;
+							}
+						}
+					}
+					if ( !missing ) {
+						// Element matches all required objects
+						$(item).show()
+					} else {
+						$(item).hide()
+						// Apply defaults because the item is now hidden
+						switch( $(item).data("default") ) {
+							case "OFF":
+								if ( !get_cookie( $(item).data("c-name") ) ) {
+									create_cookie( $(item).data("c-name"), true, 30 )
+									settings.change_text( self, "Disable " + $(self).data("title-name"))
+								}
+								break;
+							case "ON":
+								// Setting on = no cookie
+								// Remove cookie if it exists
+								if ( get_cookie( $(item).data("c-name") ) ) {
+									settings.remove_cookie($(item).data("c-name"))
+									settings.change_text( self, "Disable " + $(self).data("title-name"))
+								}
+								break;
+						}
+					}
+				});
 			}
 		}
-
+		settings.init()
 	</script>
 </div>

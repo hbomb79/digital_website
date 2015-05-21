@@ -5,6 +5,9 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="description" content="Help content, including trouble shooting and contact form for the website">
+	<meta name="keywords" content="Help, contact, troubleshooting">
+	<meta name="author" content="Harry Felton">
 	<title>Help | Contact</title>
 	<link rel="stylesheet" href="assets/css/main.css">
 	<?php
