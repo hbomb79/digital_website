@@ -6,10 +6,11 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Home Page</title>
+	<title>Grand Theft Auto V</title>
 	<link rel="stylesheet" href="assets/css/main.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script src="assets/javascript/ajax_dynamic.js"></script>
+	<?php
+	require_once"assets/_module/imports.php";
+	?>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 </head>
 <body>
@@ -17,7 +18,7 @@
 		require_once"assets/server/header_addin.php";
 	?>
 	<div id="bg-wrapper">
-	 	<div class="page-bg" id="main-page-bg">
+	 	<div class="page-bg" id="gta-page-bg">
 	</div> <!--Faded out and replaced using ajax--> </div>
 	<div class="page-container current" id="gtav"> <!-- Slide off screen, slide new page on screen using ajax -->
 		<div id="wrapper">

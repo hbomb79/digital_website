@@ -1,6 +1,14 @@
+$("body").addClass("JS")
+
 $(".handle").unbind("click").bind("click", function(){
-	$("nav ul").toggleClass("showing");
-	$(".handle").toggleClass("active");
+	$("nav > ul").toggleClass("showing");
+	$("nav > .handle").toggleClass("active");
+})
+
+$("header li.has-drop").on("mouseenter", function(){
+	$(this).children().filter("ul").stop().slideDown(250);
+}).on("mouseleave", function(){
+	$(this).children().filter("ul").stop().slideUp(250)
 })
 
 function notify(message, color, tc, optional){

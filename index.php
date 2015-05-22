@@ -5,9 +5,9 @@
 	<meta charset="UTF-8">
 	<title>Home Page</title>
 	<link rel="stylesheet" href="assets/css/main.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script src="assets/javascript/ajax_dynamic.js"></script>
-	<script src="assets/javascript/slider.jquery.js"></script>
+	<?php
+	require_once"assets/_module/imports.php";
+	?>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 </head>
 <body>
@@ -60,6 +60,10 @@
 						<div class="game">
 							<a href="http://google.com"><div class="game-bg" id="PAYDAY"></div>
 								<div class="game-title"><span>Payday: The Heist</span></div></a>
+						</div>
+						<div class="game">
+							<a href="bf4.php" class="ajax_load"><div class="game-bg" id="BF4"></div>
+								<div class="game-title"><span>Battlefield 4</span></div></a>
 						</div>
 					</div>
 				</main>
