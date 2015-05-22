@@ -2,7 +2,7 @@
 // Copyright 2015 HexCode (Harry Felton)
 // Use Under MIT License And Written Consent From HexCode
 // 
-// Unauthorised usage will result in copyritten court action
+// Unauthorized usage will result in copyright court action
 var timer = false;
 var pop_wait = false;
 _G = {};
@@ -111,10 +111,9 @@ function force_load(){
 		if (document.location.href.search("#") == -1) {
 	    	clearTimeout(pop_wait)
 	    	pop_wait = setTimeout(function(){
-	            pop_start(location.pathname, true);
+	            aj_page.start(false, location.pathname, false, false);
 	        }, 50)
 	    }
-	    return false;
 	});
 }
 
@@ -169,10 +168,10 @@ function check_hash (hash) {
 	}, 50)
 }
 
-function getFileName() {
+function getFileName( obj ) {
 	//this gets the full url
 	// If running on XAMPP this works, although a local machine will not as index.php is not always in the URL bar, to address this, a null pathname or a pathname of /digital_website/ (For local machines using XAMPP) will return index.php
-	var url = document.location.href;
+	var url = obj ? obj : document.location.href;
 	//this removes the anchor at the end, if there is one
 	url = url.substring(0, (url.indexOf("#") == -1) ? url.length : url.indexOf("#"));
 	//this removes the query after the file name, if there is one
@@ -462,6 +461,8 @@ aj_page = {
 			// Highlight the element using loading class
 			$(elem).addClass( "loading" );
 			this.elem = elem;
+		} else {
+			this.elem = false;
 		}
 		// Advance the progress bar by 10% to indicate loading has begun.
 		$("#load-container").show()
@@ -477,7 +478,7 @@ aj_page = {
 	},
 
 	fetch: function( to ) {
-		$.ajax({
+		var _xhr = $.ajax({
 			url: to,
 			timeout: 10000,
 			xhr: function () {
@@ -574,7 +575,15 @@ aj_page = {
 				}, 2000)
 			})
 		} else {
-			$(".page-container").html(content)
+			content = $(content);
+
+			// First, append the new and current class to the content, then insert it after the current page without the new class.
+			content.addClass("current new")
+			content.insertAfter(".page-container.current:not(.new)")
+			// Now, remove the current
+			$(".page-container.current:not(.new)").remove()
+			$(".page-container.new").removeClass("new")
+
 			$("#load-container").animate({"width": "100%"}, 250)
 			setTimeout(function(){
 				$("#load-container").slideUp(250).promise().done(function(){
@@ -609,11 +618,11 @@ aj_page = {
 	finish: function( ) {
 		// Set header highlighting and remove any loading classes from elements.
 		// First, remove the loading class
-		$("a.loading").removeClass("loading")
-		$("a.current").removeClass("current")
+		$("a.loading").removeClass("loading");
+		$("a.current").removeClass("current");
 		if (this.elem) {
 			// Highlight this element
-			$(this.elem).addClass("current")
+			$(this.elem).addClass("current");
 		}
 		// Dynamically highlight
 		$("header a[href='"+getFileName()+"']").addClass("current")
@@ -624,6 +633,7 @@ aj_page = {
 			cg_clear();
 			done_load();
 			_G.preserve.updating = false;
+			aj_page.check();
 			$(".load-after").fadeIn(350)
 		});
 	},
@@ -647,5 +657,29 @@ aj_page = {
 			r.resolve()
 		}
 		return r;
+	},
+
+	check: function() {
+		// Check to make sure that a page still exists, if not then load the page again.
+		var pcl, e;
+		e = false;
+		pcl = $(".page-container").length;
+		if ( pcl != 1 ) {
+			// Page is missing, reload
+			e = true;
+		} else if ( !$(".page-container").hasClass("current") ) {
+			e = true;
+		}
+		if ( e ) {
+			console.log("A problem occurred so the page was reloaded");
+			alert("A problem occurred so the page was reloaded")
+			document.location.href = this.to;
+			return true;
+		}
+		// Check if current page is not the same as this.to, this may happen if the user presses the back/forward button while already loading a page, 
+		// a pop-state event is fired after the history changes, therefore we cannot prevent the URL change, only record it, if check fails then load the page.
+		if ( getFileName() != getFileName(this.to) ) {
+			aj_page.start( getFileName(), document.location.href, false, false )
+		}
 	}
 }
