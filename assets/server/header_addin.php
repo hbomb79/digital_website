@@ -21,7 +21,7 @@
 			<div id="pane">
 				<div id="inner">
 					<h1>Settings</h1>
-					<p>Welcome to your settings page, any options changed here will revert automatically in 30 days afterwards.</p>
+					<p>Welcome to your settings page, any options changed here will revert 30 days afterwards.</p>
 					<div class="setting-content" id="ajax_content">
 						<a class="button" href="#" data-default="ON" data-required-set="[  ]" data-exclude-set="[  ]" data-c-name="ajax_disable" data-title-name="AJAX Loading" id="ajax_setting">An Error Occured, Enable Javascript</a>
 					</div>

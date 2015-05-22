@@ -453,8 +453,7 @@ aj_page = {
 		}
 		// User has animations enabled, continue checks.
 		// Check if new URL matches current.
-		if ( getFileName() == to ) {
-			console.log( "URL matches current, not moving!" );
+		if ( getFileName() == getFileName( to ) ) {
 			return false;
 		}
 		if ( click && elem ) {
