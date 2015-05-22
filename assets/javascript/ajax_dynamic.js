@@ -545,7 +545,7 @@ aj_page = {
 		return a;
 	},
 
-	transition_page: function( replace, content){
+	transition_page: function( replace, content ){
 		// Slide current page off screen, and new one on screen.
 		// .waitForImages is a 3rd party plugin!
 		var width, swidth;
