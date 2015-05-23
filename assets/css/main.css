@@ -736,8 +736,11 @@ section.h1 {
 	text-align: center;
 }
 
+#contact-title {
+	text-align: center;
+}
+
 #contact-container #contact-inner {
-	width:60%;
 	margin:0 auto;
 	background:white;
 	padding:2em;
@@ -771,6 +774,10 @@ section.h1 {
 
 #contact-container #right textarea{
 	text-align: left;
+}
+
+.contact-trigger {
+	display: none;
 }
 
 /* Mobile Code
