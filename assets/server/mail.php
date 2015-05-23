@@ -5,7 +5,7 @@
 	
 	// Append the isset variable to each JSON object key
 	
-	session_start("mailer");
+	session_start("mail");
 
 	$json_obj = array("name" => isset($_GET["name"]) ? $_GET["name"] : "null", "type" => isset($_GET["type"]) ? $_GET["type"] : "null", "message" => isset($_GET["message"]) ? $_GET["message"] : "null", "js" => isset($_GET["js"]) && !empty($_GET['js']) ? "true" : "false");
 	$missing = false;
@@ -19,19 +19,10 @@
 
 	//Store javascript in variable
 	function response( $return ) {
-		global $js, $missing, $json_obj;
+		global $js;
 		if ($js) {
-			// Return JSON response;
-			if ( !$missing ) {
-				$json_obj["status"] = isset($_SESSION["mail"]) ? 304 : 200;
-				$json_obj["statusText"] = isset($_SESSION["mail"]) ? "not_modified" : "sent";
-			} else if ( $missing ) {
-				$json_obj["status"] = 404;
-				$json_obj["statusText"] = "missing_fields";
-			}
-			// Convert to JSON
-			$json_obj = json_encode($json_obj);
-			die($json_obj);
+			// Return Ajax Response, mail has been sent
+			echo($_SESSION["mail"] == true ? "304" : "200");
 		} elseif (!$js) {
 			// Return Response With CSS (Full Page)
 			?>
@@ -39,7 +30,7 @@
 			<html lang="en">
 			<head>
 				<meta charset="UTF-8">
-				<title>Contact Us</title>
+				<title>Mail Sent!</title>
 				<link rel="stylesheet" href="../css/main.css">
 				<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 				<style>
@@ -65,15 +56,6 @@
 						transform: translate(-50%, -50%);
 						box-shadow: none;
 					}
-
-					li.none {
-						text-decoration: none;
-						list-style-type: none;
-					}
-
-					ul {
-						padding:0;
-					}
 				</style>
 			</head>
 			<body>
@@ -85,28 +67,12 @@
 						<div id="container">
 							<main>
 								<?php
-									if ( !isset($_SESSION['mail']) && !$missing ) {
-									//$_SESSION['mail'] = true;
+									if ( !isset($_SESSION['mail']) ) {
+									$_SESSION['mail'] = true;
 								?>
 								<div class="warn">
 									<h1>Mail Sent</h1>
 									<p>Your message has been sent to us, one of out customer service representatives will get back to you within 1-3 working days</p>
-								</div>
-								<?php
-									} else if ( $missing ) {
-								?>
-								<div class="warn">
-									<h1>Cannot Send</h1>
-									<p>Your Message Could Not Be Sent As The Following Fields Were Not Filled: </p>
-									<ul>
-										<?php
-											foreach( $json_obj as $key => $obj ) {
-												if ( $obj == "null" || empty($obj) ) {
-													echo("<li class='none'>" . $key . "</li>");
-												}
-											}
-										?>
-									</ul>
 								</div>
 								<?php
 									} else {
@@ -134,6 +100,7 @@
 		global $js, $missing;
 		// This function will send the email.
 		// Check for missing variables
+
 		if ($missing) {
 			return "BAD";
 		} else {
