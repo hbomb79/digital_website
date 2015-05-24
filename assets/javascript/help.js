@@ -89,9 +89,19 @@
 					datas[key] = $(datac[key]).val();
 				}
 			}
-			$.getJSON(CF.config.mailer.url, datas, function( data ){
-				CF.response(data)
+			
+			$.ajax({
+				dataType: "json",
+				url: CF.config.mailer.url,
+				data: datas,
+				method: "post",
+				success: function(data){
+					CF.response(data)
+				}
+			}).fail(function( x,t,m ){
+				CF.error(x,t,m)
 			})
+
 		},
 
 		response: function( data ) {
@@ -193,7 +203,9 @@
 				"top": "50%",
 				"left": "50%",
 				"transform":"translate( -50%, -50%)",
-				"z-index": 2000
+				"z-index": 2000,
+				"width": "50%",
+				"border": "3px #FF003F solid"
 			}
 		},
 		animation: {

@@ -222,6 +222,10 @@ header li a.loading{
 	margin-top:3em;
 }
 
+#settings #pane #inner .setting-content .button {
+	display:initial;
+}
+
 
 /* Overlay Shadow
 -------------------*/
@@ -243,6 +247,9 @@ header li a.loading{
 	-webkit-transition: background 250ms ease, color 250ms ease;
 	-o-transition: background 250ms ease, color 250ms ease;
 	transition: background 250ms ease, color 250ms ease;
+	cursor:pointer;
+	color: #FF003F;
+	display:block;
 }
 
 .button:hover {
@@ -762,7 +769,8 @@ section.h1 {
 .help-container section {
 	padding: 0;
 	border: 2px #FF003F solid;
-	border-radius: 0 0 0.7em 0.7em;
+	border-radius: 0.7em;
+	overflow: hidden;
 }
 
 .help-container #right {
@@ -783,6 +791,7 @@ section.h1 {
 .help-container h2{
 	margin: 0;
 	background: red;
+	color:white;
 }
 
 
@@ -795,7 +804,7 @@ section.h1 {
 #contact-container #contact-inner {
 	margin:0 auto;
 	background:white;
-	padding:2em;
+	padding:1em;
 }
 
 #contact-container #left {
@@ -829,12 +838,17 @@ section.h1 {
 }
 
 #contact-container{
-	border: 3px #FF003F solid;
 	border-radius: 1em;
 	overflow: hidden;
 }
+body #contact-container button {
+	margin:1em 0 0 0;
+}
 
-
+body.JS #contact-container button{
+	display:block;
+	margin: 1em auto 0 auto;
+}
 
 #contact-container .warning {
 	border: 3px solid red;
@@ -859,10 +873,26 @@ section.h1 {
 		transform: none;
 		border: solid 3px #FF003F;
 	}
+
+	#contact-container {
+		position: fixed !important;
+		top:1em !important;
+		-webkit-transform: translate(-50%, 0) !important;
+		-ms-transform: translate(-50%, 0) !important;
+		-o-transform: translate(-50%, 0) !important;
+		transform: translate(-50%, 0) !important;
+	}
 }
 
 @media screen and (max-width: 700px) {
 	/* Change css rules to ones that apply for a mobile device */
+	
+	.help-container #left, .help-container #right{
+		float:none;
+		width:80%;
+		margin: 0 auto;
+	}
+
 	#container, footer {
 		width:100%;
 		margin: 0;

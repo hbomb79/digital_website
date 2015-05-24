@@ -274,6 +274,7 @@ aj_page = {
 		if ( getFileName() == getFileName( to ) && !force) {
 			return false;
 		}
+		this.popstate = force ? true : false
 		if ( click && elem ) {
 			// Highlight the element using loading class
 			$(elem).addClass( "loading" );
@@ -372,11 +373,13 @@ aj_page = {
 		if (width < 90) {
 			$("#load-container").css({"width":"90%"})
 		}
-		// push new url
+		// push new url if it was not a popstate
 
-		window.history.pushState({
-            path: this.to
-        }, '', this.to);
+		if ( !this.popstate ) {
+			window.history.pushState({
+            	path: this.to
+        	}, '', this.to);
+		}
 
 		if (!replace) {
 			$(".page-container.new").waitForImages(function() {

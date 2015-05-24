@@ -65,13 +65,13 @@
 							</section>
 						</div>
 					</div>
-					<button class="contact-trigger" style="display:none">Contact Us</button>
+					<button class="button contact-trigger" style="margin:0 auto; display:none; font-size:1.3em;">Contact Us</button>
 					<h1 id="contact-title">Contact Us</h1>
 					<!-- Contact Form -->
 					<div id="contact-container">
 						<div id="contact-notify" style="display:none;"></div>
 						<div id="contact-inner" class="clearfix">
-							<form>
+							<form action="assets/server/mail.php" method="post">
 								<div id="left">
 									<h2>Name</h2>
 									<input class="sl" name="name" id="name" type="text">
@@ -82,8 +82,8 @@
 										<option value="feedback">Feedback</option>
 										<option value="suggestion">Suggestion</option>
 									</select>
-									<button id="contact-send">Send Message</button>
-									<button class="contact-trigger">Cancel</button>
+									<button class="button" id="contact-send">Send Message</button>
+									<button class="button contact-trigger" style="display:none;">Cancel</button>
 								</div>
 								<div id="right">
 									<h2>Message</h2>
@@ -99,9 +99,11 @@
 					Page Created By <a href="http://harryfelton.web44.net">Harry Felton</a> 2015
 				</div>
 			</footer>
+			<script>
+				$.getScript("assets/javascript/help.js")
+			</script>
 		</div>
 	</div>
 	<script src="assets/javascript/page.js"></script>
-	<script src="assets/javascript/help.js"></script>
 </body>
 </html>

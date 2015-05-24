@@ -7,7 +7,7 @@
 	
 	session_start("mailer");
 
-	$json_obj = array("name" => isset($_GET["name"]) ? $_GET["name"] : "null", "type" => isset($_GET["type"]) ? $_GET["type"] : "null", "message" => isset($_GET["message"]) ? $_GET["message"] : "null", "js" => isset($_GET["js"]) && !empty($_GET['js']) ? "true" : "false");
+	$json_obj = array("name" => isset($_POST["name"]) ? $_POST["name"] : "null", "type" => isset($_POST["type"]) ? $_POST["type"] : "null", "message" => isset($_POST["message"]) ? $_POST["message"] : "null", "js" => isset($_POST["js"]) && !empty($_POST['js']) ? "true" : "false");
 	$missing = false;
 	foreach( $json_obj as $key => $obj ) {
 		if ($obj === "null" || empty($obj)) {
@@ -89,7 +89,6 @@
 							<main>
 								<?php
 									if ( !isset($_SESSION['mail']) && !$missing ) {
-									$_SESSION['mail'] = true;
 								?>
 								<div class="warn">
 									<h1>Mail Sent</h1>
@@ -129,6 +128,8 @@
 		} else {
 			die("208 - Unknown Error (undefined)");
 		}
+
+		$_SESSION['mail'] = true;
 	}
 
 	function send() {
@@ -139,8 +140,13 @@
 		if ($missing) {
 			return "BAD";
 		} else {
-			//... send mail
-			return "OK";
+			if (!isset($_SESSION["mail"])) {
+				//... send mail
+				return "OK";
+			} else {
+				// Dont send
+				return "OK";
+			}
 		}
 	}
 
