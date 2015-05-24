@@ -69,8 +69,9 @@
 					<h1 id="contact-title">Contact Us</h1>
 					<!-- Contact Form -->
 					<div id="contact-container">
+						<div id="contact-notify" style="display:none;"></div>
 						<div id="contact-inner" class="clearfix">
-							<form action="assets/server/mail.php">
+							<form>
 								<div id="left">
 									<h2>Name</h2>
 									<input class="sl" name="name" id="name" type="text">
@@ -81,7 +82,8 @@
 										<option value="feedback">Feedback</option>
 										<option value="suggestion">Suggestion</option>
 									</select>
-									<button>Send Message</button>
+									<button id="contact-send">Send Message</button>
+									<button class="contact-trigger">Cancel</button>
 								</div>
 								<div id="right">
 									<h2>Message</h2>

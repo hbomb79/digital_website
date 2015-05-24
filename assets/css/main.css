@@ -40,6 +40,62 @@ html, body {
 	100%{opacity: 0.5;}
 }
 
+@-webkit-keyframes warning{
+	0%{
+		box-shadow: 0 0 10px red;
+	}
+	50%{
+		box-shadow: 0 0 23px red;
+	}
+	100%{
+		box-shadow: 0 0 10px red;
+	}
+}
+@-moz-keyframes warning{
+	0%{
+		box-shadow: 0 0 10px red;
+	}
+	50%{
+		box-shadow: 0 0 23px red;
+	}
+	100%{
+		box-shadow: 0 0 10px red;
+	}
+}
+@-ms-keyframes warning{
+	0%{
+		box-shadow: 0 0 10px red;
+	}
+	50%{
+		box-shadow: 0 0 23px red;
+	}
+	100%{
+		box-shadow: 0 0 10px red;
+	}
+}
+@-o-keyframes warning{
+	0%{
+		box-shadow: 0 0 10px red;
+	}
+	50%{
+		box-shadow: 0 0 23px red;
+	}
+	100%{
+		box-shadow: 0 0 10px red;
+	}
+}
+@keyframes warning{
+	0%{
+		box-shadow: 0 0 10px red;
+	}
+	50%{
+		box-shadow: 0 0 23px red;
+	}
+	100%{
+		box-shadow: 0 0 10px red;
+	}
+}
+
 a.loading {
 	-webkit-animation: flash 500ms infinite;
 	-moz-animation: flash 500ms infinite;
@@ -770,6 +826,23 @@ section.h1 {
 
 #contact-container #right textarea{
 	text-align: left;
+}
+
+#contact-container{
+	border: 3px #FF003F solid;
+	border-radius: 1em;
+	overflow: hidden;
+}
+
+
+
+#contact-container .warning {
+	border: 3px solid red;
+	animation: warning 2s infinite;
+	-moz-animation: warning 2s infinite;
+	-o-animation: warning 2s infinite;
+	-ms-animation: warning 2s infinite;
+	-webkit-animation: warning 2s infinite;
 }
 
 /* Mobile Code
