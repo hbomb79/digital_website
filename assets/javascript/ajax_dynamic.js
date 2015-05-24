@@ -284,11 +284,8 @@ aj_page = {
 		}
 		// Advance the progress bar by 10% to indicate loading has begun.
 		$("#load-container").show()
-		setTimeout(function(){
-			$("#load-container").css({
-				width: "10%"
-			});
-		}, 100)
+		this.update_bar("10%", this.screen_percentage( 10 ) )
+
 		// Checks complete, fetch page
 		this.to = to;
 		this.from = from;
@@ -306,7 +303,9 @@ aj_page = {
 		        xhr.addEventListener("progress", function (evt) {
 		            if (evt.lengthComputable) {
 		                var percentComplete = evt.loaded / evt.total;
-		                $("#load-container").css({"width":(Math.round(percentComplete * 100) - getRandomInt(10, 30) + "%")})
+		                percentComplete = (Math.round(percentComplete * 100) - getRandomInt(10, 30))
+		                //$("#load-container").css({"width":(Math.round(percentComplete * 100) - getRandomInt(10, 30) + "%")})
+		                aj_page.update_bar( percentComplete + "%" , aj_page.screen_percentage( percentComplete ) )
 		            }
 		        }, false);
 		        return xhr;
@@ -319,6 +318,24 @@ aj_page = {
 		}).fail(function( x, t, m ){
 			aj_page.error( x, t, m );
 		})
+	},
+
+	return_percentage: function( element ) {
+		return ( $(element).width() * 100) / $(window).width()
+	},
+
+	screen_percentage: function( percentage ) {
+		return ( percentage / 100 ) * $(window).width()
+	},
+
+	update_bar: function( length, ltc ) {
+		// Check current length of scroll bar, if current is higher than new, then simply do not change
+		lengthToCheck = ltc || length;
+		if ( $("#load-container").width() < lengthToCheck ) {
+			$("#load-container").css({
+				"width":length
+			})
+		}
 	},
 
 	add_page: function( raw ) {
@@ -374,13 +391,6 @@ aj_page = {
 			$("#load-container").css({"width":"90%"})
 		}
 		// push new url if it was not a popstate
-
-		if ( !this.popstate ) {
-			window.history.pushState({
-            	path: this.to
-        	}, '', this.to);
-		}
-
 		if (!replace) {
 			$(".page-container.new").waitForImages(function() {
 				// Scroll user to the top of the page if they are too far down (scroll)
@@ -414,8 +424,7 @@ aj_page = {
 	},
 
 	error: function( x, t, m ) {
-		alert(x,t,m)
-		console.log(x, t, m)
+		console.error(x, t, m)
 
 		// Check error type
 		if (x.status == 404) {
@@ -461,6 +470,11 @@ aj_page = {
 		// Update DOM elements (title, bg etc...)
 		var r = $.Deferred();
 		// filter title text from content and replace current
+		if ( !this.popstate ) {
+			window.history.pushState({
+            	path: this.to
+        	}, '', this.to);
+		}
 		$("title").html( $(content).filter("title").text() )
 		// filter page-bg from content and replace id of current with new
 		if ( !get_cookie("animations_disable") ) {
