@@ -65,7 +65,7 @@
 							</section>
 						</div>
 					</div>
-					<button id="contact-trigger" style="display:none">Contact Us</button>
+					<button class="contact-trigger" style="display:none">Contact Us</button>
 					<h1 id="contact-title">Contact Us</h1>
 					<!-- Contact Form -->
 					<div id="contact-container">
