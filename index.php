@@ -45,7 +45,7 @@
 								<div class="game-title"><span>Counter Strike: Global Offensive</span></div></a>
 						</div>
 						<div class="game">
-							<a href="http://google.com"><div class="game-bg" id="SKY"></div>
+							<a href="skyrim"><div class="game-bg" id="SKY"></div>
 								<div class="game-title"><span>Elder Scrolls V: Skyrim</span></div></a>
 						</div>
 						<div class="game">

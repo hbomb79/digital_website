@@ -75,7 +75,7 @@
 						<li><a href="#">Assassin's Creed Unity</a></li>
 						<li><a href="#">Team Fortress 2</a></li>
 						<li><a href="csgo.php" class="ajax_load">Counter Strike: Global Offensive</a></li>
-						<li><a href="#">Elder Scrolls V: Skyrim</a></li>
+						<li><a href="skyrim.html">Elder Scrolls V: Skyrim</a></li>
 						<li><a href="#">Portal 2</a></li>
 						<li><a href="#">Left 4 Dead 2</a></li>
 						<li><a href="#">Payday: The Heist</a></li>
