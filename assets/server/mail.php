@@ -88,7 +88,7 @@
 						<div id="container">
 							<main>
 								<?php
-									if ( !isset($_SESSION['mail']) && !$missing ) {
+									if ( !isset($_SESSION['mail']) && !$missing && $response == "OK" ) {
 								?>
 								<div class="warn">
 									<h1>Mail Sent</h1>
@@ -107,6 +107,13 @@
 											}
 										} ?>
 									</ul>
+								</div>
+								<?php
+								} else if ( $response == "BAD" ) {
+								?>
+								<div class="warn">
+									<h1>Cannot Send</h1>
+									<p>We could not send you'r message, an unknown error occurred </p>
 								</div>
 								<?php
 									} else {
@@ -141,8 +148,29 @@
 			return "BAD";
 		} else {
 			if (!isset($_SESSION["mail"])) {
-				//... send mail
-				return "OK";
+				$FromEmail = "harryfelton12@gmail.com";
+				$FromName = "Harry Felton";
+				$ToEmail = "harryfelton12@gmail.com";
+				$Subject = "Test Message";
+				$ReplyTo = "harryfelton12@gmail.com";
+				if(($Content = file_get_contents("response.html")) === false) {
+			        $Content = "";
+			    }
+
+			    $Headers  = "MIME-Version: 1.0\n";
+			    $Headers .= "Content-type: text/html; charset=iso-8859-1\n";
+			    $Headers .= "From: ".$FromName." <".$FromEmail.">\n";
+			    $Headers .= "Reply-To: ".$ReplyTo."\n";
+			    $Headers .= "X-Sender: <".$FromEmail.">\n";
+			    $Headers .= "X-Mailer: PHP\n"; 
+			    $Headers .= "X-Priority: 1\n"; 
+			    $Headers .= "Return-Path: <".$FromEmail.">\n";  
+
+			    if(mail($ToEmail, $Subject, $Content, $Headers)) {
+			        return "OK";
+			    } else {
+			    	return "BAD";
+			    }
 			} else {
 				// Dont send
 				return "OK";
