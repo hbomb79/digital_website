@@ -1,11 +1,12 @@
 <?php
+    
 	$FromEmail = "harryfelton12@gmail.com";
 	$FromName = "Harry Felton";
 	$ToEmail = "harryfelton12@gmail.com";
 	$Subject = "Test Message";
 	$ReplyTo = "harryfelton12@gmail.com";
-	if(($Content = file_get_contents("../../index.php")) === false) {
-        $Content = "";
+	if(($Content = file_get_contents("response.php")) === false) {
+        $Content = "Thanks for you'r email, we will get back to you soon!";
     }
 
     $Headers  = "MIME-Version: 1.0\n";
@@ -18,8 +19,11 @@
     $Headers .= "Return-Path: <".$FromEmail.">\n";  
 
     if(mail($ToEmail, $Subject, $Content, $Headers)) {
-        return "OK";
+        die("OK");
     } else {
-    	return "BAD";
+    	die("BAD");
     }
+
+
+    
 ?>

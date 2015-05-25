@@ -153,8 +153,9 @@
 				$ToEmail = "harryfelton12@gmail.com";
 				$Subject = "Test Message";
 				$ReplyTo = "harryfelton12@gmail.com";
-				if(($Content = file_get_contents("response.html")) === false) {
-			        $Content = "";
+				$Content = file_get_contents("response.php");
+				if($Content === false || $Content == "DIE") {
+			        $Content = "Thanks for you'r message, we will get back to you soon!";
 			    }
 
 			    $Headers  = "MIME-Version: 1.0\n";
