@@ -7,7 +7,7 @@
 	
 	session_start("mailer");
 
-	$json_obj = array("name" => isset($_POST["name"]) ? $_POST["name"] : "null", "type" => isset($_POST["type"]) ? $_POST["type"] : "null", "message" => isset($_POST["message"]) ? $_POST["message"] : "null", "js" => isset($_POST["js"]) && !empty($_POST['js']) ? "true" : "false");
+	$json_obj = array("name" => isset($_POST["name"]) ? $_POST["name"] : "null", "email" => isset($_POST["email"]) ? $_POST["email"] : "null", "type" => isset($_POST["type"]) ? $_POST["type"] : "null", "message" => isset($_POST["message"]) ? $_POST["message"] : "null", "js" => isset($_POST["js"]) && !empty($_POST['js']) ? "true" : "false");
 	$missing = false;
 	foreach( $json_obj as $key => $obj ) {
 		if ($obj === "null" || empty($obj)) {
@@ -150,14 +150,18 @@
 			if (!isset($_SESSION["mail"])) {
 				$FromEmail = "harryfelton12@gmail.com";
 				$FromName = "Harry Felton";
-				$ToEmail = "harryfelton12@gmail.com";
-				$Subject = "Test Message";
+				$ToName = urlencode(stripslashes($json_obj["name"]));
+				$ToEmail = urlencode(stripslashes($json_obj["email"]));
+				$Subject = "HexCode Contact Notification";
 				$ReplyTo = "harryfelton12@gmail.com";
-				$Content = file_get_contents("response.php");
-				if($Content === false || $Content == "DIE") {
-			        $Content = "Thanks for you'r message, we will get back to you soon!";
-			    }
 
+			    $GET = "name=".$ToName."&email=".$ToEmail;
+			    $Content = file_get_contents('http://www.harryfelton.web44.net/digital_website/assets/server/response.php?'.$GET);
+
+			    if ( $Content == "BAD" || $Content = "" || !$Content ) {
+			    	$Content = "Thanks for your message ".$ToName.", we will get back to you in around 1-3 working days";
+			    }
+			    
 			    $Headers  = "MIME-Version: 1.0\n";
 			    $Headers .= "Content-type: text/html; charset=iso-8859-1\n";
 			    $Headers .= "From: ".$FromName." <".$FromEmail.">\n";

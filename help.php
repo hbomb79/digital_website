@@ -75,6 +75,8 @@
 								<div id="left">
 									<h2>Name</h2>
 									<input class="sl" name="name" id="name" type="text">
+									<h2>Email</h2>
+									<input class="sl" name="email" id="email" type="text">
 									<h2>Type</h2>
 									<select name="type" id="type">
 										<option value="inquiry">Inquiry</option>

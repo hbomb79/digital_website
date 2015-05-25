@@ -217,7 +217,8 @@
 			data:{
 				"name": "#name",
 				"type": "#type",
-				"message": "#message"
+				"message": "#message",
+				"email": "#email"
 			},
 			url: "assets/server/mail.php"
 		}

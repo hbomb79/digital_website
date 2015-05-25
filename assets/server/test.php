@@ -3,12 +3,12 @@
 	$FromEmail = "harryfelton12@gmail.com";
 	$FromName = "Harry Felton";
 	$ToEmail = "harryfelton12@gmail.com";
-	$Subject = "Test Message";
+	$Subject = "HexCode Contact Notification";
 	$ReplyTo = "harryfelton12@gmail.com";
-	if(($Content = file_get_contents("response.php")) === false) {
-        $Content = "Thanks for you'r email, we will get back to you soon!";
-    }
 
+    $GET = "name=".urlencode($FromName)."&email=".urlencode($FromEmail);
+    $Content = file_get_contents('http://www.harryfelton.web44.net/digital_website/assets/server/response.php?'.$GET);
+    
     $Headers  = "MIME-Version: 1.0\n";
     $Headers .= "Content-type: text/html; charset=iso-8859-1\n";
     $Headers .= "From: ".$FromName." <".$FromEmail.">\n";
@@ -23,7 +23,6 @@
     } else {
     	die("BAD");
     }
-
 
     
 ?>

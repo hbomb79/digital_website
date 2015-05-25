@@ -23,7 +23,7 @@
 			color: crimson;
 		}
 
-		header, main, footer {
+		header, main {
 			padding: 1em;
 		}
 
@@ -36,6 +36,7 @@
 			border-top: 1px solid crimson;
 			font-size: 0.7em;
 			text-align: left;
+			padding: 0 1em;
 		}
 	</style>
 </head>
@@ -52,11 +53,11 @@
 		?>
 		<header>
 			<h1>
-				Thanks For You'r Message!
+				Thanks For Your Message!
 			</h1>
 		</header>
 		<main>
-			<p>Hey <?php echo( $name ." <span class='emp'>(".$email.")</span>"); ?>, <br>We are messaging to let you know we got you'r message and we will promptly respond within 3 working days.</p>
+			<p>Hey <?php echo($name) ?> (<span class='emp'><?php echo($email) ?></span>), <br>We are messaging to let you know we got you'r message and we will promptly respond within 3 working days.</p>
 			<p>If you did not send us a message, then send us a message back and we will discard this request.</p>
 		</main>
 		<footer>
