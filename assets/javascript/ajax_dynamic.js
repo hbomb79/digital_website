@@ -102,7 +102,7 @@ function cg_clear(){
 }
 
 function force_load(){
-	window.addEventListener("popstate", function(e) {
+	$(window).off().on("popstate", function(e) {
 		if (get_cookie("animations_disable")) {
 			return;
 		}
@@ -271,10 +271,10 @@ aj_page = {
 		}
 		// User has animations enabled, continue checks.
 		// Check if new URL matches current.
-		if ( getFileName() == getFileName( to ) && !force) {
+		if ( getFileName() == getFileName( to ) && !force ) {
 			return false;
 		}
-		this.popstate = force ? true : false
+		this.popstate = force ? true : false;
 		if ( click && elem ) {
 			// Highlight the element using loading class
 			$(elem).addClass( "loading" );
