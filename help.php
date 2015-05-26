@@ -26,6 +26,9 @@
 		<div id="wrapper">
 			<div id="container" class="clearfix">
 				<main>
+					<?php
+						require_once("assets/_module/start.php");
+					?>
 					<h1>Help</h1>
 					<!-- FAQ Sections -->
 					<section>

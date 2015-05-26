@@ -23,6 +23,9 @@
 		<div id="wrapper">
 			<div id="container">
 				<main>
+					<?php
+						require_once("assets/_module/start.php");
+					?>
 					<h1 class="large" id="title">Counter Strike: Global Offensive</h1>
 					<div class="image-wrapper wide">
 						<img src="assets/image/cs1.jpg" class="center-image" alt="Picture of counter strike: global offensive">

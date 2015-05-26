@@ -192,7 +192,6 @@
 	}
 
 	CF.init({
-		// custom options
 		container: "#contact-container",
 		trigger: ".contact-trigger",
 		sendbtn: "#contact-send",

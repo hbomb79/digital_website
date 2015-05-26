@@ -21,6 +21,9 @@
 		<div id="wrapper">
 			<div id="container">
 				<main>
+					<?php
+						require_once("assets/_module/start.php");
+					?>
 					<h1 class="large" id="title">About</h1>
 					<section>
 						<h1>Whats our aim?</h1>

@@ -90,14 +90,14 @@
 								<?php
 									if ( !isset($_SESSION['mail']) && !$missing && $response == "OK" ) {
 								?>
-								<div class="warn">
+								<div class="info-box confirm">
 									<h1>Mail Sent</h1>
 									<p>Your message has been sent to us, one of out customer service representatives will get back to you within 1-3 working days</p>
 								</div>
 								<?php
 								} else if ( $missing ) {
 								?>
-								<div class="warn">
+								<div class="info-box error">
 									<h1>Cannot Send</h1>
 									<p>You're message cannot be sent due to missing field(s), please ensure the following field(s) are filled in and try again:</p>
 									<ul>
@@ -111,14 +111,14 @@
 								<?php
 								} else if ( $response == "BAD" ) {
 								?>
-								<div class="warn">
+								<div class="info-box error">
 									<h1>Cannot Send</h1>
 									<p>We could not send you'r message, an unknown error occurred </p>
 								</div>
 								<?php
 									} else {
 								?>
-								<div class="warn">
+								<div class="info-box warn">
 									<h1>Already Sent!</h1>
 									<p>Your message has already been sent to us, please hang tight for 1-3 working days for a reply</p>
 								</div>
@@ -135,12 +135,10 @@
 		} else {
 			die("208 - Unknown Error (undefined)");
 		}
-
-		$_SESSION['mail'] = true;
 	}
 
 	function send() {
-		global $js, $missing;
+		global $js, $missing, $json_obj;
 		// This function will send the email.
 		// Check for missing variables
 
@@ -158,7 +156,7 @@
 			    $GET = "name=".$ToName."&email=".$ToEmail;
 			    $Content = file_get_contents('http://www.harryfelton.web44.net/digital_website/assets/server/response.php?'.$GET);
 
-			    if ( $Content == "BAD" || $Content = "" || !$Content ) {
+			    if ( $Content == "DIE" || $Content = "" || !$Content ) {
 			    	$Content = "Thanks for your message ".$ToName.", we will get back to you in around 1-3 working days";
 			    }
 			    
@@ -172,6 +170,7 @@
 			    $Headers .= "Return-Path: <".$FromEmail.">\n";  
 
 			    if(mail($ToEmail, $Subject, $Content, $Headers)) {
+			    	$_SESSION["mail"]=true;
 			        return "OK";
 			    } else {
 			    	return "BAD";

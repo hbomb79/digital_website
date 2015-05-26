@@ -20,6 +20,8 @@ var cgc=cg_clear;
 var cge_t=cg_erase_timer;
 var cge_i=cg_erase_interval;
 
+// These variables are for cross page storage, they are reset each time the page is changed using AJAX, this is done using cg_clear()
+
 function is_elem_visible(elem)
 {
 	// Returns true if any of the elem is visible, this included the bottom and top of the element. The limit specifies how far into the element the user must scroll before this function returns true
@@ -44,9 +46,12 @@ function is_elem_visible(elem)
 
 function cg_erase_timer(k){
 	clearTimeout(_G.timer[k]);
+	// Clears the timeout with the ID you specify
 	delete _G.timer[k];
+	// Delete the timer from the object _G.timer
 	for (var i = 0; i < _G.timer.inx.length; i++) {
 		if (_G.timer.inx[i] == k) { _G.timer.inx.splice(i, 1) }
+		// Remove the left over index from the inx array
 	}
 	return true;
 }
@@ -62,16 +67,20 @@ function cg_erase_interval(k){
 
 function cg_variable(name, fn) {
 	_G.variable[name] = fn;
+	// Set a variable named "name" and with data "fn"
 }
 
 function cg_interval(name, fn){
 	if (_G.interval[name]) {
 		clearInterval(_G.interval[name]);
+		// Check if one already exists with the same name, if it does then clear it and reset
 	}
 	if ($.inArray(name, _G.interval.inx) == -1) {
+		// If one with the same name does not exist in the inx array, then push one
 		_G.interval.inx.push(name);
 	}
 	_G.interval[name] = fn;
+	// Create an interval
 };
 
 function cg_timer(name, fn){
@@ -102,17 +111,21 @@ function cg_clear(){
 }
 
 function force_load(){
+	// Load the document functions
 	$(window).off().on("popstate", function(e) {
-		if (get_cookie("animations_disable")) {
+		if (get_cookie("ajax_disable")) {
 			return;
+			// return if the user has disabled AJAX
 		}
 		e.preventDefault()
 		// Check if URL contains a HASH symbol. If it does then prevent popstate from firing.
 		if (document.location.href.search("#") == -1) {
 	    	clearTimeout(pop_wait)
+	    	// Clear the timeout if there is one, this prevents spam clicking the back/forward buttons
 	    	pop_wait = setTimeout(function(){
 	            aj_page.start(false, location.pathname, false, false, true);
-	        }, 50)
+	            // Start transfer to this page
+	        }, 250)
 	    }
 	});
 }
@@ -121,14 +134,17 @@ $(window).load(function(){
 	// Create event listener
 	done_load()
 	cg_erase_timer("temp_ready")
+	// Use CG to remove and timer if it exists, and recreate it below, this prevents the popstate from firing on page load
 	cg_timer("temp_ready", setTimeout(function() {
+		// Create event listener
         force_load()
     }, 500));
 	// Prevent the popstate event being binded too early, without this Google Chomre and Safari (Certain Versions) would fire a popstate on page load.
 });
 
 function scroll_to(object, offset, add_time)
-{
+{	
+	// Scroll to the top of the supplied element
 	var interval = 500;
     if ($(object).length == 0)  {
     	console.log("Object with this ID doesnt exist ("+object+")")
@@ -150,6 +166,7 @@ function scroll_to(object, offset, add_time)
 }
 
 function scroll_top(add_time){
+	// Scroll to the top of the page
 	var interval = 250;
 	if (add_time) { interval = interval + add_time };
 	$("html, body").animate({

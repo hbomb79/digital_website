@@ -24,6 +24,9 @@
 		<div id="wrapper">
 			<div id="container">
 				<main>
+					<?php
+						require_once("assets/_module/start.php");
+					?>
 					<h1 class="large" id="title">Grand Theft Auto V</h1>
 					<div class="image-wrapper wide">
 						<img src="assets/image/gta1.jpg" class="center-image" alt="Picture of GTA">
@@ -56,8 +59,7 @@
 						<h1>Wheres the bad part?</h1>
 						<p>My only problem with Grand Theft Auto V, is the online portion is very laggy, most of the time people teleport, and killing players is very difficult, as such the online experience turns into a pile of sh*t on the front lawn, although this lag is intermittent and most of the time, I can cope.</p>
 					</section>
-					<div class="warn">
-						<h1>Notice</h1>
+					<div class="info-box warn">
 						<p>This article is not yet completed</p>
 					</div>
 				</main>

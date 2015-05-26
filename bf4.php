@@ -24,6 +24,9 @@
 		<div id="wrapper">
 			<div id="container">
 				<main>
+					<?php
+						require_once("assets/_module/start.php");
+					?>
 					<h1 class="large" id="title">Battlefield 4</h1>
 					<div class="image-wrapper wide">
 						<img src="assets/image/bf41.jpg" class="center-image" alt="Picture of GTA">
@@ -46,8 +49,7 @@
 						<h1>Header</h1>
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos nobis dolorem obcaecati ab dignissimos unde fugiat dolore aliquam quibusdam quae nesciunt nam, accusantium doloribus sit. Ipsam alias rem ipsum fugiat, quaerat, vero aliquid saepe, voluptates libero veniam ipsa aut ducimus! Eligendi magnam accusamus est, laborum laboriosam sed quas, soluta sequi!</p>
 					</section>
-					<div class="warn">
-						<h1>Notice</h1>
+					<div class="info-box warn">
 						<p>This article is a placeholder and currently contains no information</p>
 					</div>
 				</main>

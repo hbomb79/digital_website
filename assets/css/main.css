@@ -552,21 +552,37 @@ section.h1 {
 
 }
 
-.warn {
-	width:80%;
-	background: rgba(236, 151, 39, 0.6);
+.info-box {
+	max-width: 80%;
+	position: relative;
+	left:50%;
+	-webkit-transform: translate(-50%, 0);
+	-ms-transform: translate(-50%, 0);
+	-o-transform: translate(-50%, 0);
+	transform: translate(-50%, 0);
 	padding: 1em;
 	text-align: center;
-	border: solid 3px rgba(236, 151, 39, 1);
 	margin: 0 auto;
+	display: inline-block;
 }
 
-.warn h1 {
+.info-box h1, .info-box p {
 	margin: 0;
 }
 
-.warn p{
-	margin-bottom: 0;
+.info-box.warn {
+	background: rgba(236, 151, 39, 0.6);
+	border: solid 3px rgba(236, 151, 39, 1);
+}
+
+.info-box.error {
+	background: rgba(231, 8, 4, 0.34);
+	border: solid 3px rgba(231, 8, 4, 1);
+}
+
+.info-box.confirm {
+	background: rgba(17, 255, 5, 0.34);
+	border: solid 3px rgba(17, 255, 5, 1);
 }
 
 /* index.php
