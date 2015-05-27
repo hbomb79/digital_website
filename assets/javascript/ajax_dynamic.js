@@ -240,7 +240,7 @@ function done_load() {
     $("a").on("click", function(e){
     	// remove the event listener for the popstate
     	// Remove window event
-		if ( $(this).hasClass("ajax_load") ) {
+    	if ( $(this).hasClass("ajax_load") ) {
     		e.preventDefault()
     	} else {
     		$(window).off("popstate")
