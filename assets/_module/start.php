@@ -1,4 +1,8 @@
-<div class="info-box error">
-	<h1>Maintenance</h1>
-	<p>This sites AJAX Loading Is Currently Undergoing Maintenance and is therefore glitchy at the moment, if it causes problems then disable it using the settings page in the top right</p>
-</div>
+<br>
+<noscript>
+	<div class="info-box warn" id="js-alert">
+		<h1>Javascript</h1>
+		<!--<div id="close" onclick="$('#js-alert').hide()">&times;</div>-->
+		<p> Your browsers Javascript is turned off, this will prevent certain features from functioning correctly. Please enable it to experience this website to its fullest.</p>
+	</div>
+</noscript>

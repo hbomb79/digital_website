@@ -50,6 +50,7 @@
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos nobis dolorem obcaecati ab dignissimos unde fugiat dolore aliquam quibusdam quae nesciunt nam, accusantium doloribus sit. Ipsam alias rem ipsum fugiat, quaerat, vero aliquid saepe, voluptates libero veniam ipsa aut ducimus! Eligendi magnam accusamus est, laborum laboriosam sed quas, soluta sequi!</p>
 					</section>
 					<div class="info-box warn">
+						<div id="close" onclick="$(this).parent('.info-box').hide()">&times;</div>
 						<p>This article is a placeholder and currently contains no information</p>
 					</div>
 				</main>

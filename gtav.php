@@ -60,6 +60,7 @@
 						<p>My only problem with Grand Theft Auto V, is the online portion is very laggy, most of the time people teleport, and killing players is very difficult, as such the online experience turns into a pile of sh*t on the front lawn, although this lag is intermittent and most of the time, I can cope.</p>
 					</section>
 					<div class="info-box warn">
+						<div id="close" onclick="$(this).parent('.info-box').hide()">&times;</div>					
 						<p>This article is not yet completed</p>
 					</div>
 				</main>

@@ -134,7 +134,7 @@ window.onunload = function(){};
 
 $(window).load(function(){
 	// Create event listener
-	done_load()
+	aj_page.init()
 	cg_erase_timer("temp_ready")
 	// Use CG to remove and timer if it exists, and recreate it below, this prevents the popstate from firing on page load
 	cg_timer("temp_ready", setTimeout(function() {
@@ -147,13 +147,10 @@ $(window).load(function(){
 function scroll_to(object, offset, add_time)
 {	
 	// Scroll to the top of the supplied element
-	var interval = 500;
+	var interval = add_time ? interval += add_time : 500;
     if ($(object).length == 0)  {
     	console.warn("Object with this ID doesnt exist ("+object+")")
 		return;
-    }
-    if (add_time){
-    	interval = interval + add_time
     }
     if (offset) {
     	$('html, body').animate({
@@ -169,8 +166,7 @@ function scroll_to(object, offset, add_time)
 
 function scroll_top(add_time){
 	// Scroll to the top of the page
-	var interval = 250;
-	if (add_time) { interval = interval + add_time };
+	var interval = add_time ? interval += add_time : 250
 	$("html, body").animate({
 		'scrollTop': "0"
 	}, interval)
@@ -180,11 +176,11 @@ function scroll_top(add_time){
 function check_hash (hash) {
 	if (timer) { clearTimeout(timer) }
 	timer = setTimeout(function(){
-		if ( hash == "#" ) {
+		if ( hash == "#!top" ) {
 			scroll_top()
-		}
-		else if (hash) {
-			$hash = $(hash)
+		} else if ( hash == "#" ) {
+			return;
+		} else if (hash) {
 			scroll_to(hash);
 		}
 	}, 50)
@@ -220,7 +216,8 @@ function getHashName( obj ) {
 	return hash;
 }
 
-function done_load() {
+/*function done_load() {
+	console.warn("This Funtion Is Deprecated And Should No Longer Be Used, Use aj_page.init() instead")
 	setTimeout(function(){
 		$(".load-after:not(':visible')").each(function(){
 			$(this).fadeIn(150)
@@ -266,7 +263,7 @@ function done_load() {
     		$(window).off("popstate")
     	}
     })
-}
+}*/
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -305,10 +302,59 @@ The below code is V2.4 of the Ajax Loading system, it brings the following chang
 - longer timeout
 - dynamic header highlighting
 
-To start, simply run aj_page.start( currenturl, newurl, was_button_clicked, what_button )
+To start, simply run aj_page.start( currenturl, newurl, was_button_clicked?, what_button?, popstate?)
+E.G aj_page.start( "index.php", "gtav.php", true, [object Object], false)
+
+The [object Object] signifies the a element that was clicked
 
 */
 aj_page = {
+	init: function(){
+		$(".load-after:not(':visible')").each(function(){
+			$(this).fadeIn(150)
+		})
+	    $('a.ajax_load').off("click").on('click', function(event) {
+	        if (event.button === 0) {
+	            var old, to, self;
+	            // Get href of click
+	            self = this;
+	            old = getFileName();
+	            to = $(this).attr("href");
+	            cg_erase_timer("temp_safe");
+	            cg_timer("temp_safe", setTimeout(function(){
+					aj_page.start( old, to, true, self );
+				}, 250));
+				if ( !get_cookie("ajax_disable") ) {
+					event.preventDefault()
+				}
+	        }
+	    });
+	    $("a.anchor").on('click', function(e){
+	    	if (e.button === 0) {
+	    		check_hash($(this).attr("href"))
+	    		e.preventDefault()
+	    		return false;
+	    	}
+	    });
+	    $("a").on("click", function(e){
+	    	// remove the event listener for the popstate
+	    	// Remove window event
+	    	if ( !$(this).hasClass("ajax_load") ) {
+	        	if ( getHashName( $(this).attr("href") ) ) {
+	        		// This URL has a HASH in it
+	        		check_hash( getHashName( $(this).attr("href") ) )
+	        		event.preventDefault()
+	        		return;
+	        	}
+	    	}
+			if ( $(this).hasClass("ajax_load") && !get_cookie("ajax_disable")) {
+	    		e.preventDefault()
+	    	} else if (!get_cookie("ajax_disable")){
+	    		$(window).off("popstate")
+	    	}
+	    });
+	},
+
 	start: function(from, to, click, elem, popstate) {
 		if (_G.preserve.updating) {
 			return false;
@@ -466,7 +512,7 @@ aj_page = {
 				$("#load-container").slideUp(250).promise().done(function(){
 					aj_page.finish()
 				});
-			}, 250)
+			}, 1000)
 		}
 	},
 
@@ -510,7 +556,7 @@ aj_page = {
 		}
 		$("#load-container").animate({"width": "0%"}, 10).promise().done(function(){
 			cg_clear();
-			done_load();
+			aj_page.init();
 			aj_page.check();
 			$(".load-after").fadeIn(350)
 		});

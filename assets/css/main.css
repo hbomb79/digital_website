@@ -383,7 +383,7 @@ footer #foot-contain {
 
 /* Extra Conditions
 -------------------*/
-.load-after {
+body.JS .load-after {
 	/* Show something after Ajax Load has completed, hide before transition */
 	display:none;
 }
@@ -583,6 +583,20 @@ section.h1 {
 .info-box.confirm {
 	background: rgba(17, 255, 5, 0.34);
 	border: solid 3px rgba(17, 255, 5, 1);
+}
+
+.info-box > #close {
+	position: absolute;
+	top:0;
+	right:0;
+	line-height: 1em;
+	width: 1em;
+	opacity: 0.5;
+	cursor: pointer;
+}
+
+.info-box > #close:hover {
+	opacity: 1;
 }
 
 /* index.php
