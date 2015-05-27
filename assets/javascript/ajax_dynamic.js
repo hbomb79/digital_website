@@ -208,6 +208,15 @@ function getFileName( obj ) {
 	}
 }
 
+function getHashName( obj ) {
+	// This returns the hash of a url.
+	var hash = obj ? obj : document.location.href;
+	// Check if the URL has a hash, if so then substring it, else return false
+	hash = (hash.lastIndexOf("#") != -1) ? hash.substring( ( hash.lastIndexOf("#") ), hash.length) : false
+	// If index of the last # is not -1 (not found) then set hash to a substring starting at the index of the hash, to the end of the URL. If the # index, is -1 then set hash to false.
+	return hash;
+}
+
 function done_load() {
 	setTimeout(function(){
 		$(".load-after:not(':visible')").each(function(){
@@ -240,9 +249,19 @@ function done_load() {
     $("a").on("click", function(e){
     	// remove the event listener for the popstate
     	// Remove window event
-    	if ( $(this).hasClass("ajax_load") ) {
+    	if ( !$(this).hasClass("ajax_load") ) {
+			console.log( $(this).attr("href") )
+        	if ( getHashName( $(this).attr("href") ) ) {
+        		// This URL has a HASH in it
+        		check_hash( getHashName( $(this).attr("href") ) )
+        		event.preventDefault()
+        		console.warn("Hash Found")
+        		return;
+        	}
+    	}
+		if ( $(this).hasClass("ajax_load") && !get_cookie("ajax_disable")) {
     		e.preventDefault()
-    	} else {
+    	} else if (!get_cookie("ajax_disable")){
     		$(window).off("popstate")
     	}
     })
@@ -289,7 +308,7 @@ To start, simply run aj_page.start( currenturl, newurl, was_button_clicked, what
 
 */
 aj_page = {
-	start: function(from, to, click, elem, force) {
+	start: function(from, to, click, elem, popstate) {
 		if (_G.preserve.updating) {
 			return false;
 		}
@@ -299,10 +318,10 @@ aj_page = {
 		}
 		// User has animations enabled, continue checks.
 		// Check if new URL matches current.
-		if ( getFileName() == getFileName( to ) && !force ) {
+		if ( getFileName() == getFileName( to ) && !popstate ) {
 			return false;
 		}
-		this.popstate = force ? true : false;
+		this.popstate = popstate ? true : false;
 		if ( click && elem ) {
 			// Highlight the element using loading class
 			$(elem).addClass( "loading" );
@@ -313,7 +332,6 @@ aj_page = {
 		// Advance the progress bar by 10% to indicate loading has begun.
 		$("#load-container").show()
 		this.update_bar("10%", this.screen_percentage( 10 ) )
-
 		// Checks complete, fetch page
 		this.to = to;
 		this.from = from;
@@ -462,6 +480,9 @@ aj_page = {
 		} else if (m == "timeout") {
 			alert("Load Timed Out");
 			document.location.href = this.to;
+		} else {
+			alert("An Error Occurred, Check The JavaScript Console For Details")
+			aj_page.revert()
 		}
 
 	},
@@ -508,7 +529,9 @@ aj_page = {
 		if ( !get_cookie("animations_disable") ) {
 			$(".page-bg").fadeOut(250)
 			setTimeout(function() {
-				$(".page-bg").attr( "id", $(content).find(".page-bg").attr("id") ).fadeIn(250)
+				$(".page-bg").attr( "id", $(content).find(".page-bg").attr("id") ).ready(function(){
+						$(".page-bg").fadeIn(250)
+					})
 				setTimeout(function() {
 					r.resolve() //Resolve when page-bg transition complete 
 				}, 250)
@@ -543,9 +566,6 @@ aj_page = {
 		if ( getFileName() != getFileName(this.to) ) {
 			aj_page.start( getFileName(), document.location.href, false, false, true)
 			return;
-		} else {
-			// Start window popstate event monitoring
-			$(document).trigger("popdone")
 		}
 	}
 }
