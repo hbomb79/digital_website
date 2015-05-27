@@ -59,7 +59,7 @@ var scroller;
 			elements: [
 				{
 					selector: "#to-top",
-					pixel: aj_page.screen_percentage(30)
+					pixel: aj_page.screen_percentage(50)
 				},
 			]
 		})

@@ -897,9 +897,29 @@ body.JS #to-top {
 	position: fixed;
 	bottom:0;
 	right:0;
-	margin:1em;
-	padding: 1em;
+	padding: 2em;
 	z-index:1998;
+}
+
+body.JS #to-top:before{
+	background: url("../image/down_arrow.svg") no-repeat center center;
+	background-size: contain;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	content: "";
+	top:0;
+	left:0;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	-webkit-transform: rotate(180deg);
+	-moz-transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+	transform: rotate(180deg);
 }
 
 /* Mobile Code
