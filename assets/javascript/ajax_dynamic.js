@@ -149,7 +149,7 @@ function scroll_to(object, offset, add_time)
 	// Scroll to the top of the supplied element
 	var interval = 500;
     if ($(object).length == 0)  {
-    	console.log("Object with this ID doesnt exist ("+object+")")
+    	console.warn("Object with this ID doesnt exist ("+object+")")
 		return;
     }
     if (add_time){
@@ -180,7 +180,10 @@ function scroll_top(add_time){
 function check_hash (hash) {
 	if (timer) { clearTimeout(timer) }
 	timer = setTimeout(function(){
-		if (hash) {
+		if ( hash == "#" ) {
+			scroll_top()
+		}
+		else if (hash) {
 			$hash = $(hash)
 			scroll_to(hash);
 		}
@@ -250,12 +253,10 @@ function done_load() {
     	// remove the event listener for the popstate
     	// Remove window event
     	if ( !$(this).hasClass("ajax_load") ) {
-			console.log( $(this).attr("href") )
         	if ( getHashName( $(this).attr("href") ) ) {
         		// This URL has a HASH in it
         		check_hash( getHashName( $(this).attr("href") ) )
         		event.preventDefault()
-        		console.warn("Hash Found")
         		return;
         	}
     	}
