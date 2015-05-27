@@ -130,6 +130,8 @@ function force_load(){
 	});
 }
 
+window.onunload = function(){};
+
 $(window).load(function(){
 	// Create event listener
 	done_load()
@@ -212,7 +214,7 @@ function done_load() {
 			$(this).fadeIn(150)
 		})
 	}, 5000)
-    $('a.ajax_load').unbind("click").bind('click', function(event) {
+    $('a.ajax_load').off("click").on('click', function(event) {
         if (event.button === 0) {
             var old, to, self;
             // Get href of click
@@ -235,6 +237,15 @@ function done_load() {
     		return false;
     	}
     });
+    $("a").on("click", function(e){
+    	// remove the event listener for the popstate
+    	// Remove window event
+		if ( $(this).hasClass("ajax_load") ) {
+    		e.preventDefault()
+    	} else {
+    		$(window).off("popstate")
+    	}
+    })
 }
 
 function getRandomInt(min, max) {
@@ -532,6 +543,9 @@ aj_page = {
 		if ( getFileName() != getFileName(this.to) ) {
 			aj_page.start( getFileName(), document.location.href, false, false, true)
 			return;
+		} else {
+			// Start window popstate event monitoring
+			$(document).trigger("popdone")
 		}
 	}
 }
