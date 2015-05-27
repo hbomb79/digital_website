@@ -112,7 +112,7 @@ function cg_clear(){
 
 function force_load(){
 	// Load the document functions
-	$(window).off().on("popstate", function(e) {
+	$(window).off("popstate").on("popstate", function(e) {
 		if (get_cookie("ajax_disable")) {
 			return;
 			// return if the user has disabled AJAX
@@ -349,8 +349,6 @@ aj_page = {
 	    	}
 			if ( $(this).hasClass("ajax_load") && !get_cookie("ajax_disable")) {
 	    		e.preventDefault()
-	    	} else if (!get_cookie("ajax_disable")){
-	    		$(window).off("popstate")
 	    	}
 	    });
 	},

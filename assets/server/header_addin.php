@@ -1,4 +1,7 @@
 <!-- Created by Harry Felton, header addin includes the loading animation and ajax_loading scripts -->
+<div id="to-top">
+	<a href="#!top">Go To Top</a>
+</div>
 <div id="shadow" style="display:none;"></div>
 <div id="loading" style="display:none;">
 	<div id="diag">

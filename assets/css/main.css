@@ -889,6 +889,19 @@ body.JS #contact-container button{
 	-webkit-animation: warning 2s infinite;
 }
 
+/* JavaScript Content
+-------------------*/
+
+body.JS #to-top {
+	/* This button will fade in when scrolled to a certain point */
+	position: fixed;
+	bottom:0;
+	right:0;
+	margin:1em;
+	padding: 1em;
+	z-index:1998;
+}
+
 /* Mobile Code
 -------------------*/
 @media screen and (max-width:700px), screen and (max-height:500px) {
