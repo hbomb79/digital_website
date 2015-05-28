@@ -6,7 +6,8 @@ var scroller;
 				{
 					selector: "#example",
 					pixel: 350,
-					useToggle: false
+					useToggle: false,
+					reqSpace: 0
 				}
 			],
 			speed: 250,
@@ -29,7 +30,7 @@ var scroller;
 
 		events: function(){
 			var self = this
-			$(window).scroll(function(){
+			$(window).on("scroll resize", function(){
 				// Manage
 				self.scroll.call(self)
 			})
@@ -43,7 +44,7 @@ var scroller;
 				// Check details
 				element = config.elements[i];
 				pos = element.pixel ? element.pixel : $(element.selector).offset().top
-				if ( $(window).scrollTop() >= pos ) {
+				if ( $(window).scrollTop() >= pos && ($(window).width() - $("#container").width()) /2 >= element.reqSpace ) {
 					// show
 					$( element.selector )[ element.useToggle ? config.transitionToggle : config.transitionIn ](config.speed)
 				} else {
@@ -59,7 +60,8 @@ var scroller;
 			elements: [
 				{
 					selector: "#to-top",
-					pixel: aj_page.screen_percentage(50)
+					pixel: aj_page.screen_percentage(50),
+					reqSpace: 80
 				},
 			]
 		})
