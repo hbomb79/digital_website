@@ -1,6 +1,6 @@
 /*
 Harry Felton CSS, Usage Under MIT License
-Clayton, Brynn... you must make your own ;(
+Clayton, Brynn... you must make your own :D
  */
 
 @import url(http://fonts.googleapis.com/css?family=Orbitron|Roboto:400,700,900);
@@ -899,6 +899,17 @@ body.JS #to-top {
 	right:0;
 	padding: 2em;
 	z-index:1998;
+	width:1em;
+	height:2em;
+	overflow: hidden;
+}
+
+body.JS #to-top #title {
+	position: absolute;
+	bottom:0;
+	left:0;
+	right:0;
+	text-align: center;
 }
 
 body.JS #to-top:before{
@@ -920,7 +931,18 @@ body.JS #to-top:before{
 	-ms-transform: rotate(180deg);
 	-o-transform: rotate(180deg);
 	transform: rotate(180deg);
+	-webkit-transition: all 250ms ease-in-out;
+	-o-transition: all 250ms ease-in-out;
+	transition: all 250ms ease-in-out;
 }
+
+body.JS #to-top:hover:before {
+	-webkit-transform: rotate(-180deg);
+	-ms-transform: rotate(-180deg);
+	-o-transform: rotate(-180deg);
+	transform: rotate(-180deg);
+}
+
 
 /* Mobile Code
 -------------------*/
