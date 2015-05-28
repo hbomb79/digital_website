@@ -72,19 +72,31 @@
 				<a href="about.php" class="ajax_load">About</a></li><li class="mobile-hide has-drop"> <!-- This nav button is hidden on mobile devices, there is simply not enough room to work with -->
 					<a href="#" id="games">Games</a>
 					<ul>
-						<li><a href="gtav.php" class="ajax_load">Grand Theft Auto V</a></li>
-						<li><a href="ACU.html">Assassin's Creed Unity</a></li>
-						<li><a href="#">Team Fortress 2</a></li>
-						<li><a href="csgo.php" class="ajax_load">Counter Strike: Global Offensive</a></li>
-						<li><a href="skyrim.html">Elder Scrolls V: Skyrim</a></li>
-						<li><a href="#">Portal 2</a></li>
-						<li><a href="#">Left 4 Dead 2</a></li>
-						<li><a href="#">Payday: The Heist</a></li>
-						<li><a href="bf4.php" class="ajax_load">Battlefield 4</a></li>
+						<div id="ul-wrap">
+							<li class="has-drop"><a href="gtav.php" class="ajax_load">Grand Theft Auto V</a>
+								<ul>
+									<div id="ul-wrap">
+										<li><a href="#">Test</a></li>
+										<li><a href="#">Test</a></li>
+										<li><a href="#">Test</a></li>
+										<li><a href="#">Test</a></li>
+										<li><a href="#">Test</a></li>
+									</div>
+								</ul>
+							</li>
+							<li><a href="ACU.html">Assassin's Creed Unity</a></li>
+							<li><a href="#">Team Fortress 2</a></li>
+							<li><a href="csgo.php" class="ajax_load">Counter Strike: Global Offensive</a></li>
+							<li><a href="skyrim.html">Elder Scrolls V: Skyrim</a></li>
+							<li><a href="#">Portal 2</a></li>
+							<li><a href="#">Left 4 Dead 2</a></li>
+							<li><a href="#">Payday: The Heist</a></li>
+							<li><a href="bf4.php" class="ajax_load">Battlefield 4</a></li>
+						</div>
 					</ul>
 				</li><li>
-				<a href="help.php" class="ajax_load">Help</a></li><li class="float-right">
-				<a href="#" onclick="$('#settings').fadeIn(); $('#shadow').fadeIn()">Settings</a></li>
+				<a href="help.php" class="ajax_load">Help</a></li>
+				<li class="float-right js-req"><a href="#" onclick="$('#settings').fadeIn(); $('#shadow').fadeIn()">Settings</a></li>
 			</ul>
 		</nav>
 	<div id="notification" style="display:none;">Undefined Content</div>

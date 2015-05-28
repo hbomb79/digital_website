@@ -6,9 +6,9 @@ $(".handle").unbind("click").bind("click", function(){
 })
 
 $("header li.has-drop").on("mouseenter", function(){
-	$(this).children().filter("ul").stop().slideDown(250);
+	$(this).children().filter("ul").find("#ul-wrap").stop().slideDown(250);
 }).on("mouseleave", function(){
-	$(this).children().filter("ul").stop().slideUp(250)
+	$(this).children().filter("ul").find("#ul-wrap").stop().slideUp(250)
 })
 
 function notify(message, color, tc, optional){
