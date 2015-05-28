@@ -20,8 +20,18 @@
 	<div id="bg-wrapper">
 	 	<div class="page-bg" id="bf4-page-bg">
 	</div> <!--Faded out and replaced using ajax--> </div>
-	<div class="page-container current" id="bf4"> <!-- Slide off screen, slide new page on screen using ajax -->
+	<div class="page-container current two" id="bf4"> <!-- Slide off screen, slide new page on screen using ajax -->
 		<div id="wrapper">
+			<div id="container-right">
+				<ul>
+					<h1>Contents</h1>
+					<li><a href="#">Test</a></li>
+					<li><a href="#">Tester</a></li>
+					<li><a href="#">Testing</a></li>
+					<li><a href="#">Testaro</a></li>
+					<li><a href="#">Shut Up</a></li>
+				</ul>
+			</div>
 			<div id="container">
 				<main>
 					<?php

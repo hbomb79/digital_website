@@ -20,8 +20,18 @@
 	<div id="bg-wrapper">
 	 	<div class="page-bg" id="gta-page-bg">
 	</div> <!--Faded out and replaced using ajax--> </div>
-	<div class="page-container current" id="gtav"> <!-- Slide off screen, slide new page on screen using ajax -->
+	<div class="page-container current two" id="gtav"> <!-- Slide off screen, slide new page on screen using ajax -->
 		<div id="wrapper">
+			<div id="container-right">
+				<ul>
+					<h1>Contents</h1>
+					<li><a href="#info">GTA Story</a></li>
+					<li><a href="#multi">GTA Online</a></li>
+					<li><a href="#pc">PC Port</a></li>
+					<li><a href="#graphic">Graphics</a></li>
+					<li><a href="#down">Where Is The Downside</a></li>
+				</ul>
+			</div>
 			<div id="container">
 				<main>
 					<?php
@@ -31,7 +41,7 @@
 					<div class="image-wrapper wide">
 						<img src="assets/image/gta1.jpg" class="center-image" alt="Picture of GTA">
 					</div>
-					<section>
+					<section id="info">
 						<p>Grand Theft Auto is possibly one of the most infamous video game titles to date, constantly under the microscope for various things. Certain people believe the game causes people to become murderers, whereas others think it glamorizes a life of crime and disrespect to women. <br><br>Grand Theft Auto V is no exception to this tradition and it certainly offers a lot to scrutinize.</p>
 						<h1>Story?</h1>
 						<p>In this day and age, most people disagree that games need a story mode, although Rockstar went ahead and made one of the best campains, not only in Grand Theft Auto history, but in general. Character switching adds a new level of intuition and complexity, allowing the player to freely switch between Franklin, Micheal and Trevor, the main characters in GTA V story mode. <br><br>The story mode is too large to write up, but it does contain the following:</p>
@@ -45,17 +55,17 @@
 						</ul>
 						<p>Did I mention <em>murder</em>?</p>
 					</section>
-					<section>
+					<section id="multi">
 						<h1>Online</h1>
 						<p>This game would not be complete without the ability to login and blow up your own <em>friends</em>, groundbreaking! Yes, Grand Theft Auto V comes with online, but not like GTA IV, this online is good! <br><br> GTA V allows you to experience the world of Los Santos in freemode, much like in story mode although this timer the pedestrian you killed was actually your best friend, AWESOME.</p>
 						<p>The online mode offers a large range of missions to get the cash rolling, and the new addition <em>heists</em> allows you to make big bucks in a team effort, heists include setup phases where you get ready for the bug "job", before finally executing your diabolical plan of destruction.</p>
 					</section>
-					<section>
+					<section id="pc">
 						<h1>PC port?</h1>
 						<p>Ah, The PC port, many people (including myself) have speculated that Rockstar put the PC players on the back burner, but never the less, Rockstar still presented us with a new GTA, one created for the PC, bringing Next Generation Graphics to a new level, fu*k consoles.</p>
 						<p>The PC port is surprisingly good, everything works as it should, the settings are very exstensive which is great, and they allow anything from a Dell workstation from 2012 to a custom build with SLI 980s to run the game, and it still looks beautiful.</p>
 					</section>
-					<section style="box-shadow: none;">
+					<section style="box-shadow: none;" id="down">
 						<h1>Wheres the bad part?</h1>
 						<p>My only problem with Grand Theft Auto V, is the online portion is very laggy, most of the time people teleport, and killing players is very difficult, as such the online experience turns into a pile of sh*t on the front lawn, although this lag is intermittent and most of the time, I can cope.</p>
 					</section>

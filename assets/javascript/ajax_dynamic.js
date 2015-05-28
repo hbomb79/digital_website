@@ -154,7 +154,7 @@ function scroll_to(object, offset, add_time)
     }
     if (offset) {
     	$('html, body').animate({
-        	'scrollTop': $(object).offset().top - 10
+        	'scrollTop': $(object).offset().top - 56 // Height of header
     	}, interval);
     } else {
     	$('html, body').animate({
@@ -181,7 +181,7 @@ function check_hash (hash) {
 		} else if ( hash == "#" ) {
 			return;
 		} else if (hash) {
-			scroll_to(hash);
+			scroll_to(hash, true);
 		}
 	}, 50)
 }
@@ -417,6 +417,10 @@ aj_page = {
 
 	screen_percentage: function( percentage ) {
 		return ( percentage / 100 ) * $(window).width()
+	},
+
+	screenh_percentage: function( percentage ) {
+		return ( percentage / 100 ) * $(window).height()
 	},
 
 	update_bar: function( length, ltc ) {

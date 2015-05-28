@@ -295,7 +295,25 @@ header li a.loading{
 	z-index: 2;
 }
 
-#wrapper {
+.page-container.two #container, .page-container.two footer {
+	width:69%;
+	margin:0;
+	padding: 1em 0;
+}
+
+.page-container.two #container-right {
+	width:25%;
+	background: white;
+	border: 3px solid crimson;
+	border-radius: 1em;
+	overflow: hidden;
+	float: right;
+	position: fixed;
+	right:3%;
+	top:2em;
+}
+
+#wrapper, #container-right {
 	width:100%;
 	margin-top: 50px;
 }
@@ -992,9 +1010,13 @@ body.JS #to-top:hover:before {
 	}
 
 	#container, footer {
-		width:100%;
+		width:100% !important;
 		margin: 0;
 		padding: 1em 0;
+	}
+
+	#container-right {
+		display:none;
 	}
 
 	.page-bg {

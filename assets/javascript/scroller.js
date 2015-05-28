@@ -1,5 +1,6 @@
 var scroller;
 (function( $ ){
+
 	scroller = {
 		default: {
 			elements: [
@@ -53,18 +54,18 @@ var scroller;
 				}
 			}
 		}
-	}
+	} // End Object Literal
 
 	$(window).load(function(){
 		scroller.init({
 			elements: [
 				{
 					selector: "#to-top",
-					pixel: aj_page.screen_percentage(50),
+					pixel: aj_page.screenh_percentage(100),
 					reqSpace: 80
 				},
 			]
 		})
 	});
 
-})(jQuery)
+})(jQuery) // End SIAF
