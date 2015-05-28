@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<svg width="640" height="480" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="480" height="480" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
  <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
  <defs>
   <symbol viewBox="0 0 480 480" id="svg_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -18,7 +18,6 @@
  </defs>
  <g>
   <title>Layer 1</title>
-  <use id="svg_3" xlink:href="#svg_2"/>
   <use fill="#ff0000" xlink:href="#svg_6" id="svg_7"/>
   <polygon strokeWidth="5" strokecolor="#000000" fill="#ff0000" edge="0" orient="x" sides="5" shape="regularPoly" id="svg_9" cy="254.222222" cx="289.185185"/>
  </g>
