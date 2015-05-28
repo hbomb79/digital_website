@@ -434,6 +434,7 @@ header a {
 -------------------*/
 nav ul{
 	background-color:#FF003F;
+	overflow: hidden;
 	color:white;
 	margin: 0;
 	padding:0;
@@ -486,42 +487,32 @@ body:not(.JS) nav ul li.has-drop:hover > ul{
 
 nav ul li.has-drop > ul {
 	position: absolute;
-	overflow-x: visible;
-}
-
-nav ul li.has-drop > ul > #ul-wrap {
-	overflow-y: auto;
-	max-height: 60vh;
 	display: none;
 }
 
-nav ul li.has-drop > ul li {
+nav ul li.has-drop > ul > li {
 	display: block;
 	text-transform: none;
 	border-bottom: solid 1px rgb(225, 0, 0);
 }
 
-nav ul li.has-drop > ul li > a.loading {
+nav ul li.has-drop > ul > li > a.loading {
 	background-color: #9D0027;
 }
 
-nav ul li.has-drop > ul li:last-child {
+nav ul li.has-drop > ul > li:last-child {
 	border-bottom: none;
 }
 
-nav ul li.has-drop > ul li:hover{
+nav ul li.has-drop > ul > li:hover{
 	background-color: #9D0027;
 }
 
 nav ul li.has-drop > ul {
+	max-height: 60vh;
+	overflow: auto;
 	box-shadow: 5px 5px 50px 1px black;
  	z-index: -1;
-}
-
-nav ul li.has-drop > ul li.has-drop > ul {
-	position: absolute;
-	left:100%;
-	top:0;
 }
 
 /* Mobile Nav Handle
