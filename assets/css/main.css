@@ -944,7 +944,7 @@ body.JS #to-top:before{
 	transition: all 250ms ease-in-out;
 }
 
-body.JS #to-top:active:before {
+body.JS #to-top:hover:before {
 	-webkit-transform: translate(-50%, -50%) rotate(-180deg);
 	-moz-transform: translate(-50%, -50%) rotate(-180deg);
 	-ms-transform: translate(-50%, -50%) rotate(-180deg);
