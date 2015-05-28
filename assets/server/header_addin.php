@@ -87,7 +87,7 @@
 				<li class="float-right js-req"><a href="#" onclick="$('#settings').fadeIn(); $('#shadow').fadeIn()">Settings</a></li>
 			</ul>
 		</nav>
-	<div id="notification" style="display:none;">Undefined Content</div>
+		<div id="notification" style="display:none;">Undefined Content</div>
 	</div>
 </header>
 <script>
