@@ -22,7 +22,7 @@
 	<div class="page-container current two" id="csgo"> <!-- Slide off screen, slide new page on screen using ajax -->
 		<div id="wrapper">
 			<div id="container-right">
-				<ul>
+				<ul id="contents">
 					<h1>Contents</h1>
 					<li><a href="#info">What Is CS:GO</a></li>
 					<li><a href="#pop">Is It Popular</a></li>

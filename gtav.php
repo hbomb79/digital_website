@@ -23,13 +23,12 @@
 	<div class="page-container current two" id="gtav"> <!-- Slide off screen, slide new page on screen using ajax -->
 		<div id="wrapper">
 			<div id="container-right">
-				<ul>
+				<ul id="contents">
 					<h1>Contents</h1>
 					<li><a href="#info">GTA Story</a></li>
 					<li><a href="#multi">GTA Online</a></li>
 					<li><a href="#pc">PC Port</a></li>
-					<li><a href="#graphic">Graphics</a></li>
-					<li><a href="#down">Where Is The Downside</a></li>
+					<li><a href="#down">Downside</a></li>
 				</ul>
 			</div>
 			<div id="container">

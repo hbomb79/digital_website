@@ -303,19 +303,34 @@ header li a.loading{
 
 .page-container.two #container-right {
 	width:25%;
+	position: fixed;
+	right:3%;
+	top:2em;
+	max-height: 80vh;
+	overflow: scroll;
+}
+
+.page-container.two #container-right #contents {
 	background: white;
 	border: 3px solid crimson;
 	border-radius: 1em;
 	overflow: hidden;
-	float: right;
-	position: fixed;
-	right:3%;
-	top:2em;
+}
+
+.page-container.two #container-right ul {
+	padding: 1em;
+	margin: 0;
+	list-style-type: none;
+	text-align: center;
+}
+
+.page-container.two #container-right h1 {
+	margin: 0 0 0.5em 0;
 }
 
 #wrapper, #container-right {
 	width:100%;
-	margin-top: 50px;
+	margin-top: 56px;
 }
 
 #bg-wrapper {
