@@ -39,10 +39,10 @@
 					<div class="image-wrapper wide">
 						<img src="assets/image/gta1.jpg" class="center-image" alt="Picture of GTA">
 					</div>
-					<div id="header">
+					<div class="header">
 						<h1 class="large" id="title">Grand Theft Auto V</h1>
 					</div>
-					<section id="info">
+					<section id="info" class="header-after">
 						<p>Grand Theft Auto is possibly one of the most infamous video game titles to date, constantly under the microscope for various things. Certain people believe the game causes people to become murderers, whereas others think it glamorizes a life of crime and disrespect to women. <br><br>Grand Theft Auto V is no exception to this tradition and it certainly offers a lot to scrutinize.</p>
 						<h1>Story?</h1>
 						<p>In this day and age, most people disagree that games need a story mode, although Rockstar went ahead and made one of the best campains, not only in Grand Theft Auto history, but in general. Character switching adds a new level of intuition and complexity, allowing the player to freely switch between Franklin, Micheal and Trevor, the main characters in GTA V story mode. <br><br>The story mode is too large to write up, but it does contain the following:</p>
@@ -82,6 +82,7 @@
 				</div>
 			</footer>
 		</div>
+		<script>$.getScript("assets/javascript/fix_elem.js")</script>
 	</div>
 	<script src="assets/javascript/page.js"></script>
 </body>

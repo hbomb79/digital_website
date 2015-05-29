@@ -343,7 +343,7 @@ aj_page = {
 	        	if ( getHashName( $(this).attr("href") ) ) {
 	        		// This URL has a HASH in it
 	        		check_hash( getHashName( $(this).attr("href") ) )
-	        		event.preventDefault()
+	        		e.preventDefault()
 	        		return;
 	        	}
 	    	}
@@ -492,6 +492,11 @@ aj_page = {
 				$(".page-container.current").removeClass("current").addClass("leave")
 				$(".page-container.new").removeClass("new").addClass("current")
 				$("#load-container").animate({"width": "100%"}, 250)
+				if ( fixer ) {
+					//setTimeout(function() {
+						fixer_init()
+					//}, 250)
+				}
 				setTimeout(function(){
 					$(".page-container.leave").remove()
 					$("#load-container").slideUp(250).promise().done(function(){

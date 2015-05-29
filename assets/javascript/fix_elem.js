@@ -76,12 +76,15 @@ var fixer = {
 	}
 }
 
-$(window).load(function(){
+$(window).load( fixer_init )
+
+function fixer_init() {
+	console.warn("Fixer Init")
 	fixer.init({
 		elements: [
 			{
-				selector: "#header",
-				pixel: $("#header").offset().top - 56,
+				selector: ".page-container.current .header",
+				pixel: $(".page-container.current .header").offset().top - 89,
 				position: {
 					fix: {
 						top: "28px",
@@ -93,13 +96,15 @@ $(window).load(function(){
 				},
 				callback: {
 					shown: function(){
-						$("#header").addClass("fix")
+						$(".page-container.current .header").addClass("fix")
+						$(".page-container.current .header-after").css({ "margin-top": $(".header h1").height() + 56 })
 					},
 					hidden: function() {
-						$("#header").removeClass("fix")
+						$(".page-container.current .header").removeClass("fix")
+						$(".page-container.current .header-after").css({ "margin-top":"" })
 					}
 				}
 			}
 		]
 	})
-})
+}

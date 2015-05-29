@@ -37,10 +37,10 @@
 					<?php
 						require_once("assets/_module/start.php");
 					?>
-					<div id="header">
+					<div class="header">
 						<h1 class="large" id="title">Counter Strike: Global Offensive</h1>
 					</div>
-					<div class="image-wrapper wide">
+					<div class="image-wrapper wide header-after">
 						<img src="assets/image/cs1.jpg" class="center-image" alt="Picture of counter strike: global offensive">
 					</div>
 					<section id="info">
@@ -91,6 +91,7 @@
 				</div>
 			</footer>
 		</div>
+		<script>$.getScript("assets/javascript/fix_elem.js")</script>
 	</div>
 	<script src="assets/javascript/page.js"></script>
 </body>

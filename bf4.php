@@ -37,8 +37,10 @@
 					<?php
 						require_once("assets/_module/start.php");
 					?>
-					<h1 class="large" id="title">Battlefield 4</h1>
-					<div class="image-wrapper wide">
+					<div class="header">
+						<h1 class="large" id="title">Battlefield 4</h1>
+					</div>
+					<div class="image-wrapper wide header-after">
 						<img src="assets/image/bf41.jpg" class="center-image" alt="Picture of GTA">
 					</div>
 					<section>
@@ -71,6 +73,7 @@
 				</div>
 			</footer>
 		</div>
+		<script>$.getScript("assets/javascript/fix_elem.js")</script>
 	</div>
 	<script src="assets/javascript/page.js"></script>
 </body>

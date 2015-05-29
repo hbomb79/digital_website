@@ -329,18 +329,26 @@ header li a.loading{
 	margin: 0 0 0.5em 0;
 }
 
-#header.fix {
+.header h1{
+	-webkit-transition: color 500ms ease-in-out, text-decoration 500ms ease-in-out;
+	-o-transition: color 500ms ease-in-out, text-decoration 500ms ease-in-out;
+	transition: color 500ms ease-in-out, text-decoration 500ms ease-in-out;
+}
+
+.header.fix {
 	width:69%;
 }
 
-#header.fix h1 {
+.header.fix h1 {
 	position: fixed;
 	top:28px;
 	width: inherit;
 	max-width: inherit;
 	background:white;
+	color: crimson;
 	box-shadow: 0 0 5px black;
 	padding: 0.5em 0;
+	text-decoration: none;
 }
 
 #wrapper, #container-right {
@@ -1012,7 +1020,7 @@ body.JS #to-top:hover:before {
 		max-width: 1160px;
 	}
 
-	.page-container #header {
+	.page-container .header {
 		max-width: 1160px;
 	}
 }
@@ -1066,13 +1074,13 @@ body.JS #to-top:hover:before {
 		margin: 0 auto;
 	}
 
-	#header.fix {
+	.header.fix {
 		position: static !important;
 		width: 100%;
 		max-width: none;
 	}
 
-	#header.fix h1 {
+	.header.fix h1 {
 		position: static !important;
 		width:100%;
 	}
