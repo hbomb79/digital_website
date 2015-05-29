@@ -44,13 +44,18 @@ var scroller;
 			for ( var i = 0; i < config.elements.length; i++) {
 				// Check details
 				element = config.elements[i];
-				pos = element.pixel ? element.pixel : $(element.selector).offset().top
+				if ( typeof element.pixel == "function" ) {
+					// run function
+					pos = element.pixel()
+				} else {
+					pos = element.pixel ? element.pixel : $(element.selector).offset().top
+				}
 				if ( $(window).scrollTop() >= pos && ($(window).width() - $("#container").width()) /2 >= element.reqSpace ) {
 					// show
-					$( element.selector )[ element.useToggle ? config.transitionToggle : config.transitionIn ](config.speed)
+					$( element.selector ).stop()[ element.useToggle ? config.transitionToggle : config.transitionIn ](config.speed)
 				} else {
 					// hide
-					$( element.selector )[ element.useToggle ? config.transitionToggle : config.transitionOut ](config.speed)
+					$( element.selector ).stop()[ element.useToggle ? config.transitionToggle : config.transitionOut ](config.speed)
 				}
 			}
 		}
@@ -61,7 +66,9 @@ var scroller;
 			elements: [
 				{
 					selector: "#to-top",
-					pixel: aj_page.screenh_percentage(100),
+					pixel: function(){
+						return aj_page.screenh_percentage(100);
+					},
 					reqSpace: 80
 				},
 			]

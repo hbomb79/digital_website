@@ -22,7 +22,7 @@
 	</div> <!--Faded out and replaced using ajax--> </div>
 	<div class="page-container current two" id="bf4"> <!-- Slide off screen, slide new page on screen using ajax -->
 		<div id="wrapper">
-			<div id="container-right" style="color:white;">
+			<div id="container-right">
 				<ul id="contents">
 					<h1>Contents</h1>
 					<li><a href="#">Test</a></li>
@@ -31,23 +31,6 @@
 					<li><a href="#">Testaro</a></li>
 					<li><a href="#">Shut Up</a></li>
 				</ul>
-				<br>
-				<div class="info-box warn">
-					<h1>Warning!</h1>
-					<p>This is a warning</p>
-				</div>
-				<br><br>
-				<div class="info-box error">
-					<h1>Error!</h1>
-					<p>This is an error</p>
-				</div>
-				<br><br>
-				<div class="info-box confirm">
-					<h1>Confirmation!</h1>
-					<p>This is a confirmation box</p>
-				</div>
-				<p>This page was created on 27th may 2015 in New Zealand by Harry Felton.</p>
-				<p>Use of this pages information is permitted as long as a link to this page is provided</p>
 			</div>
 			<div id="container">
 				<main>

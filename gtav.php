@@ -36,9 +36,11 @@
 					<?php
 						require_once("assets/_module/start.php");
 					?>
-					<h1 class="large" id="title">Grand Theft Auto V</h1>
 					<div class="image-wrapper wide">
 						<img src="assets/image/gta1.jpg" class="center-image" alt="Picture of GTA">
+					</div>
+					<div id="header">
+						<h1 class="large" id="title">Grand Theft Auto V</h1>
 					</div>
 					<section id="info">
 						<p>Grand Theft Auto is possibly one of the most infamous video game titles to date, constantly under the microscope for various things. Certain people believe the game causes people to become murderers, whereas others think it glamorizes a life of crime and disrespect to women. <br><br>Grand Theft Auto V is no exception to this tradition and it certainly offers a lot to scrutinize.</p>

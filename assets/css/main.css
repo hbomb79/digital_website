@@ -306,8 +306,9 @@ header li a.loading{
 	position: fixed;
 	right:3%;
 	top:2em;
-	max-height: 80vh;
-	overflow: scroll;
+	bottom:5em;
+	overflow-y: auto;
+	word-wrap: break-word;
 }
 
 .page-container.two #container-right #contents {
@@ -326,6 +327,20 @@ header li a.loading{
 
 .page-container.two #container-right h1 {
 	margin: 0 0 0.5em 0;
+}
+
+#header.fix {
+	width:69%;
+}
+
+#header.fix h1 {
+	position: fixed;
+	top:28px;
+	width: inherit;
+	max-width: inherit;
+	background:white;
+	box-shadow: 0 0 5px black;
+	padding: 0.5em 0;
 }
 
 #wrapper, #container-right {
@@ -407,8 +422,6 @@ header li a.loading{
 
 footer {
 	text-align:center;
-	margin: 0 auto;
-	padding: 0.5em 1em;
 }
 
 footer #foot-contain {
@@ -985,9 +998,25 @@ body.JS #to-top:hover:before {
 	transform: translate(-50%, -50%) rotate(-180deg);
 }
 
+#screen-warn {
+	display: none;
+}
+
 
 /* Mobile Code
 -------------------*/
+
+@media screen and ( min-width:1400px ) {
+	.page-container.two #container, .page-container.two footer {
+		margin:0 0 0 2em;
+		max-width: 1160px;
+	}
+
+	.page-container #header {
+		max-width: 1160px;
+	}
+}
+
 @media screen and (max-width:700px), screen and (max-height:500px) {
 	#settings {
 		width:100%;
@@ -1009,6 +1038,19 @@ body.JS #to-top:hover:before {
 		-o-transform: translate(-50%, 0) !important;
 		transform: translate(-50%, 0) !important;
 	}
+
+	.page-container.two #container-right {
+		position: absolute;
+		max-height: none;
+	}
+
+	#screen-warn{
+		display: block;
+	}
+
+	.info-box {
+		margin: 0px !important;
+	}
 }
 
 @media screen and (max-width: 700px) {
@@ -1022,6 +1064,17 @@ body.JS #to-top:hover:before {
 		float:none;
 		width:80%;
 		margin: 0 auto;
+	}
+
+	#header.fix {
+		position: static !important;
+		width: 100%;
+		max-width: none;
+	}
+
+	#header.fix h1 {
+		position: static !important;
+		width:100%;
 	}
 
 	#container, footer {
@@ -1040,7 +1093,7 @@ body.JS #to-top:hover:before {
 	}
 
 	.mobile-hide {
-		display:none;
+		display:none !important;
 	}
 
 	.mobile-show {
