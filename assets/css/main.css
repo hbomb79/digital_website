@@ -304,7 +304,7 @@ header li a.loading{
 .page-container.two #container-right {
 	width:25%;
 	position: fixed;
-	right:3%;
+	right:1em;
 	top:2em;
 	bottom:5em;
 	overflow-y: auto;
