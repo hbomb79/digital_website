@@ -302,9 +302,9 @@ header li a.loading{
 }
 
 .page-container.two #container-right {
-	width:25%;
+	width:29%;
 	position: fixed;
-	right:1em;
+	right:0;
 	top:2em;
 	bottom:5em;
 	overflow-y: auto;
@@ -316,6 +316,9 @@ header li a.loading{
 	border: 3px solid crimson;
 	border-radius: 1em;
 	overflow: hidden;
+	max-width: 300px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .page-container.two #container-right ul {
