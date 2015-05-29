@@ -344,7 +344,7 @@ header li a.loading{
 
 .header.fix h1 {
 	position: fixed;
-	top:28px;
+	top:24px;
 	width: inherit;
 	max-width: inherit;
 	background:white;
