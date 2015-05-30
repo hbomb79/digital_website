@@ -492,10 +492,13 @@ aj_page = {
 				$(".page-container.current").removeClass("current").addClass("leave")
 				$(".page-container.new").removeClass("new").addClass("current")
 				$("#load-container").animate({"width": "100%"}, 250)
-				if ( fixer ) {
+				if ( fixer && $(".page-container.current").data("fix-header") ) {
 					//setTimeout(function() {
+						fixer.remove_element("all")
 						fixer_init()
 					//}, 250)
+				} else if (fixer) {
+					fixer.remove_element("all")
 				}
 				setTimeout(function(){
 					$(".page-container.leave").remove()

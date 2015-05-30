@@ -53,9 +53,35 @@ var fixer = {
 	events: function(){
 		// Creates window events listener
 		var self = this;
+		var res_time;
 		$(window).on("scroll resize", function(){
 			self.scroll.call(self, this)
 		})
+		$(window).on("resize", function(){
+			if ( res_time ) {
+				clearTimeout(res_time)
+			}
+			res_time = setTimeout(function(){
+				for ( var i = 0; i < self.config.elements.length; i++ ) {
+					var element = self.config.elements[i]
+					element.callback.onresize( element )
+				}
+				$(window).trigger("scroll")
+			}, 250)
+		})
+	},
+
+	remove_element: function( name ){
+		var self = this;
+		if ( !fixer.config ) { return; }
+		for ( var i = 0; i < self.config.elements.length; i++) {
+			var element = self.config.elements[i];
+			if ( element.selector == name || name == "all") {
+				$(element.selector).removeClass("fix").css( element.position.norm )
+				element.callback.hidden()
+				self.config.elements.splice( i, 1 )
+			}
+		}
 	},
 
 	scroll: function( e ){
@@ -65,7 +91,7 @@ var fixer = {
 		for ( var i = 0; i < elements.length; i++ ) {
 			element = elements[i]
 			pos = ( typeof element.pixel == "function" ) ? element.pixel() : element.pixel;
-			if ( $(window).scrollTop() > pos ) {
+			if ( $(window).scrollTop() + element.position.offset > pos ) {
 				$( element.selector ).css( element.position.fix )
 				element.callback.shown()
 			} else {
@@ -79,12 +105,11 @@ var fixer = {
 $(window).load( fixer_init )
 
 function fixer_init() {
-	console.warn("Fixer Init")
 	fixer.init({
 		elements: [
 			{
 				selector: ".page-container.current .header",
-				pixel: $(".page-container.current .header").offset().top - 89,
+				pixel: $(".page-container.current .header").offset().top - 56 ,
 				position: {
 					fix: {
 						top: "28px",
@@ -92,7 +117,8 @@ function fixer_init() {
 					},
 					norm: {
 						position: "static"
-					}
+					},
+					offset: 28
 				},
 				callback: {
 					shown: function(){
@@ -102,6 +128,15 @@ function fixer_init() {
 					hidden: function() {
 						$(".page-container.current .header").removeClass("fix")
 						$(".page-container.current .header-after").css({ "margin-top":"" })
+					},
+					onresize: function( elem ){
+						// This function will be called when the window resizes, we will use this to calculate the new pixel offset, any elements that are effected by resize that also effect the header
+						// no longer break the header
+						//if ( !$(elem.selector).parent(".header").css("position") || !$(elem.selector).parent(".header").hasClass("fix")) {
+							$(elem.selector).css(elem.position.norm)
+							elem.pixel = $(".page-container.current .header").offset().top - 56
+							elem.callback.hidden()
+						//}
 					}
 				}
 			}

@@ -19,7 +19,7 @@
 	<div id="bg-wrapper">
 	 	<div class="page-bg" id="cs-page-bg"></div> <!--Faded out and replaced using ajax-->
 	</div>
-	<div class="page-container current two" id="csgo"> <!-- Slide off screen, slide new page on screen using ajax -->
+	<div class="page-container current two" id="csgo" data-fix-header="fix"> <!-- Slide off screen, slide new page on screen using ajax -->
 		<div id="wrapper">
 			<div id="container-right">
 				<ul id="contents">
@@ -60,7 +60,7 @@
 						<p>CS:GO is built on the Source engine... so not great, although we have become used to crystal clear graphics. When I first launched the game I was rather disappointed, but within minutes of the game play, I didn't give a sh*t about the graphics, the only thing on my mind was the bast*** on the balcony shooting at me.</p>
 					</section>
 					<section style="text-align:center; box-shadow:none;" class="mobile-hide" id="trail">
-						<iframe width="560" height="315" src="https://www.youtube.com/embed/edYCtaNueQY" class="load-after" frameborder="0" allowfullscreen></iframe>
+						<!--<iframe width="560" height="315" src="https://www.youtube.com/embed/edYCtaNueQY" class="load-after" frameborder="0" allowfullscreen></iframe>-->
 					</section>
 					<section style="text-align:center; box-shadow:none;" class="mobile-show" id="trail">
 						Click <a href="https://www.youtube.com/watch?v=edYCtaNueQY">here</a> to watch the CS:GO trailer
@@ -72,7 +72,7 @@
 					<section style="text-align:center; box-shadow:none;" class="mobile-hide">
 						<h1>I want more</h1>
 						<p>Want to see more of me playing CS:GO? I have embedded a video of me playing below</p>
-						<iframe class="load-after" width="560" height="315" src="https://www.youtube.com/embed/CSehEQiENEg" frameborder="0" allowfullscreen></iframe>
+						<!--<iframe class="load-after" width="560" height="315" src="https://www.youtube.com/embed/CSehEQiENEg" frameborder="0" allowfullscreen></iframe>-->
 					</section>
 					<section style="text-align:center; box-shadow:none;" class="mobile-show" id="gameplay">
 						<h1>I want more</h1>
@@ -91,7 +91,6 @@
 				</div>
 			</footer>
 		</div>
-		<script>$.getScript("assets/javascript/fix_elem.js")</script>
 	</div>
 	<script src="assets/javascript/page.js"></script>
 </body>

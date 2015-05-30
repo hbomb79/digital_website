@@ -20,7 +20,7 @@
 	<div id="bg-wrapper">
 	 	<div class="page-bg" id="bf4-page-bg">
 	</div> <!--Faded out and replaced using ajax--> </div>
-	<div class="page-container current two" id="bf4"> <!-- Slide off screen, slide new page on screen using ajax -->
+	<div class="page-container current two" id="bf4" data-fix-header="fix"> <!-- Slide off screen, slide new page on screen using ajax -->
 		<div id="wrapper">
 			<div id="container-right">
 				<ul id="contents">
@@ -73,7 +73,6 @@
 				</div>
 			</footer>
 		</div>
-		<script>$.getScript("assets/javascript/fix_elem.js")</script>
 	</div>
 	<script src="assets/javascript/page.js"></script>
 </body>
