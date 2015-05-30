@@ -250,6 +250,7 @@ header li a.loading{
 	cursor:pointer;
 	color: #FF003F;
 	display:block;
+	outline: none;
 }
 
 .button:hover {
@@ -609,13 +610,9 @@ nav ul li.has-drop > ul {
 /* Page Contents
 -------------------*/
 section {
-	padding:1em;
+	padding:1em 2em;
 	margin: 2em auto;
 	box-shadow: 0 5px 5px -5px black;
-}
-
-section.h1 {
-
 }
 
 .info-box {
@@ -1086,6 +1083,13 @@ body.JS #to-top:hover:before {
 	.header.fix h1 {
 		position: static !important;
 		width:100%;
+		color:black;
+		padding: 0;
+		box-shadow: none;
+	}
+
+	.header-after {
+		margin-top: 0 !important;
 	}
 
 	#container, footer {

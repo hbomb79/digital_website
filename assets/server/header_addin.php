@@ -4,13 +4,33 @@
 <div id="loading" style="display:none;">
 	<div id="diag">
 		<h1>Loading</h1>
-		<p>Please wait while we load the document</p>
+		<div id="norm" style="margin:0;">	
+			<p>Please wait while we load the document</p>
+		</div>
+		<div id="error" style="margin:0; display:none;">
+			<p>Loading is taking longer than usual. We suggest waiting, but if you like you can skip or reload the page</p>
+		</div>
 		<img src="http://i.imgur.com/6EkrPfM.gif?1" id="load-spinner" title="Loading..." alt="Loading Animation" />
+		<div id="error" style="margin:0; display:none;">
+			<button style="display: inline-block;" class="button" onclick="cancel()">Close</button>
+			<button class="button" style="display: inline-block;" onclick="retry()">Reload</button>
+		</div>
 	</div>
 </div>
 <script>
 	if (!get_cookie("loading_disable")) {
 		$("#loading").show()
+	}
+
+	$("html, body").css("overflow-y", "hidden")
+
+	function retry() {
+		location.reload(true)
+	}
+
+	function cancel() {
+		$("#loading").fadeOut(500)
+		$("html, body").css("overflow-y", "auto")
 	}
 </script>
 <div id="settings">
@@ -44,17 +64,16 @@
 		<script>
 			var timer_out = setTimeout(function(){
 				if ($("#loading").is(":visible")) {
-					$("#loading").slideUp(500)
-					console.log("Load Timed Out")
-					force_load()
+					$("#loading #error").show()
+					$("#loading #norm").hide()
 				}
-			}, 30000)
+			}, 4000)
 		</script>
 		
 		<script>
 			$(window).load(function(){
-				setTimeout(function() { $("#loading").slideUp(500) } , 500)
-				clearTimeout(timer_out)
+				//setTimeout(function() { $("#loading").slideUp(500); $("html, body").css("overflow-y", "auto"); } , 500)
+				//clearTimeout(timer_out)
 			})
 		</script>
 		<nav>

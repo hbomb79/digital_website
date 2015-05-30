@@ -102,7 +102,11 @@ var fixer = {
 	}
 }
 
-$(window).load( fixer_init )
+$(window).load(function(){
+	if( $(".page-container.current").data("fix-header") ) {
+		fixer_init()
+	}
+})
 
 function fixer_init() {
 	fixer.init({
