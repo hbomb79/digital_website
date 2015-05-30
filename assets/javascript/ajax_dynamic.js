@@ -154,7 +154,7 @@ function scroll_to(object, offset, add_time)
     }
     if (offset) {
     	$('html, body').animate({
-        	'scrollTop': $(object).offset().top - 56 // Height of header
+        	'scrollTop': $(object).offset().top - 56 - ( $(".header.fix h1").outerHeight() > 0 ? $(".header.fix h1").outerHeight() : $(".header h1").outerHeight())
     	}, interval);
     } else {
     	$('html, body').animate({
@@ -215,55 +215,6 @@ function getHashName( obj ) {
 	// If index of the last # is not -1 (not found) then set hash to a substring starting at the index of the hash, to the end of the URL. If the # index, is -1 then set hash to false.
 	return hash;
 }
-
-/*function done_load() {
-	console.warn("This Funtion Is Deprecated And Should No Longer Be Used, Use aj_page.init() instead")
-	setTimeout(function(){
-		$(".load-after:not(':visible')").each(function(){
-			$(this).fadeIn(150)
-		})
-	}, 5000)
-    $('a.ajax_load').off("click").on('click', function(event) {
-        if (event.button === 0) {
-            var old, to, self;
-            // Get href of click
-            self = this;
-            old = getFileName();
-            to = $(this).attr("href");
-            cg_erase_timer("temp_safe");
-            cg_timer("temp_safe", setTimeout(function(){
-				aj_page.start( old, to, true, self );
-			}, 250));
-			if ( !get_cookie("ajax_disable") ) {
-				event.preventDefault()
-			}
-        }
-    });
-    $("a.anchor").on('click', function(e){
-    	if (e.button === 0) {
-    		check_hash($(this).attr("href"))
-    		e.preventDefault()
-    		return false;
-    	}
-    });
-    $("a").on("click", function(e){
-    	// remove the event listener for the popstate
-    	// Remove window event
-    	if ( !$(this).hasClass("ajax_load") ) {
-        	if ( getHashName( $(this).attr("href") ) ) {
-        		// This URL has a HASH in it
-        		check_hash( getHashName( $(this).attr("href") ) )
-        		event.preventDefault()
-        		return;
-        	}
-    	}
-		if ( $(this).hasClass("ajax_load") && !get_cookie("ajax_disable")) {
-    		e.preventDefault()
-    	} else if (!get_cookie("ajax_disable")){
-    		$(window).off("popstate")
-    	}
-    })
-}*/
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -337,7 +288,7 @@ aj_page = {
 	    	}
 	    });
 	    $("a").on("click", function(e){
-	    	// remove the event listener for the popstate
+	    	// Remove the event listener for the popstate
 	    	// Remove window event
 	    	if ( !$(this).hasClass("ajax_load") ) {
 	        	if ( getHashName( $(this).attr("href") ) ) {

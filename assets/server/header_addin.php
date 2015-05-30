@@ -67,13 +67,13 @@
 					$("#loading #error").show()
 					$("#loading #norm").hide()
 				}
-			}, 4000)
+			}, 10000)
 		</script>
 		
 		<script>
 			$(window).load(function(){
-				//setTimeout(function() { $("#loading").slideUp(500); $("html, body").css("overflow-y", "auto"); } , 500)
-				//clearTimeout(timer_out)
+				setTimeout(function() { $("#loading").slideUp(500); $("html, body").css("overflow-y", "auto"); } , 500)
+				clearTimeout(timer_out)
 			})
 		</script>
 		<nav>

@@ -348,9 +348,11 @@ header li a.loading{
 	top:24px;
 	width: inherit;
 	max-width: inherit;
-	background:white;
+	background:-moz-linear-gradient(white, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+	background:-ms-linear-gradient(white, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+	background:-webkit-linear-gradient(white, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+	background:-o-linear-gradient(white, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
 	color: crimson;
-	box-shadow: 0 0 5px black;
 	padding: 0.5em 0;
 	text-decoration: none;
 }
@@ -1025,7 +1027,7 @@ body.JS #to-top:hover:before {
 	}
 }
 
-@media screen and (max-width:700px), screen and (max-height:500px) {
+@media screen and (max-width:770px), screen and (max-height:500px) {
 	#settings {
 		width:100%;
 		position: absolute;
@@ -1061,7 +1063,7 @@ body.JS #to-top:hover:before {
 	}
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 770px) {
 	/* Change css rules to ones that apply for a mobile device */
 
 	#to-top{
@@ -1086,6 +1088,8 @@ body.JS #to-top:hover:before {
 		color:black;
 		padding: 0;
 		box-shadow: none;
+		text-decoration: underline !important;
+		background: white !important;
 	}
 
 	.header-after {

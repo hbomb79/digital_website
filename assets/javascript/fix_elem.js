@@ -91,10 +91,10 @@ var fixer = {
 		for ( var i = 0; i < elements.length; i++ ) {
 			element = elements[i]
 			pos = ( typeof element.pixel == "function" ) ? element.pixel() : element.pixel;
-			if ( $(window).scrollTop() + element.position.offset > pos ) {
+			if ( $(window).scrollTop() + element.position.offset > pos && $(element.selector).css("position") != element.position.check ) {
 				$( element.selector ).css( element.position.fix )
 				element.callback.shown()
-			} else {
+			} else if( $(window).scrollTop() + element.position.offset < pos && $(element.selector).css("position") == element.position.check ) {
 				$( element.selector ).css( element.position.norm )
 				element.callback.hidden()
 			}
@@ -122,7 +122,8 @@ function fixer_init() {
 					norm: {
 						position: "static"
 					},
-					offset: 28
+					offset: 28,
+					check: "fixed" // Should be same as fix.position
 				},
 				callback: {
 					shown: function(){
