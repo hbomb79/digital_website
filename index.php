@@ -67,6 +67,10 @@
 							<a href="bf4.php" class="ajax_load"><div class="game-bg" id="BF4"></div>
 								<div class="game-title"><span>Battlefield 4</span></div></a>
 						</div>
+						<div class="game">
+							<a href="hag.php" class="ajax_load"><div class="game-bg" id="HAG"></div>
+								<div class="game-title"><span>Heroes And Generals</span></div></a>
+						</div>
 					</div>
 				</main>
 			</div>
