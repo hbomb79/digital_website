@@ -99,6 +99,7 @@
 						<li><a href="#">Left 4 Dead 2</a></li>
 						<li><a href="#">Payday: The Heist</a></li>
 						<li><a href="bf4.php" class="ajax_load">Battlefield 4</a></li>
+						<li><a href="hag.php" class="ajax_load">Heroes And Generals</a></li>
 					</ul>
 				</li><li>
 				<a href="help.php" class="ajax_load">Help</a></li>
