@@ -264,13 +264,12 @@ header li a.loading{
 	transform: translate(100%, 0);
     -webkit-transform: translate(100%, 0);
     -moz-transform: translate(100%, 0);
-    transition: transform 1s ease, opacity 1s;
-    -webkit-transition: -webkit-transform 1s ease, opacity 1s;
-    -moz-transition: -moz-transform 1s ease, opacity 1s;
+    transition: transform 2s ease, opacity 2s;
+    -webkit-transition: -webkit-transform 2s ease, opacity 2s;
+    -moz-transition: -moz-transform 2s ease, opacity 2s;
     position: absolute;
     width: 100%;
     min-height: 100vh;
-    opacity: 0;
 }
 
 .page-container.current{
@@ -278,7 +277,6 @@ header li a.loading{
 	-ms-transform: none;
 	-o-transform: none;
 	transform: none;
-	opacity: 1;
 }
 
 .page-container.leave {
@@ -425,14 +423,6 @@ header li a.loading{
 	-webkit-filter: blur(10px);
 	-o-filter: blur(10px);
 	filter: blur(10px);
-}
-
-.page-bg#hag-page-bg {
-	background: url('../image/hag_bg.jpg') no-repeat center center;
-	background-size:cover;
-	-webkit-filter: blur(5px);
-	-o-filter: blur(5px);
-	filter: blur(5px);
 }
 
 .page-bg {
@@ -757,11 +747,6 @@ section {
 
 .game .game-bg#BF4 {
 	background: url("../image/bf4.jpg") center center;
-	background-size: cover;
-}
-
-.game .game-bg#HAG {
-	background: url("../image/hag_thumb.jpg") right center;
 	background-size: cover;
 }
 

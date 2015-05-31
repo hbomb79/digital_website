@@ -456,7 +456,7 @@ aj_page = {
 					$("#load-container").slideUp(250).promise().done(function(){
 						aj_page.finish()
 					});
-				}, 1000)
+				}, 2000)
 			})
 		} else {
 			content = $(content);
@@ -537,8 +537,8 @@ aj_page = {
 		if ( !get_cookie("animations_disable") ) {
 			$(".page-bg").fadeOut(250)
 			setTimeout(function() {
-				$(".page-bg").attr( "id", $(content).find(".page-bg").attr("id") ).waitForImages(function(){
-						$(".page-bg").fadeIn(500)
+				$(".page-bg").attr( "id", $(content).find(".page-bg").attr("id") ).ready(function(){
+						$(".page-bg").fadeIn(250)
 					})
 				setTimeout(function() {
 					r.resolve() //Resolve when page-bg transition complete 

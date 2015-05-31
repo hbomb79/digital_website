@@ -30,7 +30,6 @@
 					<li><a href="#graphic">Graphics</a></li>
 					<li><a href="#trail">CS:GO Trailer</a></li>
 					<li><a href="#conc">My Final Verdict</a></li>
-					<li><a href="#gameplay">My Gameplay</a></li>
 				</ul>
 			</div>
 			<div id="container">
@@ -61,7 +60,7 @@
 						<p>CS:GO is built on the Source engine... so not great, although we have become used to crystal clear graphics. When I first launched the game I was rather disappointed, but within minutes of the game play, I didn't give a sh*t about the graphics, the only thing on my mind was the bast*** on the balcony shooting at me.</p>
 					</section>
 					<section style="text-align:center; box-shadow:none;" class="mobile-hide" id="trail">
-						<iframe width="560" height="315" src="https://www.youtube.com/embed/edYCtaNueQY" class="load-after" frameborder="0" allowfullscreen></iframe>
+						<!--<iframe width="560" height="315" src="https://www.youtube.com/embed/edYCtaNueQY" class="load-after" frameborder="0" allowfullscreen></iframe>-->
 					</section>
 					<section style="text-align:center; box-shadow:none;" class="mobile-show" id="trail">
 						Click <a href="https://www.youtube.com/watch?v=edYCtaNueQY">here</a> to watch the CS:GO trailer
@@ -70,10 +69,10 @@
 						<h1>Final Verdict</h1>
 						<p>Counter Strike: Global Offensive is a great game, with no signs of dying out in the near future, it is cheap if you don't gamble, but if you do you're screwed. The game play is great, never knowing what looms around the alleyway or in the next room. Sound is a very important part of the game (<em>sorry what?</em>). The game has good and constant support from Valve and the community and has decent graphics. I suggest it to everyone, even if I don't know them.</p>
 					</section>
-					<section style="text-align:center; box-shadow:none;" class="mobile-hide" id="gameplay">
+					<section style="text-align:center; box-shadow:none;" class="mobile-hide">
 						<h1>I want more</h1>
 						<p>Want to see more of me playing CS:GO? I have embedded a video of me playing below</p>
-						<iframe class="load-after" width="560" height="315" src="https://www.youtube.com/embed/CSehEQiENEg" frameborder="0" allowfullscreen></iframe>
+						<!--<iframe class="load-after" width="560" height="315" src="https://www.youtube.com/embed/CSehEQiENEg" frameborder="0" allowfullscreen></iframe>-->
 					</section>
 					<section style="text-align:center; box-shadow:none;" class="mobile-show" id="gameplay">
 						<h1>I want more</h1>
