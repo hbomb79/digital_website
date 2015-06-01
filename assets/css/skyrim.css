@@ -1,4 +1,14 @@
 body {
 	background-image: url("../image/skyrim1.jpg");
-	background-repeat: no-repeat;
+	
+}
+
+#main {
+	max-width: 600px;
+	margin: 0 auto;
+	width: 80%;
+	background-color: #FFFFFF;
+}
+.static{
+	position: static;
 }
