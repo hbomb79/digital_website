@@ -61,7 +61,7 @@
 						</div>
 						<div class="game">
 							<a href="#"><div class="game-bg" id="PAYDAY"></div>
-								<div class="game-title"><span>Payday: The Heist</span></div></a>
+								<div class="game-title"><span>PAYDAY: The Heist</span></div></a>
 						</div>
 						<div class="game">
 							<a href="bf4.php" class="ajax_load"><div class="game-bg" id="BF4"></div>

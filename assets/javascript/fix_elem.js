@@ -69,6 +69,9 @@ var fixer = {
 				$(window).trigger("scroll")
 			}, 250)
 		})
+		$(".info-box #close").on("click", function(){
+			$(window).trigger("resize")
+		})
 	},
 
 	remove_element: function( name ){

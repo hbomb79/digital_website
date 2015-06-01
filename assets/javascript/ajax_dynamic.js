@@ -302,6 +302,7 @@ aj_page = {
 	    		e.preventDefault()
 	    	}
 	    });
+	    this.timer = false;
 	},
 
 	start: function(from, to, click, elem, popstate) {
