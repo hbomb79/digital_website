@@ -1,0 +1,23 @@
+#backimg1{
+	background-image: url("../image/skyrim1.jpg");	
+}
+
+#mainimg2{
+	background-image: url ("../image/")
+}
+
+#mainimg3{
+background-image: url ("../image/")
+}
+
+#main {
+	max-width: 600px;
+	margin: 0 auto;
+	width: 80%;
+	background-color: #FFFFFF;
+	padding: 15px 25px;
+}
+
+.static{
+	position: static;
+}
