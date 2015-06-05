@@ -1052,6 +1052,15 @@ body.JS #to-top:hover:before {
 	font-size: 1em;
 }
 
+.setting-content .tooltip-diag {
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	-ms-transform: translateX(-50%);
+	-o-transform: translateX(-50%);
+	transform: translateX(-50%);
+	bottom: -1.5em;
+}
+
 
 /* Mobile Code
 -------------------*/

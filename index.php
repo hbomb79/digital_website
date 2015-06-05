@@ -71,6 +71,7 @@
 							<a href="hag.php" data-tooltip-title="Click To View Heroes And Generals" class="ajax_load"><div class="game-bg" id="HAG"></div>
 								<div class="game-title"><span>Heroes And Generals</span></div></a>
 						</div>
+						<!-- Anchor tags with a href of "#" indicate a page that has not been created and/or linked with this page -->
 					</div>
 				</main>
 			</div>

@@ -2,9 +2,9 @@
 var test_2;
 ;(function( $ ){
 	var instance;
-	$.fn.tooltip = function(){
+	$.fn.tooltip = function( force ){
 		// Init this plugin to monitor "this"
-		if (instance) {
+		if (instance && !force) {
 			console.error("A plugin (tooltip) instance is already running");
 			return this;
 		}
@@ -24,6 +24,16 @@ var test_2;
 			})
 		});
 
+		function adjust_position( tooltip ) {
+			if ( !is_elem_visible(tooltip) ) {
+				$(tooltip).animate({
+					bottom: "100%"
+				})
+			} else {
+				$(tooltip).css("bottom", "")
+			}
+		}
+
 		function setTooltip( element ) {
 			// Check if element already contains a tooltip
 			// The element needs to have a data-tooltip-children attribute, else return.
@@ -32,9 +42,7 @@ var test_2;
 				sibs.stop().fadeIn(250)
 				// Check if tooltip visible, if not then adjust bottom to 100% (above)
 				setTimeout(function(){
-					$(sibs[0]).css({
-						bottom: ( !is_elem_visible( sibs[0] ) ) ? "100%" : ""
-					})
+					adjust_position( sibs[0] )
 				}, 250)
 				return false;
 			}
@@ -46,9 +54,7 @@ var test_2;
 			}).insertAfter(element).stop().fadeIn(250);
 			test_2 = appended;
 			setTimeout(function(){
-				$(appended).css({
-					bottom: ( !is_elem_visible( appended ) ) ? "100%" : ""
-				})
+				adjust_position(appended)
 			}, 250)
 		}
 

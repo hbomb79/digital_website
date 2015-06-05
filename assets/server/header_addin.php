@@ -44,13 +44,13 @@
 				<h1>Settings</h1>
 				<p>Welcome to your settings page, any options changed here will revert 30 days afterwards.</p>
 				<div class="setting-content" id="ajax_content">
-					<a class="button" href="#" data-default="ON" data-required-set="[  ]" data-exclude-set="[  ]" data-c-name="ajax_disable" data-title-name="AJAX Loading" id="ajax_setting">An Error Occured, Enable Javascript</a>
+					<a class="button" data-tooltip-title="Toggle Use Of AJAX Loading. Using this increases speed but decreases performance" href="#" data-default="ON" data-required-set="[  ]" data-exclude-set="[  ]" data-c-name="ajax_disable" data-title-name="AJAX Loading" id="ajax_setting">An Error Occured, Enable Javascript</a>
 				</div>
 				<div class="setting-content">
-					<a class="button" href="#" data-default="ON" data-required-set="[  ]" data-exclude-set="[ 'ajax_disable' ]" data-c-name="animations_disable" data-title-name="Animated Transitions" id="js_setting">An Error Occured, Enable Javascript</a><br>	
+					<a class="button" data-tooltip-title="Toggle animated AJAX Loading using this makes page loading look nicer, but decreases performance" href="#" data-default="ON" data-required-set="[  ]" data-exclude-set="[ 'ajax_disable' ]" data-c-name="animations_disable" data-title-name="Animated Transitions" id="js_setting">An Error Occured, Enable Javascript</a><br>	
 				</div>
 				<div class="setting-content" id="load_content">
-					<a class="button" href="#" data-default="ON" data-required-set="[ 'ajax_disable' ]" data-exclude-set="[  ]" data-c-name="loading_disable" data-title-name="Animated Loading" id="load_setting">An Error Occured, Enable Javascript</a>
+					<a class="button" data-tooltip-title="Toggle loading screen, this is not reccomended as it displays the page while loading, although this is helpful of slow connections" href="#" data-default="ON" data-required-set="[ 'ajax_disable' ]" data-exclude-set="[  ]" data-c-name="loading_disable" data-title-name="Animated Loading" id="load_setting">An Error Occured, Enable Javascript</a>
 				</div>
 			</div>
 		</div>
