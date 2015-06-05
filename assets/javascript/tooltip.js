@@ -1,4 +1,5 @@
 // This plugin allows custom tooltips
+var test_2;
 ;(function( $ ){
 	var instance;
 	$.fn.tooltip = function(){
@@ -27,22 +28,34 @@
 			// Check if element already contains a tooltip
 			// The element needs to have a data-tooltip-children attribute, else return.
 			var sibs = $(element).siblings().filter(".tooltip-diag[data-tooltip-parent]");
-			if ( sibs.length > 0 ) {
+			if ( sibs.length == 1 ) {
 				sibs.stop().fadeIn(250)
+				// Check if tooltip visible, if not then adjust bottom to 100% (above)
+				setTimeout(function(){
+					$(sibs[0]).css({
+						bottom: ( !is_elem_visible( sibs[0] ) ) ? "100%" : ""
+					})
+				}, 250)
 				return false;
 			}
 			// Process. Create a div (if does not exist) with a class of tooltip-diag. Set the attribute data-tooltip-parent to the data-tooltip-children of the parent element.
-			$("<div></div>", {
+			var appended = $("<div></div>", {
 				"data-tooltip-parent": $(element).data("tooltip-children") ? $(element).data("tooltip-children") : "tooltip",
 				text: $(element).data("tooltip-title"),
 				class:"tooltip-diag"
 			}).insertAfter(element).stop().fadeIn(250);
+			test_2 = appended;
+			setTimeout(function(){
+				$(appended).css({
+					bottom: ( !is_elem_visible( appended ) ) ? "100%" : ""
+				})
+			}, 250)
 		}
 
 		function clearTooltip( element ) {
 			var sibs = $(element).siblings().filter(".tooltip-diag[data-tooltip-parent]");
 			if ( sibs.length > 0 ) {
-				sibs.stop().fadeOut(250)
+				sibs.stop().fadeOut(250).delay(250).css("bottom", "")
 			} else {
 				return;
 			}
