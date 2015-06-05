@@ -102,8 +102,8 @@
 						<li><a href="hag.php" class="ajax_load">Heroes And Generals</a></li>
 					</ul>
 				</li><li>
-				<a href="help.php" class="ajax_load">Help</a></li>
-				<li class="float-right js-req"><a href="#" onclick="$('#settings').fadeIn(); $('#shadow').fadeIn()">Settings</a></li>
+				<a href="help.php" id="test" class="ajax_load">Help</a></li>
+				<li class="float-right js-req"><a data-tooltip-title="Edit Website Settings" href="#" onclick="$('#settings').fadeIn(); $('#shadow').fadeIn()">Settings</a></li>
 			</ul>
 		</nav>
 		<div id="notification" style="display:none;">Undefined Content</div>
