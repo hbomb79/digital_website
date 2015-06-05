@@ -1,5 +1,4 @@
 // This plugin allows custom tooltips
-var test_2;
 ;(function( $ ){
 	var instance;
 	$.fn.tooltip = function( force ){
@@ -24,6 +23,7 @@ var test_2;
 			})
 		});
 
+		// The following functions are private!
 		function adjust_position( tooltip ) {
 			if ( !is_elem_visible(tooltip) ) {
 				$(tooltip).animate({
@@ -52,7 +52,6 @@ var test_2;
 				text: $(element).data("tooltip-title"),
 				class:"tooltip-diag"
 			}).insertAfter(element).stop().fadeIn(250);
-			test_2 = appended;
 			setTimeout(function(){
 				adjust_position(appended)
 			}, 250)
