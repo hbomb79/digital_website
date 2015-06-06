@@ -1,5 +1,5 @@
 <!-- Created by Harry Felton, header addin includes the loading animation and ajax_loading scripts -->
-<a id="to-top" href="#!top"><div id="title">TOP</div></a>
+<a id="to-top" class="tipped tipped-left tipped-vmid" aria-label="Go To Top" href="#!top"></a>
 <div id="shadow" style="display:none;"></div>
 <div id="loading" style="display:none;">
 	<div id="diag">
@@ -43,14 +43,14 @@
 			<div id="inner">
 				<h1>Settings</h1>
 				<p>Welcome to your settings page, any options changed here will revert 30 days afterwards.</p>
-				<div class="setting-content" id="ajax_content">
-					<a class="button" data-tooltip-title="Toggle Use Of AJAX Loading. Using this increases speed but decreases performance" href="#" data-default="ON" data-required-set="[  ]" data-exclude-set="[  ]" data-c-name="ajax_disable" data-title-name="AJAX Loading" id="ajax_setting">An Error Occured, Enable Javascript</a>
+				<div class="setting-content rel-contain first" id="ajax_content">
+					<a class="button tipped tipped-bottom tipped-mid" aria-label="Toggle Use Of AJAX Loading. Using this increases speed but decreases performance" href="#" data-default="ON" data-required-set="[  ]" data-exclude-set="[  ]" data-c-name="ajax_disable" data-title-name="AJAX Loading" id="ajax_setting">An Error Occured, Enable Javascript</a>
 				</div>
-				<div class="setting-content">
-					<a class="button" data-tooltip-title="Toggle animated AJAX Loading using this makes page loading look nicer, but decreases performance" href="#" data-default="ON" data-required-set="[  ]" data-exclude-set="[ 'ajax_disable' ]" data-c-name="animations_disable" data-title-name="Animated Transitions" id="js_setting">An Error Occured, Enable Javascript</a><br>	
+				<div class="setting-content rel-contain">
+					<a class="button tipped tipped-bottom tipped-mid" aria-label="Toggle animated AJAX Loading using this makes page loading look nicer, but decreases performance" href="#" data-default="ON" data-required-set="[  ]" data-exclude-set="[ 'ajax_disable' ]" data-c-name="animations_disable" data-title-name="Animated Transitions" id="js_setting">An Error Occured, Enable Javascript</a><br>	
 				</div>
-				<div class="setting-content" id="load_content">
-					<a class="button" data-tooltip-title="Toggle loading screen, this is not reccomended as it displays the page while loading, although this is helpful of slow connections" href="#" data-default="ON" data-required-set="[ 'ajax_disable' ]" data-exclude-set="[  ]" data-c-name="loading_disable" data-title-name="Animated Loading" id="load_setting">An Error Occured, Enable Javascript</a>
+				<div class="setting-content rel-contain" id="load_content">
+					<a class="button tipped tipped-bottom tipped-mid" aria-label="Toggle loading screen, this is not reccomended as it displays the page while loading, although this is helpful on slow connections" href="#" data-default="ON" data-required-set="[ 'ajax_disable' ]" data-exclude-set="[  ]" data-c-name="loading_disable" data-title-name="Animated Loading" id="load_setting">An Error Occured, Enable Javascript</a>
 				</div>
 			</div>
 		</div>
@@ -103,7 +103,7 @@
 					</ul>
 				</li><li>
 				<a href="help.php" id="test" class="ajax_load">Help</a></li>
-				<li class="float-right js-req"><a data-tooltip-title="Edit Website Settings" href="#" onclick="$('#settings').fadeIn(); $('#shadow').fadeIn()">Settings</a></li>
+				<li class="float-right js-req"><a href="#" onclick="$('#settings').fadeIn(); $('#shadow').fadeIn()">Settings</a></li>
 			</ul>
 		</nav>
 		<div id="notification" style="display:none;">Undefined Content</div>

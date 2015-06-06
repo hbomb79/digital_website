@@ -214,12 +214,16 @@ header li a.loading{
 }
 
 #settings #pane #inner{
-	padding: 1em 0.5em 3em 0.5em;
+	padding: 1em 0.5em 1em 0.5em;
 	text-align: center;
 }
 
 #settings #pane #inner .setting-content {
-	margin-top:3em;
+	padding: 1em 0;
+}
+
+#settings #pane #inner .setting-content.first {
+	margin-bottom:1em;
 }
 
 #settings #pane #inner .setting-content .button {
@@ -978,21 +982,15 @@ body.JS #to-top {
 	right:0;
 	padding: 2em;
 	z-index:1;
-	height:1em;
-	overflow: hidden;
 	display:block;
+}
+
+#to-top:after {
+	left: -110% !important;
 }
 
 body:not(.JS) #to-top {
 	display:none;
-}
-
-body.JS #to-top #title {
-	position: absolute;
-	bottom:0;
-	left:0;
-	right:0;
-	text-align: center;
 }
 
 body.JS #to-top:before{
@@ -1026,6 +1024,114 @@ body.JS #to-top:hover:before {
 	display: none;
 }
 
+.tipped:after {
+	content:attr(aria-label);
+	padding: 0.5em;
+	font-size: 12px;
+	position: absolute;
+	border-radius: 10px;
+	background-color: rgba(0, 0, 0, 0.8);
+	color: white;
+	text-decoration: none;
+	text-align: center;
+	z-index: 1999;
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transition: opacity 250ms ease-in-out;
+	-o-transition: opacity 250ms ease-in-out;
+	transition: opacity 250ms ease-in-out;
+	white-space: pre;
+	box-shadow: 0 0 5px 1px black;
+	border: solid 2px crimson;
+}
+
+.tipped:hover:after {
+	visibility: visible;
+	-webkit-transition-delay: 250ms;
+	-o-transition-delay: 250ms;
+	transition-delay: 250ms;
+	opacity: 1;
+}
+
+.rel-contain {
+	position: relative;
+}
+
+/*
+	.tipped.tipped-se - span entire
+	.tipped.tipped-sm - span most (80%)
+	.tipped.tipped-mid - center using left and right
+	.tipped.tipped-left - stick to left
+	.tipped.tipped-right - stick to right
+	.tipped.tipped-bottom - stick to bottom
+	.tipped.tipped-top - stick to top
+
+	If .tipped-se or .tipped-sm has a class .force then instead of a max width a width will be set
+
+	Below are the presets for the aforementioned rules
+*/
+
+.tipped.tipped-se:after {
+	max-width: 100%;
+}
+
+.tipped.tipped-se.force:after {
+	width: 100%;
+}
+
+.tipped.tipped-sm:after {
+	max-width: 80%;
+}
+
+.tipped.tipped-sm.force:after {
+	width: 80%;
+}
+
+.tipped.tipped-mid:after {
+	left: 50%;
+	right: auto;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	-ms-transform: translateX(-50%);
+	-o-transform: translateX(-50%);
+}
+
+.tipped.tipped-left:after {
+	left:0;
+	right:auto;
+}
+
+.tipped.tipped-right:after {
+	right:0;
+	left:auto;
+}
+
+.tipped.tipped-bottom:after {
+	top: 103%;
+}
+
+.tipped.tipped-top:after {
+	bottom:103%;
+}
+
+.tipped.tipped-vmid:after {
+	top:50%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+/*
+
+Code Deprecated 
+.tipped:after {
+	background: rgba(0, 0, 0, 0.5);
+	content:"";
+	width:100%;
+	height: 2em;
+}
+
 .tooltip-diag {
 	position: absolute;
 	background-color: crimson;
@@ -1041,25 +1147,25 @@ body.JS #to-top:hover:before {
 	font-size: 0.8em;
 }
 
-.game .tooltip-diag {
+.tooltip-diag.center-diag {
 	left: 50%;
-	right: -50%;
 	max-width: 80%;
 	-webkit-transform: translateX(-50%);
 	-ms-transform: translateX(-50%);
 	-o-transform: translateX(-50%);
 	transform: translateX(-50%);
+}
+
+.game .tooltip-diag {
+	right: -50%;
 	font-size: 1em;
 }
 
 .setting-content .tooltip-diag {
-	left: 50%;
-	-webkit-transform: translateX(-50%);
-	-ms-transform: translateX(-50%);
-	-o-transform: translateX(-50%);
-	transform: translateX(-50%);
 	bottom: -1.5em;
 }
+
+*/
 
 
 /* Mobile Code
@@ -1109,6 +1215,9 @@ body.JS #to-top:hover:before {
 
 	.info-box {
 		margin: 0px !important;
+	}
+	.tipped:after {
+		display: none !important;
 	}
 }
 

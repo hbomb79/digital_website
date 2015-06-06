@@ -521,8 +521,6 @@ aj_page = {
 			aj_page.init();
 			aj_page.check();
 			$(".load-after").fadeIn(350)
-			$("a[data-tooltip-title]").off("mouseenter").off("mouseleave")
-			$("a[data-tooltip-title]").tooltip( true )
 		});
 	},
 

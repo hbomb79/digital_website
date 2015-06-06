@@ -68,7 +68,9 @@
 							</section>
 						</div>
 					</div>
-					<button class="button contact-trigger" style="margin:0 auto; display:none; font-size:1.3em;">Contact Us</button>
+					<div class="rel-contain">
+						<button class="button contact-trigger tipped tipped-mid tipped-bottom" aria-label="Send Us A Message" style="margin:0 auto; display:none; font-size:1.3em;">Contact Us</button>
+					</div>
 					<h1 id="contact-title">Contact Us</h1>
 					<!-- Contact Form -->
 					<div id="contact-container">

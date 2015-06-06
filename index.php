@@ -32,43 +32,43 @@
 					</section>
 					<div class="game-container">
 						<div class="game">
-							<a href="gtav.php" class="ajax_load" data-tooltip-title="Click To View GTA V"><div class="game-bg" id="GTAV"></div>
+							<a href="gtav.php" class="tipped tipped-mid tipped-bottom ajax_load" aria-label="Click To View GTA V"><div class="game-bg" id="GTAV"></div>
 								<div class="game-title"><span>Grand Theft Auto V</span></div></a>
 						</div>	
 						<div class="game">
-							<a href="ACU.html" data-tooltip-title="Click To View Assassins Creed Unity"><div class="game-bg" id="AC"></div>
+							<a href="ACU.html" class="tipped tipped-mid tipped-bottom" aria-label="Click To View Assassins Creed Unity"><div class="game-bg" id="AC"></div>
 								<div class="game-title"><span>Assassin's Creed Unity</span></div></a>
 						</div>
 						<div class="game">
-							<a href="#" class="ajax_load" data-tooltip-title="This Page Is Not Completed Yet"><div class="game-bg" id="TF"></div>
+							<a href="#" class="ajax_load tipped tipped-mid tipped-bottom" aria-label="This Page Is Not Completed Yet"><div class="game-bg" id="TF"></div>
 								<div class="game-title"><span>Team Fortress 2</span></div></a>
 						</div>
 						<div class="game">
-							<a href="csgo.php" class="ajax_load" data-tooltip-title="Click To View CS:GO"><div class="game-bg" id="CS"></div>
+							<a href="csgo.php" class="ajax_load tipped tipped-mid tipped-bottom" aria-label="Click To View CS:GO"><div class="game-bg" id="CS"></div>
 								<div class="game-title"><span>Counter Strike: Global Offensive</span></div></a>
 						</div>
 						<div class="game">
-							<a href="skyrim.html" data-tooltip-title="Click To View Elder Scroll V: Skyrim"><div class="game-bg" id="SKY"></div>
+							<a href="skyrim.html" class="tipped tipped-mid tipped-bottom" aria-label="Click To View Elder Scroll V: Skyrim"><div class="game-bg" id="SKY"></div>
 								<div class="game-title"><span>Elder Scrolls V: Skyrim</span></div></a>
 						</div>
 						<div class="game">
-							<a href="#" data-tooltip-title="This Page Is Not Completed Yet"><div class="game-bg" id="PORTAL2"></div>
+							<a href="#" class="tipped tipped-mid tipped-bottom" aria-label="Waiting For Brynn To Start Page"><div class="game-bg" id="PORTAL2"></div>
 								<div class="game-title"><span>Portal 2</span></div></a>
 						</div>
 						<div class="game">
-							<a href="#" data-tooltip-title="This Page Is Not Completed Yet"><div class="game-bg" id="L4D2"></div>
+							<a href="#" class="tipped tipped-mid tipped-bottom" aria-label="Waiting For Brynn To Start Page"><div class="game-bg" id="L4D2"></div>
 								<div class="game-title"><span>Left 4 Dead 2</span></div></a>
 						</div>
 						<div class="game">
-							<a href="#" data-tooltip-title="This Page Is Not Completed Yet"><div class="game-bg" id="PAYDAY"></div>
+							<a href="#" class="tipped tipped-mid tipped-bottom" aria-label="Waiting For Brynn To Start Page"><div class="game-bg" id="PAYDAY"></div>
 								<div class="game-title"><span>PAYDAY: The Heist</span></div></a>
 						</div>
 						<div class="game">
-							<a href="bf4.php" data-tooltip-title="Click To View Battlefield 4" class="ajax_load"><div class="game-bg" id="BF4"></div>
+							<a href="bf4.php" aria-label="Click To View Battlefield 4" class="tipped tipped-mid tipped-bottom ajax_load"><div class="game-bg" id="BF4"></div>
 								<div class="game-title"><span>Battlefield 4</span></div></a>
 						</div>
 						<div class="game">
-							<a href="hag.php" data-tooltip-title="Click To View Heroes And Generals" class="ajax_load"><div class="game-bg" id="HAG"></div>
+							<a href="hag.php" aria-label="Click To View Heroes And Generals" class="tipped tipped-mid tipped-bottom ajax_load"><div class="game-bg" id="HAG"></div>
 								<div class="game-title"><span>Heroes And Generals</span></div></a>
 						</div>
 						<!-- Anchor tags with a href of "#" indicate a page that has not been created and/or linked with this page -->
