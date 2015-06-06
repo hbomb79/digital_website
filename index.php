@@ -40,7 +40,7 @@
 								<div class="game-title"><span>Assassin's Creed Unity</span></div></a>
 						</div>
 						<div class="game">
-							<a href="#" class="ajax_load tipped tipped-mid tipped-bottom" aria-label="This Page Is Not Completed Yet"><div class="game-bg" id="TF"></div>
+							<a href="#" class="ajax_load tipped tipped-mid tipped-bottom" aria-label="Waiting For Brynn To Start Page"><div class="game-bg" id="TF"></div>
 								<div class="game-title"><span>Team Fortress 2</span></div></a>
 						</div>
 						<div class="game">
@@ -60,7 +60,7 @@
 								<div class="game-title"><span>Left 4 Dead 2</span></div></a>
 						</div>
 						<div class="game">
-							<a href="#" class="tipped tipped-mid tipped-bottom" aria-label="Waiting For Brynn To Start Page"><div class="game-bg" id="PAYDAY"></div>
+							<a href="#" class="tipped tipped-mid tipped-bottom" aria-label="Waiting For Clayton To Start Page"><div class="game-bg" id="PAYDAY"></div>
 								<div class="game-title"><span>PAYDAY: The Heist</span></div></a>
 						</div>
 						<div class="game">

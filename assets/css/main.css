@@ -1036,7 +1036,6 @@ body.JS #to-top:hover:before {
 	text-align: center;
 	z-index: 1999;
 	opacity: 0;
-	visibility: hidden;
 	-webkit-transition: opacity 250ms ease-in-out;
 	-o-transition: opacity 250ms ease-in-out;
 	transition: opacity 250ms ease-in-out;
