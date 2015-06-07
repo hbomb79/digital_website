@@ -1,8 +1,7 @@
 // Dynamic Ajax Page Load
 // Copyright 2015 HexCode (Harry Felton)
 // Use Under MIT License And Written Consent From HexCode
-// 
-// Unauthorized usage will result in copyright court action
+
 var timer = false;
 var pop_wait = false;
 _G = {};

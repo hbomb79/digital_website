@@ -800,6 +800,14 @@ section {
 	filter: blur(5px);
 }
 
+.game a {
+	display: block;
+	position: absolute;
+	bottom:0;
+	top:0;
+	width:100%;
+}
+
 /* Game Sub-Pages 
 --------------------*/
 .image-wrapper {
@@ -1036,20 +1044,21 @@ body.JS #to-top:hover:before {
 	text-align: center;
 	z-index: 1999;
 	opacity: 0;
-	-webkit-transition: opacity 250ms ease-in-out;
-	-o-transition: opacity 250ms ease-in-out;
-	transition: opacity 250ms ease-in-out;
+	visibility: hidden;
+	-webkit-transition: opacity 250ms ease-in-out, visibility 250ms;
+	-o-transition: opacity 250ms ease-in-out, visibility 250ms;
+	transition: opacity 250ms ease-in-out, visibility 250ms;
+	-webkit-transition-delay: 250ms;
+	-o-transition-delay: 250ms;
+	transition-delay: 250ms;
 	white-space: pre;
 	box-shadow: 0 0 5px 1px black;
 	border: solid 2px crimson;
 }
 
 .tipped:hover:after {
-	visibility: visible;
-	-webkit-transition-delay: 250ms;
-	-o-transition-delay: 250ms;
-	transition-delay: 250ms;
 	opacity: 1;
+	visibility: visible;
 }
 
 .rel-contain {

@@ -33,9 +33,7 @@ function hideNotify(){
 }
 
 $("#notification").unbind("click").bind("click", function(){
-	console.log("HIT")
 	if($("#notification div").attr("data-notify-couple")) {
 		$($("#notification div").attr("data-notify-couple")).slideUp(500)
-		console.log($("#notification div").attr("data-notify-couple"))
 	}
 })

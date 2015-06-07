@@ -165,12 +165,10 @@
 
 		toggle: function( setting, value, expiry, text, self) {
 			if (!get_cookie(setting)) {
-				console.log("Not Cookie")
 				create_cookie(setting, value, expiry)
 				text += " Disabled";
 				settings.change_text( self, "Enable " + $(self).data("title-name") )
 			} else if ( get_cookie(setting) ) {
-				console.log("Has Cookie")
 				document.cookie = setting+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 				text += " Enabled";
 				settings.change_text( self, "Disable " + $(self).data("title-name"))
