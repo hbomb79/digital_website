@@ -1048,9 +1048,7 @@ body.JS #to-top:hover:before {
 	-webkit-transition: opacity 250ms ease-in-out, visibility 250ms;
 	-o-transition: opacity 250ms ease-in-out, visibility 250ms;
 	transition: opacity 250ms ease-in-out, visibility 250ms;
-	-webkit-transition-delay: 250ms;
-	-o-transition-delay: 250ms;
-	transition-delay: 250ms;
+
 	white-space: pre;
 	box-shadow: 0 0 5px 1px black;
 	border: solid 2px crimson;
@@ -1058,7 +1056,10 @@ body.JS #to-top:hover:before {
 
 .tipped:hover:after {
 	opacity: 1;
-	visibility: visible;
+	visibility: visible;	
+	-webkit-transition-delay: 250ms;
+	-o-transition-delay: 250ms;
+	transition-delay: 250ms;
 }
 
 .rel-contain {
