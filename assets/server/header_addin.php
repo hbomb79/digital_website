@@ -44,7 +44,7 @@
 				<h1>Settings</h1>
 				<p>Welcome to your settings page, any options changed here will revert 30 days afterwards.</p>
 				<div class="setting-content rel-contain first" id="ajax_content">
-					<a class="button tipped tipped-bottom tipped-mid" aria-label="Toggle Use Of AJAX Loading. Using this increases speed but decreases performance" href="#" data-default="ON" data-required-set="[  ]" data-exclude-set="[  ]" data-c-name="ajax_disable" data-title-name="AJAX Loading" id="ajax_setting">An Error Occured, Enable Javascript</a>
+					<a class="button tipped tipped-top tipped-mid" aria-label="Toggle Use Of AJAX Loading. Using this increases speed but decreases performance" href="#" data-default="ON" data-required-set="[  ]" data-exclude-set="[  ]" data-c-name="ajax_disable" data-title-name="AJAX Loading" id="ajax_setting">An Error Occured, Enable Javascript</a>
 				</div>
 				<div class="setting-content rel-contain">
 					<a class="button tipped tipped-bottom tipped-mid" aria-label="Toggle animated AJAX Loading using this makes page loading look nicer, but decreases performance" href="#" data-default="ON" data-required-set="[  ]" data-exclude-set="[ 'ajax_disable' ]" data-c-name="animations_disable" data-title-name="Animated Transitions" id="js_setting">An Error Occured, Enable Javascript</a><br>	
@@ -102,7 +102,7 @@
 						<li><a href="hag.php" class="ajax_load">Heroes And Generals</a></li>
 					</ul>
 				</li><li>
-				<a href="help.php" id="test" class="ajax_load">Help</a></li>
+				<a href="help.php" id="test" class="ajax_load">Help</a></li><li><a class="ajax_load" href="license.php">License</a></li>
 				<li class="float-right js-req"><a href="#" onclick="$('#settings').fadeIn(); $('#shadow').fadeIn()">Settings</a></li>
 			</ul>
 		</nav>

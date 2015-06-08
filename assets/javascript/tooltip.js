@@ -9,26 +9,23 @@
 
 	It allows custom tooltips to be displayed on hover
 */
-;(function( $ ){
+
+;(function( $, window, document, undefined ){
 	var instance;
 	$.fn.tooltip = function(){
 		// This plugin will assist the css based tooltip system. This will detect each tipped element, locate where the tooltip is going to be and add/remove classes to ensure it is correctly positioned
 		// This program emulates the tooltip in an invisible div towards the bottom of the page. It uses this to calculate the exact div width. This is because the :after pseudo element cannot be targeted using Javascript
 		// as technically it is not part of the DOM
 
-		return this.each(function(){
-			if ( !$(this).hasClass("delegated") ) {
-				$(this).addClass("delegated")
-				$(this).on("mouseenter", function( event ){
-					var elem = this;
-					if ( $(elem).hasClass("tipped-vauto") ) {
-						vcheck.call(elem, elem)
-					}
-				})
-			}
+		$("body").on("mouseenter", ".tipped-vauto", function(){
+			var elem = this;
+			vcheck.call(elem, elem)
 		})
 
+		return this;
+
 		function vcheck( element ) {
+			// Private Function (Only accessible by the plugin)
 			// This tipped wants to be automatically set
 			// First create a dummy tipped element
 			if ( $("#dummy-tipped").length > 0) {
@@ -56,8 +53,8 @@
 
 	}
 
-})( jQuery );
+})( jQuery, window, document );
 
-$(document).ready(function(){
+$(window).load(function(){
 	$(".tipped").tooltip()
 })

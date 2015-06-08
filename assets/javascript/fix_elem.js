@@ -2,42 +2,7 @@
 
 var fixer = {
 	default: {
-		elements: [
-			/*{
-				selector: "#example-selector > a#test",
-				pixel: 450, // Can be function, must return a integer
-				position: {
-					fix: {
-						top: 0,
-						position: "fixed"
-					},
-					norm: {
-						position: "static"
-					}
-				},
-				callback: {
-					shown: function(){
-						alert("Fixed")
-					},
-					hidden: function(){
-						alert("Reverted")
-					}
-				}
-			},
-			{
-				selector: "#anoter-selector",
-				pixel: function(){
-					return $("#another-selector").offset().top + 56;
-					// This will trigger when the element hits the top of the page (+56 to account for header)
-				},
-				position: {
-					top: 0,
-					right: false,
-					left: false,
-					bottom: false // If a value is false, it is skipped.
-				}
-			}*/
-		]
+		elements: []
 	},
 
 	init: function( options ){

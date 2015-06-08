@@ -24,11 +24,11 @@
 			<div id="container-right">
 				<ul id="contents">
 					<h1>Contents</h1>
-					<li><a href="#">Test</a></li>
-					<li><a href="#">Tester</a></li>
-					<li><a href="#">Testing</a></li>
-					<li><a href="#">Testaro</a></li>
-					<li><a href="#">Shut Up</a></li>
+					<li><a class="anim" href="#">Test</a></li>
+					<li><a class="anim" href="#">Tester</a></li>
+					<li><a class="anim" href="#">Testing</a></li>
+					<li><a class="anim" href="#">Testaro</a></li>
+					<li><a class="anim" href="#">Shut Up</a></li>
 				</ul>
 			</div>
 			<div id="container">
@@ -68,7 +68,7 @@
 			</div>
 			<footer>
 				<div id="foot-contain">
-					Page Created By <a href="http://harryfelton.web44.net">Harry Felton</a> 2015
+					Page Created By <a class="anim" href="http://harryfelton.web44.net">Harry Felton</a> 2015
 				</div>
 			</footer>
 		</div>

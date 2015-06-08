@@ -25,10 +25,10 @@
 			<div id="container-right">
 				<ul id="contents">
 					<h1>Contents</h1>
-					<li><a href="#info">GTA Story</a></li>
-					<li><a href="#multi">GTA Online</a></li>
-					<li><a href="#pc">PC Port</a></li>
-					<li><a href="#down">Downside</a></li>
+					<li><a class="anim" href="#info">GTA Story</a></li>
+					<li><a class="anim" href="#multi">GTA Online</a></li>
+					<li><a class="anim" href="#pc">PC Port</a></li>
+					<li><a class="anim" href="#down">Downside</a></li>
 				</ul>
 			</div>
 			<div id="container">
@@ -78,7 +78,7 @@
 			</div>
 			<footer>
 				<div id="foot-contain">
-					Page Created By <a href="http://harryfelton.web44.net">Harry Felton</a> 2015
+					Page Created By <a class="anim" href="http://harryfelton.web44.net">Harry Felton</a> 2015
 				</div>
 			</footer>
 		</div>

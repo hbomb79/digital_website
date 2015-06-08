@@ -24,13 +24,13 @@
 			<div id="container-right">
 				<ul id="contents">
 					<h1>Contents</h1>
-					<li><a href="#info">What Is CS:GO</a></li>
-					<li><a href="#pop">Is It Popular</a></li>
-					<li><a href="#price">Pricing</a></li>
-					<li><a href="#graphic">Graphics</a></li>
-					<li><a href="#trail">CS:GO Trailer</a></li>
-					<li><a href="#conc">My Final Verdict</a></li>
-					<li><a href="#gameplay">My Gameplay</a></li>
+					<li><a class="anim" href="#info">What Is CS:GO</a></li>
+					<li><a class="anim" href="#pop">Is It Popular</a></li>
+					<li><a class="anim" href="#price">Pricing</a></li>
+					<li><a class="anim" href="#graphic">Graphics</a></li>
+					<li><a class="anim" href="#trail">CS:GO Trailer</a></li>
+					<li><a class="anim" href="#conc">My Final Verdict</a></li>
+					<li><a class="anim" href="#gameplay">My Gameplay</a></li>
 				</ul>
 			</div>
 			<div id="container">
@@ -42,7 +42,8 @@
 						<h1 class="large" id="title">Counter Strike: Global Offensive</h1>
 					</div>
 					<div class="image-wrapper wide header-after">
-						<img src="assets/image/cs1.jpg" class="center-image" alt="Picture of counter strike: global offensive">
+						<img src="assets/image/cs1.jpg" class="center-image" alt="Picture of counter strike: global offensive"><br>
+						<small>Royalty Free image of CS:GO sourced from CS:GO official steam page</small>
 					</div>
 					<section id="info">
 						<h1>What is Counter Strike?</h1>
@@ -88,7 +89,7 @@
 			</div>
 			<footer>
 				<div id="foot-contain">
-					Page Created By <a href="http://harryfelton.web44.net">Harry Felton</a> 2015
+					Page Created By <a class="anim" href="http://harryfelton.web44.net">Harry Felton</a> 2015
 				</div>
 			</footer>
 		</div>

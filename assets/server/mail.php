@@ -6,7 +6,7 @@
 	// Append the isset variable to each JSON object key
 	
 	session_start("mailer");
-
+	$_POST = $_GET;
 	$json_obj = array("name" => isset($_POST["name"]) ? $_POST["name"] : "null", "email" => isset($_POST["email"]) ? $_POST["email"] : "null", "type" => isset($_POST["type"]) ? $_POST["type"] : "null", "message" => isset($_POST["message"]) ? $_POST["message"] : "null", "js" => isset($_POST["js"]) && !empty($_POST['js']) ? "true" : "false");
 	$missing = false;
 	foreach( $json_obj as $key => $obj ) {
@@ -25,10 +25,15 @@
 		if ($js) {
 			// Return Ajax Response, mail has been sent
 			if ( !$missing ) {
-				$json_obj["status"] = isset($_SESSION["mail"]) ? 304 : 200;
-				$json_obj["statusText"] = isset($_SESSION["mail"]) ? "already_sent" : "sent";
-				if ( !isset($_SESSION["mail"]) ) {
-					$_SESSION['mail'] = true;
+				if ( $return == "OK" ) {
+					$json_obj["status"] = isset($_SESSION["mail"]) ? 304 : 200;
+					$json_obj["statusText"] = isset($_SESSION["mail"]) ? "already_sent" : "sent";
+					if ( !isset($_SESSION["mail"]) ) {
+						$_SESSION['mail'] = true;
+					}
+				} else {
+					$json_obj["status"] = 201;
+					$json_obj["statusText"] = "not_sent";
 				}
 			} else {
 				$json_obj["status"] = 404;
@@ -88,7 +93,7 @@
 						<div id="container">
 							<main>
 								<?php
-									if ( !isset($_SESSION['mail']) && !$missing && $response == "OK" ) {
+									if ( !isset($_SESSION['mail']) && !$missing && $return == "OK" ) {
 								?>
 								<div class="info-box confirm">
 									<h1>Mail Sent</h1>
@@ -109,11 +114,11 @@
 									</ul>
 								</div>
 								<?php
-								} else if ( $response == "BAD" ) {
+								} else if ( $return == "BAD" ) {
 								?>
 								<div class="info-box error">
-									<h1>Cannot Send</h1>
-									<p>We could not send you'r message, an unknown error occurred </p>
+									<h1>Cannot Send</h1><br>
+									<p>We could not send your message, an unknown error occurred </p>
 								</div>
 								<?php
 									} else {

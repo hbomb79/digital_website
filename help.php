@@ -34,7 +34,7 @@
 					<section>
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos distinctio doloribus id doloremque cumque numquam assumenda error ducimus amet, perspiciatis vel nam, iure optio alias soluta sapiente maxime. Distinctio dicta dolore necessitatibus sunt, natus, velit laudantium incidunt, quos praesentium officia quod saepe accusamus excepturi nulla maxime mollitia qui doloremque. Placeat doloremque repellat molestiae atque, officiis ea voluptatum esse. Est blanditiis vel aperiam odit doloribus tenetur magni cum veniam. Ex laborum facilis eveniet a officiis voluptates, iusto perspiciatis provident ab itaque error quis repellat inventore eius non illo assumenda amet accusantium recusandae ipsum mollitia dolorem numquam rerum. Architecto doloribus aut, officia fugit quae voluptatum quas blanditiis commodi, minus laudantium maiores alias, animi nulla facere soluta nostrum maxime delectus cupiditate nihil earum non temporibus veniam. Omnis dolores, quae quisquam facere! Cum minima, laudantium consectetur sint ratione in perferendis quis, quasi suscipit, eligendi fugiat commodi reprehenderit neque molestiae delectus est id praesentium impedit.</p>
 					</section>
-					<div class="help-container">
+					<div class="help-container clearfix">
 						<div id="left">
 							<section>
 								<div class="title-wrap">
@@ -42,11 +42,11 @@
 								</div>
 								<div class="body-wrap">
 									<ul>
-										<li><a href="#">Animations Lag</a></li>
-										<li><a href="#">Slow Animations</a></li>
-										<li><a href="#">Something Else</a></li>
-										<li><a href="#">Another Thing</a></li>
-										<li><a href="#">Last One</a></li>
+										<li><a class="anim" href="#">Animations Lag</a></li>
+										<li><a class="anim" href="#">Slow Animations</a></li>
+										<li><a class="anim" href="#">Something Else</a></li>
+										<li><a class="anim" href="#">Another Thing</a></li>
+										<li><a class="anim" href="#">Last One</a></li>
 									</ul>
 								</div>
 							</section>
@@ -58,18 +58,18 @@
 								</div>
 								<div class="body-wrap">
 									<ul>
-										<li><a href="#">Animations Lag</a></li>
-										<li><a href="#">Slow Animations</a></li>
-										<li><a href="#">Something Else</a></li>
-										<li><a href="#">Another Thing</a></li>
-										<li><a href="#">Last One</a></li>
+										<li><a class="anim" href="#">Animations Lag</a></li>
+										<li><a class="anim" href="#">Slow Animations</a></li>
+										<li><a class="anim" href="#">Something Else</a></li>
+										<li><a class="anim" href="#">Another Thing</a></li>
+										<li><a class="anim" href="#">Last One</a></li>
 									</ul>
 								</div>
 							</section>
 						</div>
 					</div>
 					<div class="rel-contain">
-						<button class="button contact-trigger tipped tipped-mid tipped-bottom" aria-label="Send Us A Message" style="margin:0 auto; display:none; font-size:1.3em;">Contact Us</button>
+						<button class="button contact-trigger tipped tipped-mid tipped-vauto" aria-label="Send Us A Message" style="margin:0 auto; display:none; font-size:1.3em;">Contact Us</button>
 					</div>
 					<h1 id="contact-title">Contact Us</h1>
 					<!-- Contact Form -->
@@ -103,7 +103,7 @@
 			</div>
 			<footer>
 				<div id="foot-contain">
-					Page Created By <a href="http://harryfelton.web44.net">Harry Felton</a> 2015
+					Page Created By <a class="anim" href="http://harryfelton.web44.net">Harry Felton</a> 2015
 				</div>
 			</footer>
 			<script>

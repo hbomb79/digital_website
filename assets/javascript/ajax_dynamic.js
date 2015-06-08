@@ -129,6 +129,8 @@ function force_load(){
 	});
 }
 
+// Allows pages that are not using Ajax to load themselves correctly, also stops lag and 
+// animation issues when going back to animated page from other pages
 window.onunload = function(){};
 
 $(window).load(function(){
@@ -152,6 +154,7 @@ function scroll_to(object, offset, add_time)
 		return;
     }
     if (offset) {
+    	// If the user wants a offset, then calculate it and scroll to that position
     	$('html, body').animate({
         	'scrollTop': $(object).offset().top - 56 - ( $(".header.fix h1").outerHeight() > 0 ? $(".header.fix h1").outerHeight() : $(".header h1").outerHeight())
     	}, interval);
@@ -161,11 +164,13 @@ function scroll_to(object, offset, add_time)
     	}, interval);
     }
     return interval;
+    // Return how long it took so you could use the function as an interval (for waiting until animation completed)
 }
 
 function scroll_top(add_time){
 	// Scroll to the top of the page
 	var interval = add_time ? interval += add_time : 250
+	// Interval equals the current interval (0) + the user amount, or a default of 250
 	$("html, body").animate({
 		'scrollTop': "0"
 	}, interval)
@@ -175,12 +180,15 @@ function scroll_top(add_time){
 function check_hash (hash) {
 	if (timer) { clearTimeout(timer) }
 	timer = setTimeout(function(){
+		// If passed hash is actually a hashbang with top then scroll to the top of the page
 		if ( hash == "#!top" ) {
 			scroll_top()
 		} else if ( hash == "#" ) {
+			// If the hash passed has no content, then simply return
 			return;
 		} else if (hash) {
 			scroll_to(hash, true);
+			// Otherwise scroll to the specified hash.
 		}
 	}, 50)
 }
@@ -222,18 +230,24 @@ function getRandomInt(min, max) {
 function create_cookie(cname, cvalue, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    // Get current time, and add the expiry days
     var expires = "expires="+d.toUTCString();
+    // set the cookie with the cname, cvale and expires
     document.cookie = cname + "=" + cvalue + "; " + expires;
 }
 
 function get_cookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(';');
+    // Grab cookies from browser storage
     for(var i=0; i<ca.length; i++) {
+    	// Loop through each cookie
         var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1);
-        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+        // c now equals the current cookie
+        while (c.charAt(0)==' ') c = c.substring(1); // Trim cookie
+        if (c.indexOf(name) == 0) return c.substring(name.length, c.length); // Return cookie if name matches
     }
+    // otherwise return false
     return false;
 }
 
@@ -260,15 +274,20 @@ The [object Object] signifies the a element that was clicked
 */
 aj_page = {
 	init: function(){
+		// Function to be called on page load
 		$(".load-after:not(':visible')").each(function(){
 			$(this).fadeIn(150)
+			// Fade in any .load-after elements that are not already visible
 		})
+		// Unset the ajax_load a tags and reset the click event
 	    $('a.ajax_load').off("click").on('click', function(event) {
 	        if (event.button === 0) {
+	        	// If the user clicked using the main mouse button
 	            var old, to, self;
 	            // Get href of click
 	            self = this;
 	            old = getFileName();
+	            // Get current file name (old)
 	            to = $(this).attr("href");
 	            cg_erase_timer("temp_safe");
 	            cg_timer("temp_safe", setTimeout(function(){
@@ -283,7 +302,9 @@ aj_page = {
 	    	if (e.button === 0) {
 	    		check_hash($(this).attr("href"))
 	    		e.preventDefault()
+	    		// Stop page change
 	    		return false;
+	    		// Return false
 	    	}
 	    });
 	    $("a").on("click", function(e){
@@ -305,24 +326,30 @@ aj_page = {
 	},
 
 	start: function(from, to, click, elem, popstate) {
+		// Start processing next page
 		if (_G.preserve.updating) {
 			return false;
+			// Return false if the page is currently changing
 		}
 		// First, check if the user has animations enabled, if they dont, then return
 		if ( get_cookie( "ajax_disable" ) ) {
 			return true;
+			// If user has ajax_disable set then return true to load the page normally
 		}
 		// User has animations enabled, continue checks.
 		// Check if new URL matches current.
 		if ( getFileName() == getFileName( to ) && !popstate ) {
 			return false;
+			// Return false if url to matches current page and the start is not a popstate
 		}
 		this.popstate = popstate ? true : false;
+		// Set this.popstate equal to true or false depending on popstate
 		if ( click && elem ) {
 			// Highlight the element using loading class
 			$(elem).addClass( "loading" );
 			this.elem = elem;
 		} else {
+			// Set this.elem to false
 			this.elem = false;
 		}
 		// Advance the progress bar by 10% to indicate loading has begun.
@@ -332,13 +359,15 @@ aj_page = {
 		this.to = to;
 		this.from = from;
 		_G.preserve.updating = true;
+		// Ajax fetch the new page
 		aj_page.fetch( to );
 	},
 
 	fetch: function( to ) {
+		// Create new _xhr, this allows the request to be aborted using _xhr.abort()
 		var _xhr = $.ajax({
 			url: to,
-			timeout: 10000,
+			timeout: 10000, // Set timeout of 10 seconds
 			xhr: function () {
 		        var xhr = new window.XMLHttpRequest();
 		        //Download progress
@@ -346,8 +375,10 @@ aj_page = {
 		            if (evt.lengthComputable) {
 		                var percentComplete = evt.loaded / evt.total;
 		                percentComplete = (Math.round(percentComplete * 100) - getRandomInt(10, 30))
+		                // Convert to percentage
 		                //$("#load-container").css({"width":(Math.round(percentComplete * 100) - getRandomInt(10, 30) + "%")})
 		                aj_page.update_bar( percentComplete + "%" , aj_page.screen_percentage( percentComplete ) )
+		                // Update progress bar
 		            }
 		        }, false);
 		        return xhr;
@@ -359,27 +390,33 @@ aj_page = {
 			aj_page.add_page( data );
 		}).fail(function( x, t, m ){
 			aj_page.error( x, t, m );
+			// Throw error in console and revert progress
 		})
 	},
 
 	return_percentage: function( element ) {
 		return ( $(element).width() * 100) / $(window).width()
+		// return width of the element as a percentage relative to the window
 	},
 
 	screen_percentage: function( percentage ) {
 		return ( percentage / 100 ) * $(window).width()
+		// Return the size of the window width as a requested percentage
 	},
 
 	screenh_percentage: function( percentage ) {
 		return ( percentage / 100 ) * $(window).height()
+		// Return the size of the window height as a requested percentage
 	},
 
 	update_bar: function( length, ltc ) {
 		// Check current length of scroll bar, if current is higher than new, then simply do not change
 		lengthToCheck = ltc || length;
 		if ( $("#load-container").width() < lengthToCheck ) {
+			// Check lengthToCheck
 			$("#load-container").css({
 				"width":length
+				// Animate css using css keyframe animation
 			})
 		}
 	},
@@ -407,24 +444,33 @@ aj_page = {
 
 	prepare: function( raw ) {
 		var d = $.Deferred();
-		aj_page.update_dom( raw ).done( function() { 
+		// Create a new jQuery deferred to be resolved when DOM prepared
+		aj_page.update_dom( raw ).done( function() {
+			// When update dom deferred complete (promise) then scroll to top of page and continue
 			aj_page.scroll().done(function(){
 				d.resolve()
+				// Resolve D, return d
 			})
 		})
 		return d;
+		// return deferred
 	},
 
 	scroll: function(){
 		var a = $.Deferred();
+		// Create a new deferred 
 		if ( $(window).scrollTop() > 200 || !is_elem_visible("#title") ) {
+			// Scroll to top if the user is 200px down the page or the #title element is not visible
 			setTimeout(function(){
 				a.resolve();
+				// Resolve a
 			}, scroll_top())
 		} else {
 			a.resolve();
+			// resolve a
 		}
 		return a;
+		// return a deferred
 	},
 
 	transition_page: function( replace, content ){
@@ -444,10 +490,8 @@ aj_page = {
 				$(".page-container.new").removeClass("new").addClass("current")
 				$("#load-container").animate({"width": "100%"}, 250)
 				if ( fixer && $(".page-container.current").data("fix-header") ) {
-					//setTimeout(function() {
-						fixer.remove_element("all")
-						fixer_init()
-					//}, 250)
+					fixer.remove_element("all")
+					fixer_init()
 				} else if (fixer) {
 					fixer.remove_element("all")
 				}

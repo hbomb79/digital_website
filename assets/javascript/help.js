@@ -5,6 +5,7 @@
 
 // 304 - already_sent: Message has already been sent
 // 200 - sent: Message successfully sent
+// 201 - not_sent - could not send message
 // 404 - missing_fields: Required fields were not filled in
 // 208 - error: Unknown Error Occurred.
 
@@ -80,6 +81,7 @@
 
 		send: function() {
 			// Submit an AJAX request to the mail.php file requesting a JSON object
+			notify("Sending Message", "limegreen", "white", "#contact-notify")
 			var datas = {};
 			datas.js = "true";
 			var datac = CF.config.mailer.data;

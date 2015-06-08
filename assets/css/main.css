@@ -230,6 +230,10 @@ header li a.loading{
 	display:initial;
 }
 
+.button:hover {
+	color:white !important;
+}
+
 
 /* Overlay Shadow
 -------------------*/
@@ -421,6 +425,7 @@ header li a.loading{
 .page-bg#mail-page-bg {
 	background: url('../image/mail.jpg') no-repeat center center;
 	background-size:cover;
+	display: block !important;
 }
 
 .page-bg#bf4-page-bg {
@@ -434,6 +439,14 @@ header li a.loading{
 .page-bg#hag-page-bg {
 	background: url('../image/hag_bg.jpg') no-repeat center center;
 	background-size:cover;
+	-webkit-filter: blur(5px);
+	-o-filter: blur(5px);
+	filter: blur(5px);
+}
+
+.page-bg#lic-page-bg {
+	background: url("../image/lic-bg.jpg") no-repeat center center;
+	background-size: cover;
 	-webkit-filter: blur(5px);
 	-o-filter: blur(5px);
 	filter: blur(5px);
@@ -468,9 +481,34 @@ a {
 	text-decoration: none;
 }
 
-a:active, a:hover {
-	text-decoration: underline;
+a.anim {
+	position: relative;
+}
+
+a.anim:before {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 1px;
+	bottom: 0;
+	left: 0;
+	background-color: #FF003F;
+	visibility: hidden;
+	-webkit-transform: scaleX(0);
+	transform: scaleX(0);
+	-webkit-transition: all 0.3s ease-in-out 0s;
+	transition: all 0.3s ease-in-out 0s;
+}
+
+a.anim:hover:before {
+	visibility: visible;
+	-webkit-transform: scaleX(1);
+	transform: scaleX(1);
+}
+
+a:not(.anim):active, a:not(.anim):hover {
 	color:red;
+	text-decoration: underline;
 }
 
 h1.large {
@@ -619,7 +657,8 @@ nav ul li.has-drop > ul {
 	margin-top: 1.04em;
 }
 .handle:hover,
-.handle.active {
+.handle.active,
+body:not(.JS) .handle{
 	background: #B90000;
 }
 
@@ -1290,11 +1329,11 @@ Code Deprecated
 		min-width:0;
 	}
 
-	nav ul{
+	body.JS nav ul{
 		max-height:0px;
 	}
-	.showing{
-		max-height:15em;
+	body.JS .showing{
+		max-height:25em;
 	}
 	.handle{
 		display:block;

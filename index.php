@@ -77,7 +77,7 @@
 			</div>
 			<footer>
 				<div id="foot-contain">
-					Page Created By <a href="http://harryfelton.web44.net">Harry Felton</a> 2015
+					Page Created By <a class="anim" href="http://harryfelton.web44.net">Harry Felton</a> 2015
 				</div>
 			</footer>
 		</div>
