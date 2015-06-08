@@ -19,18 +19,19 @@
 </div>
 <script>
 	if (!get_cookie("loading_disable")) {
-		$("#loading").show()
+		$("#loading").show();
+		$("html, body").css("overflow-y", "hidden");
 	}
 
-	$("html, body").css("overflow-y", "hidden")
-
 	function retry() {
-		location.reload(true)
+		location.reload(true);
 	}
 
 	function cancel() {
-		$("#loading").fadeOut(500)
-		$("html, body").css("overflow-y", "auto")
+		$("#loading").fadeOut(500).promise().done(function(){
+			$("html, body").css("overflow-y", "auto");
+			$(window).trigger("scroll")
+		});
 	}
 </script>
 <div id="settings">
@@ -72,7 +73,7 @@
 		
 		<script>
 			$(window).load(function(){
-				setTimeout(function() { $("#loading").slideUp(500); $("html, body").css("overflow-y", "auto"); } , 500)
+				setTimeout(function() { $("#loading").slideUp(500).promise().done(function(){ $("html, body").css("overflow-y", "auto"); $(window).trigger("scroll"); }); } , 500)
 				clearTimeout(timer_out)
 			})
 		</script>
