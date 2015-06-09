@@ -21,7 +21,7 @@
 	</div>
 	<div class="page-container current two" id="csgo" data-fix-header="fix"> <!-- Slide off screen, slide new page on screen using ajax -->
 		<div id="wrapper">
-			<div id="container-right">
+			<div id="container-right" class="load-after">
 				<ul id="contents">
 					<h1>Contents</h1>
 					<li><a class="anim" href="#info">What Is CS:GO</a></li>

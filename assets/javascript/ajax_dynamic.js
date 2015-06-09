@@ -136,6 +136,7 @@ window.onunload = function(){};
 $(window).load(function(){
 	// Create event listener
 	aj_page.init()
+	aj_page.ajax_prepare( true )
 	cg_erase_timer("temp_ready")
 	// Use CG to remove and timer if it exists, and recreate it below, this prevents the popstate from firing on page load
 	cg_timer("temp_ready", setTimeout(function() {
@@ -274,11 +275,6 @@ The [object Object] signifies the a element that was clicked
 */
 aj_page = {
 	init: function(){
-		// Function to be called on page load
-		$(".load-after:not(':visible')").each(function(){
-			$(this).fadeIn(150)
-			// Fade in any .load-after elements that are not already visible
-		})
 		// Unset the ajax_load a tags and reset the click event
 	    $('a.ajax_load').off("click").on('click', function(event) {
 	        if (event.button === 0) {
@@ -386,7 +382,6 @@ aj_page = {
 		}).done(function( data ){
 			// When ajax request completed, then run add_page()
 			// Hide any load-after elements
-			$(".load-after").hide()
 			aj_page.add_page( data );
 		}).fail(function( x, t, m ){
 			aj_page.error( x, t, m );
@@ -421,6 +416,16 @@ aj_page = {
 		}
 	},
 
+	ajax_prepare: function( in_out ){
+		// Hide/Reveal .load-after elements
+		var c = $.Deferred();
+		var trans = ( in_out == false ) ? "fadeOut" : "fadeIn";
+		$(".load-after").stop()[trans](500).promise().done(function(){
+			c.resolve()
+		});
+		return c;
+	},
+
 	add_page: function( raw ) {
 		content = $(raw).filter(".page-container")
 		if ( !get_cookie("animations_disable") ) {
@@ -431,7 +436,9 @@ aj_page = {
 			// wait until ready, then update dom and transition
 			$("page-container.new").ready(function(){
 				aj_page.prepare( raw ).done(function(){
-					aj_page.transition_page() 
+					aj_page.ajax_prepare( false ).done(function(){
+						aj_page.transition_page() 
+					})
 				})
 			});
 		} else {
@@ -563,7 +570,6 @@ aj_page = {
 			cg_clear();
 			aj_page.init();
 			aj_page.check();
-			$(".load-after").fadeIn(350)
 		});
 	},
 
@@ -619,5 +625,6 @@ aj_page = {
 			aj_page.start( getFileName(), document.location.href, false, false, true)
 			return;
 		}
+		aj_page.ajax_prepare( true )
 	}
 }
