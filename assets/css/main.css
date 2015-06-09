@@ -310,7 +310,7 @@ header li a.loading{
 .page-container.two #container, .page-container.two footer {
 	width:69%;
 	margin:0;
-	padding: 1em 0;
+	padding: 1em;
 }
 
 .page-container.two #container-right {

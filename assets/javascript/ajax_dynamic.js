@@ -156,11 +156,11 @@ function scroll_to(object, offset, add_time)
     }
     if (offset) {
     	// If the user wants a offset, then calculate it and scroll to that position
-    	$('html, body').animate({
+    	$('html, body').stop().animate({
         	'scrollTop': $(object).offset().top - 56 - ( $(".header.fix h1").outerHeight() > 0 ? $(".header.fix h1").outerHeight() : $(".header h1").outerHeight())
     	}, interval);
     } else {
-    	$('html, body').animate({
+    	$('html, body').stop().animate({
         	'scrollTop': $(object).offset().top + 1
     	}, interval);
     }
