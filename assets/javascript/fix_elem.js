@@ -96,7 +96,7 @@ function fixer_init() {
 				callback: {
 					shown: function(){
 						$(".page-container.current .header").addClass("fix").addClass(".load-after")
-						$(".page-container.current .header-after").css({ "margin-top": $(".header h1").height() + 56 })
+						$(".page-container.current .header-after").css({ "margin-top": $(".header h1").outerHeight() })
 					},
 					hidden: function() {
 						$(".page-container.current .header").removeClass("fix").removeClass(".load-after")

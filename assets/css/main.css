@@ -3,7 +3,8 @@ Harry Felton CSS, Usage Under MIT License
 Clayton, Brynn... you must make your own :D
  */
 
-@import url(http://fonts.googleapis.com/css?family=Orbitron|Roboto:400,700,900);
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,700,900);
+@import url(http://fonts.googleapis.com/css?family=Orbitron:400,700);
 html, body {
 	padding: 0;
 	margin: 0;
@@ -512,7 +513,7 @@ a:not(.anim):active, a:not(.anim):hover {
 }
 
 h1.large {
-	font-size: 3em;
+	font-size: 4em;
 	text-decoration: underline;
 }
 
