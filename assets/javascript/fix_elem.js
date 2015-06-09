@@ -90,13 +90,13 @@ function fixer_init() {
 					norm: {
 						position: "static"
 					},
-					offset: 20,
+					offset: 13,
 					check: "fixed" // Should be same as fix.position
 				},
 				callback: {
 					shown: function(){
 						$(".page-container.current .header").addClass("fix").addClass(".load-after")
-						$(".page-container.current .header-after").css({ "margin-top": $(".header h1").outerHeight() + 16 })
+						$(".page-container.current .header-after").css({ "margin-top": $(".header h1").outerHeight() + 24 }) // 24 with an offset of 13 gives the best results, they seamlessly switch between fixed and static with literally no jumping
 					},
 					hidden: function() {
 						$(".page-container.current .header").removeClass("fix").removeClass(".load-after")
