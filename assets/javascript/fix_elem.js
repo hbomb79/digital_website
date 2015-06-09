@@ -81,22 +81,22 @@ function fixer_init() {
 		elements: [
 			{
 				selector: ".page-container.current .header",
-				pixel: $(".page-container.current .header").offset().top - 56 ,
+				pixel: $(".page-container.current .header").offset().top - 60 ,
 				position: {
 					fix: {
-						top: "28px",
+						top: "0px",
 						position: "fixed"
 					},
 					norm: {
 						position: "static"
 					},
-					offset: 28,
+					offset: 20,
 					check: "fixed" // Should be same as fix.position
 				},
 				callback: {
 					shown: function(){
 						$(".page-container.current .header").addClass("fix").addClass(".load-after")
-						$(".page-container.current .header-after").css({ "margin-top": $(".header h1").outerHeight() })
+						$(".page-container.current .header-after").css({ "margin-top": $(".header h1").outerHeight() + 16 })
 					},
 					hidden: function() {
 						$(".page-container.current .header").removeClass("fix").removeClass(".load-after")
@@ -107,7 +107,7 @@ function fixer_init() {
 						// no longer break the header
 						//if ( !$(elem.selector).parent(".header").css("position") || !$(elem.selector).parent(".header").hasClass("fix")) {
 							$(elem.selector).css(elem.position.norm)
-							elem.pixel = $(".page-container.current .header").offset().top - 56
+							elem.pixel = $(".page-container.current .header").offset().top - 60
 							elem.callback.hidden()
 						//}
 					}
