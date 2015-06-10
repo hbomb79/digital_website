@@ -60,7 +60,7 @@
 								<div class="game-title"><span>Left 4 Dead 2</span></div></a>
 						</div>
 						<div class="game">
-							<a href="#" class="tipped tipped-mid tipped-vauto" aria-label="Waiting For Clayton To Start Page"><div class="game-bg" id="PAYDAY"></div>
+							<a href="payday.html" class="tipped tipped-mid tipped-vauto" aria-label="Click To View PAYDAY: The Heist"><div class="game-bg" id="PAYDAY"></div>
 								<div class="game-title"><span>PAYDAY: The Heist</span></div></a>
 						</div>
 						<div class="game">
