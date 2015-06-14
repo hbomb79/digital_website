@@ -6,7 +6,9 @@
 	// Append the isset variable to each JSON object key
 	
 	session_start("mailer");
-	$_POST = $_GET;
+	if ( !isset($_POST["type"]) ) {
+		$_POST = $_GET;
+	}
 	$json_obj = array("name" => isset($_POST["name"]) ? $_POST["name"] : "null", "email" => isset($_POST["email"]) ? $_POST["email"] : "null", "type" => isset($_POST["type"]) ? $_POST["type"] : "null", "message" => isset($_POST["message"]) ? $_POST["message"] : "null", "js" => isset($_POST["js"]) && !empty($_POST['js']) ? "true" : "false");
 	$missing = false;
 	foreach( $json_obj as $key => $obj ) {
@@ -104,7 +106,7 @@
 								?>
 								<div class="info-box error">
 									<h1>Cannot Send</h1>
-									<p>You're message cannot be sent due to missing field(s), please ensure the following field(s) are filled in and try again:</p>
+									<p>Your message cannot be sent due to missing field(s), please ensure the following field(s) are filled in and try again:</p>
 									<ul>
 										<?php foreach ($json_obj as $key => $value){
 											if( $value == "null" || empty($value) ) {

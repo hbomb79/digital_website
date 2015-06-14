@@ -44,11 +44,20 @@
 			// Call event function to prepare trigger
 			CF.events()
 
+			// TEMP CODE - REMOVE WHEN COMPLETE
+			$(config.container).remove()
+
 		},
 
 		trigger: function( element ) {
 			// A trigger button has been clicked, toggle the visibility of the container
 			// Call the before callback
+
+			// TEMP CODE - REMOVE THIS WHEN COMPLETE
+			alert("Sorry, our contact system is under maintenance and is expected to be completed 6/24/15.");
+			return;
+
+			
 			CF.config.callback.before()
 			var config = CF.config;
 			// Check current status
@@ -135,6 +144,7 @@
 		error: function(x, t, m) {
 			// Something went wrong while sending an AJAX request
 			console.error("An Error Occurred During XMLHttp Request: "+x+", "+t+", "+m)
+			notify("Failed Sending Message", "red", "white", "#contact-notify")
 		},
 
 		events: function() {

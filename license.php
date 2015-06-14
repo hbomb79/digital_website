@@ -19,7 +19,7 @@
 	<div id="bg-wrapper">
 	 	<div class="page-bg" id="lic-page-bg"></div> <!--Faded out and replaced using ajax-->
 	</div>
-	<div class="page-container current" id="license"> <!-- Slide off screen, slide new page on screen using ajax -->
+	<div class="page-container current" id="license" data-fix-header="fix"> <!-- Slide off screen, slide new page on screen using ajax -->
 		<div id="wrapper">
 			<div id="container">
 				<main>
@@ -29,7 +29,7 @@
 					<div class="header">
 						<h1 class="large" id="title">License Information</h1>
 					</div>
-					<section>
+					<section class="header-after">
 						<h1>Image Copyright</h1>
 						<p>All images used on, in or around this site are not copywritten, therefore use of the images by HexCode are permitted on this site.</p>
 						<p>If you own an image that is displayed on this page and have recently added copyright or believe we have made a mistake in believing the image is not copywritten, then contact us <a class="anim" href="mailto:harryfelton12@gmail.com">here</a>, including your details, the page you saw the image on, and the image context, decription or if possible its href. </p>

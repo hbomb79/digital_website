@@ -350,8 +350,13 @@ header li a.loading{
 	transition: color 500ms ease-in-out, text-decoration 500ms ease-in-out;
 }
 
-.header.fix {
+.page-container.two .header.fix {
 	width:69%;
+}
+
+.page-container:not(.two) .header.fix {
+	width: 88%;
+	max-width: 960px;
 }
 
 .header.fix h1 {
@@ -514,7 +519,6 @@ a:not(.anim):active, a:not(.anim):hover {
 
 h1.large {
 	font-size: 4em;
-	text-decoration: underline;
 }
 
 .large {
@@ -919,8 +923,8 @@ section {
 /* Help Page
 --------------------*/
 
-#help main{
-	padding:1em;
+#help #help-inner{
+	padding:0 1em;
 }
 
 .help-container {
@@ -956,69 +960,7 @@ section {
 }
 
 
-#contact-container #right{
-	float:right;
-	width:48%;
-	text-align: center;
-}
-
-#contact-container #contact-inner {
-	margin:0 auto;
-	background:white;
-	padding:1em;
-}
-
-#contact-container #left {
-	float:left;
-	width:48%;
-}
-
-#contact-container #left input {
-	width:80%;
-	padding:0.5em;
-	font-size:1.1em;
-	border: 3px solid #FF003F;
-	border-radius: 0.5em;
-	outline: 0;
-}
-
-#contact-container #right textarea, .form-container #left select {
-	width:80%;
-	padding:0.5em;
-	border: 3px solid #FF003F;
-	border-radius: 0.5em;
-	outline: 0;
-}
-
-#contact-container select{
-	display: block;
-}
-
-#contact-container #right textarea{
-	text-align: left;
-}
-
-#contact-container{
-	border-radius: 1em;
-	overflow: hidden;
-}
-body #contact-container button {
-	margin:1em 0 0 0;
-}
-
-body.JS #contact-container button{
-	display:block;
-	margin: 1em auto 0 auto;
-}
-
-#contact-container .warning {
-	border: 3px solid red;
-	animation: warning 2s infinite;
-	-moz-animation: warning 2s infinite;
-	-o-animation: warning 2s infinite;
-	-ms-animation: warning 2s infinite;
-	-webkit-animation: warning 2s infinite;
-}
+/* HELP CONTACT */
 
 /* JavaScript Content
 -------------------*/
@@ -1221,17 +1163,25 @@ Code Deprecated
 -------------------*/
 
 @media screen and ( min-width:1400px ) {
+	/* Large Screens */
 	.page-container.two #container, .page-container.two footer {
 		margin:0 0 0 2em;
 		max-width: 1160px;
 	}
 
-	.page-container .header {
+	.page-container:not(.two) .header {
+		max-width: 960px;
+	}
+
+	.page-container.two .header {
 		max-width: 1160px;
 	}
 }
 
 @media screen and (max-width:770px), screen and (max-height:500px) {
+	
+	/* Tablets */
+
 	#settings {
 		width:100%;
 		position: absolute;

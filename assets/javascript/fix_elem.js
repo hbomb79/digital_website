@@ -19,7 +19,7 @@ var fixer = {
 		// Creates window events listener
 		var self = this;
 		var res_time;
-		$(window).on("scroll resize", function(){
+		$(window).on("scroll", function(){
 			self.scroll.call(self, this)
 		})
 		$(window).on("resize", function(){
@@ -32,7 +32,7 @@ var fixer = {
 					element.callback.onresize( element )
 				}
 				$(window).trigger("scroll")
-			}, 250)
+			}, 500)
 		})
 		$(".info-box #close").on("click", function(){
 			$(window).trigger("resize")
@@ -72,47 +72,8 @@ var fixer = {
 
 $(window).load(function(){
 	if( $(".page-container.current").data("fix-header") ) {
-		fixer_init()
+		if (fixer_init) {
+			fixer_init()
+		}
 	}
 })
-
-function fixer_init() {
-	fixer.init({
-		elements: [
-			{
-				selector: ".page-container.current .header",
-				pixel: $(".page-container.current .header").offset().top - 60 ,
-				position: {
-					fix: {
-						top: "0px",
-						position: "fixed"
-					},
-					norm: {
-						position: "static"
-					},
-					offset: 13,
-					check: "fixed" // Should be same as fix.position
-				},
-				callback: {
-					shown: function(){
-						$(".page-container.current .header").addClass("fix").addClass(".load-after")
-						$(".page-container.current .header-after").css({ "margin-top": $(".header h1").outerHeight() + 24 }) // 24 with an offset of 13 gives the best results, they seamlessly switch between fixed and static with literally no jumping
-					},
-					hidden: function() {
-						$(".page-container.current .header").removeClass("fix").removeClass(".load-after")
-						$(".page-container.current .header-after").css({ "margin-top":"" })
-					},
-					onresize: function( elem ){
-						// This function will be called when the window resizes, we will use this to calculate the new pixel offset, any elements that are effected by resize that also effect the header
-						// no longer break the header
-						//if ( !$(elem.selector).parent(".header").css("position") || !$(elem.selector).parent(".header").hasClass("fix")) {
-							$(elem.selector).css(elem.position.norm)
-							elem.pixel = $(".page-container.current .header").offset().top - 60
-							elem.callback.hidden()
-						//}
-					}
-				}
-			}
-		]
-	})
-}
