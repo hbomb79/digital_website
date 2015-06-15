@@ -4,8 +4,6 @@
 	// First, check if the passed fields are correct, the information will be serialised so access the information using the key that matches the inputs (name) tag.
 	
 	// Append the isset variable to each JSON object key
-	
-	session_start("mailer");
 	if ( !isset($_POST["type"]) ) {
 		$_POST = $_GET;
 	}
@@ -28,11 +26,8 @@
 			// Return Ajax Response, mail has been sent
 			if ( !$missing ) {
 				if ( $return == "OK" ) {
-					$json_obj["status"] = isset($_SESSION["mail"]) ? 304 : 200;
-					$json_obj["statusText"] = isset($_SESSION["mail"]) ? "already_sent" : "sent";
-					if ( !isset($_SESSION["mail"]) ) {
-						$_SESSION['mail'] = true;
-					}
+					$json_obj["status"] = 200;
+					$json_obj["statusText"] = "sent";
 				} else {
 					$json_obj["status"] = 201;
 					$json_obj["statusText"] = "not_sent";
@@ -43,6 +38,7 @@
 			}
 			die( json_encode($json_obj) );
 		} elseif (!$js) {
+			// DEPRECATED - REMOVING 6/16/15. A pure JSON approach will be used, start changing PHP code to accomodate that. Use GET js=true to use JSON before 6/16/15.
 			// Return Response With CSS (Full Page)
 			?>
 			<!DOCTYPE html>
@@ -95,7 +91,7 @@
 						<div id="container">
 							<main>
 								<?php
-									if ( !isset($_SESSION['mail']) && !$missing && $return == "OK" ) {
+									if ( !$missing && $return == "OK" ) {
 								?>
 								<div class="info-box confirm">
 									<h1>Mail Sent</h1>
@@ -146,53 +142,33 @@
 
 	function send() {
 		global $js, $missing, $json_obj;
-		// This function will send the email.
-		// Check for missing variables
-
 		if ($missing) {
 			return "BAD";
 		} else {
-			if (!isset($_SESSION["mail"])) {
-				$FromEmail = "harryfelton12@gmail.com";
-				$FromName = "Harry Felton";
-				$ToName = urlencode(stripslashes($json_obj["name"]));
-				$ToEmail = urlencode(stripslashes($json_obj["email"]));
-				$Subject = "HexCode Contact Notification";
-				$ReplyTo = "harryfelton12@gmail.com";
+			$from = "support@hexcode.com";
+	        $from_name = "HexCode Support";
+	        $name = $json_obj["name"];
+	        $to = $json_obj["email"];
+	        $subject = "HexCode Contact Notification";
+	        $ReplyTo = "harryfelton12@gmail.com";
+	        $GET = "name=".urlencode(stripslashes($name))."&email=".urlencode(stripslashes($to));
+	        $content = file_get_contents('http://www.harryfelton.web44.net/digital_website/assets/server/response.php?'.$GET);
+	        if ( $content == "DIE" || $content == "" || !$content ) {
+	            $content = "Thanks for your message ".$name.", we will get back to you in around 1-3 working days";
+	        }
+	        
+	        $Headers  = "MIME-Version: 1.0". "\r\n";
+	        $Headers .= "Content-type: text/html; charset=iso-8859-1". "\r\n";
+	        $Headers .= "From: ".$from_name." <".$from.">". "\r\n";
+	        $Headers .= "Reply-To: ".$ReplyTo. "\r\n";
 
-			    $GET = "name=".$ToName."&email=".$ToEmail;
-			    $Content = file_get_contents('http://www.harryfelton.web44.net/digital_website/assets/server/response.php?'.$GET);
-
-			    if ( $Content == "DIE" || $Content = "" || !$Content ) {
-			    	$Content = "Thanks for your message ".$ToName.", we will get back to you in around 1-3 working days";
-			    }
-			    
-			    $Headers  = "MIME-Version: 1.0\n";
-			    $Headers .= "Content-type: text/html; charset=iso-8859-1\n";
-			    $Headers .= "From: ".$FromName." <".$FromEmail.">\n";
-			    $Headers .= "Reply-To: ".$ReplyTo."\n";
-			    $Headers .= "X-Sender: <".$FromEmail.">\n";
-			    $Headers .= "X-Mailer: PHP\n"; 
-			    $Headers .= "X-Priority: 1\n"; 
-			    $Headers .= "Return-Path: <".$FromEmail.">\n";  
-
-			    if(mail($ToEmail, $Subject, $Content, $Headers)) {
-			    	$_SESSION["mail"]=true;
-			        return "OK";
-			    } else {
-			    	return "BAD";
-			    }
-			} else {
-				// Dont send
-				return "OK";
-			}
+	        if(mail($to, $subject, $content, $Headers)) {
+	            return "OK";
+	        } else {
+	            return "BAD";
+	        }
 		}
 	}
 
-	// Send
-	//if ( isset($_SESSION['mail']) ) {
-		//response("OK");
-	//} else { 
-		response(send());
-	//}
+	response(send());
 ?>

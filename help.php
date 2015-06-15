@@ -2,6 +2,7 @@
 <!-- csgo.php Landing Page HARRY FELTON 
 	https://wireframe.cc/kuJIVT
 -->
+<?php session_start("mailer"); ?>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -72,7 +73,7 @@
 							</div>
 						</div>
 						<div class="rel-contain">
-							<button class="button contact-trigger tipped tipped-mid tipped-vauto" aria-label="Sorry. This is not available at the moment" style="margin:0 auto; display:none; font-size:1.3em;">Contact Us</button>
+							<button class="button contact-trigger tipped tipped-mid tipped-vauto" aria-label="Sorry. This is not available at the moment" style="margin:0 auto; font-size:1.3em;">Contact Us</button>
 						</div>
 						<h1 id="contact-title">Contact Us</h1>
 						<!-- Contact Form -->
@@ -81,31 +82,10 @@
 								The contact form is under maintainance and is currently not functioning. Expected to be ready 6/24/15
 							</div>
 							<br><br>
-							<div id="contact-inner">
-								<div id="step1">
-									<form action="assets/server/mail.php" method="post" id="step1-form">
-										<div id="inputs">
-											<input type="text" name="name" id="name" class="large">
-											<input type="text" name="email" id="email" class="large">
-										</div>
-										<div id="control">
-											<input type="submit" value="Next" id="submit" class="large" name="submit">
-										</div>
-									</form>
-								</div>
-								<div id="step2">
-									<form action="assets/server/mail.php" method="post" id="step2-form">
-										
-									</form>
-								</div>
-								<div id="fail">
-									
-								</div>
-								<div id="success">
-									
-								</div>
-							</div>
 						</div>
+						<script>
+							$("#contact-container").load("assets/server/contact_form.php?js=true")
+						</script>
 					</div>
 				</main>
 			</div>
