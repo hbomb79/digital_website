@@ -1,0 +1,100 @@
+body:not(.JS) #cf{
+	width:30%;
+	max-width: 350px;
+	min-height: 250px;
+	position: absolute;
+	left:50%;
+	top:50%;
+	padding:1em;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	background:white;
+	border: 3px solid crimson;
+	border-radius: 6px;
+	text-align: center;
+}
+
+input {
+	display: block;
+	margin: 0.5em auto;
+}
+
+form {
+	margin: 0;
+	padding: 0;
+}
+
+h3 {
+	margin: 0;
+	padding: 0;
+}
+
+body:not(.JS) {
+	background:darkgray;
+}
+
+button {
+	display: inline-block !important;
+}
+
+.button {
+	padding:1em;
+	background: white;
+	border: 3px solid #FF003F;
+	text-decoration: none !important;
+	-webkit-transition: background 250ms ease, color 250ms ease;
+	-o-transition: background 250ms ease, color 250ms ease;
+	transition: background 250ms ease, color 250ms ease;
+	cursor:pointer;
+	color: #FF003F;
+	display:block;
+	outline: none;
+}
+
+.button:hover {
+	background:#FF003F;
+	color:white;
+}
+
+.info-box {
+	max-width: 80%;
+	padding: 1em;
+	text-align: center;
+	margin: 0 auto;
+	display: inline-block;
+}
+
+.info-box h1, .info-box p {
+	margin: 0;
+}
+
+.info-box.warn {
+	background: rgba(236, 151, 39, 0.6);
+	border: solid 3px rgba(236, 151, 39, 1);
+}
+
+.info-box.error {
+	background: rgba(231, 8, 4, 0.34);
+	border: solid 3px rgba(231, 8, 4, 1);
+}
+
+.info-box.confirm {
+	background: rgba(17, 255, 5, 0.34);
+	border: solid 3px rgba(17, 255, 5, 1);
+}
+
+.info-box > #close {
+	position: absolute;
+	top:0;
+	right:0;
+	line-height: 1em;
+	width: 1em;
+	opacity: 0.5;
+	cursor: pointer;
+}
+
+.info-box > #close:hover {
+	opacity: 1;
+}

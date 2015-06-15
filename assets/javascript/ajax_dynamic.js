@@ -149,7 +149,7 @@ $(window).load(function(){
 function scroll_to(object, offset, add_time)
 {	
 	// Scroll to the top of the supplied element
-	var interval = add_time ? interval += add_time : 500;
+	var interval = add_time ? add_time : 500;
     if ($(object).length == 0)  {
     	console.warn("Object with this ID doesnt exist ("+object+")")
 		return;
