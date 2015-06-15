@@ -7,11 +7,13 @@
 #backimg2{
 	background-image: url("../image/ACUnity.jpg");
 	background-attachment: fixed;
+	background-position: center;
 }
 
 #backimg3{
-	background-image: url("../image/");
+	background-image: url("../image/paydaybg.jpg");
 	background-attachment: fixed;
+	background-size: cover;
 }
 
 #main {
