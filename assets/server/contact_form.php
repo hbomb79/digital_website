@@ -130,7 +130,7 @@
 				<?php
 			}
 			if ( isset($_GET["back"]) && !empty($_GET["back"]) ) { ?>
-				<a style="display:inline-block !important;" href="<?php echo($_GET['back']) ?>" class="button">Close</a>
+				<a style="display:inline-block !important;" href="<?php echo($_GET['back']) ?>" class="button contact-send">Close</a>
 			<?php 
 			} else {
 				?>
@@ -178,6 +178,7 @@
 	}
 
 	function draw1( $e, $et ) {
+		global $js;
 		?>
 			<div id="step1" class="step" data-step-name="step1">
 				<div id="start">
@@ -198,7 +199,7 @@
 						?>
 					</div>
 					<div id="success"></div>
-					<form method="post" id="step1-form">
+					<form method="post" id="step1-form" class="step-form">
 						<div id="hidden">
 							<input type="hidden" name="type" value="<?php echo(isset($_POST['type']) ? $_POST['type'] : '') ?>">
 							<input type="hidden" name="message" value="<?php echo(isset($_POST['message']) ? $_POST['message'] : '') ?>">
@@ -208,18 +209,22 @@
 							<input type="text" id="name" name="name" class="large" placeholder="Tell us who you are" value="<?php echo(isset($_POST['name']) ? $_POST['name']  : '') ?>">
 							<h3>Email</h3>
 							<input type="text" id="email" class="large" name="email" placeholder="test@example.com" value="<?php echo(isset($_POST['email']) ? $_POST['email']  : '') ?>">
-						</div>
+						</div><br>
 						<div id="controls">
 							<?php
-							if ( isset($_GET["back"]) && !empty($_GET["back"]) ) { ?>
-								<a style="display:inline-block !important;" href="<?php echo($_GET['back']) ?>" class="button">Close</a>
+							if ( !$js && isset($_GET["back"]) && !empty($_GET["back"]) ) { ?>
+								<a style="display:inline-block !important;" href="<?php echo($_GET['back']) ?>" class="button contact-send">Close</a>
 							<?php 
-							} else {
+							} else if (!$js ) {
 								?>
 								<p>Close this tab/window to cancel</p>
 								<?php
-							}?>
-							<button type="submit" name="step" value="step2" class="button">Next</button>
+							} else if ($js) {?>
+								<button type="button" class="contact-trigger button">Cancel</button><br>
+							<?php
+							}
+							?>
+							<button type="submit" name="step" value="step2"  class="button contact-send">Next</button>
 						</div>
 					</form>
 				</div> 
@@ -248,7 +253,7 @@
 						?>
 					</div>
 					<div id="success"></div>
-					<form method="post" id="step2-form">
+					<form method="post" id="step2-form" class="step-form">
 						<div id="hidden">
 							<input type="hidden" name="name" value="<?php echo($_POST['name']) ?>">
 							<input type="hidden" name="email" value="<?php echo($_POST['email']) ?>">
@@ -263,8 +268,8 @@
 							</select>
 						</div>
 						<div id="controls">
-							<button type="submit" value="step1" name="step" class="button" id="contact-send">Back</button>
-							<button type="submit" value="step3" name="step" class="button" id="contact-send">Next</button>
+							<button type="submit" value="step1" name="step" class="button contact-send" >Back</button>
+							<button type="submit" value="step3" name="step" class="button contact-send" >Next</button>
 						</div>
 					</form>
 				</div>
@@ -293,7 +298,7 @@
 					?>
 				</div>
 				<div id="success"></div>
-				<form method="post" id="step3-form">
+				<form method="post" id="step3-form" class="step-form">
 					<div id="hidden">
 						<input type="hidden" name="name" value="<?php echo($_POST['name']) ?>">
 						<input type="hidden" name="email" value="<?php echo($_POST['email']) ?>">
@@ -303,8 +308,8 @@
 						<textarea name="message" id="message" cols="30" rows="10"><?php echo( isset($_POST["message"]) ? $_POST["message"] : "" ) ?></textarea>
 					</div>
 					<div id="controls">
-						<button type="submit" value="step2" name="step" class="button" id="contact-send">Back</button>
-						<button type="submit" value="send" name="step" class="button" id="contact-send">Send</button>
+						<button type="submit" value="step2" name="step" class="button contact-send" >Back</button>
+						<button type="submit" value="send" name="step" class="button contact-send" >Send</button>
 					</div>
 				</form>
 			</div> 
