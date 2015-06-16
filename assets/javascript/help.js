@@ -51,14 +51,15 @@
 							type:"normal" // Validate only if has value.
 						},
 						{
-							name:"email"
+							name:"email",
 							id:"email",
 							type:"email" // Validate if has value and if matches EMAIL filter.
 						}
-					]
+					],
+					id:0
 				},
 				{
-					name: "step2"
+					name: "step2",
 					inputs: [
 						{
 							name:"type",
@@ -68,27 +69,39 @@
 								unselect: "NONE" // Must not match this, otherwise not selected, set to FALSE for no check.
 							}
 						}
-					]
+					],
+					id:1
 				},
 				{
-					name: "step3"
+					name: "step3",
+					cid: "#step3",
 					inputs: [
 						{
 							name:"message",
 							id:"message",
 							type:"text" // Validate only if has value.
 						}
-					]
+					],
+					id:2
 				}
 			],
-			current_slide: "first" // NAME
+			current_slide: 0 // NAME
 		},
 
 		init: function( options ){
 			this.config = $.extend(true, {}, this.defaults, options)
 			var config = this.config;
-			$(config.container).addClass("cf-enable")
 			// Hide and position the contact form. Non JS users simply wont see the contact form.
+			// Firstly, grab the step widths and heights to animate.
+			var cache_width, width, height, $element;
+			for (var i = 0; i < config.steps.length; i++) {
+				$element = $(config.steps[i].cid)
+				width = $element.width();
+				cache_width += width;
+				if ( i > 0 ) {
+					
+				}
+			}
 		},
 
 		slide_to: function(){
@@ -103,24 +116,15 @@
 
 		},
 
-		update_json: function( step ){
-			// The data-step-name of the containing div (.step-container) must match one set in the configuration. The settings applied to that slide will then be applied here.
-		},
-
 		submit: function(){
 
 		},
 
 		response: function(){
 
-		},
-
-
-
+		}
 	}
 
-	Cf.init({
-
-	})
+	CF.init()
 
 })(jQuery, window, document);

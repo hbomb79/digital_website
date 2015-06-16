@@ -1,14 +1,12 @@
 <?php
-	$js = isset($_GET["js"]) ? true : false; 
-	if (!$js) { session_start("mailer"); }
+	$js = isset($_GET["js"]) ? true : false;
+	session_start("mailer");
 	function check_cookie() {
 		if ( isset($_SESSION["mail"]) || isset($_COOKIE["mail"]) ) {
 			?>
-			<div id="error">
-				<div class="info-box" id="error">
-					<h1>Already Sent</h1><br>
-					<p>Our servers detect that you have already sent us a message. Please wait before sending another.</p>
-				</div>
+			<div class="info-box">
+				<h1>Already Sent</h1><br>
+				<p>Our servers detect that you have already sent us a message. Please wait before sending another.</p>
 			</div>
 			<?php
 			die();
@@ -19,7 +17,6 @@
 		$_SESSION["mail"] = true;
 		setcookie("mail","true",time()+86400);
 	}
-	check_cookie();
 	function drawmain() {
 		?>
 			<!-- MAIN html layout -->
@@ -42,6 +39,7 @@
 								<main>
 									<div id="contact-inner">
 										<?php
+											check_cookie();
 											if ( !isset($_GET["js"]) && !isset($_POST["step"]) || isset($_POST["step"]) && $_POST["step"] == "step1" ) {
 												draw1( false, false );
 											} else if( !isset($_GET["js"]) && isset($_POST["step"]) && $_POST["step"] == "step2" ) {
@@ -181,7 +179,7 @@
 
 	function draw1( $e, $et ) {
 		?>
-			<div id="step1" class="step">
+			<div id="step1" class="step" data-step-name="step1">
 				<div id="start">
 					<h2>Contact</h2>
 					<p>Fill in your name and email, we will use these to contact you regarding you request.</p>
@@ -231,7 +229,7 @@
 
 	function draw2( $e, $et) {
 		?>
-			<div id="step2" class="step">
+			<div id="step2" class="step" data-step-name="step2">
 				<div id="start">
 					<h2>Contact</h2>
 					<p>What kind of message are you submitting. We use this to better sort and repond to your message.</p>
@@ -276,7 +274,7 @@
 
 	function draw3( $e, $et) {
 		?>
-		<div id="step3" class="step">
+		<div id="step3" class="step" data-step-name="step3">
 			<div id="start">
 				<h2>Contact</h2>
 				<p>Enter your message below and click send.</p>
@@ -318,6 +316,7 @@
 	if (!$js) {
 		drawmain();
 	} else {
+		check_cookie();
 		draw1( false, false );
 		draw2( false, false );
 		draw3( false, false );

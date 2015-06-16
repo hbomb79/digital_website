@@ -2,7 +2,9 @@
 <!-- csgo.php Landing Page HARRY FELTON 
 	https://wireframe.cc/kuJIVT
 -->
-<?php session_start("mailer"); ?>
+<?php
+	session_start("mailer");
+?>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -78,13 +80,10 @@
 						<h1 id="contact-title">Contact Us</h1>
 						<!-- Contact Form -->
 						<div id="contact-container">
-							<div class="info-box error">
-								The contact form is under maintainance and is currently not functioning. Expected to be ready 6/24/15
-							</div>
-							<br><br>
+							<div id="contact-inner"></div>
 						</div>
 						<script>
-							$("#contact-container").load("assets/server/contact_form.php?js=true")
+							$("#contact-inner").load("assets/server/contact_form.php?js=true")
 						</script>
 					</div>
 				</main>
@@ -94,9 +93,8 @@
 					Page Created By <a class="anim" href="http://harryfelton.web44.net">Harry Felton</a> 2015
 				</div>
 			</footer>
-			<script>
-				$.getScript("assets/javascript/help.js")
-				
+			<script src="assets/javascript/help.js">
+				//$.getScript("assets/javascript/help.js")
 			</script>
 		</div>
 	</div>
