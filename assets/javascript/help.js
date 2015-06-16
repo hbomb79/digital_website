@@ -274,18 +274,22 @@ var CF, test_2	;
 			config.current_slide = step;
 			self.resize_container( step.cid );
 			if ( !backwards ) {
-				$( step.cid ).animate({
+				$( step.cid ).css({
+					"left": $(step.cid).outerWidth(),
+					"opacity": 0
+				});
+				$( step.cid ).show().animate({
 					"left": 0,
 					"opacity": 1
 				}, 200);
 			} else {
 				// Go back
 				$( step.cid ).css({
-					"left": 0,
-					"right": $(step.cid).outerWidth()
+					"left": $(step.cid).outerWidth() / -1,
+					"opacity": 0
 				});
-				$( step.cid ).animate({
-					"right": 0,
+				$( step.cid ).show().animate({
+					"left": 0,
 					"opacity": 1
 				}, 200);
 			}
