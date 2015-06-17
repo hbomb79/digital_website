@@ -2,18 +2,21 @@
 	background-image: url("../image/skyrim1.jpg");
 	background-attachment: fixed;
 	background-position: 57% 43%;
+	margin: 0;
 }
 
 #backimg2{
 	background-image: url("../image/ACUnity.jpg");
 	background-attachment: fixed;
 	background-position: center;
+	margin: 0;
 }
 
 #backimg3{
 	background-image: url("../image/paydaybg.jpg");
 	background-attachment: fixed;
 	background-size: cover;
+	margin: 0;
 }
 
 #main {
@@ -21,7 +24,7 @@
 	margin: 0 auto;
 	width: 80%;
 	background-color: #FFFFFF;
-	padding: 15px 25px;
+	padding: 0px 25px;
 }
 
 .static{
@@ -30,6 +33,7 @@
 
 .font1{
 	font-family:'Orbitron', sans-serif;
+	margin-top: 0;
 }
 
 .font2{
