@@ -1179,7 +1179,7 @@ Code Deprecated
 	overflow: hidden;
 }
 
-#contact-container input {
+#contact-container input, #contact-container textarea {
 	display: block;
 	margin: 0.5em auto;
 	padding:0.5em;
@@ -1320,6 +1320,7 @@ Code Deprecated
 		position: static !important;
 		width: 100%;
 		max-width: none;
+		margin:0 auto;
 	}
 
 	.header.fix h1 {
@@ -1328,8 +1329,6 @@ Code Deprecated
 		color:black;
 		padding: 0;
 		box-shadow: none;
-		text-decoration: underline !important;
-		background: white !important;
 	}
 
 	.header-after {

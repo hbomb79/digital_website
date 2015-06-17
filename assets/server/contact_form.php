@@ -211,20 +211,20 @@
 							<input type="text" id="email" class="large" name="email" placeholder="test@example.com" value="<?php echo(isset($_POST['email']) ? $_POST['email']  : '') ?>">
 						</div><br>
 						<div id="controls">
+							<button type="submit" name="step" value="step2"  class="button contact-send">Next</button><br>
 							<?php
 							if ( !$js && isset($_GET["back"]) && !empty($_GET["back"]) ) { ?>
-								<a style="display:inline-block !important;" href="<?php echo($_GET['back']) ?>" class="button contact-send">Close</a>
+								<br><a style="display:inline-block !important;" href="<?php echo($_GET['back']) ?>" class="button contact-send">Close</a>
 							<?php 
 							} else if (!$js ) {
 								?>
 								<p>Close this tab/window to cancel</p>
 								<?php
 							} else if ($js) {?>
-								<button type="button" class="contact-trigger button">Cancel</button><br>
+								<button type="button" class="contact-trigger button">Cancel</button>
 							<?php
 							}
 							?>
-							<button type="submit" name="step" value="step2"  class="button contact-send">Next</button>
 						</div>
 					</form>
 				</div> 
@@ -233,6 +233,7 @@
 	}
 
 	function draw2( $e, $et) {
+		global $js;
 		?>
 			<div id="step2" class="step" data-step-name="step2">
 				<div id="start">
@@ -267,9 +268,10 @@
 								<option value="bug">Bug Report</option>
 							</select>
 						</div>
+						<br>
 						<div id="controls">
+							<button type="submit" value="step3" name="step" class="button contact-send" >Next</button><br>
 							<button type="submit" value="step1" name="step" class="button contact-send" >Back</button>
-							<button type="submit" value="step3" name="step" class="button contact-send" >Next</button>
 						</div>
 					</form>
 				</div>
@@ -278,6 +280,7 @@
 	}
 
 	function draw3( $e, $et) {
+		global $js;
 		?>
 		<div id="step3" class="step" data-step-name="step3">
 			<div id="start">
@@ -307,14 +310,43 @@
 					<div id="inputs">
 						<textarea name="message" id="message" cols="30" rows="10"><?php echo( isset($_POST["message"]) ? $_POST["message"] : "" ) ?></textarea>
 					</div>
+					<br>
 					<div id="controls">
-						<button type="submit" value="step2" name="step" class="button contact-send" >Back</button>
-						<button type="submit" value="send" name="step" class="button contact-send" >Send</button>
+						<button type="submit" value="send" name="step" class="button contact-send">Send</button><br>
+						<button type="submit" value="step2" name="step" class="button contact-send">Back</button>
 					</div>
 				</form>
 			</div> 
 		</div> <!-- #step3 -->
 	<?php
+	}
+
+	function draw_send(){
+		// Only for javascript users.
+		?>
+		<div id="stepsend" class="step" data-step-name="stepsend">
+			<div id="start">
+				<h2>Contact</h2>
+				<p>Sending Message</p>
+			</div>
+			<div>
+				<form method="post" id="step3-form" class="step-form">
+					<div id="hidden">
+						<input type="hidden" name="name" value="<?php echo($_POST['name']) ?>">
+						<input type="hidden" name="email" value="<?php echo($_POST['email']) ?>">
+						<input type="hidden" name="type" value="<?php echo($_POST['type']) ?>">
+					</div>
+					<div id="inputs">
+						<textarea name="message" id="message" cols="30" rows="10"><?php echo( isset($_POST["message"]) ? $_POST["message"] : "" ) ?></textarea>
+					</div>
+					<div id="controls">
+						<button type="submit" value="step2" name="step" class="button contact-send">Back</button><br>
+						<button type="submit" value="send" name="step" class="button contact-send">Send</button>
+					</div>
+				</form>
+			</div> 
+		</div> <!-- #stepsend -->
+		<?php
 	}
 	
 	// This file will detect what stage the user is on if using POST, otherwise it will assume the user is using Javascript and animate the transitions.

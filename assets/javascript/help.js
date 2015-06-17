@@ -47,13 +47,17 @@ var CF, test_2	;
 			container: "#contact-container",
 			button: ".button",
 			trigger: ".trigger",
+			send_step: "send",
 			form_class: ".step-form",
 			callback: {
 				start: function(){}, // When the file is started
-				anim_start: function(){}, // When the slide begins animating
-				anim_done: function(){}, // When the slide stops animating
+				anim_start: function( f_step, t_step ){}, // When the slide begins animating
+				anim_done: function( n_step ){}, // When the slide stops animating
 				submit: function(){}, // When the final form is submitted
-				reponse: function(){} // When an AJAX response is received
+				response: function( response ){} // When an AJAX response is received
+			},
+			mailer: {
+				url: "assets/server/mail.php"
 			},
 			animation: {
 				offset: 0, // Added to offset right ($(elem).offset().left + $(elem).outerWidth() + offset )
@@ -113,13 +117,57 @@ var CF, test_2	;
 
 		init: function( options ){
 			this.config = $.extend(true, {}, this.defaults, options)
-			console.log(this.config)
 			var config = this.config;
+			var self = this;
 			// Hide and position the contact form. Non JS users simply wont see the contact form.
 			// Firstly, grab the step widths and heights to animate.
 			this.restore();
 			this.events();
-			this.resize_container();
+			setTimeout(function(){
+				self.resize_container();
+				$(config.container).hide();
+			}, 10)
+			config.callback.start();
+		},
+
+		check_bounds: function(){
+			// Check if the bottom or top is off screen.
+			var elem, $elem, config, self, height, wind_height;
+			self = this;
+			config = self.config;
+			elem = config.container;
+			$elem = $(elem);
+			wind_height = $(window).outerHeight()
+			height = $elem.outerHeight();
+
+			// Window height has to be at least twice as tall as the actual contact form.
+			if ( wind_height >= height ) {
+				if ( $elem.css("position") == "absolute" ) {
+					$elem.css({
+						"position":"fixed",
+						"transform": "translate(-50%, -50%)",
+						"top": "50%"
+					})
+					scroll_to( config.container, false, 250)
+					$("html, body").css({
+						"overflow": "hidden"
+					})
+				}
+			} else {
+				if ( $elem.css("position") == "fixed" ) {
+					$elem.css({
+						"position":"absolute",
+						"transform": "translate(-50%, 0)",
+						"top":"0"
+						
+					})
+					scroll_top();
+					$("html, body").css({
+						"overflow": "auto"
+					})
+				}
+			}
+
 		},
 
 		restore: function(){
@@ -142,6 +190,7 @@ var CF, test_2	;
 
 		events: function(){
 			var self = this;
+			var bound_timer;
 			$(self.config.button).on("click", function( e ){
 				e.preventDefault();
 				self.button_click( this );
@@ -149,6 +198,14 @@ var CF, test_2	;
 			$(self.config.trigger).on("click", function( e ){
 				e.preventDefault();
 				self.trigger_click();
+			});
+			$(window).on("scroll resize", function(){
+				if ( $(self.config.container).is(":visible") ){
+					clearTimeout(bound_timer);
+					bound_timer = setTimeout(function(){
+						self.check_bounds()
+					}, 500);
+				}
 			})
 		},
 
@@ -157,22 +214,30 @@ var CF, test_2	;
 			if ( $(this.config.container).is(":visible") ) {
 				$(this.config.container).fadeOut(250);
 				$("#shadow").fadeOut(250)
+				$("html, body").css({
+					"overflow":"auto"
+				})
 			} else {
 				$(this.config.container).fadeIn(250)
 				$("#shadow").fadeIn(250)
+				$("html, body").css({
+					"overflow":"hidden"
+				})
 			}
+			scroll_to("#contact-container", false, 250)
 		},
 
 		resize_container: function( elem ) {
 			var $elem = elem ? $(elem) : $(this.config.current_slide.cid);
-			$(this.config.container).animate( {"height": $elem.outerHeight()}, 250)
+			var self = this;
+			$(this.config.container).animate( {"height": $elem.outerHeight()}, 250).promise().done(function(){
+				self.check_bounds()
+			})
 		},
 
-		button_click: function(elem){
-			$elem = $(elem);
-			var proceed;
+		validate_current: function(){
+			var d = $.Deferred();
 			var self = this;
-			// Validate this steps fields
 			this.validate( this.get_slide("name", this.config.current_slide.name) ).done(function( r ){
 				var elem, $elem, errors;
 				proceed = true;
@@ -218,24 +283,85 @@ var CF, test_2	;
 				setTimeout(function(){
 					self.resize_container()
 				}, 100)
+				d.resolve( proceed );
 			})
+			return d;
+		},
+
+		button_click: function(elem){
+			$elem = $(elem);
+			var proceed;
+			var self = this;
+			// Validate this steps fields
 			// Check name of button, if step then check value.
-			if ( $elem.context.name == "step" && proceed ) {
+			if ( $elem.context.name == "step" ) {
 				// This button is supposed to change the slide.
 				var value = this.get_slide("name", $elem.context.value);
 				if ( value ) {
 					// Go to this new slide, first detect whether we are going backwards or forwards.
 					if ( value.id < this.config.current_slide.id ) {
 						// BACK
-						this.slide_trans( value, true )
+						self.slide_trans( value, true )
 					} else if ( value.id > this.config.current_slide.id ) {
 						// FORWARD
-						this.slide_trans( value, false )
+						self.validate_current().done(function( proceed ){
+							if ( proceed ) {
+								self.slide_trans( value, false );
+							}
+						})
+						
 					} else {
 						console.warn("User requested slide change to current slide, not moving.")
 					}
+				} else if ( $elem.context.value == self.config.send_step ) {
+					// Going forward, trying to send, validate ALL steps incase an alteration to the fields has been made via inspect element.
+					self.validate_current().done(function( proceed ){
+						if ( proceed ) {
+							self.validate_all().done(function( r ){
+								if ( r ) {
+									self.submit();
+								} else {
+									if ( $(elem).siblings("#final-error").length > 0 ) {
+										$(elem).siblings("#final-error").remove()
+									}
+									$("<div></div>", {
+										class: "step-error",
+										id: "final-error",
+										text: "Missing Fields Detected On Previous Steps",
+										css: {
+											color:"red"
+										}
+									}).insertBefore( elem )
+								}
+							})
+						}
+					})
 				}
 			}
+		},
+
+		validate_all: function() {
+			var d = $.Deferred();
+			var elems, $elem, elem, proceed, self;
+			self = this;
+			elems = this.config.steps;
+			proceed = true;
+			for ( var i = 0; i < elems.length; i++) {
+				elem = elems[i];
+				$elem = $(elem);
+				// Loop through each field
+				self.validate( elem ).promise().done(function( r ){
+					// Loop through the results.
+					for ( var i = 0; i < r.length; i++) {
+						if ( r[i].error != 200 ) {
+							// ERROR
+							proceed = false;
+						}
+					}
+					d.resolve( proceed );
+				})
+			}
+			return d;
 		},
 
 		validate_email: function( address ) {
@@ -270,29 +396,37 @@ var CF, test_2	;
 			config = this.config
 			o_step = config.current_slide;
 			// If forward
-			$( o_step.cid ).fadeOut(250);
+			$( o_step.cid ).fadeOut(500);
+			$( ".step-error" ).fadeOut(250).promise().done(function(){
+				$(".step-error").remove()
+			});
+			$(".warning").removeClass("warning");
 			config.current_slide = step;
 			self.resize_container( step.cid );
+			config.callback.anim_start( config.current_slide, step )
 			if ( !backwards ) {
 				$( step.cid ).css({
-					"left": $(step.cid).outerWidth(),
+					"left": $(step.cid).outerWidth() + config.animation.offset,
 					"opacity": 0
 				});
 				$( step.cid ).show().animate({
 					"left": 0,
 					"opacity": 1
-				}, 200);
+				}, 500);
 			} else {
 				// Go back
 				$( step.cid ).css({
-					"left": $(step.cid).outerWidth() / -1,
+					"left": ( $(step.cid).outerWidth() + config.animation.offset )/ -1,
 					"opacity": 0
 				});
 				$( step.cid ).show().animate({
 					"left": 0,
 					"opacity": 1
-				}, 200);
+				}, 500);
 			}
+			setTimeout(function(){
+				config.callback.anim_done( config.current_slide )
+			}, 500)
 		},
 
 		validate: function( step ){
@@ -304,7 +438,6 @@ var CF, test_2	;
 			for ( var i = 0; i < fields.length; i++) {
 				type = fields[i].type;
 				field = fields[i];
-				console.log(field)
 				if ( $.trim( $(field.id).val() ) == "" && type == "normal" || $.trim( $(field.id).val() ) == "" && type == "email" ) {
 					results.push({
 						"name": field.name,
@@ -320,6 +453,13 @@ var CF, test_2	;
 						"error": 401,
 						"errorText": "Please Enter A Valid Email"
 					})
+				} else if ( type == "select" && $(field.id).val() == field.select_param.unselect ) {
+					results.push({
+						"name": field.name,
+						"id": field.id,
+						"error": 401,
+						"errorText": "Please Pick One"
+					})
 				} else if ( $.trim( $(field.id).val() ) != "" && type == "normal" || type == "email" && $.trim( $(field.id).val() ) != "") {
 					results.push({
 						"name": field.name,
@@ -334,11 +474,37 @@ var CF, test_2	;
 		},
 
 		submit: function(){
-
+			this.config.callback.submit();
+			var self = this;
+			var datac, data;
+			data = {};
+			datac = self.config.steps;
+			for ( var i = 0; i < datac.length; i++ ) {
+				// Check data
+				if ( datac[i].post ) {
+					for ( var c = 0; c < datac[i].inputs.length; c++ ) {
+						data[ datac[i].inputs[c].name ] = $(datac[i].inputs[c].id).val();
+					}	
+				}
+			}
+			data["js"] = "true";
+			console.log(data)
+			$.ajax({
+				dataType: "json",
+				url: self.config.mailer.url,
+				data: data,
+				method: "post",
+				success: function(data){
+					self.response(data)
+				}
+			}).fail(function(x,t,m){
+				console.warn(x, t, m)
+			})
 		},
 
-		response: function(){
-
+		response: function( data ){
+			this.config.callback.response();
+			console.log( data )
 		}
 	}
 
@@ -361,6 +527,7 @@ var CF, test_2	;
 				{
 					name: "step1",
 					cid: "#step1",
+					post: "true",
 					inputs: [
 						{
 							name:"name",
@@ -378,10 +545,11 @@ var CF, test_2	;
 				{
 					name: "step2",
 					cid: "#step2",
+					post: "true",
 					inputs: [
 						{
 							name:"type",
-							id:"type",
+							id:"#type",
 							type:"select",
 							select_param: {
 								unselect: "NONE"
@@ -393,11 +561,12 @@ var CF, test_2	;
 				{
 					name: "step3",
 					cid: "#step3",
+					post: "true",
 					inputs: [
 						{
 							name:"message",
-							id:"message",
-							type:"text"
+							id:"#message",
+							type:"normal"
 						}
 					],
 					id:2

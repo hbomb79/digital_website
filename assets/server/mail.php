@@ -30,7 +30,7 @@
 					$json_obj["statusText"] = "sent";
 				} else {
 					$json_obj["status"] = 201;
-					$json_obj["statusText"] = "not_sent";
+					$json_obj["statusText"] = "not_sent_bad";
 				}
 			} else {
 				$json_obj["status"] = 404;
