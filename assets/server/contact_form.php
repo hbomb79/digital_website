@@ -1,6 +1,6 @@
 <?php
-	$js = isset($_GET["js"]) ? true : false;
-	session_start("mailer");
+	$js = isset($js) ? true : false;
+	if (!$js) { session_start("mailer"); }
 	function check_cookie() {
 		if ( isset($_SESSION["mail"]) || isset($_COOKIE["mail"]) ) {
 			?>

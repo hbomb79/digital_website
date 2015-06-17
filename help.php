@@ -80,10 +80,15 @@
 						<h1 id="contact-title">Contact Us</h1>
 						<!-- Contact Form -->
 						<div id="contact-container">
-							<div id="contact-inner"></div>
+							<div id="contact-inner">
+								<?php
+									$js = true;
+									require_once("assets/server/contact_form.php");
+								?>
+							</div>
 						</div>
 						<script>
-							$("#contact-inner").load("assets/server/contact_form.php?js=true")
+							//$("#contact-inner").load("assets/server/contact_form.php?js=true")
 						</script>
 					</div>
 				</main>

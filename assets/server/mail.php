@@ -28,9 +28,11 @@
 				if ( $return == "OK" ) {
 					$json_obj["status"] = 200;
 					$json_obj["statusText"] = "sent";
+					$_SESSION["mail"] = true;
+					setcookie("mail","true",time()+86400);
 				} else {
 					$json_obj["status"] = 201;
-					$json_obj["statusText"] = "not_sent_bad";
+					$json_obj["statusText"] = "not_sent";
 				}
 			} else {
 				$json_obj["status"] = 404;
