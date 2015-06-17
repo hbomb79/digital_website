@@ -1,15 +1,23 @@
 $("body").addClass("JS")
 
-$(".handle").unbind("click").bind("click", function(){
-	$("nav > ul").toggleClass("showing");
-	$("nav > .handle").toggleClass("active");
-})
+$(document).ready(function() {
+	$(".handle").unbind("click").bind("click", function(){
+		$("nav > ul").toggleClass("showing");
+		$("nav > .handle").toggleClass("active");
+	});
 
-$("header li.has-drop").on("mouseenter", function(){
-	$(this).children().filter("ul").stop().slideDown(250);
-}).on("mouseleave", function(){
-	$(this).children().filter("ul").stop().slideUp(250)
-})
+	$("header li.has-drop").on("mouseenter", function(){
+		$(this).children().filter("ul").stop().slideDown(250);
+	}).on("mouseleave", function(){
+		$(this).children().filter("ul").stop().slideUp(250)
+	});
+
+	$("#notification").unbind("click").bind("click", function(){
+		if($("#notification div").attr("data-notify-couple")) {
+			$($("#notification div").attr("data-notify-couple")).slideUp(500)
+		}
+	});
+});
 
 function notify(message, color, tc, optional){
 	if (!optional) {
@@ -32,8 +40,3 @@ function hideNotify(){
 	}
 }
 
-$("#notification").unbind("click").bind("click", function(){
-	if($("#notification div").attr("data-notify-couple")) {
-		$($("#notification div").attr("data-notify-couple")).slideUp(500)
-	}
-})

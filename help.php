@@ -26,6 +26,79 @@
 	 	<div class="page-bg" id="help-page-bg">
 	</div> <!--Faded out and replaced using ajax--> </div>
 	<div class="page-container current" id="help" data-fix-header="fix">
+		<script>
+		$.getScript("assets/javascript/help.js", function(){
+			CF.init({
+				button: ".contact-send",
+				form_class: ".step-form",
+				trigger: ".contact-trigger",
+				callback: {
+					start: function(){},
+					anim_start: function(){},
+					anim_done: function(){},
+					submit: function(){},
+					reponse: function(){}
+				},
+				animation: {
+					offset: 64
+				},
+				steps: [
+					{
+						name: "step1",
+						cid: "#step1",
+						post: "true",
+						inputs: [
+							{
+								name:"name",
+								id:"#name",
+								type:"normal"
+							},
+							{
+								name:"email",
+								id:"#email",
+								type:"email"
+							}
+						],
+						id:0
+					},
+					{
+						name: "step2",
+						cid: "#step2",
+						post: "true",
+						inputs: [
+							{
+								name:"type",
+								id:"#type",
+								type:"select",
+								select_param: {
+									unselect: "NONE"
+								}
+							}
+						],
+						id:1
+					},
+					{
+						name: "step3",
+						cid: "#step3",
+						post: "true",
+						inputs: [
+							{
+								name:"message",
+								id:"#message",
+								type:"normal"
+							}
+						],
+						id:2
+					}
+				],
+				current_slide: {
+					cid: "#step1",
+					name: "step1",
+					id:0
+				}
+			})
+		});
+		</script>
 		<div id="wrapper">
 			<div id="container" class="clearfix">
 				<main>
@@ -74,12 +147,19 @@
 								</section>
 							</div>
 						</div>
-						<div class="rel-contain">
-							<button class="button contact-trigger tipped tipped-mid tipped-vauto" aria-label="Sorry. This is not available at the moment" style="margin:0 auto; font-size:1.3em;">Contact Us</button>
+						<div class="rel-contain" id="ct" style="display:none;">
+							<button class="button contact-trigger tipped tipped-mid tipped-vauto" aria-label="Contact Us" style="margin:0 auto; font-size:1.3em;">Contact Us</button>
 						</div>
-						<h1 id="contact-title">Contact Us</h1>
+						<noscript>
+							<div class="rel-contain" style="text-align:center;">
+								<a href="assets/server/contact_form.php" class="button" style="text-align:center; margin:0 auto; font-size:1.3em; display:inline-block;">Contact Us</a>
+							</div>
+						</noscript>
+						<script>
+							$("#ct").show()
+						</script>
 						<!-- Contact Form -->
-						<div id="contact-container">
+						<div id="contact-container" style="display:none; ">
 							<div id="contact-inner">
 								<?php
 									$js = true;
@@ -87,9 +167,6 @@
 								?>
 							</div>
 						</div>
-						<script>
-							//$("#contact-inner").load("assets/server/contact_form.php?js=true")
-						</script>
 					</div>
 				</main>
 			</div>
@@ -98,9 +175,6 @@
 					Page Created By <a class="anim" href="http://harryfelton.web44.net">Harry Felton</a> 2015
 				</div>
 			</footer>
-			<script src="assets/javascript/help.js">
-				//$.getScript("assets/javascript/help.js")
-			</script>
 		</div>
 	</div>
 	<script src="assets/javascript/page.js"></script>

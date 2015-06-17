@@ -2,20 +2,31 @@
 	$js = isset($js) ? true : false;
 	if (!$js) { session_start("mailer"); }
 	function check_cookie() {
+		global $js;
 		if ( isset($_SESSION["mail"]) || isset($_COOKIE["mail"]) ) {
+			if ( !$js ) {
 			?>
 			<div class="info-box">
 				<h1>Already Sent</h1><br>
 				<p>Our servers detect that you have already sent us a message. Please wait before sending another.</p>
 			</div>
 			<?php
+			} else {
+				?>
+					<div id="step1" class="step" data-step-name="step1">
+						<h1>Already Sent</h1>
+						<p>Our servers detect that you have already sent us a message. Please wait before sending another.</p>
+						<button style="margin:0 auto;" class="contact-trigger button">Close</button>
+					</div>
+				<?php
+			}
 			die();
 		}
 	}
 
 	function create_cookie() {
 		$_SESSION["mail"] = true;
-		setcookie("mail","true",time()+86400);
+		setcookie("mail","true",time()+86400, "/");
 	}
 	function drawmain() {
 		?>

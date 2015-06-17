@@ -225,6 +225,7 @@ var CF, test_2	;
 				})
 			}
 			scroll_to("#contact-container", false, 250)
+			this.resize_container()
 		},
 
 		resize_container: function( elem ) {
@@ -504,80 +505,26 @@ var CF, test_2	;
 
 		response: function( data ){
 			this.config.callback.response();
+			var self = this;
 			console.log( data )
+			if ( data.status == 200 ) {
+				$("#contact-inner").replaceWith($("<div></div>",{
+					class: "step step-done",
+					id: self.config.current_slide.name,
+					css:{
+						"text-align":"center",
+					}
+				}))
+				$(".step-done").html( $( "<h1></h1>", {
+					text: "Message Sent"
+				}))
+				$(".step-done h1").after( $("<p></p>", {
+					text: "Your message has been sent. We have sent you an email containing more information"
+				}) )
+				$(".step-done p").after( $("<button onclick='CF.trigger_click()' class='button contact-trigger' style='margin:0 auto;'>Close</button>") )
+			}
+			this.resize_container();
 		}
 	}
-
-	$(window).load(function(){
-		CF.init({
-			button: ".contact-send",
-			form_class: ".step-form",
-			trigger: ".contact-trigger",
-			callback: {
-				start: function(){},
-				anim_start: function(){},
-				anim_done: function(){},
-				submit: function(){},
-				reponse: function(){}
-			},
-			animation: {
-				offset: 64
-			},
-			steps: [
-				{
-					name: "step1",
-					cid: "#step1",
-					post: "true",
-					inputs: [
-						{
-							name:"name",
-							id:"#name",
-							type:"normal"
-						},
-						{
-							name:"email",
-							id:"#email",
-							type:"email"
-						}
-					],
-					id:0
-				},
-				{
-					name: "step2",
-					cid: "#step2",
-					post: "true",
-					inputs: [
-						{
-							name:"type",
-							id:"#type",
-							type:"select",
-							select_param: {
-								unselect: "NONE"
-							}
-						}
-					],
-					id:1
-				},
-				{
-					name: "step3",
-					cid: "#step3",
-					post: "true",
-					inputs: [
-						{
-							name:"message",
-							id:"#message",
-							type:"normal"
-						}
-					],
-					id:2
-				}
-			],
-			current_slide: {
-				cid: "#step1",
-				name: "step1",
-				id:0
-			}
-		})
-	});
 
 })(jQuery, window, document);

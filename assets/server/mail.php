@@ -1,4 +1,5 @@
 <?php
+	session_start("mailer");
 	// This PHP file will allow users with JavaScript turned off to use the contact form, users that have JS on, will simply be returned a Ajax Response.
 	
 	// First, check if the passed fields are correct, the information will be serialised so access the information using the key that matches the inputs (name) tag.
@@ -26,10 +27,15 @@
 			// Return Ajax Response, mail has been sent
 			if ( !$missing ) {
 				if ( $return == "OK" ) {
-					$json_obj["status"] = 200;
-					$json_obj["statusText"] = "sent";
-					$_SESSION["mail"] = true;
-					setcookie("mail","true",time()+86400);
+					if ( isset($_SESSION["mail"]) || isset($_COOKIE["mail"]) ) {
+						$json_obj["status"] = 304;
+						$json_obj["statusText"] = "already_sent";
+					} else {
+						$json_obj["status"] = 200;
+						$json_obj["statusText"] = "sent";
+						$_SESSION["mail"] = true;
+						setcookie("mail","true",time()+86400, "/");
+					}
 				} else {
 					$json_obj["status"] = 201;
 					$json_obj["statusText"] = "not_sent";
@@ -93,13 +99,15 @@
 						<div id="container">
 							<main>
 								<?php
-									if ( !$missing && $return == "OK" ) {
+									if ( !$missing && $return == "OK" && !isset($_SESSION["mail"]) && !isset($_COOKIE["mail"]) ) {
 								?>
 								<div class="info-box confirm">
 									<h1>Mail Sent</h1>
 									<p>Your message has been sent to us, one of out customer service representatives will get back to you within 1-3 working days</p>
 								</div>
 								<?php
+								$_SESSION["mail"] = true;
+								setcookie("mail","true",time()+86400, "/");
 								} else if ( $missing ) {
 								?>
 								<div class="info-box error">
@@ -144,6 +152,9 @@
 
 	function send() {
 		global $js, $missing, $json_obj;
+		if ( isset($_SESSION["mail"]) || isset($_COOKIE["mail"]) ) {
+			return "OK";
+		}
 		if ($missing) {
 			return "BAD";
 		} else {
