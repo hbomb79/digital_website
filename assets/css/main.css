@@ -1177,6 +1177,7 @@ Code Deprecated
 	border: 3px solid crimson;
 	border-radius: 5px;
 	overflow: hidden;
+	box-shadow: 0 0 15px black;
 }
 
 #contact-container input, #contact-container textarea, #contact-container select,  #contact-container option {

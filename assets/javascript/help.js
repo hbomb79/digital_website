@@ -1,14 +1,14 @@
-// This JS document is used by the help.php page, this will hide the contact form allowing javascript to animate it, also allowing Ajax requests to assets/server/mail.php
+// A nice 700 line JS document used by the help.php page (Harry Felton, HexCode, 2015 MIT)
 //
 // mail.php returns a JSON object, this JSON object will contain what the user typed, along side a status code and status text, here are the possible values:
 
 // To prevent spam messaging this file must store a cookie, PHP could also be used...
 
 // 200 - sent: Message successfully sent
-// 201 - not_sent - could not send message
+// 201 - not_sent: could not send message
 // 404 - missing_fields: Required fields were not filled in
-// 208 - error: Unknown Error Occurred.
-var CF, test_2	;
+// 304 - already_sent: Already sent a message in past 24 hours
+var CF;
 (function($, window, document, undefined){
 	// Restarted 6/15/15
 	// This JS file needs to:
@@ -252,7 +252,6 @@ var CF, test_2	;
 					elem = r[i]
 					$elem = $(elem.id);
 					$elem.find(".step-error").remove()
-					test_2 = $elem.siblings("#"+elem.name+"-error");
 					$errors = $elem.siblings("#"+elem.name+"-error");
 					if ( elem.error == 200 ) {
 						if( $elem.hasClass("warning") ){
@@ -361,7 +360,7 @@ var CF, test_2	;
 				} else if ( $elem.context.value == "step-error-back" ) {
 					// Return from error.
 					// Fade in last slide, fade and remove error.
-					$(".step-node-error").fadeOut(500).promise().done(function(){
+					$(".step-node-error").fadeOut(250).promise().done(function(){
 						$(".step-node-error").remove();
 					})
 					var field = $elem.hasClass("restart") ? 0 : self.config.steps[self.config.steps.length-1].id
@@ -440,7 +439,7 @@ var CF, test_2	;
 			config = this.config
 			o_step = config.current_slide;
 			// If forward
-			$( o_step.cid ).fadeOut(500);
+			$( o_step.cid ).fadeOut(250);
 			$( ".step-error" ).fadeOut(250).promise().done(function(){
 				$(".step-error").remove()
 			});
@@ -456,7 +455,7 @@ var CF, test_2	;
 				$( step.cid ).show().animate({
 					"left": 0,
 					"opacity": 1
-				}, 500);
+				}, 250);
 			} else {
 				// Go back
 				$( step.cid ).css({
@@ -466,12 +465,12 @@ var CF, test_2	;
 				$( step.cid ).show().animate({
 					"left": 0,
 					"opacity": 1
-				}, 500);
+				}, 250);
 			}
 			setTimeout(function(){
 				config.callback.anim_done( config.current_slide )
 				self.config.system.hold = false;
-			}, 500)
+			}, 250)
 		},
 
 		validate: function( step ){
