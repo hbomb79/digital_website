@@ -241,7 +241,7 @@ var CF, test_2	;
 			var self = this;
 			this.validate( this.get_slide("name", this.config.current_slide.name) ).done(function( r ){
 				var elem, $elem, errors;
-				proceed = true;
+				proceed = false;
 				for ( var i = 0; i < r.length; i++) {
 					elem = r[i]
 					$elem = $(elem.id);
@@ -249,15 +249,15 @@ var CF, test_2	;
 					test_2 = $elem.siblings("#"+elem.name+"-error");
 					$errors = $elem.siblings("#"+elem.name+"-error");
 					if ( elem.error == 200 ) {
+						proceed = true;
 						if( $elem.hasClass("warning") ){
 							$elem.removeClass("warning")
 						}
-						$errors.filter(".step-per-error").removeClass(".step-per-error").addClass("step-error");
+						$errors.filter(".step-per-error").addClass("step-error");
 						$errors.addClass("done").slideUp(100).promise().done(function(){
 							$(".step-error").filter(".done").remove()
 						});
 					} else {
-						proceed = false;
 						if ( !$elem.hasClass("warning") ) {
 							$elem.addClass("warning")
 						}
@@ -311,17 +311,13 @@ var CF, test_2	;
 								self.slide_trans( value, false );
 							}
 						})
-						
-					} else {
-						console.warn("User requested slide change to current slide, not moving.")
 					}
 				} else if ( $elem.context.value == self.config.send_step ) {
 					// Going forward, trying to send, validate ALL steps incase an alteration to the fields has been made via inspect element.
 					self.validate_current().done(function( proceed ){
 						if ( proceed ) {
 							self.validate_all().done(function( r, s ){
-								console.log(r)
-								console.log(s)
+
 								if ( r ) {
 									self.submit();
 								} else {
@@ -358,8 +354,6 @@ var CF, test_2	;
 					for ( var i = 0; i < r.length; i++) {
 						if ( r[i].error != 200 ) {
 							// ERROR, highlight field.
-							console.warn("DETECT")
-							test_2 = r[i];
 							// Remove previous step-per-errors for this element.
 							$( "#"+r[i].name+"-error" ).remove();
 							$( r[i].id ).after( $("<p></p>", {
@@ -369,17 +363,12 @@ var CF, test_2	;
 								text: r[i].errorText,
 								class: "step-per-error", // A step-per-error is only removed if you are going next off of that field and validation is correct. step-error is removed whenever slide_trans is called.
 								id: r[i].name+"-error"
-							}) )
-							console.log("HALF: "+proceed)
-							proceed = false;
+							}) )							proceed = false;
 							first_step = ( first_step > elem.id ) ? elem.id : first_step // If this error step is less than the first_step, then set it.
-						} else {
-							console.warn("OK")
 						}
 					}
 				})
 			}
-			console.log("END: " + proceed + ":: " + first_step)
 			d.resolve( proceed, first_step );
 			return d;
 		},
@@ -473,19 +462,26 @@ var CF, test_2	;
 						"error": 401,
 						"errorText": "Please Enter A Valid Email"
 					})
-				} else if ( type == "select" && $(field.id).val() == "" || type == "select" && $(field.id).val() == field.select_param.unselect ) {
+				} else if ( type == "select" && $(field.id).val() == "" || type == "select" && $(field.id).val() == null || type == "select" && $(field.id).val() == field.select_param.unselect ) {
 					results.push({
 						"name": field.name,
 						"id": field.id,
 						"error": 401,
 						"errorText": "Please Pick One"
 					})
-				} else if ( $.trim( $(field.id).val() ) != "" && type == "normal" || type == "email" && $.trim( $(field.id).val() ) != "") {
+				} else if ( $.trim( $(field.id).val() ) != "" && type == "normal" || type == "email" && $.trim( $(field.id).val() ) != "" || type == "select" && $.trim( $(field.id).val() ) != "" && $.trim( $(field.id).val() ) != field.select_param.unselect ) {
 					results.push({
 						"name": field.name,
 						"id": field.id,
 						"error": 200,
 						"errorText": "OK"
+					})
+				} else {
+					results.push({
+						"name": field.name,
+						"id": field.id,
+						"error": 201,
+						"errorText": "Error Occurred, Please report"
 					})
 				}
 			}
@@ -508,7 +504,6 @@ var CF, test_2	;
 				}
 			}
 			data["js"] = "true";
-			console.log(data)
 			$.ajax({
 				dataType: "json",
 				url: self.config.mailer.url,
@@ -525,7 +520,6 @@ var CF, test_2	;
 		response: function( data ){
 			this.config.callback.response();
 			var self = this;
-			console.log( data )
 			if ( data.status == 200 ) {
 				$("#contact-inner").replaceWith($("<div></div>",{
 					class: "step step-done",

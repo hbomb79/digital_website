@@ -26,6 +26,7 @@
 	 	<div class="page-bg" id="help-page-bg">
 	</div> <!--Faded out and replaced using ajax--> </div>
 	<div class="page-container current" id="help" data-fix-header="fix">
+		<script src="assets/javascript/help.js"></script>
 		<script>
 		$.getScript("assets/javascript/help.js", function(){
 			CF.init({
