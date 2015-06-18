@@ -25,8 +25,7 @@
 	<div id="bg-wrapper">
 	 	<div class="page-bg" id="help-page-bg">
 	</div> <!--Faded out and replaced using ajax--> </div>
-	<div class="page-container current" id="help" data-fix-header="fix">
-		<script src="assets/javascript/help.js"></script>
+	<div class="page-container current" id="help">
 		<script>
 		$.getScript("assets/javascript/help.js", function(){
 			CF.init({
@@ -106,12 +105,10 @@
 					<?php
 						require_once("assets/_module/start.php");
 					?>
-					<div class="header">
-						<h1 id="title" class="large">Help</h1>
-					</div>
+					<h1 id="title" class="large">Help</h1>
 					<div id="help-inner">
 						<!-- FAQ Sections -->
-						<section class="header-after">
+						<section>
 							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos distinctio doloribus id doloremque cumque numquam assumenda error ducimus amet, perspiciatis vel nam, iure optio alias soluta sapiente maxime. Distinctio dicta dolore necessitatibus sunt, natus, velit laudantium incidunt, quos praesentium officia quod saepe accusamus excepturi nulla maxime mollitia qui doloremque. Placeat doloremque repellat molestiae atque, officiis ea voluptatum esse. Est blanditiis vel aperiam odit doloribus tenetur magni cum veniam. Ex laborum facilis eveniet a officiis voluptates, iusto perspiciatis provident ab itaque error quis repellat inventore eius non illo assumenda amet accusantium recusandae ipsum mollitia dolorem numquam rerum. Architecto doloribus aut, officia fugit quae voluptatum quas blanditiis commodi, minus laudantium maiores alias, animi nulla facere soluta nostrum maxime delectus cupiditate nihil earum non temporibus veniam. Omnis dolores, quae quisquam facere! Cum minima, laudantium consectetur sint ratione in perferendis quis, quasi suscipit, eligendi fugiat commodi reprehenderit neque molestiae delectus est id praesentium impedit.</p>
 						</section>
 						<div class="help-container clearfix">

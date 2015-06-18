@@ -108,6 +108,9 @@ var CF, test_2	;
 					id:2
 				}
 			],
+			system: {
+				hold: false
+			},
 			current_slide: {
 				cid: "#cid",
 				name: "name",
@@ -239,12 +242,12 @@ var CF, test_2	;
 			})
 		},
 
-		validate_current: function(){
+		validate_current: function( no_resize ){
 			var d = $.Deferred();
 			var self = this;
 			this.validate( this.get_slide("name", this.config.current_slide.name) ).done(function( r ){
 				var elem, $elem, errors;
-				proceed = false;
+				proceed = true;
 				for ( var i = 0; i < r.length; i++) {
 					elem = r[i]
 					$elem = $(elem.id);
@@ -252,7 +255,6 @@ var CF, test_2	;
 					test_2 = $elem.siblings("#"+elem.name+"-error");
 					$errors = $elem.siblings("#"+elem.name+"-error");
 					if ( elem.error == 200 ) {
-						proceed = true;
 						if( $elem.hasClass("warning") ){
 							$elem.removeClass("warning")
 						}
@@ -261,6 +263,7 @@ var CF, test_2	;
 							$(".step-error").filter(".done").remove()
 						});
 					} else {
+						proceed = false;
 						if ( !$elem.hasClass("warning") ) {
 							$elem.addClass("warning")
 						}
@@ -285,9 +288,11 @@ var CF, test_2	;
 						
 					}
 				}
-				setTimeout(function(){
-					self.resize_container()
-				}, 100)
+				if ( !no_resize ) {
+					setTimeout(function(){
+						self.resize_container()
+					}, 100)
+				}
 				d.resolve( proceed );
 			})
 			return d;
@@ -295,11 +300,11 @@ var CF, test_2	;
 
 		button_click: function(elem){
 			$elem = $(elem);
-			var proceed;
 			var self = this;
 			// Validate this steps fields
 			// Check name of button, if step then check value.
-			if ( $elem.context.name == "step" ) {
+			if ( $elem.context.name == "step" && !self.config.system.hold ) {
+				self.config.system.hold = true;
 				// This button is supposed to change the slide.
 				var value = this.get_slide("name", $elem.context.value);
 				if ( value ) {
@@ -312,28 +317,52 @@ var CF, test_2	;
 						self.validate_current().done(function( proceed ){
 							if ( proceed ) {
 								self.slide_trans( value, false );
+							} else {
+								self.config.system.hold = false;
 							}
 						})
 					}
 				} else if ( $elem.context.value == self.config.send_step ) {
 					// Going forward, trying to send, validate ALL steps incase an alteration to the fields has been made via inspect element.
-					self.validate_current().done(function( proceed ){
+					self.validate_current( true ).done(function( proceed ){
 						if ( proceed ) {
 							self.validate_all().done(function( r, s ){
-
 								if ( r ) {
 									self.submit();
+									// Show sending stage
+									$( self.config.current_slide.cid ).fadeOut(100)
+									$("#contact-inner").after($("<div></div>",{
+										class: "step",
+										id: "step-loading-node",
+										css:{
+											"text-align":"center",
+											"display":"none"
+										}
+									}))
+									$("#step-loading-node").html( $( "<h1></h1>", {
+										text: "Sending Message"
+									})).fadeIn(100)
+									$("#step-loading-node h1").after( $("<p></p>", {
+										text: "Please wait while we process your message"
+									}) )
+									self.resize_container("#step-loading-node");
 								} else {
 									self.slide_trans( self.get_slide( "id", s ), true )
 								}
+								self.config.system.hold = false;
 							})
+						} else {
+							setTimeout(function(){
+								self.resize_container()
+								self.config.system.hold = false;
+							}, 100)
 						}
 					})
 				} else if ( $elem.context.value == "step-error-back" ) {
 					// Return from error.
 					// Fade in last slide, fade and remove error.
-					$("#step-error-node").fadeOut(500).promise().done(function(){
-						$("#step-error-node").remove();
+					$(".step-node-error").fadeOut(500).promise().done(function(){
+						$(".step-node-error").remove();
 					})
 					var field = $elem.hasClass("restart") ? 0 : self.config.steps[self.config.steps.length-1].id
 					self.slide_trans( self.get_slide("id", field ), true ) // Display last step ( The user should only get here if they tried to send from last step. If not then vslidation will catch them )
@@ -343,8 +372,10 @@ var CF, test_2	;
 
 		validate_all: function() {
 			var d = $.Deferred();
+			d.resolve(true, 3);
+			return d;
 			var elems, $elem, elem, proceed, self, first_step;
-			first_step = this.config.steps.length ;
+			first_step = this.config.steps.length-1 ;
 			self = this;
 			elems = this.config.steps;
 			proceed = true;
@@ -439,6 +470,7 @@ var CF, test_2	;
 			}
 			setTimeout(function(){
 				config.callback.anim_done( config.current_slide )
+				self.config.system.hold = false;
 			}, 500)
 		},
 
@@ -515,98 +547,152 @@ var CF, test_2	;
 				method: "post",
 				success: function(data){
 					self.response(data)
-				}
+					self.config.system.hold = false;
+				},
+				timeout: 5000
 			}).fail(function(x,t,m){
-				console.warn(x, t, m)
+				console.warn( x, t, m )
+				self.config.system.hold = false;
+				self.error( x, t, m )
 			})
+		},
+
+		error: function( x, t, m ){
+			var self = this;
+			$("#step-loading-node").fadeOut().promise().done(function(){
+				$(this).remove();
+			})
+			if ( x.statusText == "timeout" || x.status == 0 ) {
+
+				self.output({
+					"header": "Connection Timeout",
+					"text": "Sorry, we could not connect to the server in time.",
+					"node_class": "step step-error",
+					"type": "after",
+					"selector": ".step.step-error",
+					"btext": "Back",
+					"resize_param": ".step-error",
+				})
+			} else if ( x.status == 404 ) {
+				self.output({
+					"header": "Connection Failed",
+					"text": "It appears as though the mailing system is down. We will fix this as soon as we can. Please try again later",
+					"node_class": "step step-error",
+					"type": "after",
+					"selector": ".step.step-error",
+					"btext": "Back",
+					"resize_param": ".step-error",
+				})
+			}
+		},
+
+		output: function( settings ){
+			// This function made it A LOT easier to display temporary messages on the fly (without a seperate div etc...)
+			var defaults, options, header, text, restart, back, id, node_class, resize_param, type, css, selector, btext, self;
+			defaults = {
+				id: "step-info-node",
+				header: "HEADER",
+				text: "Some text",
+				restart: false,
+				back: false,
+				node_class: "",
+				resize_param: ".step-node",
+				type: "after",
+				node_css: {
+					container: {
+						"display": "none",
+						"text-align": "center"
+					},
+					button: {
+						"margin": "0 auto"
+					}
+				},
+				selector: "#step-info-node",
+				btext: "Button"
+			}
+			options = $.extend(true, {}, defaults, settings);
+			self = this;
+			selector = options.selector;
+			$("#step-loading-node, .step-node").fadeOut().promise().done(function(){
+				$(this).remove();
+			})
+			$( self.config.current_slide.cid ).fadeOut()
+			$("#contact-inner")[ ( options.type == "replace" ) ? "replaceWith" : "after" ]($("<div></div>",{
+				class: options.node_class+" step-node",
+				id: options.id,
+				css: options.node_css.container
+			}))
+			$(selector).html( $("<h1></h1>", {
+				text: options.header
+			}) ).fadeIn()
+			$(selector + " h1").after( $("<p></p>", {
+				text: options.text
+			}) )
+			if ( options.back ) {
+				$(selector + " p").after( $("<button class='button contact-trigger' style='margin:0 auto;'>Close</button>") )
+			} else {
+				$(selector + " p").after( $("<button></button>", {
+					value: "step-error-back",
+					class: ( options.restart ) ? "button contact-send restart" : "button contact-send",
+					css: options.node_css.button,
+					text: options.btext,
+					name: "step"
+				}) )
+			}
+			if (options.resize_param != "none") {
+				self.resize_container( options.resize_param )
+			}
 		},
 
 		response: function( data ){
 			this.config.callback.response();
 			var self = this;
+			$("#step-loading-node").fadeOut().promise().done(function(){
+				$(this).remove();
+			})
 			if ( data.status == 200 ) {
-				$("#contact-inner").replaceWith($("<div></div>",{
-					class: "step step-done",
-					id: self.config.current_slide.name,
-					css:{
-						"text-align":"center",
-					}
-				}))
-				$(".step-done").html( $( "<h1></h1>", {
-					text: "Message Sent"
-				}))
-				$(".step-done h1").after( $("<p></p>", {
-					text: "Your message has been sent. We have sent you an email containing more information"
-				}) )
-				$(".step-done p").after( $("<button class='button contact-trigger' style='margin:0 auto;'>Close</button>") )
-				this.resize_container();
+				self.output({
+					"header": "Message Sent",
+					"text": "Your message has been sent. We will get back to you using the email you provided as soon as we can.",
+					"node_class": "step step-done",
+					"type": "replace",
+					"selector": ".step.step-done",
+					"btext": "Close",
+					"resize_param": ".step-done",
+					"back": true
+				})
 			} else if ( data.status == 201 ) {
-				$( self.config.current_slide.cid ).hide()
-				$("#contact-inner").after($("<div></div>",{
-					class: "step",
-					id: "step-error-node",
-					css:{
-						"text-align":"center",
-					}
-				}))
-				$("#step-error-node").html( $( "<h1></h1>", {
-					text: "Unknown Error"
-				}))
-				$("#step-error-node h1").after( $("<p></p>", {
-					text: "Sorry, We could not send your message. Click back to retry"
-				}) )
-				$("#step-error-node p").after( $("<button></button>", {
-					"value": "step-error-back",
-					"class": "button contact-send",
-					"name": "step",
-					css: {
-						"margin": "0 auto"
-					},
-					text: "Back"
-				}) )
-				this.resize_container("#step-error-node");
+				self.output({
+					"header": "Unknown Error",
+					"text": "An unexpected error prevented us from sending your message.",
+					"node_class": "step step-node-error",
+					"type": "after",
+					"selector": ".step.step-node-error",
+					"btext": "Back",
+					"resize_param": ".step-node-error"
+				})
 			} else if ( data.status == 404 ) {
-				$( self.config.current_slide.cid ).hide()
-				$("#contact-inner").after($("<div></div>",{
-					class: "step",
-					id: "step-error-node",
-					css:{
-						"text-align":"center",
-					}
-				}))
-				$("#step-error-node").html( $( "<h1></h1>", {
-					text: "Verification Error"
-				}))
-				$("#step-error-node h1").after( $("<p></p>", {
-					text: "Somethings not quite right. Please go back and check that all fields are correctly filled in"
-				}) )
-				$("#step-error-node p").after( $("<button></button>", {
-					"value": "step-error-back",
-					"class": "button contact-send restart",
-					"name": "step",
-					css: {
-						"margin": "0 auto"
-					},
-					text: "Back"
-				}) )
-				this.resize_container("#step-error-node");
+				self.output({
+					"header": "Verification Error",
+					"text": "Somethings not quite right. Please go back and check that all fields are correctly filled in.",
+					"node_class": "step step-node-error",
+					"type": "after",
+					"selector": ".step.step-node-error",
+					"btext": "Back",
+					"resize_param": ".step-node-error",
+					"restart": true
+				})
 			} else if ( data.status == 304 ) {
-				$( self.config.current_slide.cid ).hide()
-				$("#contact-inner").after($("<div></div>",{
-					class: "step",
-					id: "step-error-node",
-					css:{
-						"text-align":"center",
-					}
-				}))
-				$("#step-error-node").html( $( "<h1></h1>", {
-					text: "Already Sent"
-				}))
-				$("#step-error-node h1").after( $("<p></p>", {
-					text: "Please wait a while before resending a message, thanks"
-				}) )
-				$("#step-error-node p").after( $("<button class='button contact-trigger' style='margin:0 auto;'>Close</button>") )
-				this.resize_container("#step-error-node");
+				self.output({
+					"header": "Already Sent",
+					"text": "Please wait a while before sending another message. Thanks",
+					"node_class": "step step-done",
+					"type": "replace",
+					"selector": ".step.step-done",
+					"btext": "Close",
+					"resize_param": ".step-done",
+					"back": true
+				})
 			}
 		}
 	}
