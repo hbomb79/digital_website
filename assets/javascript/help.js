@@ -131,6 +131,9 @@ var CF, test_2	;
 		},
 
 		check_bounds: function(){
+			if ( $(window).width() < 770 ) {
+				return;
+			}
 			// Check if the bottom or top is off screen.
 			var elem, $elem, config, self, height, wind_height;
 			self = this;
@@ -363,7 +366,8 @@ var CF, test_2	;
 								text: r[i].errorText,
 								class: "step-per-error", // A step-per-error is only removed if you are going next off of that field and validation is correct. step-error is removed whenever slide_trans is called.
 								id: r[i].name+"-error"
-							}) )							proceed = false;
+							}) )
+							proceed = false;
 							first_step = ( first_step > elem.id ) ? elem.id : first_step // If this error step is less than the first_step, then set it.
 						}
 					}

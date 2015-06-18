@@ -1305,6 +1305,14 @@ Code Deprecated
 
 @media screen and (max-width: 770px) {
 	/* Change css rules to ones that apply for a mobile device */
+	
+	html, body {
+		overflow: auto !important;
+	}
+
+	#contact-container {
+		position: absolute;
+	}
 
 	#to-top{
 		display:none !important;
