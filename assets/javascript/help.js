@@ -121,13 +121,13 @@ var CF, test_2	;
 			var self = this;
 			// Hide and position the contact form. Non JS users simply wont see the contact form.
 			// Firstly, grab the step widths and heights to animate.
+			$( config.container ).show().css({
+				"opacity":0
+			})
 			this.restore();
 			this.events();
-			setTimeout(function(){
-				self.resize_container();
-				$(config.container).hide();
-			}, 10)
 			config.callback.start();
+			setTimeout(function(){ self.resize_container(); $( config.container ).hide().css("opacity", 1) }, 250)
 		},
 
 		check_bounds: function(){
@@ -211,6 +211,7 @@ var CF, test_2	;
 
 		trigger_click: function() {
 			// Fade in/out the contact form and shadow
+			var self = this;
 			if ( $(this.config.container).is(":visible") ) {
 				$(this.config.container).fadeOut(250);
 				$("#shadow").fadeOut(250)
@@ -225,7 +226,6 @@ var CF, test_2	;
 				})
 			}
 			scroll_to("#contact-container", false, 250)
-			this.resize_container()
 		},
 
 		resize_container: function( elem ) {
