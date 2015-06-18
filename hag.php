@@ -56,7 +56,7 @@
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod temporibus vel quia nobis harum sunt explicabo voluptatem recusandae. Sed quae alias enim aspernatur quis omnis animi doloremque non quisquam, ullam dolores obcaecati molestiae dolorum dignissimos, consequatur tempore iste nemo quasi eum reiciendis iusto hic at. Libero nihil ipsum iure aut!</p>
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, voluptatibus. Quidem pariatur repellendus enim, voluptates minus dolorem aspernatur. Molestiae dignissimos maiores obcaecati, necessitatibus. Rerum minus fuga saepe commodi deserunt illum non nemo iste delectus accusantium dicta accusamus numquam, enim nulla at architecto animi expedita sapiente repellendus quasi facilis. Eligendi, magnam?</p>
 					</section>
-					<section style="box-shadow: none;">
+					<section class="last">
 						<h1>Header</h1>
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos nobis dolorem obcaecati ab dignissimos unde fugiat dolore aliquam quibusdam quae nesciunt nam, accusantium doloribus sit. Ipsam alias rem ipsum fugiat, quaerat, vero aliquid saepe, voluptates libero veniam ipsa aut ducimus! Eligendi magnam accusamus est, laborum laboriosam sed quas, soluta sequi!</p>
 					</section>

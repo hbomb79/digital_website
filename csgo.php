@@ -80,7 +80,7 @@
 						<h1>I want more</h1>
 						<p>Want to see more of me playing CS:GO? Click <a href="https://www.youtube.com/watch?v=CSehEQiENEg">here</a></p>
 					</section>
-					<section style="box-shadow:none; font-size:0.6em;">
+					<section class="last" style="font-size:0.6em;">
 						<p>*This is relative to COD Black Ops 2, Ghosts and Advanced Warfare on the PC</p>
 						<p>**$20NZD was the price of the game at the time of writing this article</p>
 						<p>***You can purchase cases on the Steam marketplace if you'd rather not wait to get one from playing</p>

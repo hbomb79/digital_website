@@ -66,7 +66,7 @@
 						<p>Ah, The PC port, many people (including myself) have speculated that Rockstar put the PC players on the back burner, but never the less, Rockstar still presented us with a new GTA, one created for the PC, bringing Next Generation Graphics to a new level, fu*k consoles.</p>
 						<p>The PC port is surprisingly good, everything works as it should, the settings are very exstensive which is great, and they allow anything from a Dell workstation from 2012 to a custom build with SLI 980s to run the game, and it still looks beautiful.</p>
 					</section>
-					<section style="box-shadow: none;" id="down">
+					<section class="last" id="down">
 						<h1>Wheres the bad part?</h1>
 						<p>My only problem with Grand Theft Auto V, is the online portion is very laggy, most of the time people teleport, and killing players is very difficult, as such the online experience turns into a pile of sh*t on the front lawn, although this lag is intermittent and most of the time, I can cope.</p>
 					</section>

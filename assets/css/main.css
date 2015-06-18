@@ -1252,6 +1252,12 @@ Code Deprecated
 	margin:0 auto;
 }
 
+section.last {
+	box-shadow: none;
+	margin-bottom: 0;
+}
+
+
 /* Mobile Code
 -------------------*/
 
@@ -1318,7 +1324,7 @@ Code Deprecated
 	#to-top{
 		display:none !important;
 	}
-	
+
 	.help-container #left, .help-container #right{
 		float:none;
 		width:80%;
@@ -1347,7 +1353,7 @@ Code Deprecated
 	#container, footer {
 		width:100% !important;
 		margin: 0;
-		padding: 1em 0;
+		padding: .5em 0 !important;
 	}
 
 	#container-right {
