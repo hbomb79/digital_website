@@ -191,11 +191,11 @@ var CF, test_2	;
 		events: function(){
 			var self = this;
 			var bound_timer;
-			$(self.config.button).on("click", function( e ){
+			$("body "+self.config.container).on("click", self.config.button, function( e ){
 				e.preventDefault();
 				self.button_click( this );
 			});
-			$(self.config.trigger).on("click", function( e ){
+			$("body").on("click", self.config.trigger, function( e ){
 				e.preventDefault();
 				self.trigger_click();
 			});
@@ -330,6 +330,14 @@ var CF, test_2	;
 							})
 						}
 					})
+				} else if ( $elem.context.value == "step-error-back" ) {
+					// Return from error.
+					// Fade in last slide, fade and remove error.
+					$("#step-error-node").fadeOut(500).promise().done(function(){
+						$("#step-error-node").remove();
+					})
+					var field = $elem.hasClass("restart") ? 0 : self.config.steps[self.config.steps.length-1].id
+					self.slide_trans( self.get_slide("id", field ), true ) // Display last step ( The user should only get here if they tried to send from last step. If not then vslidation will catch them )
 				}
 			}
 		},
@@ -532,9 +540,76 @@ var CF, test_2	;
 				$(".step-done h1").after( $("<p></p>", {
 					text: "Your message has been sent. We have sent you an email containing more information"
 				}) )
-				$(".step-done p").after( $("<button onclick='CF.trigger_click()' class='button contact-trigger' style='margin:0 auto;'>Close</button>") )
+				$(".step-done p").after( $("<button class='button contact-trigger' style='margin:0 auto;'>Close</button>") )
+				this.resize_container();
+			} else if ( data.status == 201 ) {
+				$( self.config.current_slide.cid ).hide()
+				$("#contact-inner").after($("<div></div>",{
+					class: "step",
+					id: "step-error-node",
+					css:{
+						"text-align":"center",
+					}
+				}))
+				$("#step-error-node").html( $( "<h1></h1>", {
+					text: "Unknown Error"
+				}))
+				$("#step-error-node h1").after( $("<p></p>", {
+					text: "Sorry, We could not send your message. Click back to retry"
+				}) )
+				$("#step-error-node p").after( $("<button></button>", {
+					"value": "step-error-back",
+					"class": "button contact-send",
+					"name": "step",
+					css: {
+						"margin": "0 auto"
+					},
+					text: "Back"
+				}) )
+				this.resize_container("#step-error-node");
+			} else if ( data.status == 404 ) {
+				$( self.config.current_slide.cid ).hide()
+				$("#contact-inner").after($("<div></div>",{
+					class: "step",
+					id: "step-error-node",
+					css:{
+						"text-align":"center",
+					}
+				}))
+				$("#step-error-node").html( $( "<h1></h1>", {
+					text: "Verification Error"
+				}))
+				$("#step-error-node h1").after( $("<p></p>", {
+					text: "Somethings not quite right. Please go back and check that all fields are correctly filled in"
+				}) )
+				$("#step-error-node p").after( $("<button></button>", {
+					"value": "step-error-back",
+					"class": "button contact-send restart",
+					"name": "step",
+					css: {
+						"margin": "0 auto"
+					},
+					text: "Back"
+				}) )
+				this.resize_container("#step-error-node");
+			} else if ( data.status == 304 ) {
+				$( self.config.current_slide.cid ).hide()
+				$("#contact-inner").after($("<div></div>",{
+					class: "step",
+					id: "step-error-node",
+					css:{
+						"text-align":"center",
+					}
+				}))
+				$("#step-error-node").html( $( "<h1></h1>", {
+					text: "Already Sent"
+				}))
+				$("#step-error-node h1").after( $("<p></p>", {
+					text: "Please wait a while before resending a message, thanks"
+				}) )
+				$("#step-error-node p").after( $("<button class='button contact-trigger' style='margin:0 auto;'>Close</button>") )
+				this.resize_container("#step-error-node");
 			}
-			this.resize_container();
 		}
 	}
 
