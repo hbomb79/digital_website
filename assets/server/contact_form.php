@@ -64,6 +64,10 @@
 													$error = 404;
 													$error_text = "Please Fill In Both Fields";
 												}
+												if ( isset( $_POST["email"] ) && !empty( $_POST["email"] ) && !filter_var($_POST["email"], FILTER_VALIDATE_EMAIL) ) {
+													$error = 201;
+													$error_text = "Invalid Email Address";
+												}
 												if ( $error != 0) {
 													draw1( $error, $error_text );
 												} else {
@@ -281,7 +285,7 @@
 						</div>
 						<br>
 						<div id="controls">
-							<button type="submit" value="step3" name="step" class="button contact-send" >Next</button><br>
+							<button type="submit" value="step3" name="step" class="button contact-send" >Next</button><br><?php if(!$js) { ?><br><?php } ?>
 							<button type="submit" value="step1" name="step" class="button contact-send" >Back</button>
 						</div>
 					</form>
@@ -323,41 +327,13 @@
 					</div>
 					<br>
 					<div id="controls">
-						<button type="submit" value="send" name="step" class="button contact-send">Send</button><br>
+						<button type="submit" value="send" name="step" class="button contact-send">Send</button><br><?php if(!$js) { ?><br><?php } ?>
 						<button type="submit" value="step2" name="step" class="button contact-send">Back</button>
 					</div>
 				</form>
 			</div> 
 		</div> <!-- #step3 -->
 	<?php
-	}
-
-	function draw_send(){
-		// Only for javascript users.
-		?>
-		<div id="stepsend" class="step" data-step-name="stepsend">
-			<div id="start">
-				<h2>Contact</h2>
-				<p>Sending Message</p>
-			</div>
-			<div>
-				<form method="post" id="step3-form" class="step-form">
-					<div id="hidden">
-						<input type="hidden" name="name" value="<?php echo($_POST['name']) ?>">
-						<input type="hidden" name="email" value="<?php echo($_POST['email']) ?>">
-						<input type="hidden" name="type" value="<?php echo($_POST['type']) ?>">
-					</div>
-					<div id="inputs">
-						<textarea name="message" id="message" cols="30" rows="10"><?php echo( isset($_POST["message"]) ? $_POST["message"] : "" ) ?></textarea>
-					</div>
-					<div id="controls">
-						<button type="submit" value="step2" name="step" class="button contact-send">Back</button><br>
-						<button type="submit" value="send" name="step" class="button contact-send">Send</button>
-					</div>
-				</form>
-			</div> 
-		</div> <!-- #stepsend -->
-		<?php
 	}
 	
 	// This file will detect what stage the user is on if using POST, otherwise it will assume the user is using Javascript and animate the transitions.

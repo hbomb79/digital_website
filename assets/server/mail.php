@@ -11,6 +11,14 @@
 	$json_obj = array("name" => isset($_POST["name"]) ? $_POST["name"] : "null", "email" => isset($_POST["email"]) ? $_POST["email"] : "null", "type" => isset($_POST["type"]) ? $_POST["type"] : "null", "message" => isset($_POST["message"]) ? $_POST["message"] : "null", "js" => isset($_POST["js"]) && !empty($_POST['js']) ? "true" : "false");
 	$missing = false;
 	foreach( $json_obj as $key => $obj ) {
+		if ( $key == "type" && $obj == "NONE" ) {
+			// IF NONE then missing
+			$missing = true;
+		}
+		if ( $key == "email" && !filter_var($obj, FILTER_VALIDATE_EMAIL) ) {
+			$missing = true;
+			// Invalid EMAIL
+		}
 		if ($obj === "null" || empty($obj)) {
 			$missing = true;
 		}
@@ -115,7 +123,7 @@
 									<p>Your message cannot be sent due to missing field(s), please ensure the following field(s) are filled in and try again:</p>
 									<ul>
 										<?php foreach ($json_obj as $key => $value){
-											if( $value == "null" || empty($value) ) {
+											if( $value == "null" || empty($value) || $key == "type" && $value == "NONE" || $key == "email" && !filter_var($value, FILTER_VALIDATE_EMAIL) ) {
 												echo("<li class='none'>".$key."</li>");
 											}
 										} ?>
@@ -158,6 +166,25 @@
 		if ($missing) {
 			return "BAD";
 		} else {
+			// Send message to HEXCODE
+
+			$from_h = "support@hexcode.com";
+	        $from_name_h = "HexCode Support";
+	        $subject_h = "HexCode Contact Submission";
+	        $message = "Your website contact form has been submitted with the following infomation: "."\n\n";
+			$message .= 'Name: '.strip_tags($json_obj["name"])."\n"; 
+			$message .= 'Email: '.strip_tags($_POST["email"])."\n";
+			$message .= 'Type: '.strip_tags($_POST["type"])."\n";
+			$message .= 'Message: '.strip_tags($_POST['message'])."\n";
+	        
+	        $header_h = "From: ".$from_name_h." <".$from_h.">". "\r\n";
+	        $header_h .= "Reply-To: ". $json_obj["email"] . "\r\n";
+
+	        if ( !mail("harryfelton12@gmail.com", $subject_h, $message, $header_h) ) {
+	        	// Content message not sent
+	        	return "BAD";
+	        }
+	        // Else, continue and send verification message to user.
 			$from = "support@hexcode.com";
 	        $from_name = "HexCode Support";
 	        $name = $json_obj["name"];

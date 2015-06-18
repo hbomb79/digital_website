@@ -252,6 +252,7 @@ var CF, test_2	;
 						if( $elem.hasClass("warning") ){
 							$elem.removeClass("warning")
 						}
+						$errors.filter(".step-per-error").removeClass(".step-per-error").addClass("step-error");
 						$errors.addClass("done").slideUp(100).promise().done(function(){
 							$(".step-error").filter(".done").remove()
 						});
@@ -318,21 +319,13 @@ var CF, test_2	;
 					// Going forward, trying to send, validate ALL steps incase an alteration to the fields has been made via inspect element.
 					self.validate_current().done(function( proceed ){
 						if ( proceed ) {
-							self.validate_all().done(function( r ){
+							self.validate_all().done(function( r, s ){
+								console.log(r)
+								console.log(s)
 								if ( r ) {
 									self.submit();
 								} else {
-									if ( $(elem).siblings("#final-error").length > 0 ) {
-										$(elem).siblings("#final-error").remove()
-									}
-									$("<div></div>", {
-										class: "step-error",
-										id: "final-error",
-										text: "Missing Fields Detected On Previous Steps",
-										css: {
-											color:"red"
-										}
-									}).insertBefore( elem )
+									self.slide_trans( self.get_slide( "id", s ), true )
 								}
 							})
 						}
@@ -343,7 +336,8 @@ var CF, test_2	;
 
 		validate_all: function() {
 			var d = $.Deferred();
-			var elems, $elem, elem, proceed, self;
+			var elems, $elem, elem, proceed, self, first_step;
+			first_step = this.config.steps.length ;
 			self = this;
 			elems = this.config.steps;
 			proceed = true;
@@ -355,13 +349,30 @@ var CF, test_2	;
 					// Loop through the results.
 					for ( var i = 0; i < r.length; i++) {
 						if ( r[i].error != 200 ) {
-							// ERROR
+							// ERROR, highlight field.
+							console.warn("DETECT")
+							test_2 = r[i];
+							// Remove previous step-per-errors for this element.
+							$( "#"+r[i].name+"-error" ).remove();
+							$( r[i].id ).after( $("<p></p>", {
+								css: {
+									color: 'red'
+								},
+								text: r[i].errorText,
+								class: "step-per-error", // A step-per-error is only removed if you are going next off of that field and validation is correct. step-error is removed whenever slide_trans is called.
+								id: r[i].name+"-error"
+							}) )
+							console.log("HALF: "+proceed)
 							proceed = false;
+							first_step = ( first_step > elem.id ) ? elem.id : first_step // If this error step is less than the first_step, then set it.
+						} else {
+							console.warn("OK")
 						}
 					}
-					d.resolve( proceed );
 				})
 			}
+			console.log("END: " + proceed + ":: " + first_step)
+			d.resolve( proceed, first_step );
 			return d;
 		},
 
@@ -454,7 +465,7 @@ var CF, test_2	;
 						"error": 401,
 						"errorText": "Please Enter A Valid Email"
 					})
-				} else if ( type == "select" && $(field.id).val() == field.select_param.unselect ) {
+				} else if ( type == "select" && $(field.id).val() == "" || type == "select" && $(field.id).val() == field.select_param.unselect ) {
 					results.push({
 						"name": field.name,
 						"id": field.id,

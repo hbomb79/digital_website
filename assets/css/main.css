@@ -314,7 +314,7 @@ header li a.loading{
 }
 
 .page-container.two #container-right {
-	width:29%;
+	width:27%;
 	position: fixed;
 	right:0;
 	top:2em;
@@ -1179,7 +1179,7 @@ Code Deprecated
 	overflow: hidden;
 }
 
-#contact-container input, #contact-container textarea {
+#contact-container input, #contact-container textarea, #contact-container select,  #contact-container option {
 	display: block;
 	margin: 0.5em auto;
 	padding:0.5em;
@@ -1342,7 +1342,7 @@ Code Deprecated
 	}
 
 	#container-right {
-		display:none;
+		display:none !important;
 	}
 
 	.page-bg {
