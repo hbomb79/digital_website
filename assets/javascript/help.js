@@ -371,8 +371,6 @@ var CF;
 
 		validate_all: function() {
 			var d = $.Deferred();
-			d.resolve(true, 3);
-			return d;
 			var elems, $elem, elem, proceed, self, first_step;
 			first_step = this.config.steps.length-1 ;
 			self = this;
