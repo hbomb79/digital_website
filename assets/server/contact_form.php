@@ -29,79 +29,49 @@
 		setcookie("mail","true",time()+86400, "/");
 	}
 	function drawmain() {
-		?>
-			<!-- MAIN html layout -->
-			<html>
-				<head>
-					<link rel="stylesheet" href="../css/contact.css">
-					<style>
-						.button{
-							font-size: 0.8em;
-						}
-					</style>
-				</head>
-				<body>
-					<div id="bg-wrapper">
-					 	<div class="page-bg" id="cf-page-bg"></div> <!--Faded out and replaced using ajax-->
-					</div>
-					<div class="page-container current" id="cf">
-						<div id="wrapper">
-							<div id="container">
-								<main>
-									<div id="contact-inner">
-										<?php
-											check_cookie();
-											if ( !isset($_GET["js"]) && !isset($_POST["step"]) || isset($_POST["step"]) && $_POST["step"] == "step1" ) {
-												draw1( false, false );
-											} else if( !isset($_GET["js"]) && isset($_POST["step"]) && $_POST["step"] == "step2" ) {
-												// Verify entries
-												// 
-												// First, Check both were filled.
-												$error = 0;
-												$error_text = "done";
-												if ( !isset($_POST["name"]) || empty($_POST["name"]) || empty($_POST["email"]) || !isset($_POST["email"])) {
-													// Both are not filled
-													$error = 404;
-													$error_text = "Please Fill In Both Fields";
-												}
-												if ( isset( $_POST["email"] ) && !empty( $_POST["email"] ) && !filter_var($_POST["email"], FILTER_VALIDATE_EMAIL) ) {
-													$error = 201;
-													$error_text = "Invalid Email Address";
-												}
-												if ( $error != 0) {
-													draw1( $error, $error_text );
-												} else {
-													draw2( false, false );
-												}
-											} else if( !isset($_GET["js"]) && isset($_POST["step"]) && $_POST["step"] == "step3" ) {
-												if (  !isset($_POST["type"]) || empty($_POST["type"]) || $_POST["type"]=="NONE" ) {
-													// Both are not filled
-													$error = 404;
-													$error_text = "Please Select A Type";
-													draw2( $error, $error_text );
-												} else {
-													draw3( false, false );
-												}
-											} else if ( isset($_POST["step"]) && $_POST["step"] == "send" && !isset($_GET["js"]) ) {
-												if ( !isset($_POST["message"]) || empty($_POST["message"]) ) {
-													$error=404;
-													$error_text="Please Type A Message";
-													draw3( $error, $error_text );
-												} else {
-													send_now();
-													// Send Message, Report Success.
-													// mail.php, send information too.
-												}
-											}
-										?>
-									</div>
-								</main>
-							</div>
-						</div>
-					</div>
-				</body>
-			</html>
-		<?php
+		check_cookie();
+		if ( !isset($_GET["js"]) && !isset($_POST["step"]) || isset($_POST["step"]) && $_POST["step"] == "step1" ) {
+			draw1( false, false );
+		} else if( !isset($_GET["js"]) && isset($_POST["step"]) && $_POST["step"] == "step2" ) {
+			// Verify entries
+			// 
+			// First, Check both were filled.
+			$error = 0;
+			$error_text = "done";
+			if ( !isset($_POST["name"]) || empty($_POST["name"]) || empty($_POST["email"]) || !isset($_POST["email"])) {
+				// Both are not filled
+				$error = 404;
+				$error_text = "Please Fill In Both Fields";
+			}
+			if ( isset( $_POST["email"] ) && !empty( $_POST["email"] ) && !filter_var($_POST["email"], FILTER_VALIDATE_EMAIL) ) {
+				$error = 201;
+				$error_text = "Invalid Email Address";
+			}
+			if ( $error != 0) {
+				draw1( $error, $error_text );
+			} else {
+				draw2( false, false );
+			}
+		} else if( !isset($_GET["js"]) && isset($_POST["step"]) && $_POST["step"] == "step3" ) {
+			if (  !isset($_POST["type"]) || empty($_POST["type"]) || $_POST["type"]=="NONE" ) {
+				// Both are not filled
+				$error = 404;
+				$error_text = "Please Select A Type";
+				draw2( $error, $error_text );
+			} else {
+				draw3( false, false );
+			}
+		} else if ( isset($_POST["step"]) && $_POST["step"] == "send" && !isset($_GET["js"]) ) {
+			if ( !isset($_POST["message"]) || empty($_POST["message"]) ) {
+				$error=404;
+				$error_text="Please Type A Message";
+				draw3( $error, $error_text );
+			} else {
+				send_now();
+				// Send Message, Report Success.
+				// mail.php, send information too.
+			}
+		}
 	}
 
 	function drawsent( $response ){

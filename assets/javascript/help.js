@@ -26,22 +26,6 @@ var CF;
 
 	// This JS file is created using an object literal. In my opinion this makes the code easier to both write and read.
 
-	// Order of progress:
-	// Javascript loads on page
-	// Current slide is positioned correctly, the others are to the right of that slide on top of each other.
-
-	// WHEN a user clicks NEXT, then the slide matching the step form data will be slid to the right.
-
-	// WHEN a user clicks BACK, then the slide matching the step will be moved to the left of the current slide, it will then slide over top.
-
-	// WHEN a user clicks a BUTTON with a step of SUBMIT, then the JS file will submit the request and process.
-
-	// WHILE an animation is in progress the user CANNOT change slide.
-
-	// WHEN the request is completed, then the SUCCESS slide will be slid over top, until then the SUCCESS slide is display:none;
-
-	// WHEN any button is clicked to change slide, the current_slide is manipulated and the next slide is detected, whether it be behind or infront (if config.current_slide.id < new_id ? backward : forward )
-
 	CF = {
 		defaults: {
 			container: "#contact-container",

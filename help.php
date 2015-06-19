@@ -28,10 +28,11 @@
 	<div class="page-container current" id="help">
 		<!--<script src="assets/javascript/help.js"></script>-->
 		<script>
-		var CF = CF ? CF : false;
-		var CF_enable = CF ? true : false;
+		var contact = contact ? contact : false;
+		var contact_enable = contact ? true : false;
 		$.getScript("assets/javascript/help.js", function(){
-			CF.init({
+			contact = Object.create( CF )
+			contact.init({
 				button: ".contact-send",
 				form_class: ".step-form",
 				trigger: ".contact-trigger",
@@ -106,7 +107,7 @@
 					name: "step1",
 					id:0
 				}
-			}, CF_enable)
+			}, contact_enable)
 		});
 		</script>
 		<div id="wrapper">
@@ -160,7 +161,7 @@
 						</div>
 						<noscript>
 							<div class="rel-contain" style="text-align:center;">
-								<a href="assets/server/contact_form.php" class="button" style="text-align:center; margin:0 auto; font-size:1.3em; display:inline-block;">Contact Us</a>
+								<a href="contact.php?back=help.php" class="button" style="text-align:center; margin:0 auto; font-size:1.3em; display:inline-block;">Contact Us</a>
 							</div>
 						</noscript>
 						<script>
