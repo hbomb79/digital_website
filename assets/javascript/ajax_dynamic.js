@@ -427,6 +427,7 @@ aj_page = {
 	},
 
 	add_page: function( raw ) {
+		$(window).trigger("aj_start")
 		content = $(raw).filter(".page-container")
 		if ( !get_cookie("animations_disable") ) {
 			// Append to body, and wait until done.
@@ -491,7 +492,7 @@ aj_page = {
 		}
 		// push new url if it was not a popstate
 		if (!replace) {
-			$(".page-container.new").waitForImages(function() {
+			//$(".page-container.new").waitForImages(function() {
 				// Scroll user to the top of the page if they are too far down (scroll)
 				$(".page-container.current").removeClass("current").addClass("leave")
 				$(".page-container.new").removeClass("new").addClass("current")
@@ -508,7 +509,7 @@ aj_page = {
 						aj_page.finish()
 					});
 				}, 1000)
-			})
+			//})
 		} else {
 			content = $(content);
 
@@ -587,9 +588,9 @@ aj_page = {
 		if ( !get_cookie("animations_disable") ) {
 			$(".page-bg").fadeOut(250)
 			setTimeout(function() {
-				$(".page-bg").attr( "id", $(content).find(".page-bg").attr("id") ).waitForImages(function(){
+				$(".page-bg").attr( "id", $(content).find(".page-bg").attr("id") )//.waitForImages(function(){
 						$(".page-bg").fadeIn(500)
-					})
+					//})
 				setTimeout(function() {
 					r.resolve() //Resolve when page-bg transition complete 
 				}, 250)
@@ -626,6 +627,7 @@ aj_page = {
 			return;
 		}
 		aj_page.ajax_prepare( true )
+		$(window).trigger("aj_done")
 	}
 }
 

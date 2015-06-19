@@ -40,3 +40,13 @@ function hideNotify(){
 	}
 }
 
+// Load data-js-link if javascript is on, else load the href
+
+$(document).ready(function(){
+	$("html").on("click", "a.js-link", function( e ){
+		e.preventDefault();
+		// Animate
+		aj_page.start( getFileName(), $(this).data("js-link"), false, false, false )
+	})
+})
+

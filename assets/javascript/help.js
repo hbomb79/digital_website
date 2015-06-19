@@ -8,7 +8,7 @@
 // 201 - not_sent: could not send message
 // 404 - missing_fields: Required fields were not filled in
 // 304 - already_sent: Already sent a message in past 24 hours
-var CF;
+var CF, test_2;
 (function($, window, document, undefined){
 	// Restarted 6/15/15
 	// This JS file needs to:
@@ -182,7 +182,7 @@ var CF;
 					$element.css({
 						"left": width+this.config.animation.offset,
 						"opacity": 0
-					})
+					}).hide()
 				}
 			}
 		},
@@ -204,6 +204,54 @@ var CF;
 					bound_timer = setTimeout(function(){
 						self.check_bounds()
 					}, 500);
+				}
+			});
+			$("body").on("change", ".cf-keyup", function(){
+				// Check
+				self.check_select( this );
+			});
+			self.target_click();
+			self.fade_out();
+		},
+
+		check_select: function( e ){
+			var step, field, self, config, fields, ps;
+			self = this;
+			config = self.config;
+			fields = config.steps;
+			ps = $(e).parents(".step").length == 1 ? $(e).parents(".step")[0] : false;
+			if ( !ps ) {
+				return;
+			}
+			step = self.get_slide( "name", $(ps).data("step-name") )
+			// We have the step, find which field this input belongs to.
+			for ( var i = 0; i < step.inputs.length; i++ ) {
+				if ( step.inputs[i].name == $(e).attr("name") ) {
+					field = step.inputs[i];
+				}
+			}
+			if ( $(e).val() == field.select_param.other_select ) {
+				// SHOW OTHER, HIDE MAIN WARNING
+				$( field.select_param.other.id ).slideDown(250)
+				$( "#"+field.name+"-error").remove()
+				$(field.id).removeClass("warning")
+			} else {
+				// HIDE OTHER, AND WARNING
+				$("#"+field.select_param.other.name+"-error").remove()
+				$( field.select_param.other.id ).val("").removeClass("warning").slideUp(250)
+			}
+			setTimeout(function(){ self.resize_container() }, 250)
+		},
+
+		target_click: function(){
+			var self = this;
+			$(window).on("click", function( e ) {
+				if ( !$(self.config.container).is(":visible") ) {
+					return;
+				}
+				var ev = $( e.originalEvent.srcElement ) // Found using Google Chromes inspect element (had no internet for documentation)
+				if ( ev.parents( self.config.container ).length != 1 && !ev.hasClass( (self.config.button).replace(".", "") ) && !ev.hasClass( (self.config.trigger).replace(".", "") )) {
+					self.trigger_click();
 				}
 			})
 		},
@@ -227,7 +275,15 @@ var CF;
 			if ( self.config.system.r_param ) {
 				self.resize_container( self.config.system.r_param )
 			}
-			scroll_to("#contact-container", false, 250)
+		},
+
+		fade_out: function() {
+			var self = this;
+			$(window).on("aj_start", function(){ //Fired when ajax is about to begin changing page
+				if ( $(self.config.container).is(":visible") ) {
+					self.trigger_click()
+				}
+			})
 		},
 
 		resize_container: function( elem ) {
@@ -239,6 +295,7 @@ var CF;
 		},
 
 		validate_current: function( no_resize ){
+			// Used object.validate, then adds/removes highlight & error messages from fields on current slide.
 			var d = $.Deferred();
 			var self = this;
 			this.validate( this.get_slide("name", this.config.current_slide.name) ).done(function( r ){
@@ -489,14 +546,31 @@ var CF;
 						"error": 401,
 						"errorText": preset[401]
 					})
-				} else if ( type == "select" && $(field.id).val() == "" || type == "select" && $(field.id).val() == null || type == "select" && $(field.id).val() == field.select_param.unselect ) {
-					results.push({
-						"name": field.name,
-						"id": field.id,
-						"error": 401,
-						"errorText": preset[401]
-					})
-				} else if ( $.trim( $(field.id).val() ) != "" && type == "normal" || type == "email" && $.trim( $(field.id).val() ) != "" || type == "select" && $.trim( $(field.id).val() ) != "" && $.trim( $(field.id).val() ) != field.select_param.unselect ) {
+				} else if ( type == "select" && $(field.id).val() == "" || type == "select" && $(field.id).val() == null || type == "select" && $(field.id).val() == field.select_param.unselect || type == "select" && $(field.id).val() == field.select_param.other_select && $.trim( $(field.select_param.other.id).val() ) == "" ) {
+					if ( type == "select" && $.trim( $(field.id).val() ) == field.select_param.other_select ) {
+						// Push to the other input
+						results.push({
+							"name": field.select_param.other.name,
+							"id": field.select_param.other.id,
+							"error": 404,
+							"errorText": field.select_param.other.presets[404] //Push the error defined in the presets of the {other}
+						})
+						// Also clear the main input (Because other_select is valid)
+						results.push({
+							"name": field.name,
+							"id": field.id,
+							"error": 200,
+							"errorText": preset[200]
+						})
+					} else {
+						results.push({
+							"name": field.name,
+							"id": field.id,
+							"error": 401,
+							"errorText": preset[401]
+						})
+					}
+				} else if ( $.trim( $(field.id).val() ) != "" && type == "normal" || type == "email" && $.trim( $(field.id).val() ) != "" || type == "select" && $.trim( $(field.id).val() ) != "" && $.trim( $(field.id).val() ) != field.select_param.unselect && $.trim( $(field.id).val() ) != field.select_param.other_select || type == "select" && $.trim( $(field.id).val() ) == field.select_param.other_select && $.trim( $( field.select_param.other.id ).val() ) != "" ) {
 					results.push({
 						"name": field.name,
 						"id": field.id,
@@ -526,7 +600,12 @@ var CF;
 				// Check data
 				if ( datac[i].post ) {
 					for ( var c = 0; c < datac[i].inputs.length; c++ ) {
-						data[ datac[i].inputs[c].name ] = $(datac[i].inputs[c].id).val();
+						// Check if type is select
+						if ( datac[i].inputs[c].type == "select" && $( datac[i].inputs[c].id ).val() == datac[i].inputs[c].select_param.other_select ) {
+							data[ datac[i].inputs[c].name ] = $(datac[i].inputs[c].select_param.other.id).val()
+						} else {
+							data[ datac[i].inputs[c].name ] = $(datac[i].inputs[c].id).val();
+						}
 					}	
 				}
 			}
@@ -604,7 +683,7 @@ var CF;
 			self = this;
 			self.config.system.r_param = options.selector;
 			selector = options.selector;
-			$("#step-loading-node, .step-node").fadeOut().promise().done(function(){
+			$("#step-loading-node, .step-node").stop().fadeOut().promise().done(function(){
 				$(this).remove();
 			})
 			$( self.config.current_slide.cid ).fadeOut()

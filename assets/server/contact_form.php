@@ -244,12 +244,23 @@
 							<input type="hidden" name="message" value="<?php echo(isset($_POST['message']) ? $_POST['message'] : '') ?>">
 						</div>
 						<div id="inputs">
-							<select name="type" id="type">
+							<select name="type" id="type" class="cf-keyup">
 								<option value="NONE">Please Select</option>
 								<option value="inquiry">Inquiry</option>
 								<option value="feedback">Feedback</option>
 								<option value="bug">Bug Report</option>
+								<?php
+									if ( $js ) { ?> <option value="OTHER">Other</option> <?php }
+								?>
 							</select>
+							<?php
+							if ( $js ) { ?>
+
+							<input type="text" id="type_other" class="large" name="type_other" style="display:none; padding:0.4em; font-size: 0.8em; width: 123px;" placeholder="Your custom type">
+
+							<?php
+							}
+							?>
 						</div>
 						<br>
 						<div id="controls">

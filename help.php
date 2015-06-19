@@ -28,6 +28,16 @@
 	<div class="page-container current" id="help">
 		<!--<script src="assets/javascript/help.js"></script>-->
 		<script>
+
+		if ( !_G.preserve.done_set ) {
+			_G.preserve.done_set = true;
+			$(window).on( "aj_done", function(){ // Fired when ajax has completed
+				hash.check( "#contact" , function(){
+					contact.trigger_click();
+				});
+			} )
+		}
+
 		var contact = contact ? contact : false;
 		var contact_enable = contact ? true : false;
 		$.getScript("assets/javascript/help.js", function(){
@@ -78,7 +88,16 @@
 								id:"#type",
 								type:"select",
 								select_param: {
-									unselect: "NONE"
+									unselect: "NONE",
+									other_select: "OTHER", // This will use select_param.other. When this param is met (onkeyup), then the new field will be displayed
+									other: { // May be changing to array of objects so differnet inputs can be shown per select option. ( cant figure out selects in selects, the code wasnt really made for that )
+										name: "type_other",
+										id: "#type_other",
+										type: "normal",
+										presets: {
+											404: "Enter your custom type"
+										}
+									}
 								},
 								presets: {
 									401: "Please pick one"
@@ -187,5 +206,14 @@
 		</div>
 	</div>
 	<script src="assets/javascript/page.js"></script>
+	<script>
+		$(window).load(function(){ 
+			setTimeout(function(){
+				hash.check( "#contact" , function(){
+					contact.trigger_click();
+				});
+			}, 500)
+		})
+	</script>
 </body>
 </html>
