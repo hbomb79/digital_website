@@ -26,7 +26,10 @@
 	 	<div class="page-bg" id="help-page-bg">
 	</div> <!--Faded out and replaced using ajax--> </div>
 	<div class="page-container current" id="help">
+		<!--<script src="assets/javascript/help.js"></script>-->
 		<script>
+		var CF = CF ? CF : false;
+		var CF_enable = CF ? true : false;
 		$.getScript("assets/javascript/help.js", function(){
 			CF.init({
 				button: ".contact-send",
@@ -56,7 +59,10 @@
 							{
 								name:"email",
 								id:"#email",
-								type:"email"
+								type:"email",
+								presets: {
+									401: "Enter a valid email"
+								}
 							}
 						],
 						id:0
@@ -72,6 +78,9 @@
 								type:"select",
 								select_param: {
 									unselect: "NONE"
+								},
+								presets: {
+									401: "Please pick one"
 								}
 							}
 						],
@@ -85,7 +94,8 @@
 							{
 								name:"message",
 								id:"#message",
-								type:"normal"
+								type:"normal",
+								presets: { 404: "Go on then, type a message" }
 							}
 						],
 						id:2
@@ -96,7 +106,7 @@
 					name: "step1",
 					id:0
 				}
-			})
+			}, CF_enable)
 		});
 		</script>
 		<div id="wrapper">

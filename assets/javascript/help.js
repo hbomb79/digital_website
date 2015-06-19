@@ -109,7 +109,16 @@ var CF;
 				}
 			],
 			system: {
-				hold: false
+				hold: false,
+				r_param: false
+			},
+			validation: {
+				err_msg: {
+					"404": "This field is required",
+					"401": "Invalid entry",
+					"200": "OK",
+					"201": "Error"
+				}
 			},
 			current_slide: {
 				cid: "#cid",
@@ -118,7 +127,7 @@ var CF;
 			} // NAME
 		},
 
-		init: function( options ){
+		init: function( options, skip ){
 			this.config = $.extend(true, {}, this.defaults, options)
 			var config = this.config;
 			var self = this;
@@ -128,7 +137,7 @@ var CF;
 				"opacity":0
 			})
 			this.restore();
-			this.events();
+			if ( !skip ) { this.events(); } // Stops multiple event handlers on same element ( causes open and close immediately ) if already been called. Because the page doesnt get reloaded ( JS ) then the init function must be recalled.
 			config.callback.start();
 			setTimeout(function(){ self.resize_container(); $( config.container ).hide().css("opacity", 1) }, 250)
 		},
@@ -231,6 +240,9 @@ var CF;
 					"overflow":"hidden"
 				})
 			}
+			if ( self.config.system.r_param ) {
+				self.resize_container( self.config.system.r_param )
+			}
 			scroll_to("#contact-container", false, 250)
 		},
 
@@ -300,6 +312,7 @@ var CF;
 		button_click: function(elem){
 			$elem = $(elem);
 			var self = this;
+			self.config.system.r_param = false;
 			// Validate this steps fields
 			// Check name of button, if step then check value.
 			if ( $elem.context.name == "step" && !self.config.system.hold ) {
@@ -329,22 +342,14 @@ var CF;
 								if ( r ) {
 									self.submit();
 									// Show sending stage
-									$( self.config.current_slide.cid ).fadeOut(100)
-									$("#contact-inner").after($("<div></div>",{
-										class: "step",
-										id: "step-loading-node",
-										css:{
-											"text-align":"center",
-											"display":"none"
-										}
-									}))
-									$("#step-loading-node").html( $( "<h1></h1>", {
-										text: "Sending Message"
-									})).fadeIn(100)
-									$("#step-loading-node h1").after( $("<p></p>", {
-										text: "Please wait while we process your message"
-									}) )
-									self.resize_container("#step-loading-node");
+									self.output({
+										"header": "Sending Message",
+										"text": "Please wait while we process your message",
+										"node_class": "step step-node-load",
+										"selector": ".step.step-node-load",
+										"resize_param": ".step-node-load",
+										"button": false
+									});
 								} else {
 									self.slide_trans( self.get_slide( "id", s ), true )
 								}
@@ -387,9 +392,10 @@ var CF;
 							// ERROR, highlight field.
 							// Remove previous step-per-errors for this element.
 							$( "#"+r[i].name+"-error" ).remove();
-							$( r[i].id ).after( $("<p></p>", {
+							$( r[i].id ).after( $("<div></div>", {
 								css: {
-									color: 'red'
+									color: 'red',
+									"text-align": "center"
 								},
 								text: r[i].errorText,
 								class: "step-per-error", // A step-per-error is only removed if you are going next off of that field and validation is correct. step-error is removed whenever slide_trans is called.
@@ -434,7 +440,7 @@ var CF;
 			// STEP is the NEW step to go to, use o_step to access current/old
 			var o_step, config, self;
 			self = this;
-			config = this.config
+			config = this.config;
 			o_step = config.current_slide;
 			// If forward
 			$( o_step.cid ).fadeOut(250);
@@ -474,18 +480,22 @@ var CF;
 		validate: function( step ){
 			var d = $.Deferred();
 			// Check fields
-			var type, results, field;
+			var type, results, field, self;
+			self = this;
 			results = [];
 			var fields = step.inputs;
 			for ( var i = 0; i < fields.length; i++) {
 				type = fields[i].type;
 				field = fields[i];
+				// Open the fields error table and extend with defaults.
+				var field_preset = field.presets ? field.presets : {};
+				var preset = $.extend( true, {}, self.config.validation.err_msg, field_preset )
 				if ( $.trim( $(field.id).val() ) == "" && type == "normal" || $.trim( $(field.id).val() ) == "" && type == "email" ) {
 					results.push({
 						"name": field.name,
 						"id": field.id,
 						"error": 404,
-						"errorText": "Please Enter Something"
+						"errorText": preset[404]
 					})
 				}
 				else if ( type == "email" && !this.validate_email( $.trim( $(field.id).val() ) ) ) {
@@ -493,28 +503,28 @@ var CF;
 						"name": field.name,
 						"id": field.id,
 						"error": 401,
-						"errorText": "Please Enter A Valid Email"
+						"errorText": preset[401]
 					})
 				} else if ( type == "select" && $(field.id).val() == "" || type == "select" && $(field.id).val() == null || type == "select" && $(field.id).val() == field.select_param.unselect ) {
 					results.push({
 						"name": field.name,
 						"id": field.id,
 						"error": 401,
-						"errorText": "Please Pick One"
+						"errorText": preset[401]
 					})
 				} else if ( $.trim( $(field.id).val() ) != "" && type == "normal" || type == "email" && $.trim( $(field.id).val() ) != "" || type == "select" && $.trim( $(field.id).val() ) != "" && $.trim( $(field.id).val() ) != field.select_param.unselect ) {
 					results.push({
 						"name": field.name,
 						"id": field.id,
 						"error": 200,
-						"errorText": "OK"
+						"errorText": preset[200]
 					})
 				} else {
 					results.push({
 						"name": field.name,
 						"id": field.id,
 						"error": 201,
-						"errorText": "Error Occurred, Please report"
+						"errorText": preset[201]
 					})
 				}
 			}
@@ -560,12 +570,10 @@ var CF;
 				$(this).remove();
 			})
 			if ( x.statusText == "timeout" || x.status == 0 ) {
-
 				self.output({
 					"header": "Connection Timeout",
 					"text": "Sorry, we could not connect to the server in time.",
 					"node_class": "step step-error",
-					"type": "after",
 					"selector": ".step.step-error",
 					"btext": "Back",
 					"resize_param": ".step-error",
@@ -575,7 +583,6 @@ var CF;
 					"header": "Connection Failed",
 					"text": "It appears as though the mailing system is down. We will fix this as soon as we can. Please try again later",
 					"node_class": "step step-error",
-					"type": "after",
 					"selector": ".step.step-error",
 					"btext": "Back",
 					"resize_param": ".step-error",
@@ -585,7 +592,7 @@ var CF;
 
 		output: function( settings ){
 			// This function made it A LOT easier to display temporary messages on the fly (without a seperate div etc...)
-			var defaults, options, header, text, restart, back, id, node_class, resize_param, type, css, selector, btext, self;
+			var defaults, options, self;
 			defaults = {
 				id: "step-info-node",
 				header: "HEADER",
@@ -605,10 +612,13 @@ var CF;
 					}
 				},
 				selector: "#step-info-node",
-				btext: "Button"
+				btext: "Button",
+				hideOnClick: false,
+				button: true
 			}
 			options = $.extend(true, {}, defaults, settings);
 			self = this;
+			self.config.system.r_param = options.selector;
 			selector = options.selector;
 			$("#step-loading-node, .step-node").fadeOut().promise().done(function(){
 				$(this).remove();
@@ -625,16 +635,26 @@ var CF;
 			$(selector + " h1").after( $("<p></p>", {
 				text: options.text
 			}) )
-			if ( options.back ) {
-				$(selector + " p").after( $("<button class='button contact-trigger' style='margin:0 auto;'>Close</button>") )
-			} else {
-				$(selector + " p").after( $("<button></button>", {
-					value: "step-error-back",
-					class: ( options.restart ) ? "button contact-send restart" : "button contact-send",
-					css: options.node_css.button,
-					text: options.btext,
-					name: "step"
-				}) )
+			if ( options.button ) {
+				if ( options.back ) {
+					$(selector + " p").after( $("<button class='button contact-trigger' style='margin:0 auto;'>Close</button>") )
+				} else {
+					$(selector + " p").after( $("<button></button>", {
+						value: "step-error-back",
+						class: ( options.restart ) ? "button contact-send restart" : "button contact-send",
+						css: options.node_css.button,
+						text: options.btext,
+						name: "step"
+					}) )
+				}
+				if ( options.hideOnClick ) {
+					$(selector + " button").on("click", function( e ){
+						var self_elem = this;
+						$(this).parent(selector).fadeOut( 250 ).promise().done(function(){
+							$(self_elem).parent(selector).remove()
+						});
+					})
+				}
 			}
 			if (options.resize_param != "none") {
 				self.resize_container( options.resize_param )
@@ -663,7 +683,6 @@ var CF;
 					"header": "Unknown Error",
 					"text": "An unexpected error prevented us from sending your message.",
 					"node_class": "step step-node-error",
-					"type": "after",
 					"selector": ".step.step-node-error",
 					"btext": "Back",
 					"resize_param": ".step-node-error"
@@ -673,7 +692,6 @@ var CF;
 					"header": "Verification Error",
 					"text": "Somethings not quite right. Please go back and check that all fields are correctly filled in.",
 					"node_class": "step step-node-error",
-					"type": "after",
 					"selector": ".step.step-node-error",
 					"btext": "Back",
 					"resize_param": ".step-node-error",
