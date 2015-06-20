@@ -89,18 +89,20 @@
 								type:"select",
 								select_param: {
 									unselect: "NONE",
-									other_select: "OTHER", // This will use select_param.other. When this param is met (onkeyup), then the new field will be displayed
-									other: { // May be changing to array of objects so differnet inputs can be shown per select option. ( cant figure out selects in selects, the code wasnt really made for that )
-										name: "type_other",
-										id: "#type_other",
-										type: "normal",
-										presets: {
-											404: "Enter your custom type"
-										}
-									}
 								},
 								presets: {
 									401: "Please pick one"
+								}
+							},
+							{
+								name: "type_other",
+								id: "#type_other",
+								type: "normal",
+								shown: false,
+								parent: {
+									id: "#type",
+									name: "type",
+									showWhen: "OTHER"
 								}
 							}
 						],
