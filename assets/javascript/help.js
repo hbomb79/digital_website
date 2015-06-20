@@ -632,7 +632,7 @@ var CF, test_2;
 			$("#step-loading-node").fadeOut().promise().done(function(){
 				$(this).remove();
 			})
-			if ( x.statusText == "timeout" || x.status == 0 ) {
+			if ( x.statusText == "timeout" ) {
 				self.output({
 					"header": "Connection Timeout",
 					"text": "Sorry, we could not connect to the server in time.",
@@ -645,6 +645,24 @@ var CF, test_2;
 				self.output({
 					"header": "Connection Failed",
 					"text": "It appears as though the mailing system is down. We will fix this as soon as we can. Please try again later",
+					"node_class": "step step-error",
+					"selector": ".step.step-error",
+					"btext": "Back",
+					"resize_param": ".step-error",
+				})
+			} else if ( x.statusText == "error" ) {
+				self.output({
+					"header": "Connection Failed",
+					"text": "We could not connect to our servers. Check your internet connection and try again",
+					"node_class": "step step-error",
+					"selector": ".step.step-error",
+					"btext": "Back",
+					"resize_param": ".step-error",
+				})
+			} else {
+				self.output({
+					"header": "Fatal Error",
+					"text": "A fatal error prevented us from sending your message. Please try again later",
 					"node_class": "step step-error",
 					"selector": ".step.step-error",
 					"btext": "Back",
