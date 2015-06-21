@@ -186,6 +186,11 @@ var CF, test_2;
 					$(self_elem).parent(selector).remove()
 				});
 			});
+			$("body").on("click", "node-r-click", function(){
+				self.config.system.hold = false;
+				self.config.system.r_param = false;
+				// The button has been clicked, remove the r_param to allow the program to resize to current step instead.
+			})
 			// When an element with class cf-keyup changes value then fire this function
 			$("body").on("change", ".cf-keyup", function(){
 				// Check
@@ -299,10 +304,13 @@ var CF, test_2;
 				$("html, body").css({
 					"overflow":"hidden"
 				})
+				if ( self.config.system.r_param ) {
+					self.resize_container( self.config.system.r_param );
+				} else {
+					self.resize_container();
+				}
 			}
-			if ( self.config.system.r_param ) {
-				self.resize_container( self.config.system.r_param )
-			}
+			
 		},
 
 		fade_out: function() {
@@ -787,7 +795,8 @@ var CF, test_2;
 				selector: "#step-info-node", // Selector to use when targeting
 				btext: "Button", // Button text
 				hideOnClick: true, // hide+remove message when the button is clicked
-				button: true // false for NO button ( loading screen )
+				button: true, // false for NO button ( loading screen )
+				rClick: true
 			}
 			options = $.extend(true, {}, defaults, settings); // Extend settings
 			self = this;
@@ -832,6 +841,10 @@ var CF, test_2;
 					// hideOnClick enabled, then add a class of node-fade-click, this is delegated in function events
 					$(selector + " button").addClass("node-fade-click")
 				}
+				if ( options.rClick ) {
+					// Remove r_param on click of button.
+					$(selector + " button").addClass("node-r-click")
+				}
 			}
 			if (options.resize_param != "none") {
 				self.resize_container( options.resize_param )
@@ -859,7 +872,9 @@ var CF, test_2;
 					"selector": ".step.step-done",
 					"btext": "Continue",
 					"resize_param": ".step-done",
-					"back": true
+					"back": true,
+					"hideOnClick": false,
+					"rClick": false
 				})
 			} else if ( data.status == 201 ) {
 				self.output({
@@ -889,7 +904,9 @@ var CF, test_2;
 					"selector": ".step.step-done",
 					"btext": "Close",
 					"resize_param": ".step-done",
-					"back": true
+					"back": true,
+					"hideOnClick": false,
+					"rClick": false
 				})
 			}
 		}
