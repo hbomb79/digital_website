@@ -204,7 +204,6 @@ var CF, test_2;
 			config = self.config;
 			steps = config.steps;
 			field_buffer = [];
-
 			for ( var s = 0; s < steps.length; s++ ) {
 				step = steps[s];
 				fields = step.inputs;
@@ -213,7 +212,7 @@ var CF, test_2;
 					field = fields[f];
 					if ( field.parent ) {
 						// Field has a parent
-						if ( field.parent.id == $(e).attr("id") ) {
+						if ( field.parent.id.replace("#", "") == $(e).attr("id") ) {
 							// This is the same parent, check criteria
 							if ( $(e).val() == field.parent.showWhen ) {
 								// Show field
@@ -239,18 +238,19 @@ var CF, test_2;
 				if ( field_buffer[i].show ) {
 					// Show if not already visible
 					if ( !$(field_buffer[i].id).is(":visible") ) {
-						$(field_buffer[i].id).fadeIn(250)
+						$(field_buffer[i].id).slideDown(250)
 					}
 				} else {
 					// Hide if shown
 					if ( $(field_buffer[i].id).is(":visible") ) {
-						$(field_buffer[i].id).fadeOut(250)
+						$(field_buffer[i].id).slideUp(250)
 					}
 				}
-				setTimeout( function(){
-					self.resize_container()
-				}, 250)
+				
 			}
+			setTimeout( function(){
+				self.resize_container()
+			}, 300)
 
 		},
 
@@ -563,7 +563,6 @@ var CF, test_2;
 			var type, results, field, self;
 			self = this;
 			var fields = step.inputs;
-			console.log( fields )
 			var toValidate = [];
 			for ( var i = 0; i < fields.length; i++) {
 				// Loop through each field and store in variable
@@ -600,7 +599,6 @@ var CF, test_2;
 
 			// The actual validation is done now
 			results = [];
-			console.log(toValidate)
 			for ( var c = 0; c < toValidate.length; c++ ) {
 				// Loop through each field to validate
 				var type, cid, name, val, proceed, result, results, v;
@@ -656,7 +654,6 @@ var CF, test_2;
 				}
 				results.push( result )
 			}
-			console.log( results )
 
 			d.resolve(results)
 			return d;
