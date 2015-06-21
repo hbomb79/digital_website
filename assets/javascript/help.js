@@ -219,13 +219,15 @@ var CF, test_2;
 								field_buffer.push({
 									"show": true,
 									"name": field.name,
-									"id": field.id
+									"id": field.id,
+									"parent": field.parent
 								})
 							} else {
 								field_buffer.push({
 									"show": false,
 									"name": field.name,
-									"id": field.id
+									"id": field.id,
+									"parent": field.parent
 								})
 							}
 						}
@@ -235,15 +237,23 @@ var CF, test_2;
 
 			// Show/Hide those in buffer
 			for ( var i = 0; i < field_buffer.length; i++ ) {
+				$("#"+field_buffer[i].name+"-error").fadeOut(100).promise().done(function(){
+					$(this).remove();
+				});
+				$(field_buffer[i].parent.id).removeClass("warning")
+				$("#"+field_buffer[i].parent.name+"-error").fadeOut(100).promise().done(function(){
+					$(this).remove();
+				})
+				$(field_buffer[i].id).removeClass("warning").val("");
 				if ( field_buffer[i].show ) {
 					// Show if not already visible
 					if ( !$(field_buffer[i].id).is(":visible") ) {
-						$(field_buffer[i].id).slideDown(250)
+						$(field_buffer[i].id).slideDown(100)
 					}
 				} else {
 					// Hide if shown
 					if ( $(field_buffer[i].id).is(":visible") ) {
-						$(field_buffer[i].id).slideUp(250)
+						$(field_buffer[i].id).slideUp(100)
 					}
 				}
 				
