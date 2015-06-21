@@ -91,7 +91,7 @@
 									unselect: "NONE",
 								},
 								presets: {
-									401: "Please pick one"
+									404: "Please pick one"
 								}
 							},
 							{
@@ -99,6 +99,9 @@
 								id: "#type_other",
 								type: "normal",
 								shown: false,
+								presets: {
+									404: "Define custom type"
+								},
 								parent: {
 									id: "#type",
 									name: "type",

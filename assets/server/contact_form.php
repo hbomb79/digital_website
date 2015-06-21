@@ -256,7 +256,7 @@
 							<?php
 							if ( $js ) { ?>
 
-							<input type="text" id="type_other" class="large" name="type_other" style="display:none; padding:0.4em; font-size: 0.8em; width: 123px;" placeholder="Your custom type">
+							<input type="text" id="type_other" class="large" name="type_other" style="display:none; padding:0.4em; font-size: 0.8em; width: 123px;" placeholder="Custom Type">
 
 							<?php
 							}

@@ -578,9 +578,7 @@ var CF, test_2;
 				// Loop through each field and store in variable
 				type = fields[i].type;
 				field = fields[i];
-				// Open the fields error table and extend with defaults.
-				var field_preset = field.presets ? field.presets : {};
-				var preset = $.extend( true, {}, self.config.validation.err_msg, field_preset )
+				console.log( field )
 				// Check if field is a parent ( shown by parent value )
 				// If so then check the parent, if the parent is correct then validate this field as well.
 				fieldParent = field.parent ? field.parent : false
@@ -612,7 +610,9 @@ var CF, test_2;
 			for ( var c = 0; c < toValidate.length; c++ ) {
 				// Loop through each field to validate
 				var type, cid, name, val, proceed, result, results, v;
-				v = toValidate[c];
+				v = toValidate[c];				
+				var field_preset = v.presets ? v.presets : {};
+				var preset = $.extend( true, {}, self.config.validation.err_msg, field_preset )
 				type = v.type;
 				cid = v.id;
 				name = v.name;
@@ -629,7 +629,6 @@ var CF, test_2;
 						proceed = false;
 						result["error"] = 404;
 						result["errorText"] = preset[404];
-						// Append error to result, then we 
 					}
 				} else if ( type == "email" ) {
 					if ( val == "" || !val ) {
@@ -655,7 +654,8 @@ var CF, test_2;
 				} else {
 					// Unknown Type, Return 201
 					proceed = false;
-					console.warn("Unknown Type")
+					result["error"] = 201;
+					result["errorText"] = preset[201];
 				}
 				if ( proceed ) {
 					// OK, return 200
@@ -663,8 +663,9 @@ var CF, test_2;
 					result["errorText"] = preset[200];
 				}
 				results.push( result )
+				// Push result ( error & status ) to main result table.
 			}
-
+			// Results compiled, resolve with the argument.
 			d.resolve(results)
 			return d;
 		},
