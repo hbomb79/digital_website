@@ -20,8 +20,8 @@
 	<script>
 		$(window).load(function(){
 			setTimeout(function(){
-				hash.check( "#contact" , function(){
-					contact.trigger_click();
+				hash.check( "#!contact" , function(){ //#! = Hashbang to signify use of AJAX/Javascript related events as opposed to an id on the page.
+					if ( contact_enable ) { contact.trigger_click() }
 				});
 			}, 500)
 		})
@@ -37,18 +37,17 @@
 	<div class="page-container current" id="help">
 		<!--<script src="assets/javascript/help.js"></script>-->
 		<script>
-
+		var contact_enable = contact_enable ? true : false;
 		if ( !_G.preserve.done_set ) {
 			_G.preserve.done_set = true;
 			$(window).on( "aj_done", function(){ // Fired when ajax has completed
-				hash.check( "#contact" , function(){
-					contact.trigger_click();
+				hash.check( "#!contact" , function(){
+					if ( contact_enable ) { contact.trigger_click() } // Contact form has been init
 				});
 			} )
 		}
 
 		var contact = contact ? contact : false;
-		var contact_enable = contact ? true : false;
 		$.getScript("assets/javascript/help.js", function(){
 			contact = Object.create( CF )
 			contact.init({
@@ -56,7 +55,9 @@
 				form_class: ".step-form",
 				trigger: ".contact-trigger",
 				callback: {
-					start: function(){},
+					start: function(){
+						contact_enable = true;
+					},
 					anim_start: function(){},
 					anim_done: function(){},
 					submit: function(){},

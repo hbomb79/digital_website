@@ -32,7 +32,7 @@
 					<section class="header-after">
 						<h1>Image Copyright</h1>
 						<p>All images used on, in or around this site are not copywritten, therefore use of the images by HexCode are permitted on this site.</p>
-						<p>If you own an image that is displayed on this page and have recently added copyright or believe we have made a mistake in believing the image is not copywritten, then contact us <a class="anim js-link" data-js-link="help.php#contact" href="mailto:harryfelton12@gmail.com">here</a>, including your details, the page you saw the image on, and the image context, decription or if possible its href. </p>
+						<p>If you own an image that is displayed on this page and have recently added copyright or believe we have made a mistake in believing the image is not copywritten, then contact us <a class="anim js-link" data-js-link="help.php#!contact" href="mailto:harryfelton12@gmail.com">here</a>, including your details, the page you saw the image on, and the image context, decription or if possible its href. </p>
 					</section>
 					<section>
 						<h1>Source Owner</h1>
@@ -53,7 +53,7 @@
 						<h1>Accurate Reviews</h1>
 						<p>Reviews on this site are personal and therefore may be inaccurate. These reviews should not be taken as such, they are more like an opinion. Authors do not simply say "I do or dont like". Authors should instead talk about the game in sections, like Gameplay, Graphics and Performance.</p>
 						<p>Any opinions on perfomance may not be accurate due to machine limitations, each author may have a differnet machine and therefore graphic limitations may not be accurate if the author is running the game software on an out of date machine.</p>
-						<p>If you disagree with a "review" on this site, then please ensure you understand they are not reviews, and are not accurate. If you feel an author has spoken too hostile or display a clear hatrid for the game because of personal not factual evidence, then contact HexCode <a class="anim js-link" data-js-link="help.php#contact" href="mailto:harryfelton12@gmail.com">here</a>. If you believe that an author is providing incorrect factual material, such as game specifications then contact us <a class="anim js-link" data-js-link="help.php#contact" href="mailto:harryfelton12@gmail.com">here</a>.</p>
+						<p>If you disagree with a "review" on this site, then please ensure you understand they are not reviews, and are not accurate. If you feel an author has spoken too hostile or display a clear hatrid for the game because of personal not factual evidence, then contact HexCode <a class="anim js-link" data-js-link="help.php#!contact" href="mailto:harryfelton12@gmail.com">here</a>. If you believe that an author is providing incorrect factual material, such as game specifications then contact us <a class="anim js-link" data-js-link="help.php#!contact" href="mailto:harryfelton12@gmail.com">here</a>.</p>
 						<p>Any messages sent to HexCode may be held and recorded for training, reference of legal purposes. Sending a message states you agree to this policy.</p>
 						<p></p>
 					</section>

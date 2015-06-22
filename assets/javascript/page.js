@@ -44,6 +44,9 @@ function hideNotify(){
 
 $(document).ready(function(){
 	$("html").on("click", "a.js-link", function( e ){
+		if ( get_cookie( "ajax_disable" ) ) {
+			return true;
+		}
 		e.preventDefault();
 		// Animate
 		aj_page.start( getFileName(), $(this).data("js-link"), false, false, false )

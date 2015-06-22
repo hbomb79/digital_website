@@ -153,6 +153,8 @@ header li a.loading{
 	background:white;
 	z-index:1999;
 	width:0%;
+	-webkit-box-shadow: 0 0 5px black;
+	box-shadow: 0 0 5px black;
 }
 #load-progress{
 	position: relative;
@@ -937,7 +939,9 @@ section {
 	margin: 0;
 	box-shadow: none;
 	overflow: hidden;
-	background: lightgray;
+	background: white;
+	border: 3px solid crimson;
+	border-radius: 3px;
 }
 
 .help-container #right {

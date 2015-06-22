@@ -130,6 +130,9 @@ var CF, test_2;
 					})
 					scroll_top();
 				}
+				if ( !is_elem_visible( self.config.container ) ) {
+					scroll_top();
+				}
 				$("html, body").css({
 					"overflow": "auto"
 				})
@@ -301,14 +304,13 @@ var CF, test_2;
 			} else {
 				$(this.config.container).fadeIn(250)
 				$("#shadow").fadeIn(250)
-				$("html, body").css({
-					"overflow":"hidden"
-				})
-				if ( self.config.system.r_param ) {
-					self.resize_container( self.config.system.r_param );
-				} else {
-					self.resize_container();
-				}
+				setTimeout(function(){
+					if ( self.config.system.r_param ) {
+						self.resize_container( self.config.system.r_param );
+					} else {
+						self.resize_container();
+					}
+				}, 250);
 			}
 			
 		},
