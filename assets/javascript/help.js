@@ -115,10 +115,10 @@ var CF, test_2;
 						"top": "50%"
 					})
 					scroll_to( config.container, false, 250)
-					$("html, body").css({
-						"overflow": "hidden"
-					})
 				}
+				$("html, body").css({
+					"overflow": "hidden"
+				})
 			} else {
 				// If the window height is smaller, then change position to absolute if currently set to fixed
 				if ( $elem.css("position") == "fixed" ) {
@@ -129,10 +129,10 @@ var CF, test_2;
 						
 					})
 					scroll_top();
-					$("html, body").css({
-						"overflow": "auto"
-					})
 				}
+				$("html, body").css({
+					"overflow": "auto"
+				})
 			}
 
 		},
@@ -586,7 +586,6 @@ var CF, test_2;
 				// Loop through each field and store in variable
 				type = fields[i].type;
 				field = fields[i];
-				console.log( field )
 				// Check if field is a parent ( shown by parent value )
 				// If so then check the parent, if the parent is correct then validate this field as well.
 				fieldParent = field.parent ? field.parent : false

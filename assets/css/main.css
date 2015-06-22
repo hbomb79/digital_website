@@ -929,13 +929,15 @@ section {
 
 .help-container {
 	width:100%;
+	margin-bottom: 2em;
 }
 
 .help-container section {
-	padding: 0;
-	border: 2px #FF003F solid;
-	border-radius: 0.7em;
+	padding: 1em;
+	margin: 0;
+	box-shadow: none;
 	overflow: hidden;
+	background: lightgray;
 }
 
 .help-container #right {
@@ -948,15 +950,17 @@ section {
 	float:left;
 }
 
-.help-container .title-wrap {
-	background:red;
-	padding: 0.5em;
+.help-container #inner {
+	width:70%;
+	margin: 0 auto;
+	text-align: center;
+	box-shadow: 2px 2px 5px -2px black;
 }
 
-.help-container h2{
+.help-container #inner ul, .help-container #inner li {
 	margin: 0;
-	background: red;
-	color:white;
+	padding: 0;
+	list-style-type: none;
 }
 
 
@@ -1212,6 +1216,10 @@ section.last {
 	margin-bottom: 0;
 }
 
+.help-container section h2 {
+	margin-top: 0;
+}
+
 
 /* Mobile Code
 -------------------*/
@@ -1268,6 +1276,10 @@ section.last {
 @media screen and (max-width: 770px) {
 	/* Change css rules to ones that apply for a mobile device */
 	
+	.help-container #inner section {
+		margin-bottom: 1em;
+	}
+
 	html, body {
 		overflow: auto !important;
 	}

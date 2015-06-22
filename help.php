@@ -17,6 +17,15 @@
 	require_once"assets/_module/imports.php";
 	?>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<script>
+		$(window).load(function(){
+			setTimeout(function(){
+				hash.check( "#contact" , function(){
+					contact.trigger_click();
+				});
+			}, 500)
+		})
+	</script>
 </head>
 <body>
 	<?php
@@ -148,36 +157,45 @@
 						</section>
 						<div class="help-container clearfix">
 							<div id="left">
-								<section>
-									<div class="title-wrap">
-										<h2>Troubleshooting</h2>
-									</div>
-									<div class="body-wrap">
-										<ul>
-											<li><a class="anim" href="#">Animations Lag</a></li>
-											<li><a class="anim" href="#">Slow Animations</a></li>
-											<li><a class="anim" href="#">Something Else</a></li>
-											<li><a class="anim" href="#">Another Thing</a></li>
-											<li><a class="anim" href="#">Last One</a></li>
-										</ul>
-									</div>
-								</section>
+								<div id="inner">
+									<section>
+										<div class="title-wrap">
+											<h2>Troubleshooting</h2>
+										</div>
+										<div class="body-wrap">
+											<ul>
+												<li><a class="anim" href="#">Animations Lag</a></li>
+												<li><a class="anim" href="#">Slow Animations</a></li>
+												<li><a class="anim" href="#">Something Else</a></li>
+												<li><a class="anim" href="#">Another Thing</a></li>
+												<li><a class="anim" href="#">Last One</a></li>
+												<li><a class="anim" href="#">Animations Lag</a></li>
+												<li><a class="anim" href="#">Slow Animations</a></li>
+												<li><a class="anim" href="#">Something Else</a></li>
+												<li><a class="anim" href="#">Another Thing</a></li>
+												<li><a class="anim" href="#">Last One</a></li>
+											</ul>
+										</div>
+									</section>
+								</div>
 							</div>
 							<div id="right">
-								<section>
-									<div class="title-wrap">
-										<h2>Troubleshooting</h2>
-									</div>
-									<div class="body-wrap">
-										<ul>
-											<li><a class="anim" href="#">Animations Lag</a></li>
-											<li><a class="anim" href="#">Slow Animations</a></li>
-											<li><a class="anim" href="#">Something Else</a></li>
-											<li><a class="anim" href="#">Another Thing</a></li>
-											<li><a class="anim" href="#">Last One</a></li>
-										</ul>
-									</div>
-								</section>
+								<div id="inner">
+									<section>
+										<div class="title-wrap">
+											<h2>Troubleshooting</h2>
+										</div>
+										<div class="body-wrap">
+											<ul>
+												<li><a class="anim" href="#">Animations Lag</a></li>
+												<li><a class="anim" href="#">Slow Animations</a></li>
+												<li><a class="anim" href="#">Something Else</a></li>
+												<li><a class="anim" href="#">Another Thing</a></li>
+												<li><a class="anim" href="#">Last One</a></li>
+											</ul>
+										</div>
+									</section>
+								</div>
 							</div>
 						</div>
 						<div class="rel-contain" id="ct" style="display:none;">
@@ -211,14 +229,6 @@
 		</div>
 	</div>
 	<script src="assets/javascript/page.js"></script>
-	<script>
-		$(window).load(function(){ 
-			setTimeout(function(){
-				hash.check( "#contact" , function(){
-					contact.trigger_click();
-				});
-			}, 500)
-		})
-	</script>
+	
 </body>
 </html>

@@ -239,8 +239,8 @@
 					<div id="success"></div>
 					<form method="post" id="step2-form" class="step-form">
 						<div id="hidden">
-							<input type="hidden" name="name" value="<?php echo($_POST['name']) ?>">
-							<input type="hidden" name="email" value="<?php echo($_POST['email']) ?>">
+							<input type="hidden" name="name" value="<?php echo( isset($_POST['name']) ? $_POST['name'] : '') ?>">
+							<input type="hidden" name="email" value="<?php echo( isset($_POST['email']) ? $_POST['email'] : '') ?>">
 							<input type="hidden" name="message" value="<?php echo(isset($_POST['message']) ? $_POST['message'] : '') ?>">
 						</div>
 						<div id="inputs">
@@ -297,9 +297,9 @@
 				<div id="success"></div>
 				<form method="post" id="step3-form" class="step-form">
 					<div id="hidden">
-						<input type="hidden" name="name" value="<?php echo($_POST['name']) ?>">
-						<input type="hidden" name="email" value="<?php echo($_POST['email']) ?>">
-						<input type="hidden" name="type" value="<?php echo($_POST['type']) ?>">
+						<input type="hidden" name="name" value="<?php echo( isset($_POST['name']) ? $_POST['name'] : '') ?>">
+						<input type="hidden" name="email" value="<?php echo( isset($_POST['email']) ? $_POST['email'] : '') ?>">
+						<input type="hidden" name="type" value="<?php echo( isset($_POST['type']) ? $_POST['type'] : '') ?>">
 					</div>
 					<div id="inputs">
 						<textarea name="message" id="message" cols="30" rows="10"><?php echo( isset($_POST["message"]) ? $_POST["message"] : "" ) ?></textarea>
