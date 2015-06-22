@@ -931,17 +931,13 @@ section {
 
 .help-container {
 	width:100%;
-	margin-bottom: 2em;
+	margin-bottom: 1em;
 }
 
 .help-container section {
 	padding: 1em;
 	margin: 0;
 	box-shadow: none;
-	overflow: hidden;
-	background: white;
-	border: 3px solid crimson;
-	border-radius: 3px;
 }
 
 .help-container #right {
@@ -959,6 +955,9 @@ section {
 	margin: 0 auto;
 	text-align: center;
 	box-shadow: 2px 2px 5px -2px black;
+	margin-bottom: 1em;
+	border: 3px solid crimson;
+	border-radius: 3px;
 }
 
 .help-container #inner ul, .help-container #inner li {
@@ -968,9 +967,7 @@ section {
 }
 
 
-/* HELP CONTACT */
-
-/* JavaScript Content
+/* Tooltips and Javascript stuff
 -------------------*/
 
 body.JS #to-top {
@@ -1280,10 +1277,6 @@ section.last {
 @media screen and (max-width: 770px) {
 	/* Change css rules to ones that apply for a mobile device */
 	
-	.help-container #inner section {
-		margin-bottom: 1em;
-	}
-
 	html, body {
 		overflow: auto !important;
 	}
