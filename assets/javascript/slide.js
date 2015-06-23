@@ -15,6 +15,11 @@
 		}, options)
 
 		var timers = [],
+			slideshowImg = [],
+			originalSrc,
+			dummy,
+			container,
+			listArray
 
 
 	}
