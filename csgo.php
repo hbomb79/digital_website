@@ -42,7 +42,7 @@
 						<h1 class="large" id="title">Counter Strike: Global Offensive</h1>
 					</div>
 					<div class="image-wrapper wide header-after">
-						<img src="assets/image/cs1.jpg" class="center-image" alt="Picture of counter strike: global offensive"><br>
+						<img id="test1" src="assets/image/cs1.jpg" class="center-image" alt="Picture of counter strike: global offensive" data-slideshow-src="assets/image/cs.png|assets/image/cs1.jpg|assets/image/|gmod.jpgassets/image/hag.jpg"><br>
 						<small>Royalty Free image of CS:GO sourced from CS:GO official steam page</small>
 					</div>
 					<section id="info">
@@ -62,7 +62,7 @@
 						<p>CS:GO is built on the Source engine... so not great, although we have become used to crystal clear graphics. When I first launched the game I was rather disappointed, but within minutes of the game play, I didn't give a sh*t about the graphics, the only thing on my mind was the bast*** on the balcony shooting at me.</p>
 					</section>
 					<section style="text-align:center; box-shadow:none;" class="mobile-hide" id="trail">
-						<iframe width="560" height="315" src="https://www.youtube.com/embed/edYCtaNueQY" class="load-after" frameborder="0" allowfullscreen></iframe>
+						<!--<iframe width="560" height="315" src="https://www.youtube.com/embed/edYCtaNueQY" class="load-after" frameborder="0" allowfullscreen></iframe>-->
 					</section>
 					<section style="text-align:center; box-shadow:none;" class="mobile-show" id="trail">
 						Click <a href="https://www.youtube.com/watch?v=edYCtaNueQY">here</a> to watch the CS:GO trailer
@@ -74,7 +74,7 @@
 					<section style="text-align:center; box-shadow:none;" class="mobile-hide" id="gameplay">
 						<h1>I want more</h1>
 						<p>Want to see more of me playing CS:GO? I have embedded a video of me playing below</p>
-						<iframe class="load-after" width="560" height="315" src="https://www.youtube.com/embed/CSehEQiENEg" frameborder="0" allowfullscreen></iframe>
+						<!--<iframe class="load-after" width="560" height="315" src="https://www.youtube.com/embed/CSehEQiENEg" frameborder="0" allowfullscreen></iframe>-->
 					</section>
 					<section style="text-align:center; box-shadow:none;" class="mobile-show" id="gameplay">
 						<h1>I want more</h1>

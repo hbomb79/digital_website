@@ -37,7 +37,7 @@
 						require_once("assets/_module/start.php");
 					?>
 					<div class="image-wrapper wide">
-						<img src="assets/image/gta1.jpg" class="center-image" alt="Picture of GTA">
+						<img src="assets/image/cs1.jpg" class="center-image" alt="Picture of counter strike: global offensive" data-slideshow-src="assets/image/cs.png|assets/image/cs1.jpg|assets/image/gmod.jpg|assets/image/hag.jpg"><br>
 					</div>
 					<div class="header">
 						<h1 class="large" id="title">Grand Theft Auto V</h1>
