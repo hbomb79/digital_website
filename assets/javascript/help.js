@@ -93,8 +93,8 @@ var CF, test_2;
 		},
 
 		check_bounds: function(){
-			if ( $(window).width() < 770 ) {
-				// Dont alter the positioning of the div if the screen is in mobile mode ( media )
+			if ( $(window).width() < 770 || !$( this.config.container ).is(":visible") ) {
+				// Dont alter the positioning of the div if the screen is in mobile mode ( media ) or if the contact container is not visible
 				return;
 			}
 			// Check if the bottom or top is off screen.
@@ -164,6 +164,9 @@ var CF, test_2;
 			var bound_timer;
 			// Sets a event listener using event delegation for the button class contained in the body container
 			// Event delegation allows elements that are created on the fly ( using function output )
+			// 
+			// All these events are using event delegation, meaning they only have to be called once per session. Even if AJAX changes that page
+			// the plugin will still perform like it should.
 			$("body").on("click", self.config.button, function( e ){
 				e.preventDefault();
 				self.button_click( this );

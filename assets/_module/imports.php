@@ -7,4 +7,5 @@
 <script src="assets/javascript/tooltip.js"></script>
 <script src="assets/javascript/scroller.js"></script>
 <script src="assets/javascript/hash.js"></script>
+<script src="assets/javascript/slide.js"></script>
 <!-- END HEAD IMPORTS -->
