@@ -117,8 +117,6 @@
 				i++;
 			}
 
-
-
 			$container.replaceWith( dummy );
 			// Container done, now adjust stuff!
 			lastID++;

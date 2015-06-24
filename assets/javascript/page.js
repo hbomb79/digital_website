@@ -69,7 +69,8 @@ $(window).on("load aj_done", function(){
 			start: function(){
 				$(".img-border").css({
 					"height": "41vw"
-				})
+				});
+				$(window).trigger("resize");
 			}
 		}
 	})
