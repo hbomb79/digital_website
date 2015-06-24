@@ -1,47 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<script src="assets/javascript/jquery.min.js"></script>
+	<script src="assets/javascript/slide.js"></script>
+	<link rel="stylesheet" href="assets/css/slide.css">
 	<meta charset="UTF-8">
 	<title>Test</title>
 	<style>
 	
-	#container {
-		width:500px;
+	#test {
+		width:600px;
 		height: 300px;
-	}
-
-	ul {
-		
-	}
-
-	ul li {
-		list-style-type: none;
-		display: inline;
-	}
-
-	ul li img {
-		width:40%;
 	}
 
 	</style>
 </head>
 <body>
 	<main>
-			
-		<div id="container" class="slides">
-			<div id="controls">
-				<div id="lefr">
-					<a href="#">Back</a>
-				</div>
-				<div id="right">
-					<a href="#">Forward</a>
-				</div>
-			</div>
-			<ul>
-				<li><img src="assets/image/gta.jpg" alt=""></li>
-				<li><img src="assets/image/payday.jpg" alt=""></li>
-				<li><img src="assets/image/cs.png" alt=""></li>
-			</ul>
+
+		<div id="test">
+			<img id="test1" src="assets/image/gta.jpg" class="center-image" alt="Picture of counter strike: global offensive" data-slideshow-src="assets/image/gta1.jpg|assets/image/slideshow/gta1.jpg|assets/image/slideshow/gta2.jpg|assets/image/slideshow/gta3.jpg|assets/image/slideshow/gta4.jpg">
+			<img id="test2" src="assets/image/gta.jpg" class="center-image" alt="Picture of counter strike: global offensive" data-slideshow-src="assets/image/gta1.jpg|assets/image/slideshow/gta1.jpg|assets/image/slideshow/gta2.jpg|assets/image/slideshow/gta3.jpg|assets/image/slideshow/gta4.jpg">
 		</div>
 
 	</main>
