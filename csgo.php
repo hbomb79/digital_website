@@ -42,7 +42,7 @@
 						<h1 class="large" id="title">Counter Strike: Global Offensive</h1>
 					</div>
 					<div class="image-wrapper wide header-after">
-						<img id="test1" src="assets/image/cs1.jpg" class="center-image" alt="Picture of counter strike: global offensive" data-slideshow-src="assets/image/cs.png|assets/image/cs1.jpg|assets/image/|gmod.jpgassets/image/hag.jpg"><br>
+						<img id="test1" src="assets/image/cs1.jpg" class="center-image" alt="Picture of counter strike: global offensive" data-slideshow-src="assets/image/cs.png|assets/image/cs1.jpg|assets/image/gmod.jpg|assets/image/hag.jpg"><br>
 						<small>Royalty Free image of CS:GO sourced from CS:GO official steam page</small>
 					</div>
 					<section id="info">

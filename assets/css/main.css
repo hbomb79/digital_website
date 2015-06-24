@@ -361,6 +361,10 @@ header li a.loading{
 	max-width: 960px;
 }
 
+.header.fix {
+	z-index:2;
+}
+
 .header.fix h1 {
 	position: fixed;
 	top:0;

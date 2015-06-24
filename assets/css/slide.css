@@ -8,6 +8,47 @@
 	background-position: center;
 }
 
-.slideshow {
+.hexslide {
 	position: relative;
+	width:60vw;
+	height:35vw;
+	z-index:1;
+}
+
+.hexslide span {
+	position: absolute;
+	z-index: 2;
+	top:50%;
+	-webkit-transform: translateY(-50%);
+	color:white;
+	display: block;
+	padding:1em;
+	background:yellow;
+	-webkit-transition: padding 0.2s ease-in-out;
+	-o-transition: padding 0.2s ease-in-out;
+	transition: padding 0.2s ease-in-out;
+	cursor: pointer;
+}
+
+.hexslide .right span {
+	right:-3px;
+}
+
+.hexslide .left span {
+	left:-3px;
+}
+
+.hexslide .left span:hover {
+	padding-left:25px;
+}
+
+.hexslide .right span:hover {
+	padding-right: 25px;
+}
+
+@media screen and ( max-width:770px ) {
+	.hexslide{
+		height: 55vw;
+		width: 90vw;
+	}
 }

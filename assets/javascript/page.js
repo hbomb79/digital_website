@@ -52,4 +52,3 @@ $(document).ready(function(){
 		aj_page.start( getFileName(), $(this).data("js-link"), false, false, false )
 	})
 })
-
