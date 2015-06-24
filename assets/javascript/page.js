@@ -67,7 +67,7 @@ $(window).on("load ajax_done", function(){setTimeout(function(){
 		},
 		callback: {
 			start: function(){
-				$(".img-border").css({"width":"initial"});
+				
 			}
 		}
 	})}, 1000)

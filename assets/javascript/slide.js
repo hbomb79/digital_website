@@ -16,6 +16,7 @@
 			navigation: true,
 			alwaysShowNav: false,
 			stopAutoOnNav: false,
+			indicators: true,
 			additionalClass: {
 				slide: false,
 				container: false
@@ -67,20 +68,29 @@
 				dummy.css( options.additionalCSS.container )
 			}
 
-			if ( options.navigation ) {
-				createGUI();
-			}
-
 			if ( options.pauseOnHover ) {
 				// Add a class to be used by event listeners. This indicates the slideshow should be paused when a user hovers on it.
 				dummy.addClass("hexslide-hover")
+			}
+			slideshowImgs[item] = $container.data("slideshow-src").split("|");
+			if ( options.navigation ) {
+				// Compile list of static steps.
+				var temp_slides = [];
+				temp_slides[0] = $container.attr('src');
+				var temp_imgs = [];
+				temp_imgs = $container.data("slideshow-src").split("|");
+				for ( var i = 0; i < temp_imgs.length; i++ ) {
+					temp_slides.push( temp_imgs[i] );
+				}
+				createGUI( temp_slides );
 			}
 
 			img = $("<div></div>", {
 				class: "slide",
 				css: {
 					"background-image": "url("+ $container.attr('src') +")"
-				}
+				},
+				"data-hexslide-id": 0
 			}).appendTo( dummy )
 
 			if ( options.additionalClass.slide ) {
@@ -90,15 +100,14 @@
 			if ( options.additionalCSS.slide ) {
 				img.css( options.additionalCSS.slide )
 			}
-
-			slideshowImgs[item] = $container.data("slideshow-src").split("|");
-
+			var i = 1;
 			for ( var index = 0; index < slideshowImgs[item].length; index++ ) {
 				img = $("<div></div>", {
 					class: "slide",
 					css: {
 						"background-image": "url(" + slideshowImgs[item][index] + ")"
-					}
+					},
+					"data-hexslide-id": i
 				}).appendTo( dummy )
 				if ( options.additionalClass.slide ) {
 					img.addClass( options.additionalClass.slide )
@@ -106,7 +115,10 @@
 				if ( options.additionalCSS.slide ) {
 					img.css( options.additionalCSS.slide )
 				}
+				i++;
 			}
+
+
 
 			$container.replaceWith( dummy );
 			// Container done, now adjust stuff!
@@ -126,11 +138,8 @@
 				clearInterval( timer[i] );
 			}
 			timers[i] = setInterval(function(){
-				// First, fade out the first item, then fade in the second, last append (move) the first (faded out) 
-				// element to the end of the chain
-				$("#hexslide-"+i+"-container .slide:first").fadeOut( options.speed )
-					.next( ".slide" ).fadeIn( options.speed )
-					.end().appendTo("#hexslide-"+i+"-container");
+				// Emulate a click on the next button
+				nextSlide.call( $slideshow.find(".slide"), true )
 			}, options.interval)
 		}
 
@@ -139,7 +148,7 @@
 			console.warn("stopped "+i)
 		}
 
-		function createGUI( i ) {
+		function createGUI( id ) {
 			var nextBtn, prevBtn, nextTxt, prevTxt;
 			nextBtn = $("<div></div>", {
 				class: "slide-btn right",
@@ -175,40 +184,114 @@
 			prevTxt.appendTo(prevBtn);
 			nextBtn.appendTo(dummy);
 			prevBtn.appendTo(dummy);
+
+			if ( options.indicators ) {
+				// Now create the slide indicators.
+				var indCont, inds, slides;
+				indCont = $("<div></div>", {
+					class: "indicator-container"
+				})
+				slides = id;
+				for ( var i = 0; i < slides.length; i++ ) {
+					var ind = $("<span></span>", {
+						class: "indicator",
+						"data-hexslide-id": i
+					}).appendTo( indCont )
+
+					if ( i == 0 ) {
+						ind.addClass("active")
+					}
+				}
+				if ( !options.alwaysShowNav ) {
+					indCont.addClass("hide");
+				}
+				indCont.appendTo( dummy );
+			}
 		}
 
-		function nextSlide() {
+		function nextSlide( auto ) {
 			// Clear the corresponding interval to stop the slideshow
-            clearInterval(timers[($(this).parent(".hexslide").attr('id').split('-')[1])]);
+			if (!auto) { clearInterval(timers[($(this).parent(".hexslide").attr('id').split('-')[1])]) }
 
-            // Fade out the current image and append it to the parent, making it last
-            // Fade in the next one
+			// Fade out the current image, fade in the next ID.
+			var $currentSlide = $(this).parent(".hexslide").find(".slide:first");
+			var currentID = $currentSlide.data("hexslide-id");
+			currentID++;
+			// If current ID is greater than the amount of slides, then set to 0
+			if ( currentID > $(this).parent(".hexslide").find(".slide").length-1 ) {
+				currentID = 0;
+			}
 
-            $(this).parent(".hexslide").find('.slide:first').stop().fadeOut( options.speed )
-                .next('.slide').stop().fadeIn( options.speed )
-                .end().appendTo($(this).parent(".hexslide"));
+			$currentSlide.stop().fadeOut( options.speed );
+			$(this).parent(".hexslide").find(".slide").filter(function(){
+				return $(this).data("hexslide-id") == currentID;
+			}).fadeIn( options.speed ).insertBefore( $currentSlide );
 
-            if ( options.stopAutoOnNav ) {
-            	$(this).parent(".hexslide").removeClass("hexslide-hover");
-            	stop( $(this).parent(".hexslide").attr('id').split("-")[1] );
-            }
+			/*$(this).parent(".hexslide").find('.slide:first').stop().fadeOut( options.speed )
+			    .next('.slide').stop().fadeIn( options.speed )
+			    .end().appendTo($(this).parent(".hexslide"));
+			*/
+
+			if ( options.stopAutoOnNav ) {
+				$(this).parent(".hexslide").removeClass("hexslide-hover");
+				stop( $(this).parent(".hexslide").attr('id').split("-")[1] );
+			}
+			var newID = $(this).parent(".hexslide").find('.slide:first').data("hexslide-id");
+				updateInd( newID, this )
 		}
 
-		function prevSlide() {
+		function updateInd( newID, sibling ) {
+			test_2 = sibling;
+			$(sibling).siblings(".indicator-container").find(".indicator.active").removeClass("active");
+			$(sibling).siblings(".indicator-container").find(".indicator").filter(function(){
+				return $(this).data("hexslide-id") == newID;
+			}).addClass("active")
+		}
+
+		function indClick() {
+			// Find the slide with the correct ID, fade in and move to top of queue
+			var $currentSlide, currentID, ind;
+			ind = $(this).data("hexslide-id")
+			$currentSlide = $(this).parents(".hexslide").find(".slide:first");
+			console.log( $currentSlide )
+			currentID = $currentSlide.data("hexslide-id");
+			$currentSlide.fadeOut( options.speed )
+			$(this).parents(".hexslide").find(".slide").filter(function(){
+				return $(this).data("hexslide-id") == ind;
+			}).fadeIn( options.speed ).insertBefore( $currentSlide );
+			updateInd( ind, $currentSlide );
+		}
+
+		function prevSlide( auto ) {
 			// Clear the corresponding interval to stop the slideshow
-            clearInterval(timers[($(this).parent(".hexslide").attr('id').split('-')[1])]);
+			if (!auto) { clearInterval(timers[($(this).parent(".hexslide").attr('id').split('-')[1])]) }
 
-            // Fade out the current image and append it to the parent, making it last
-            // Fade in the next one
+			var $currentSlide = $(this).parent(".hexslide").find(".slide:first");
+			var currentID = $currentSlide.data("hexslide-id");
+			currentID--;
 
-          	 $(this).parent(".hexslide").find('.slide:last').fadeIn( options.speed )
-                    .insertBefore($(this).parent(".hexslide").find('.slide:first').fadeOut( options.speed ));
+			// If currentID is less that 0, set to highest slide ( last ).
+			if ( currentID < 0 ) {
+				currentID = $(this).parent(".hexslide").find(".slide").length;
+				currentID -= 1;
+			}
+
+			$currentSlide.stop().fadeOut( options.speed );
+
+			$(this).parent(".hexslide").find(".slide").filter(function(){
+				return $(this).data("hexslide-id") == currentID;
+			}).fadeIn( options.speed ).insertBefore( $currentSlide )
+
+			/*$(this).parent(".hexslide").find('.slide:last').fadeIn( options.speed )
+				.insertBefore($(this).parent(".hexslide").find('.slide:first').fadeOut( options.speed ));*/
 
 
-            if ( options.stopAutoOnNav ) {
-	            $(this).parent(".hexslide").removeClass("hexslide-hover");
-	            stop( $(this).parent(".hexslide").attr('id').split("-")[1] );
-	        }
+			if ( options.stopAutoOnNav ) {
+				$(this).parent(".hexslide").removeClass("hexslide-hover");
+				stop( $(this).parent(".hexslide").attr('id').split("-")[1] );
+			}
+			var newID = $(this).parent(".hexslide").find('.slide:first').data("hexslide-id");
+			updateInd( newID, this )
 		}
 
 
@@ -227,12 +310,18 @@
 					// Show navigation
 					if ( !options.alwaysShowNav ) {
 						$(this).find(".slide-btn").removeClass("hide")
+						if ( options.indicators ) {
+							$(this).find(".indicator-container").removeClass("hide")
+						}
 					}
 				}).on("mouseleave", ".hexslide.hexslide-hover", function(){
 					// Restart slideshow
 					start( $(this).attr('id').split('-')[1] )
 					if ( !options.alwaysShowNav ) {
 						$(this).find(".slide-btn").addClass("hide")
+						if ( options.indicators ) {
+							$(this).find(".indicator-container").addClass("hide")
+						}
 					}
 				});
 			}
@@ -245,6 +334,11 @@
 					prevSlide.call( this )
 				}
 			})
+			if ( options.indicators ) {
+				$("body").on("click", ".indicator", function( e ){
+					indClick.call( this )
+				})
+			}
 
 		}
 
