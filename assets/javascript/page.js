@@ -53,7 +53,7 @@ $(document).ready(function(){
 	})
 })
 
-$(window).on("load ajax_done", function(){setTimeout(function(){
+$(window).on("load aj_done", function(){
 	$("img").hexSlide({
 		"speed": 500,
 		"additionalCSS":{
@@ -67,8 +67,10 @@ $(window).on("load ajax_done", function(){setTimeout(function(){
 		},
 		callback: {
 			start: function(){
-				
+				$(".img-border").css({
+					"height": "41vw"
+				})
 			}
 		}
-	})}, 1000)
+	})
 })

@@ -5,10 +5,11 @@
 (function( $, window, document, undefined ){
 
 	_G.variable.last_slide_id = 0;
-	_G.variable.slide_done = _G.variable.slide_done ? true : false;
-
+	_G.preserve.slide_done = _G.preserve.slide_done ? true : false;
+	var timers = [],
+		slideshowImgs = []
+		// These must be kept outside the cope of the plugin, so they are not reset each time an instance is created. They are still private to the window instance
 	$.fn.hexSlide = function( options ){
-
 		options = $.extend(true, {}, {
 			interval: 3000,
 			speed: 500,
@@ -30,18 +31,16 @@
 			}
 		}, options)
 
-		var timers = [],
-		slideshowImgs = [],
-		img,
-		dummy,
-		container,
-		$container,
-		listArray = this.filter(function(){
-			return $(this).data("slideshow-src")
-		}),
-		lastID,
-		width,
-		height;
+		var img,
+			dummy,
+			container,
+			$container,
+			listArray = this.filter(function(){
+				return $(this).data("slideshow-src")
+			}),
+			lastID,
+			width,
+			height;
 
 		lastID = _G.variable.last_slide_id ? _G.variable.last_slide_id : 0;
 
@@ -128,7 +127,6 @@
 		}
 
 		function start( i ) {
-			console.warn("started "+i)
 			var $slideshow;
 			$slideshow = $("#hexslide-" + i + "-container");
 			$slideshow.children(".slide:gt(0)").hide();
@@ -145,7 +143,6 @@
 
 		function stop( i ) {
 			clearTimeout(timers[i]);
-			console.warn("stopped "+i)
 		}
 
 		function createGUI( id ) {
@@ -221,7 +218,6 @@
 			if ( currentID > $(this).parent(".hexslide").find(".slide").length-1 ) {
 				currentID = 0;
 			}
-
 			$currentSlide.stop().fadeOut( options.speed );
 			$(this).parent(".hexslide").find(".slide").filter(function(){
 				return $(this).data("hexslide-id") == currentID;
@@ -241,7 +237,6 @@
 		}
 
 		function updateInd( newID, sibling ) {
-			test_2 = sibling;
 			$(sibling).siblings(".indicator-container").find(".indicator.active").removeClass("active");
 			$(sibling).siblings(".indicator-container").find(".indicator").filter(function(){
 				return $(this).data("hexslide-id") == newID;
@@ -253,7 +248,6 @@
 			var $currentSlide, currentID, ind;
 			ind = $(this).data("hexslide-id")
 			$currentSlide = $(this).parents(".hexslide").find(".slide:first");
-			console.log( $currentSlide )
 			currentID = $currentSlide.data("hexslide-id");
 			$currentSlide.fadeOut( options.speed )
 			$(this).parents(".hexslide").find(".slide").filter(function(){
@@ -295,13 +289,13 @@
 		}
 
 
-		$(window).on("ajax_start", function() {
+		$(window).on("aj_start", function() {
 			for ( var i = 0; i < timers.length; i++ ) {
 				clearTimeout(timers[i]);
 			}
 		})
-		if ( !_G.variable.slide_done ) {
-			_G.variable.slide_done = true;
+		if ( !_G.preserve.slide_done ) {
+			_G.preserve.slide_done = true;
 			if ( options.pauseOnHover ) {
 				// Stop the slideshow when hovering. This only needs to be run once per session because it uses delegation
 				$("body").on("mouseenter", ".hexslide.hexslide-hover", function(){
