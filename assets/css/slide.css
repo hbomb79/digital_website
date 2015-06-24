@@ -15,7 +15,7 @@
 	z-index:1;
 }
 
-.hexslide span {
+.hexslide .slide-btn span {
 	position: absolute;
 	z-index: 2;
 	top:50%;
@@ -28,6 +28,14 @@
 	-o-transition: padding 0.2s ease-in-out;
 	transition: padding 0.2s ease-in-out;
 	cursor: pointer;
+	opacity: 1;
+	-webkit-transform: translateY(-50%) translateX(0);
+	-ms-transform: translateY(-50%) translateX(0);
+	-o-transform: translateY(-50%) translateX(0);
+	transform: translateY(-50%) translateX(0);
+	-webkit-transition: all 250ms ease-in-out;
+	-o-transition: all 250ms ease-in-out;
+	transition: all 250ms ease-in-out;
 }
 
 .hexslide .right span {
@@ -44,6 +52,22 @@
 
 .hexslide .right span:hover {
 	padding-right: 25px;
+}
+
+.hexslide .slide-btn.hide.right span {
+	opacity: 0;
+	-webkit-transform: translateY(-50%) translateX(30%);
+	-ms-transform: translateY(-50%) translateX(30%);
+	-o-transform: translateY(-50%) translateX(30%);
+	transform: translateY(-50%) translateX(30%);
+}
+
+.hexslide .slide-btn.hide.left span {
+	opacity: 0;
+	-webkit-transform: translateY(-50%) translateX(-30%);
+	-ms-transform: translateY(-50%) translateX(-30%);
+	-o-transform: translateY(-50%) translateX(-30%);
+	transform: translateY(-50%) translateX(-30%);
 }
 
 @media screen and ( max-width:770px ) {

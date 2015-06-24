@@ -52,3 +52,23 @@ $(document).ready(function(){
 		aj_page.start( getFileName(), $(this).data("js-link"), false, false, false )
 	})
 })
+
+$(window).on("load ajax_done", function(){setTimeout(function(){
+	$("img").hexSlide({
+		"speed": 500,
+		"additionalCSS":{
+			container:{
+				"display":"inline-block",
+				"background": "black"
+			}
+		},
+		"additionalClass": {
+			container: "center-image"
+		},
+		callback: {
+			start: function(){
+				$(".img-border").css({"width":"initial"});
+			}
+		}
+	})}, 1000)
+})

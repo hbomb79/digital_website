@@ -72,7 +72,7 @@
 		</script>
 		
 		<script>
-			$(window).load(function(){
+			$(window).on("load", function(){
 				setTimeout(function() { $("#loading").slideUp(500).promise().done(function(){ $("html, body").css("overflow-y", "auto"); $(window).trigger("scroll"); }); } , 500)
 				clearTimeout(timer_out)
 			})

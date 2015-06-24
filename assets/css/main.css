@@ -865,10 +865,16 @@ section {
 }
 
 .center-image {
+	width:100%;
+}
+
+.img-border {
+	border: 3px solid black;
+	display: inline-block;
+	box-shadow: 0 10px 10px -7px black;
+	font-size: 0;
 	width:88%;
 	max-width: 1920px;
-	box-shadow: 0 10px 10px -7px black;
-	border: solid 3px black;
 }
 
 .mobile-show {

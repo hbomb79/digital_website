@@ -23,6 +23,9 @@
 			additionalCSS: {
 				slide: false,
 				container: false
+			},
+			callback: {
+				start: function(){}
 			}
 		}, options)
 
@@ -63,9 +66,6 @@
 			if ( options.additionalCSS.container ) {
 				dummy.css( options.additionalCSS.container )
 			}
-
-			//dummy.height( height );
-			//dummy.width( width );
 
 			if ( options.navigation ) {
 				createGUI();
@@ -143,11 +143,11 @@
 			var nextBtn, prevBtn, nextTxt, prevTxt;
 			nextBtn = $("<div></div>", {
 				class: "slide-btn right",
-				id: "forward"
+				"data-slide-direction": "forward"
 			})
 			prevBtn = $("<div></div>", {
 				class: "slide-btn left",
-				id:"backward"
+				"data-slide-direction":"backward"
 			})
 			nextTxt = $("<span></span>", {
 				text:"NEXT"
@@ -167,22 +167,89 @@
 			if ( options.additionalCSS.prevTxt ) {
 				nextBtn.addClass( options.additionalCSS.prevTxt );
 			}
+			if ( !options.alwaysShowNav ) {
+				nextBtn.addClass("hide");
+				prevBtn.addClass("hide");
+			}
 			nextTxt.appendTo(nextBtn);
 			prevTxt.appendTo(prevBtn);
 			nextBtn.appendTo(dummy);
 			prevBtn.appendTo(dummy);
 		}
 
-		if ( options.pauseOnHover && !_G.variable.slide_done) {
-			// Stop the slideshow when hovering. This only needs to be run once per session because it uses delegation
+		function nextSlide() {
+			// Clear the corresponding interval to stop the slideshow
+            clearInterval(timers[($(this).parent(".hexslide").attr('id').split('-')[1])]);
+
+            // Fade out the current image and append it to the parent, making it last
+            // Fade in the next one
+
+            $(this).parent(".hexslide").find('.slide:first').stop().fadeOut( options.speed )
+                .next('.slide').stop().fadeIn( options.speed )
+                .end().appendTo($(this).parent(".hexslide"));
+
+            if ( options.stopAutoOnNav ) {
+            	$(this).parent(".hexslide").removeClass("hexslide-hover");
+            	stop( $(this).parent(".hexslide").attr('id').split("-")[1] );
+            }
+		}
+
+		function prevSlide() {
+			// Clear the corresponding interval to stop the slideshow
+            clearInterval(timers[($(this).parent(".hexslide").attr('id').split('-')[1])]);
+
+            // Fade out the current image and append it to the parent, making it last
+            // Fade in the next one
+
+          	 $(this).parent(".hexslide").find('.slide:last').fadeIn( options.speed )
+                    .insertBefore($(this).parent(".hexslide").find('.slide:first').fadeOut( options.speed ));
+
+
+            if ( options.stopAutoOnNav ) {
+	            $(this).parent(".hexslide").removeClass("hexslide-hover");
+	            stop( $(this).parent(".hexslide").attr('id').split("-")[1] );
+	        }
+		}
+
+
+		$(window).on("ajax_start", function() {
+			for ( var i = 0; i < timers.length; i++ ) {
+				clearTimeout(timers[i]);
+			}
+		})
+		if ( !_G.variable.slide_done ) {
 			_G.variable.slide_done = true;
-			$("body").on("mouseenter", ".hexslide.hexslide-hover", function(){
-				// Stop slideshow
-				stop( $(this).attr('id').split('-')[1] )
-			}).on("mouseleave", ".hexslide.hexslide-hover", function(){
-				// Restart slideshow
-				start( $(this).attr('id').split('-')[1] )
-			});
+			if ( options.pauseOnHover ) {
+				// Stop the slideshow when hovering. This only needs to be run once per session because it uses delegation
+				$("body").on("mouseenter", ".hexslide.hexslide-hover", function(){
+					// Stop slideshow
+					stop( $(this).attr('id').split('-')[1] )
+					// Show navigation
+					if ( !options.alwaysShowNav ) {
+						$(this).find(".slide-btn").removeClass("hide")
+					}
+				}).on("mouseleave", ".hexslide.hexslide-hover", function(){
+					// Restart slideshow
+					start( $(this).attr('id').split('-')[1] )
+					if ( !options.alwaysShowNav ) {
+						$(this).find(".slide-btn").addClass("hide")
+					}
+				});
+			}
+			$("body").on("click", ".slide-btn", function( e ){
+				var dir;
+				dir = $(this).data("slide-direction")
+				if ( dir == "forward" ) {
+					nextSlide.call( this )
+				} else if ( dir == "backward" ) {
+					prevSlide.call( this )
+				}
+			})
+
+		}
+
+		if ( typeof options.callback.start == "function" ) {
+			options.callback.start();
 		}
 
 	}
