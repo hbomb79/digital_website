@@ -60,9 +60,9 @@
 .hexslide .slide-btn.hide.right span {
 	opacity: 0;
 	visibility: hidden;
-	-webkit-transition-delay: 0.2s, 0, 0, 0;
-	-o-transition-delay: 0.2s, 0, 0, 0;
-	transition-delay: 0.2s, 0, 0, 0;
+	-webkit-transition-delay: 0.2s, 0s, 0s, 0s;
+	-o-transition-delay: 0.2s, 0s, 0s, 0s;
+	transition-delay: 0.2s, 0s, 0s, 0s;
 	-webkit-transform: translateY(-50%) translateX(30%);
 	-ms-transform: translateY(-50%) translateX(30%);
 	-o-transform: translateY(-50%) translateX(30%);
@@ -72,9 +72,9 @@
 .hexslide .slide-btn.hide.left span {
 	opacity: 0;
 	visibility: hidden;
-	-webkit-transition-delay: 0.2s, 0, 0, 0;
-	-o-transition-delay: 0.2s, 0, 0, 0;
-	transition-delay: 0.2s, 0, 0, 0;
+	-webkit-transition-delay: 0.2s, 0s, 0s, 0s;
+	-o-transition-delay: 0.2s, 0s, 0s, 0s;
+	transition-delay: 0.2s, 0s, 0s, 0s;
 	-webkit-transform: translateY(-50%) translateX(-30%);
 	-ms-transform: translateY(-50%) translateX(-30%);
 	-o-transform: translateY(-50%) translateX(-30%);
