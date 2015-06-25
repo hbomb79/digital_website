@@ -8,5 +8,5 @@
 <script src="assets/javascript/scroller.js"></script>
 <script src="assets/javascript/hash.js"></script>
 <script src="assets/javascript/hexslide.min.js"></script>
-<link rel="stylesheet" href="assets/css/slide.css">
+<link rel="stylesheet" href="assets/css/hexslide.css">
 <!-- END HEAD IMPORTS -->
