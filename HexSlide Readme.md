@@ -25,9 +25,19 @@ The CSS
 
 The CSS required to make this work is contained in the file hexslide.css, move or copy the css file into your site directory *first*
 
-You can adjust this if you like, although only edit rules specified after the comment
+Dont edit CSS rules unless you know what you're doing, rules before the appearance comment should *NOT* be edited at all.
 
-EG: /* You May Edit Now */
+*Only* edit appearence related css rules after this comment:
+
+	/* ONLY EDIT APPEARENCE */
+
+Only change rules like background, color, opacity. But not positioning or transitions etc...
+
+After this comment:
+
+	/* ONLY EDIT APPEARENCE */
+
+edit the rules *however* you like. Be aware that editing the rules may result in unwanted changes.
 
 All CSS before the above comment in the css file is required and should not be adjusted unless you know what your doing.
 
@@ -46,7 +56,7 @@ The Javascript is minified to reduce file size, and reduce modification attempts
 ### Step 1
 First off, link the *hexslide.min.js* file from the downloaded .zip into your document. Move or copy the javascript file into your site directory *first*
 
-Then *link* the javascript document using
+Then *link* the Javascript document using
 
 <script src="hexslide.min.js"></script>
 
@@ -59,7 +69,7 @@ If you want to run the plugin using all default settings, then all you have to d
 
 $("img").hexSlide();
 
-The above snippet of code will convert the image into a hexslide slideshow div. Although if you want custom settings to make your slideshow perform how you need it to, we need to understand the settings available.
+The above snippet of code will convert the image into a hexslide slide-show div. Although if you want custom settings to make your slide-show perform how you need it to, we need to understand the settings available.
 
 def. = Default Setting ( Does not need to be set unless changed )
 
@@ -81,16 +91,16 @@ Available String Settings
 	The speed is how fast ( in ms ) the slide fades in and out
 
 ### pauseOnHover ( boolean )
-	If true, the slide show will not auto play if the user moves mouse onto slideshow, and wont restart until the user moves mouse off of slideshow
+	If true, the slide show will not auto play if the user moves mouse onto slide-show, and wont restart until the user moves mouse off of slide-show
 
 ### autoPlay ( boolean )
-	If true the slide show will use the interval to automatically play the slideshow
+	If true the slide show will use the interval to automatically play the slide-show
 
 ### navigation ( boolean )
-	If true Back and Next buttons will be created and can be used to navigate the slideshow
+	If true Back and Next buttons will be created and can be used to navigate the slide-show
 
 ### alwaysShowNav ( boolean )
-	If true, the navigation and indicators will not hide them selves when the user is not hovering on the slideshow
+	If true, the navigation and indicators will not hide them selves when the user is not hovering on the slide-show
 
 ### stopAutoOnNav ( boolean )
 	If true autoPlay will be disabled when the user navigates ( using forward/back or indicator )
@@ -115,7 +125,7 @@ Available Object Settings
 	This object can contain 1-2 string values, indexed using either *container* or *slide*
 	EG: additionalClass: { container: "my-container-class", slide: "my-slide-class and-another-slide-class" }
 	
-	Mutliple classes must be seperated using a *space* not a comma, semi-colon or other character
+	Mutliple classes must be separated using a *space* not a comma, semi-colon or other character
 
 ### callback ( object )
 	This object currently only contains one index, named *start*. The key must be a function, this function will be called *after* and *every* time the plugin is used.
@@ -144,11 +154,11 @@ $("img").hexSlide({
 	}
 })
 
-The above code will turn any img tags with data-slideshow-src into a hexslide slideshow.
+The above code will turn any img tags with data-slideshow-src into a hexslide slide-show.
 
 The image will change over 1 second every 5 seconds. The container has a background color of black and a display of inline-block. The container also has a class of center-image
 
-When the plugin has finished, "Done!" will be output to the console and any Javascript listening for a window resize, will fire incase the size of the img (slideshow) has changed.
+When the plugin has finished, "Done!" will be output to the console and any Javascript listening for a window resize, will fire in case the size of the img (slideshow) has changed.
 
 ### Step 3
 
@@ -162,7 +172,7 @@ http://harryfelton.web44.net/digital_website/help#!contact
 Email: harryfelton12@gmail.com
 
 ### NOTES
-If you want to change the plugin settings permanently ( so you dont have to set the setting each time you call the plugin ) you can change them using the following directive:
+If you want to change the plugin settings permanently ( so you don't have to set the setting each time you call the plugin ) you can change them using the following directive:
 
 	$.fn.hexSlide.defaults;
 

@@ -19,6 +19,8 @@
 	opacity: 1;
 }
 
+/* ONLY EDIT APPEARENCE */
+
 .hexslide .slide-btn span {
 	position: absolute;
 	font-size: 16px;
@@ -40,6 +42,8 @@
 	-o-transition: visibility 0s ease-in-out 0s, padding 0.2s ease-in-out 0s, -o-transform 0.2s ease-in-out 0s, opacity 0.2s ease-in-out 0s;
 	transition: visibility 0s ease-in-out 0s, padding 0.2s ease-in-out 0s, transform 0.2s ease-in-out 0s, opacity 0.2s ease-in-out 0s;
 }
+
+/* EDIT HERE AND BELOW */
 
 .hexslide .right span {
 	right:-3px;
@@ -124,11 +128,4 @@
 .hexslide .indicator-container .indicator.active {
 	background: crimson;
 	border-color:white;
-}
-
-@media screen and ( max-width:770px ) {
-	.hexslide{
-		height: 55vw;
-		width: 90vw;
-	}
 }
