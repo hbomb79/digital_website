@@ -15,29 +15,9 @@ var _G = _G ? _G : false;
 	var timers = [],
 		slideshowImgs = [];
 		// These must be kept outside the cope of the plugin, so they are not reset each time an instance is created. They are still private to the window instance
-	$.fn.hexSlide = function( options ){
-		options = $.extend(true, {}, {
-			interval: 3000,
-			speed: 500,
-			pauseOnHover: true,
-			autoPlay: true,
-			navigation: true,
-			alwaysShowNav: false,
-			stopAutoOnNav: false,
-			indicators: true,
-			additionalClass: {
-				slide: false,
-				container: false
-			},
-			additionalCSS: {
-				slide: false,
-				container: false
-			},
-			callback: {
-				start: function(){}
-			}
-		}, options);
 
+	$.fn.hexSlide = function( options ){
+		options = $.extend(true, {}, $.fn.hexSlide.defaults, options);
 		var img,
 			dummy,
 			container,
@@ -350,6 +330,28 @@ var _G = _G ? _G : false;
 			options.callback.start();
 		}
 
+	}
+
+	$.fn.hexSlide.defaults = {
+		interval: 3000,
+		speed: 500,
+		pauseOnHover: true,
+		autoPlay: true,
+		navigation: true,
+		alwaysShowNav: false,
+		stopAutoOnNav: false,
+		indicators: true,
+		additionalClass: {
+			slide: false,
+			container: false
+		},
+		additionalCSS: {
+			slide: false,
+			container: false
+		},
+		callback: {
+			start: function(){}
+		}
 	}
 
 })( jQuery, window, document );

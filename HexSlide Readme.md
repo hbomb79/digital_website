@@ -63,34 +63,135 @@ The above snippet of code will convert the image into a hexslide slideshow div. 
 
 def. = Default Setting ( Does not need to be set unless changed )
 
-Available String Settings:
-	* interval ( def. 3000 )
-	* speed ( def. 500 )
-	* pauseOnHover ( def. true )
-	* autoPlay ( def. true )
-	* navigation ( def. true )
-	* alwaysShowNav ( def. false )
-	* stopAutoOnNav ( def. false )
-	* indicators ( def. true )
+Available String Settings
+-------------------------
+* interval ( def. 3000 )
+* speed ( def. 500 )
+* pauseOnHover ( def. true )
+* autoPlay ( def. true )
+* navigation ( def. true )
+* alwaysShowNav ( def. false )
+* stopAutoOnNav ( def. false )
+* indicators ( def. true )
 
-	### Interval ( int )
-		The interval is the time ( in ms ) spent waiting between slides ( Only used when autoPlay is true )
+### Interval ( int )
+	The interval is the time ( in ms ) spent waiting between slides ( Only used when autoPlay is true )
 
-	### Speed ( int )
-		The speed is how fast ( in ms ) the slide fades in and out
+### Speed ( int )
+	The speed is how fast ( in ms ) the slide fades in and out
 
-	### pauseOnHover ( boolean )
-		If true, the slide show will not auto play if the user moves mouse onto slideshow, and wont restart until the user moves mouse off of slideshow
+### pauseOnHover ( boolean )
+	If true, the slide show will not auto play if the user moves mouse onto slideshow, and wont restart until the user moves mouse off of slideshow
 
-	### autoPlay ( boolean )
-		If true the slide show will use the interval to automatically play the slideshow
+### autoPlay ( boolean )
+	If true the slide show will use the interval to automatically play the slideshow
 
-	### navigation ( boolean )
-		If true Back and Next buttons will be created and can be used to navigate the slideshow
+### navigation ( boolean )
+	If true Back and Next buttons will be created and can be used to navigate the slideshow
 
-	### alwaysShowNav ( boolean )
-		If true, the navigation and indicators will not hide them selves when the user is not hovering on the slideshow
+### alwaysShowNav ( boolean )
+	If true, the navigation and indicators will not hide them selves when the user is not hovering on the slideshow
+
+### stopAutoOnNav ( boolean )
+	If true autoPlay will be disabled when the user navigates ( using forward/back or indicator )
+
+### indicators ( boolean )
+	If true, circles will be created underneath the slide show, one per slide. A user can use these to navigate the slides.
 
 
-Available Object Settings:
-	* additionalCSS
+Available Object Settings
+-------------------------
+* additionalCSS ( def. false )
+* additionalClass ( def.false )
+* callback ( def. Object [object] )
+
+### additionalCSS ( object )
+	The additionalCSS object can contain 1-2 other objects, indexed using *container* or *slide*
+	EG: additionalCSS: { container: { "cssrule": "cssvalue" }, slide: { "cssrule": "cssvalue" } }
+
+	Any CSS in the slide index will be applied to each individual slide. Any rules in the container index will be applied to the parent div.hexslide
+
+### additionalClass ( object )
+	This object can contain 1-2 string values, indexed using either *container* or *slide*
+	EG: additionalClass: { container: "my-container-class", slide: "my-slide-class and-another-slide-class" }
+	
+	Mutliple classes must be seperated using a *space* not a comma, semi-colon or other character
+
+### callback ( object )
+	This object currently only contains one index, named *start*. The key must be a function, this function will be called *after* and *every* time the plugin is used.
+	EG: callback:{ start: function(){ alert("done!"); } }
+
+Example Call
+------------
+
+$("img").hexSlide({
+	speed: 1000,	
+	interval: 5000,
+	additionalCSS:{
+		container:{
+			"display":"inline-block",
+			"background": "black"
+		}
+	},
+	additionalClass: {
+		container: "center-image"
+	},
+	callback: {
+		start: function(){
+			console.log("Done!")
+			$(window).trigger("resize");
+		}
+	}
+})
+
+The above code will turn any img tags with data-slideshow-src into a hexslide slideshow.
+
+The image will change over 1 second every 5 seconds. The container has a background color of black and a display of inline-block. The container also has a class of center-image
+
+When the plugin has finished, "Done!" will be output to the console and any Javascript listening for a window resize, will fire incase the size of the img (slideshow) has changed.
+
+### Step 3
+
+Nothing, you're done.
+
+Feel free to contact me here:
+	
+http://harryfelton.web44.net/digital_website/help#!contact
+	* Only works with javascript.
+
+Email: harryfelton12@gmail.com
+
+### NOTES
+If you want to change the plugin settings permanently ( so you dont have to set the setting each time you call the plugin ) you can change them using the following directive:
+
+	$.fn.hexSlide.defaults;
+
+You will have to reset the entire table, so here are the defaults:
+
+	interval: 3000,
+	speed: 500,
+	pauseOnHover: true,
+	autoPlay: true,
+	navigation: true,
+	alwaysShowNav: false,
+	stopAutoOnNav: false,
+	indicators: true,
+	additionalClass: {
+		slide: false,
+		container: false
+	},
+	additionalCSS: {
+		slide: false,
+		container: false
+	},
+	callback: {	start: function(){} }
+
+You can simply copy these, change what you need to, and set the directive to them, OR you can simply target them like so:
+
+	$.fn.hexSlide.defaults.interval = 4000
+
+Now unless specified when running the plugin, the interval will be 4 seconds, instead of three.
+
+If any of these defaults are missing the program may crash or not function correctly, because of this the second method of default adjustment is *recommended*
+
+Changing the global defaults is dangerous and can result in undesired changes.
