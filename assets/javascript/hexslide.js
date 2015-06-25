@@ -20,6 +20,7 @@ var _G = _G ? _G : false;
 			interval: 3000,
 			speed: 500,
 			pauseOnHover: true,
+			autoPlay: true,
 			navigation: true,
 			alwaysShowNav: false,
 			stopAutoOnNav: false,
@@ -127,11 +128,15 @@ var _G = _G ? _G : false;
 			start( item );
 		}
 
-		function start( i ) {
+		function start( i, restart ) {
 			var $slideshow;
 			$slideshow = $("#hexslide-" + i + "-container");
-			$slideshow.children(".slide:gt(0)").hide();
-
+			if ( !restart ) {
+				$slideshow.children(".slide:gt(0)").hide();
+			}
+			if ( !options.autoPlay ) {
+				return;
+			}
 			if (timers[i]) {
 				// Timer already set, clear it just incase it is still running.
 				clearInterval( timers[i] );
@@ -229,6 +234,10 @@ var _G = _G ? _G : false;
 			if ( options.stopAutoOnNav ) {
 				$(this).parent(".hexslide").removeClass("hexslide-hover");
 				stop( $(this).parent(".hexslide").attr('id').split("-")[1] );
+			} else if ( !auto && options.autoPlay && !options.pauseOnHover ) {
+				// User clicked, auto play is enabled. Stop and restart the timer to prevent it from changing while user is navigating
+				stop( $(this).parent(".hexslide").attr('id').split("-")[1] );
+				start( $(this).parent(".hexslide").attr('id').split("-")[1], true );
 			}
 			var newID = $(this).parent(".hexslide").find('.slide:first').data("hexslide-id");
 				updateInd( newID, this );
@@ -247,11 +256,16 @@ var _G = _G ? _G : false;
 			ind = $(this).data("hexslide-id");
 			$currentSlide = $(this).parents(".hexslide").find(".slide:first");
 			currentID = $currentSlide.data("hexslide-id");
-			$currentSlide.fadeOut( options.speed );
+			$currentSlide.stop().fadeOut( options.speed );
 			$(this).parents(".hexslide").find(".slide").filter(function(){
 				return $(this).data("hexslide-id") == ind;
-			}).fadeIn( options.speed ).insertBefore( $currentSlide );
+			}).stop().fadeIn( options.speed ).insertBefore( $currentSlide );
 			updateInd( ind, $currentSlide );
+			if ( options.autoPlay && !options.pauseOnHover ) {
+				// User clicked, auto play is enabled. Stop and restart the timer to prevent it from changing while user is navigating
+				stop( $(this).parents(".hexslide").attr('id').split("-")[1] );
+				start( $(this).parents(".hexslide").attr('id').split("-")[1], true );
+			}
 		}
 
 		function prevSlide( auto ) {
@@ -277,6 +291,10 @@ var _G = _G ? _G : false;
 			if ( options.stopAutoOnNav ) {
 				$(this).parent(".hexslide").removeClass("hexslide-hover");
 				stop( $(this).parent(".hexslide").attr('id').split("-")[1] );
+			} else if ( options.autoPlay && !options.pauseOnHover ) {
+				// User clicked, auto play is enabled. Stop and restart the timer to prevent it from changing while user is navigating
+				stop( $(this).parent(".hexslide").attr('id').split("-")[1] );
+				start( $(this).parent(".hexslide").attr('id').split("-")[1], true );
 			}
 			var newID = $(this).parent(".hexslide").find('.slide:first').data("hexslide-id");
 			updateInd( newID, this );

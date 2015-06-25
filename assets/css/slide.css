@@ -29,18 +29,16 @@
 	display: block;
 	padding:1em;
 	background:crimson;
-	-webkit-transition: padding 0.2s ease-in-out;
-	-o-transition: padding 0.2s ease-in-out;
-	transition: padding 0.2s ease-in-out;
 	cursor: pointer;
 	opacity: 0.7;
+	visibility: visible;
 	-webkit-transform: translateY(-50%) translateX(0);
 	-ms-transform: translateY(-50%) translateX(0);
 	-o-transform: translateY(-50%) translateX(0);
 	transform: translateY(-50%) translateX(0);
-	-webkit-transition: all 250ms ease-in-out;
-	-o-transition: all 250ms ease-in-out;
-	transition: all 250ms ease-in-out;
+	-webkit-transition: visibility 0s ease-in-out 0s, padding 0.2s ease-in-out 0s, -webkit-transform 0.2s ease-in-out 0s, opacity 0.2s ease-in-out 0s;
+	-o-transition: visibility 0s ease-in-out 0s, padding 0.2s ease-in-out 0s, -o-transform 0.2s ease-in-out 0s, opacity 0.2s ease-in-out 0s;
+	transition: visibility 0s ease-in-out 0s, padding 0.2s ease-in-out 0s, transform 0.2s ease-in-out 0s, opacity 0.2s ease-in-out 0s;
 }
 
 .hexslide .right span {
@@ -61,6 +59,10 @@
 
 .hexslide .slide-btn.hide.right span {
 	opacity: 0;
+	visibility: hidden;
+	-webkit-transition-delay: 0.2s, 0, 0, 0;
+	-o-transition-delay: 0.2s, 0, 0, 0;
+	transition-delay: 0.2s, 0, 0, 0;
 	-webkit-transform: translateY(-50%) translateX(30%);
 	-ms-transform: translateY(-50%) translateX(30%);
 	-o-transform: translateY(-50%) translateX(30%);
@@ -69,6 +71,10 @@
 
 .hexslide .slide-btn.hide.left span {
 	opacity: 0;
+	visibility: hidden;
+	-webkit-transition-delay: 0.2s, 0, 0, 0;
+	-o-transition-delay: 0.2s, 0, 0, 0;
+	transition-delay: 0.2s, 0, 0, 0;
 	-webkit-transform: translateY(-50%) translateX(-30%);
 	-ms-transform: translateY(-50%) translateX(-30%);
 	-o-transform: translateY(-50%) translateX(-30%);

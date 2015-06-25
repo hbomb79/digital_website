@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<script src="assets/javascript/jquery.min.js"></script>
-	<script src="assets/javascript/slide.js"></script>
+	<script src="assets/javascript/hexslide.min.js"></script>
 	<link rel="stylesheet" href="assets/css/slide.css">
 	<meta charset="UTF-8">
 	<title>Test</title>
@@ -13,14 +13,18 @@
 		height: 300px;
 	}
 
+	img {
+		width: 600px;
+		height: 300px;
+	}
+
 	</style>
 </head>
 <body>
 	<main>
 
 		<div id="test">
-			<img id="test1" src="assets/image/gta.jpg" class="center-image" alt="Picture of counter strike: global offensive" data-slideshow-src="assets/image/gta1.jpg|assets/image/slideshow/gta1.jpg|assets/image/slideshow/gta2.jpg|assets/image/slideshow/gta3.jpg|assets/image/slideshow/gta4.jpg">
-			<img id="test2" src="assets/image/gta.jpg" class="center-image" alt="Picture of counter strike: global offensive" data-slideshow-src="assets/image/gta1.jpg|assets/image/slideshow/gta1.jpg|assets/image/slideshow/gta2.jpg|assets/image/slideshow/gta3.jpg|assets/image/slideshow/gta4.jpg">
+			<img src="assets/image/slideshow/gta1.jpg" alt="Images of GTA" data-slideshow-src="assets/image/slideshow/gta2.jpg|assets/image/slideshow/gta3.jpg|assets/image/slideshow/gta4.jpg">
 		</div>
 
 	</main>
