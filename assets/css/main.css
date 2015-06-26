@@ -1427,4 +1427,9 @@ section.last {
 	.person:last-child{
 		border-bottom: none;
 	}
+	
+	.hexslide{
+		height: 55vw;
+		width: 90vw;
+	}
 }
