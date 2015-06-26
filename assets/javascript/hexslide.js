@@ -27,6 +27,7 @@ var _G = _G ? _G : false;
 			}),
 			lastID,
 			width,
+			currentSlides,
 			height;
 
 		lastID = _G.variable.last_slide_id ? _G.variable.last_slide_id : 0;
@@ -46,6 +47,15 @@ var _G = _G ? _G : false;
 				class: "hexslide"
 			});
 
+			dummy.width( options.width ? options.width : width )
+			dummy.height( options.height ? options.height : height )
+			dummy.css({
+				"max-height": ( options.maxheight ) ? options.maxheight : "",
+				"max-width": ( options.maxwidth ) ? options.maxwidth : "",
+				"min-height": ( options.minheight ) ? options.minheight : "",
+				"min-width": ( options.minwidth ) ? options.minwidth : "",
+			})
+
 			if ( options.additionalClass.container ) {
 				dummy.addClass( options.additionalClass.container );
 			}
@@ -56,7 +66,9 @@ var _G = _G ? _G : false;
 
 			// Add a class to be used by event listeners. This indicates the slideshow should be paused when a user hovers on it.
 			dummy.addClass("hexslide-hover");
-
+			currentSlides = $("<div></div>", {
+				"class": "hexslide-slide-container"
+			});
 			slideshowImgs[item] = $container.data("slideshow-src").split("|");
 			// Compile list of static steps.
 			var temp_slides = [];
@@ -74,7 +86,7 @@ var _G = _G ? _G : false;
 					"background-image": "url("+ $container.attr('src') +")"
 				},
 				"data-hexslide-id": 0
-			}).appendTo( dummy );
+			}).appendTo( currentSlides );
 
 			if ( options.additionalClass.slide ) {
 				img.addClass( options.additionalClass.slide );
@@ -91,7 +103,7 @@ var _G = _G ? _G : false;
 						"background-image": "url(" + slideshowImgs[item][index] + ")"
 					},
 					"data-hexslide-id": i
-				}).appendTo( dummy );
+				}).appendTo( currentSlides );
 				if ( options.additionalClass.slide ) {
 					img.addClass( options.additionalClass.slide );
 				}
@@ -100,20 +112,18 @@ var _G = _G ? _G : false;
 				}
 				i++;
 			}
-
+			currentSlides.appendTo( dummy );
 			$container.replaceWith( dummy );
+			$("#hexslide-"+item+"-container").children(".hexslide-slide-container").children(".slide:gt(0)").hide();
 			// Container done, now adjust stuff!
 			lastID++;
 			_G.variable.last_slide_id = lastID;
 			start( item );
 		}
 
-		function start( i, restart ) {
+		function start( i ) {
 			var $slideshow;
 			$slideshow = $("#hexslide-" + i + "-container");
-			if ( !restart ) {
-				$slideshow.children(".slide:gt(0)").hide();
-			}
 			if ( !options.autoPlay ) {
 				return;
 			}
@@ -123,7 +133,7 @@ var _G = _G ? _G : false;
 			}
 			timers[i] = setInterval(function(){
 				// Emulate a click on the next button
-				nextSlide.call( $slideshow.find(".slide"), true );
+				nextSlide.call( $slideshow.find(".hexslide-slide-container"), true );
 			}, options.interval)
 		}
 
@@ -133,7 +143,10 @@ var _G = _G ? _G : false;
 
 		function createGUI( id ) {
 			if ( options.navigation ) {
-				var nextBtn, prevBtn, nextTxt, prevTxt;
+				var nextBtn, prevBtn, nextTxt, prevTxt, controls;
+				controls = $("<div></div>", {
+					class: "hexslide-control-container"
+				});
 				nextBtn = $("<div></div>", {
 					class: "slide-btn right",
 					"data-slide-direction": "forward"
@@ -166,8 +179,9 @@ var _G = _G ? _G : false;
 				}
 				nextTxt.appendTo(nextBtn);
 				prevTxt.appendTo(prevBtn);
-				nextBtn.appendTo(dummy);
-				prevBtn.appendTo(dummy);
+				nextBtn.appendTo( controls );
+				prevBtn.appendTo( controls );
+				controls.appendTo( dummy );
 			}
 
 			if ( options.indicators ) {
@@ -196,30 +210,42 @@ var _G = _G ? _G : false;
 
 		function nextSlide( auto ) {
 			// Clear the corresponding interval to stop the slideshow
-			if (!auto) { clearInterval(timers[($(this).parent(".hexslide").attr('id').split('-')[1])]) }
+			if (!auto) { clearInterval(timers[($(this).parents(".hexslide").attr('id').split('-')[1])]) }
+
+			// For sliding, animate the css of the current image to match the width ( global )
+			// set the css of the new slide to left of slideshow. Then animate to 0
 
 			// Fade out the current image, fade in the next ID.
-			var $currentSlide = $(this).parent(".hexslide").find(".slide:first");
+			var $currentSlide = $(this).parents(".hexslide").find(".slide:first");
 			var currentID = $currentSlide.data("hexslide-id");
 			currentID++;
 			// If current ID is greater than the amount of slides, then set to 0
-			if ( currentID > $(this).parent(".hexslide").find(".slide").length-1 ) {
+			if ( currentID > $(this).parents(".hexslide").find(".slide").length-1 ) {
 				currentID = 0;
 			}
-			$currentSlide.stop().fadeOut( options.speed );
-			$(this).parent(".hexslide").find(".slide").filter(function(){
-				return $(this).data("hexslide-id") == currentID;
-			}).fadeIn( options.speed ).insertBefore( $currentSlide );
+			if ( options.animation == "slide" ) {
+				$currentSlide.stop().animate({"left": ( width ) /-1 }, options.speed, function(){
+					$(this).hide()
+				});
+				$(this).parents(".hexslide").find(".slide").filter(function(){
+					return $(this).data("hexslide-id") == currentID;
+				}).stop().css("left", width).show().animate( { "left": 0 }, options.speed ).insertBefore( $currentSlide );
+			} else {
+				$currentSlide.stop().fadeOut( options.speed );
+				$(this).parent(".hexslide").find(".slide").filter(function(){
+					return $(this).data("hexslide-id") == currentID;
+				}).fadeIn( options.speed ).insertBefore( $currentSlide );
+			}
 
 			if ( options.stopAutoOnNav ) {
-				$(this).parent(".hexslide").removeClass("hexslide-hover");
-				stop( $(this).parent(".hexslide").attr('id').split("-")[1] );
+				$(this).parents(".hexslide").removeClass("hexslide-hover");
+				stop( $(this).parents(".hexslide").attr('id').split("-")[1] );
 			} else if ( !auto && options.autoPlay && !options.pauseOnHover ) {
 				// User clicked, auto play is enabled. Stop and restart the timer to prevent it from changing while user is navigating
-				stop( $(this).parent(".hexslide").attr('id').split("-")[1] );
-				start( $(this).parent(".hexslide").attr('id').split("-")[1], true );
+				stop( $(this).parents(".hexslide").attr('id').split("-")[1] );
+				start( $(this).parents(".hexslide").attr('id').split("-")[1] );
 			}
-			var newID = $(this).parent(".hexslide").find('.slide:first').data("hexslide-id");
+			var newID = $(this).parents(".hexslide").find('.slide:first').data("hexslide-id");
 				updateInd( newID, this );
 		}
 
@@ -236,47 +262,68 @@ var _G = _G ? _G : false;
 			ind = $(this).data("hexslide-id");
 			$currentSlide = $(this).parents(".hexslide").find(".slide:first");
 			currentID = $currentSlide.data("hexslide-id");
-			$currentSlide.stop().fadeOut( options.speed );
-			$(this).parents(".hexslide").find(".slide").filter(function(){
-				return $(this).data("hexslide-id") == ind;
-			}).stop().fadeIn( options.speed ).insertBefore( $currentSlide );
-			updateInd( ind, $currentSlide );
+			if ( options.animation ) {
+				$currentSlide.stop().animate({ "left": width/-1 }, options.speed, function(){
+					$(this).hide()
+				})
+				$(this).parents(".hexslide").find(".slide").filter(function(){
+					return $(this).data("hexslide-id") == ind;
+				}).stop().css("left", width).show().animate( { "left": 0 }, options.speed ).insertBefore( $currentSlide );
+			} else {
+				$currentSlide.stop().fadeOut( options.speed );
+				$(this).parents(".hexslide").find(".slide").filter(function(){
+					return $(this).data("hexslide-id") == ind;
+				}).stop().fadeIn( options.speed ).insertBefore( $currentSlide );
+			}
+
+			updateInd( ind, $currentSlide.parent(".hexslide-slide-container") );
 			if ( options.autoPlay && !options.pauseOnHover ) {
 				// User clicked, auto play is enabled. Stop and restart the timer to prevent it from changing while user is navigating
 				stop( $(this).parents(".hexslide").attr('id').split("-")[1] );
-				start( $(this).parents(".hexslide").attr('id').split("-")[1], true );
+				start( $(this).parents(".hexslide").attr('id').split("-")[1] );
 			}
 		}
 
 		function prevSlide( auto ) {
 			// Clear the corresponding interval to stop the slideshow
-			if (!auto) { clearInterval(timers[($(this).parent(".hexslide").attr('id').split('-')[1])]) }
+			if (!auto) { clearInterval(timers[($(this).parents(".hexslide").attr('id').split('-')[1])]) }
 
-			var $currentSlide = $(this).parent(".hexslide").find(".slide:first");
+			var $currentSlide = $(this).parents(".hexslide").find(".slide:first");
 			var currentID = $currentSlide.data("hexslide-id");
 			currentID--;
 
 			// If currentID is less that 0, set to highest slide ( last ).
 			if ( currentID < 0 ) {
-				currentID = $(this).parent(".hexslide").find(".slide").length;
+				currentID = $(this).parents(".hexslide").find(".slide").length;
 				currentID -= 1;
 			}
 
-			$currentSlide.stop().fadeOut( options.speed );
+			// Get the current slide, animate forward
+			if ( options.animation == "slide" ) {
+				$currentSlide.stop().animate({"left": width}, options.speed, function(){
+					$(this).hide()
+				})
 
-			$(this).parent(".hexslide").find(".slide").filter(function(){
-				return $(this).data("hexslide-id") == currentID;
-			}).fadeIn( options.speed ).insertBefore( $currentSlide );
+				$(this).parents(".hexslide").find(".slide").filter(function(){
+					return $(this).data("hexslide-id") == currentID;
+				}).stop().css({"left": (width) /-1 }).show().animate( {"left": 0}, options.speed ).insertBefore( $currentSlide );
+			} else {
+				$currentSlide.stop().fadeOut( options.speed );
+
+				$(this).parent(".hexslide").find(".slide").filter(function(){
+					return $(this).data("hexslide-id") == currentID;
+				}).fadeIn( options.speed ).insertBefore( $currentSlide );
+			}
 
 			if ( options.stopAutoOnNav ) {
-				$(this).parent(".hexslide").removeClass("hexslide-hover");
-				stop( $(this).parent(".hexslide").attr('id').split("-")[1] );
+				$(this).parents(".hexslide").removeClass("hexslide-hover");
+				stop( $(this).parents(".hexslide").attr('id').split("-")[1] );
 			} else if ( options.autoPlay && !options.pauseOnHover ) {
 				// User clicked, auto play is enabled. Stop and restart the timer to prevent it from changing while user is navigating
-				stop( $(this).parent(".hexslide").attr('id').split("-")[1] );
-				start( $(this).parent(".hexslide").attr('id').split("-")[1], true );
+				stop( $(this).parents(".hexslide").attr('id').split("-")[1] );
+				start( $(this).parents(".hexslide").attr('id').split("-")[1] );
 			}
-			var newID = $(this).parent(".hexslide").find('.slide:first').data("hexslide-id");
+			var newID = $(this).parents(".hexslide").find('.slide:first').data("hexslide-id");
 			updateInd( newID, this );
 		}
 
@@ -335,12 +382,19 @@ var _G = _G ? _G : false;
 	$.fn.hexSlide.defaults = {
 		interval: 3000,
 		speed: 500,
+		width: false,
+		height: false,
+		maxheight: false,
+		maxwidth: false,
+		minheight: false,
+		minwidth: false,
 		pauseOnHover: true,
 		autoPlay: true,
 		navigation: true,
 		alwaysShowNav: false,
 		stopAutoOnNav: false,
 		indicators: true,
+		animation: "fade",
 		additionalClass: {
 			slide: false,
 			container: false

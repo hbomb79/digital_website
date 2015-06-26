@@ -40,7 +40,7 @@
 						<div class="img-border">
 							<img id="test1" src="assets/image/gta.jpg" class="center-image" alt="Picture of counter strike: global offensive" data-slideshow-src="assets/image/gta1.jpg|assets/image/slideshow/gta1.jpg|assets/image/slideshow/gta2.jpg|assets/image/slideshow/gta3.jpg|assets/image/slideshow/gta4.jpg">
 						</div><br>
-						<small>Royalty Free image of GTA V sourced from Rockstar official new feed</small>
+						<small>Royalty Free image of GTA V sourced from Rockstar official news feed</small>
 					</div>
 					<div class="header">
 						<h1 class="large" id="title">Grand Theft Auto V</h1>

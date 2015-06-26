@@ -35,7 +35,7 @@ Only change rules like background, color, opacity. But not positioning or transi
 
 After this comment:
 
-	/* ONLY EDIT APPEARENCE */
+	/* EDIT HERE AND BELOW */
 
 edit the rules *however* you like. Be aware that editing the rules may result in unwanted changes.
 
@@ -69,7 +69,32 @@ If you want to run the plugin using all default settings, then all you have to d
 
 $("img").hexSlide();
 
-The above snippet of code will convert the image into a hexslide slide-show div. Although if you want custom settings to make your slide-show perform how you need it to, we need to understand the settings available.
+The above snippet of code will convert the image into a hexslide slide-show div, similar to this:
+
+<div class="hexslide" id="hexslide-0-container">
+	<div class="slide-btn left" data-slide-direction="backward">
+		<span>BACK</span>
+	</div>
+	<div class="slide-btn right" data-slide-direction="forward">
+		<span>NEXT</span>
+	</div>
+	<div class="indicator-container">
+		<span class="indicator" data-hexslide-id="0"></span>
+		<span class="indicator" data-hexslide-id="1"></span>
+		<span class="indicator" data-hexslide-id="2"></span>
+		<span class="indicator" data-hexslide-id="3"></span>
+		<span class="indicator" data-hexslide-id="4"></span>
+	</div>
+	<div class="hexslide-slide-container">
+		<div class="slide" data-hexslide-id="0"></div>
+		<div class="slide" data-hexslide-id="1"></div>
+		<div class="slide" data-hexslide-id="2"></div>
+		<div class="slide" data-hexslide-id="3"></div>
+		<div class="slide" data-hexslide-id="4"></div>
+	</div>
+</div>
+
+Although if you want custom settings to make your slide-show perform how you need it to, we need to understand the settings available.
 
 def. = Default Setting ( Does not need to be set unless changed )
 
@@ -83,6 +108,11 @@ Available String Settings
 * alwaysShowNav ( def. false )
 * stopAutoOnNav ( def. false )
 * indicators ( def. true )
+* animation ( def. fade )
+* width ( def. false )
+* height ( def. false )
+* maxwidth ( def.false )
+* maxheight ( def.false )
 
 ### Interval ( int )
 	The interval is the time ( in ms ) spent waiting between slides ( Only used when autoPlay is true )
@@ -107,6 +137,26 @@ Available String Settings
 
 ### indicators ( boolean )
 	If true, circles will be created underneath the slide show, one per slide. A user can use these to navigate the slides.
+
+### animation ( string )
+	If this string is set to "slide" the fade transitions for the slides will be replaced with sliding ones. If you want to go back to fade mode, simply unset this option when initializing the plugin or set it to "fade"
+
+### width ( string / int / percentage / CSS value )
+	If this setting is left unchanged ( false ), set to false or an unknown value the width of the original image tag will be applied to the new container. This will not be dynamic so you should set this value to a percentage, vw or vh value.
+
+### height ( string / int / percentage / CSS value )
+	If this setting is false or unknown then the height of the original image tag will be applied to the container. Just like the width it wont be dynamic so you should set it to a dynamic value.
+
+### maxwidth ( string / int / percentage / CSS value )
+	If this setting is left unchanged, set to default or if an unknown value is set the maxwidth will not be set.
+
+### maxheight ( string / int / percentage / CSS value )
+	If this is left at default or an unknown value is entered, the maxheight wont be set.
+
+
+### NOTE ###
+	If you want to set max width, or heights you can target .hexslide in your CSS. Same goes for width and height, although !important will be needed to override the default.
+
 
 
 Available Object Settings
@@ -134,6 +184,7 @@ Available Object Settings
 Example Call
 ------------
 
+
 $("img").hexSlide({
 	speed: 1000,	
 	interval: 5000,
@@ -154,6 +205,7 @@ $("img").hexSlide({
 	}
 })
 
+
 The above code will turn any img tags with data-slideshow-src into a hexslide slide-show.
 
 The image will change over 1 second every 5 seconds. The container has a background color of black and a display of inline-block. The container also has a class of center-image
@@ -166,12 +218,16 @@ Nothing, you're done.
 
 Feel free to contact me here:
 	
-http://harryfelton.web44.net/digital_website/help#!contact
+http://harryfelton.web44.net/digital_website/help.php#!contact
 	* Only works with javascript.
 
 Email: harryfelton12@gmail.com
 
 ### NOTES
+
+Global Settings
+---------------
+
 If you want to change the plugin settings permanently ( so you don't have to set the setting each time you call the plugin ) you can change them using the following directive:
 
 	$.fn.hexSlide.defaults;
@@ -186,6 +242,13 @@ You will have to reset the entire table, so here are the defaults:
 	alwaysShowNav: false,
 	stopAutoOnNav: false,
 	indicators: true,
+	animation: "fade",
+	width: false,
+	height: false,
+	maxheight: false,
+	maxwidth: false,
+	minwidth: false,
+	minheight: false,
 	additionalClass: {
 		slide: false,
 		container: false
@@ -205,3 +268,16 @@ Now unless specified when running the plugin, the interval will be 4 seconds, in
 If any of these defaults are missing the program may crash or not function correctly, because of this the second method of default adjustment is *recommended*
 
 Changing the global defaults is dangerous and can result in undesired changes.
+
+
+Dynamic Sizes
+-------------
+
+When setting the width and height properties, it can be hard to pick ones that offer a good size. I personally use view window measuements.
+
+Width: 60vw
+Height: 41vw
+
+These two values seem to work well and offer a reasonably good ratio.
+
+If you need to limit the minimum width of the slideshow, I then use set px (pixel) values, such as 500px and 710px

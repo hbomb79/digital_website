@@ -869,7 +869,6 @@ section {
 }
 
 .img-border {
-	border: 3px solid black;
 	display: inline-block;
 	box-shadow: 0 10px 10px -7px black;
 	font-size: 0;
