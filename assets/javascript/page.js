@@ -65,7 +65,8 @@ $(window).on("load aj_done", function(){
 		"additionalCSS":{
 			container:{
 				"display":"inline-block",
-				"background": "black"
+				"background": "black",
+				"box-shadow": "0 10px 10px -7px black"
 			}
 		},
 		"additionalClass": {
@@ -74,7 +75,8 @@ $(window).on("load aj_done", function(){
 		callback: {
 			start: function(){
 				$(".img-border").css({
-					"height": "41vw"
+					"height": "41vw",
+					"border": ""
 				});
 				$(window).trigger("resize");
 			}
