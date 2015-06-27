@@ -15,7 +15,8 @@ We are going to use data-slideshow-src.
 
 Inside of this attribute, we place our image URLs separated using "|" (No Quotes).
 
-*Add the custom attribute*
+*Add the custom attribute*  
+
 	<img src="youimg.extension" alt="What is this image?" data-slideshow-src="img.jpg|img2.jpg|img3.jpg|img4.jpg">
 
 Your required HTML code is done now. You may want to target the image to adjust its size and other properties.
@@ -35,7 +36,7 @@ Only change rules like background, color, opacity. But not positioning or transi
 
 After this comment:
 
-	/* ONLY EDIT APPEARENCE */
+	/* EDIT HERE AND BELOW */
 
 edit the rules *however* you like. Be aware that editing the rules may result in unwanted changes.
 
@@ -72,17 +73,25 @@ $("img").hexSlide();
 The above snippet of code will convert the image into a hexslide slide-show div. Although if you want custom settings to make your slide-show perform how you need it to, we need to understand the settings available.
 
 def. = Default Setting ( Does not need to be set unless changed )
+* = This setting can be changed on the fly, learn more at the end of the document
 
 Available String Settings
 -------------------------
-* interval ( def. 3000 )
-* speed ( def. 500 )
-* pauseOnHover ( def. true )
-* autoPlay ( def. true )
-* navigation ( def. true )
-* alwaysShowNav ( def. false )
-* stopAutoOnNav ( def. false )
-* indicators ( def. true )
+* interval ( def. 3000 ) *
+* speed ( def. 500 ) *
+* pauseOnHover ( def. true ) *
+* autoPlay ( def. true ) *
+* navigation ( def. true ) *
+* alwaysShowNav ( def. false ) 
+* stopAutoOnNav ( def. false ) *
+* indicators ( def. true ) *
+* width ( def. false ) *
+* minwidth ( def. false ) *
+* maxwidth ( def. false ) *
+* height ( def. false ) *
+* maxheight ( def. false ) *
+* minheight ( def. false ) *
+* animation ( def. "fade" ) *
 
 ### Interval ( int )
 The interval is the time ( in ms ) spent waiting between slides ( Only used when autoPlay is true )
@@ -108,18 +117,63 @@ If true autoPlay will be disabled when the user navigates ( using forward/back o
 ### indicators ( boolean )
 If true, circles will be created underneath the slide show, one per slide. A user can use these to navigate the slides.
 
+### width ( CSS Property )
+If false or an unknown value is given then the width of the container will be set to that of the img tag before plugin initialization
+
+### height ( CSS Property )
+If false or an unknown value is given then the height of the container will be set to that of the img tag before plugin initialization
+
+### minwidth ( CSS Property )
+If false or an unknown value is given then the min width wont be set. If width is a dynamic value then the container could possibly get *very* small
+
+### maxwidth ( CSS Property )
+If false or an unknown value is given then the max width wont be set. If width is a dynamic value then the container could get *very* large
+
+### maxheight ( CSS Property )
+If false or an unknown value is given then the max height wont be set. If height is a dynamic value then the container could get *very* large
+
+### minheight ( CSS Property )
+If false or an unknown value is given then the min height wont be set. If height is a dynamic value then the container could get *very* large
+
+### animation ( String )
+If false or an unknown value is given, the animation using to change the slides will be a simple fade in/out. If supplied value is string slide, the slides will slide in and out of the window.
+
+
+Any setting above that has an "*" next to it means that the setting is dynamic. Therefore after starting the plugin you can target the slideshow ( using our Class objects below ) and simply call hexSlide containing only the settings you want to change.
+
+Your new settings will be merged with your old settings, and the defaults.
+
+Lets say you wanted to remove the navigation, or disable pauseOnHover after starting the plugin, simply target the slideshow using a custom class you apply when setting the plugin ( used below )
+
+### First INIT
+
+	$("img").hexSlide({
+		additionalClass:{
+			container: "my-slideshow-target"
+		}
+	})
+
+### Second INIT
+
+	$(".my-slideshow-target").hexSlide({
+		pauseOnHover: false
+	})
+
+
+The above code shows a slideshow being created with class *.my-slideshow-target*. This class is then used in the second call which disabled pauseOnHover, the container class remains afterwards.
 
 Available Object Settings
 -------------------------
 * additionalCSS ( def. false )
 * additionalClass ( def.false )
 * callback ( def. Object [object] )
+* text ( def. Object [object] )
 
 ### additionalCSS ( object )
-The additionalCSS object can contain 1-2 other objects, indexed using *container* or *slide*
+The additionalCSS object can contain 1-2 other objects, indexed using container, slide, nextBtn, nextTxt, prevBtn, prevTxt.
 EG: additionalCSS: { container: { "cssrule": "cssvalue" }, slide: { "cssrule": "cssvalue" } }
 
-Any CSS in the slide index will be applied to each individual slide. Any rules in the container index will be applied to the parent div.hexslide
+Any CSS in the slide index will be applied to each individual slide. Any rules in the container index will be applied to the parent div.hexslide, the prevBtn and nextBtn CSS applies to the div containing the button. The nextTxt and prevBtn applies to the span inside.
 
 ### additionalClass ( object )
 This object can contain 1-2 string values, indexed using either *container* or *slide*
@@ -127,9 +181,20 @@ EG: additionalClass: { container: "my-container-class", slide: "my-slide-class a
 
 Mutliple classes must be separated using a *space* not a comma, semi-colon or other character
 
-### callback ( object )
+### callback ( object ) * ( This object setting is called each time, changing it will work )
 This object currently only contains one index, named *start*. The key must be a function, this function will be called *after* and *every* time the plugin is used.
 EG: callback:{ start: function(){ alert("done!"); } }
+
+### text ( object )
+This object contains two indexs. *previous* and *next*. These indexs must hold a *string* key.
+EG: text: { previous: "Back Button", next: "Next Button" }
+
+The string held within the index, is applied to the appropriate button. By default the previous has a value of "Back" and the next has a value of "Next".
+
+
+Unlike straight settings, object setting are *NOT* dynamic ( except callback ) because the majority of them are called when starting the plugin and not afterwards and keeping track of your previous CSS classes would be difficult. If you need to change the class, simply change it using normal jQuery methods.
+
+	$(".my-slideshow-target .slide-btn.right").text("Next Button")
 
 Example Call
 ------------
@@ -179,12 +244,19 @@ You will have to reset the entire table, so here are the defaults:
 
 	interval: 3000,
 	speed: 500,
+	width: false,
+	height: false,
+	maxheight: false,
+	maxwidth: false,
+	minheight: false,
+	minwidth: false,
 	pauseOnHover: true,
 	autoPlay: true,
 	navigation: true,
 	alwaysShowNav: false,
 	stopAutoOnNav: false,
 	indicators: true,
+	animation: "fade",
 	additionalClass: {
 		slide: false,
 		container: false
@@ -193,7 +265,13 @@ You will have to reset the entire table, so here are the defaults:
 		slide: false,
 		container: false
 	},
-	callback: {	start: function(){} }
+	callback: {
+		start: function(){}
+	},
+	text: {
+		previous: "Back",
+		next: "Next"
+	}
 
 You can simply copy these, change what you need to, and set the directive to them, OR you can simply target them like so:
 

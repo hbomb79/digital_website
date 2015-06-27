@@ -427,7 +427,6 @@ aj_page = {
 	},
 
 	add_page: function( raw ) {
-		$(window).trigger("aj_start")
 		content = $(raw).filter(".page-container")
 		if ( !get_cookie("animations_disable") ) {
 			// Append to body, and wait until done.
@@ -436,6 +435,7 @@ aj_page = {
 			content.insertAfter(".page-container.current");
 			// wait until ready, then update dom and transition
 			$("page-container.new").ready(function(){
+				$(window).trigger("aj_start")
 				aj_page.prepare( raw ).done(function(){
 					aj_page.ajax_prepare( false ).done(function(){
 						aj_page.transition_page() 
