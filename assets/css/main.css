@@ -361,6 +361,10 @@ header li a.loading{
 	max-width: 960px;
 }
 
+.header.fix {
+	z-index:2;
+}
+
 .header.fix h1 {
 	position: fixed;
 	top:0;
@@ -861,10 +865,17 @@ section {
 }
 
 .center-image {
-	width:88%;
-	max-width: 1920px;
+	width:100%;
+}
+
+.img-format {
+	display: inline-block;
 	box-shadow: 0 10px 10px -7px black;
-	border: solid 3px black;
+	font-size: 0;
+	width: 60vw;
+	max-width: 960px;
+	max-height: 540px;
+	border: 3px solid black;
 }
 
 .mobile-show {

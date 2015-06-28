@@ -1,0 +1,159 @@
+/* CSS that you are likely to edit should have a comment beside it */
+
+.hexslide .slide {
+	position: absolute;
+	left:0;
+	width:100%;
+	height: 100%;
+	top:0;
+	background-size: cover;
+	background-position: center;
+}
+
+.hexslide {
+	position: relative;
+	width:100%;
+	height:100%;
+	z-index:1;
+	border: solid 3px crimson; /* BORDER COLOR - Change this if you like */
+}
+
+.hexslide-slide-container {
+	overflow: hidden;
+	position: absolute;
+	height:100%;
+	width:100%;
+	left:0;
+	top:0;
+}
+
+.hexslide-control-container {
+	position: absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	overflow: hidden;
+}
+
+/* ONLY EDIT APPEARENCE */
+
+.hexslide .slide-btn span {
+	position: absolute;
+	font-size: 16px;
+	z-index: 2;
+	top:50%;
+	-webkit-transform: translateY(-50%);
+	color:white;
+	display: block;
+	padding:1em; /* Button Size */
+	background:crimson; /* Button color */
+	cursor: pointer;
+	opacity: 0.7; /* Opacity of button when not hovered */
+	visibility: visible;
+	-webkit-transform: translateY(-50%) translateX(0);
+	-ms-transform: translateY(-50%) translateX(0);
+	-o-transform: translateY(-50%) translateX(0);
+	transform: translateY(-50%) translateX(0);
+	-webkit-transition: visibility 0s ease-in-out 0s, padding 0.2s ease-in-out 0s, -webkit-transform 0.2s ease-in-out 0s, opacity 0.2s ease-in-out 0s;
+	-o-transition: visibility 0s ease-in-out 0s, padding 0.2s ease-in-out 0s, -o-transform 0.2s ease-in-out 0s, opacity 0.2s ease-in-out 0s;
+	transition: visibility 0s ease-in-out 0s, padding 0.2s ease-in-out 0s, transform 0.2s ease-in-out 0s, opacity 0.2s ease-in-out 0s;
+}
+
+/* EDIT HERE AND BELOW */
+
+.hexslide .right span {
+	right:0;
+}
+
+.hexslide .left span {
+	left:0;
+}
+
+.hexslide .slide-btn span:hover {
+	opacity: 1; /* Opacity when hovering on buttons */
+}
+
+.hexslide .left span:hover {
+	padding-left:25px; /* Offset when hovering */
+}
+
+.hexslide .right span:hover {
+	padding-right: 25px; /* Offset when hovering */
+}
+
+.hexslide .slide-btn.hide.right span {
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transition-delay: 0.2s, 0s, 0s, 0s;
+	-o-transition-delay: 0.2s, 0s, 0s, 0s;
+	transition-delay: 0.2s, 0s, 0s, 0s;
+	-webkit-transform: translateY(-50%) translateX(30%);
+	-ms-transform: translateY(-50%) translateX(30%);
+	-o-transform: translateY(-50%) translateX(30%);
+	transform: translateY(-50%) translateX(30%);
+}
+
+.hexslide .slide-btn.hide.left span {
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transition-delay: 0.2s, 0s, 0s, 0s;
+	-o-transition-delay: 0.2s, 0s, 0s, 0s;
+	transition-delay: 0.2s, 0s, 0s, 0s;
+	-webkit-transform: translateY(-50%) translateX(-30%);
+	-moz-transform: translateY(-50%) translateX(-30%);
+	-ms-transform: translateY(-50%) translateX(-30%);
+	-o-transform: translateY(-50%) translateX(-30%);
+	transform: translateY(-50%) translateX(-30%);
+}
+
+.hexslide .indicator-container {
+	position: absolute;
+	bottom:0;
+	left:50%;
+	font-size: 16px;
+	padding: 9px 5px 5px 5px;
+	-webkit-transform: translate(-50%, 100%);
+	-moz-transform: translate(-50%, 100%);
+	-ms-transform: translate(-50%, 100%);
+	-o-transform: translate(-50%, 100%);
+	transform: translate(-50%, 100%);
+	background: rgba(0, 0, 0, 0.8); /* Indicator panel color. 0.8 is opacity */
+	border-radius: 0px 0px 5px 5px; /* Rounding of corners */
+	opacity: 1;
+	-webkit-transition: -webkit-transform 250ms ease-in-out, opacity 250ms ease-in-out;
+	-o-transition: -o-transform 250ms ease-in-out, opacity 250ms ease-in-out;
+	transition: transform 250ms ease-in-out, opacity 250ms ease-in-out;
+}
+
+.hexslide .indicator-container.hide {
+	-webkit-transform: translate(-50%, 0);
+	-moz-transform: translate(-50%, 0);
+	-ms-transform: translate(-50%, 0);
+	-o-transform: translate(-50%, 0);
+	transform: translate(-50%, 0);
+	opacity: 0;
+}
+
+.hexslide .indicator-container .indicator {
+	width: 16px; /* Size */
+	height: 16px;
+	display: inline-block;
+	border: 2px solid crimson; /* Indicator circle outline */
+	margin: 0 6px;
+	border-radius: 50%;
+	cursor: pointer;
+	-webkit-transition: background 250ms ease-in-out, border 500ms ease-in-out;
+	-o-transition: background 250ms ease-in-out, border 500ms ease-in-out;
+	-moz-transition: background 250ms ease-in-out, border 500ms ease-in-out;
+	transition: background 250ms ease-in-out, border 500ms ease-in-out;
+}
+
+.hexslide .indicator-container .indicator:hover {
+	background: white;
+}
+
+.hexslide .indicator-container .indicator.active {
+	background: crimson;
+	border-color:white;
+}

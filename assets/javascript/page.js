@@ -53,3 +53,35 @@ $(document).ready(function(){
 	})
 })
 
+$(window).on("load aj_done", function(){
+	$("img").hexSlide({
+		height: "41vw",
+		width: "60vw",
+		maxwidth: "960px",
+		maxheight: "540px",
+		animation: "slide",
+		additionalCSS:{
+			container:{
+				"display":"inline-block",
+				"background": "black",
+				"box-shadow": "0 10px 10px -7px black"
+			}
+		},
+		additionalClass: {
+			container: "center-image"
+		},
+		callback: {
+			start: function(){
+				$(".img-border").css({
+					"height": "41vw",
+					"border": ""
+				});
+				$(window).trigger("resize");
+			}
+		},
+		text: {
+			next: "NEXT",
+			previous: "BACK"
+		}
+	})
+})
