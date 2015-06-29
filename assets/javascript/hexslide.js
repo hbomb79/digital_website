@@ -1,5 +1,7 @@
 // HexSlide Version beta 2.6 | Copyright (C) 2015 HexCode, Harry Felton.
 
+// If mobile tap is not on button, toggle nav visibility. Use delegation on the body hexslide. Dont toggle if the user clicks off of the slideshow. While visible pause slideshow.
+
 var _G = _G ? _G : {};
 (function( $, window, document, undefined ){
 	if ( !_G ) {
