@@ -57,6 +57,7 @@ $(window).on("load aj_done", function(){
 	$("img").hexSlide({
 		height: "41vw",
 		width: "60vw",
+		shuffle: true,
 		maxwidth: "960px",
 		maxheight: "540px",
 		animation: "slide",
