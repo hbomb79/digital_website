@@ -284,7 +284,11 @@ var CF, test_2;
 					// If the contact form is currently invisible then return because we only want this function to apply when the contact form is visible
 					// because this is desgined to close the form.
 				}
-				var ev = $( e.originalEvent.srcElement ) // Found using Google Chromes inspect element (had no internet for documentation)
+				var ev = $( e.originalEvent.target ) // e is the mouse click event. Originalevent is the event that fired the click event on the window, and the target is what was clicked.
+				if ( !ev ) {
+					// If the browser does not support this (for whatever reason, return)
+					return;
+				}
 				// ev stores the element the user clicked on.
 				if ( ev.parents( self.config.container ).length != 1 && !ev.hasClass( (self.config.button).replace(".", "") ) && !ev.hasClass( (self.config.trigger).replace(".", "") )) {
 					self.trigger_click();

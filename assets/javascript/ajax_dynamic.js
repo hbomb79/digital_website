@@ -37,7 +37,6 @@ function is_elem_visible(elem)
     var elemBottom = elemTop + $elem.height();
     if (!$elem.is(":visible") || $elem.css("opacity") == 0){
     	return false;
-    	console.log("Element is not visible to viewport, returning false")
     }
     return ((elemTop <= docViewBottom) && (elemTop >= docViewTop) || (elemBottom <= docViewBottom) && (elemBottom >= docViewTop) || (elemTop <= docViewTop) && (elemBottom >= docViewBottom));
     // If the elements top and bottom are both off the screen, then we can assume the middle of the element is still visible, thus we accept this as a condition
