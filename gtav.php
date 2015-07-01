@@ -6,6 +6,9 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="description" content="Grand Theft Auto V review page">
+	<meta name="keywords" content="gta, v, gtav, review, author">
+	<meta name="author" content="Harry Felton">
 	<title>Grand Theft Auto V</title>
 	<link rel="stylesheet" href="assets/css/main.css">
 	<?php

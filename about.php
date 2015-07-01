@@ -3,6 +3,9 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="description" content="HexCode about page, see our authors and learn about the website">
+	<meta name="keywords" content="author, hexcode, site, website, about">
+	<meta name="author" content="Harry Felton">
 	<title>About</title>
 	<link rel="stylesheet" href="assets/css/main.css">
 	<?php
@@ -70,7 +73,7 @@
 						<section class="last">
 							<h2>Well... whats the second thing?</h2>
 							<p>The second thing you may have noticed, is lag, users that have a poor quality computer or browser will experience lag during page change because of the sheer amount of things happening, if you want to disable the JavaScript animations you can turn them off by clicking settings in the top right, and toggling animations in the window.</p>
-							<p>Although, thats not the only thing that can lag the animation, Embedded YouTube videos seem to cause a huge problem. <br>The YouTube embed API assumes you have <a target="_blank" href="https://www.google.co.nz/chrome/devices/chromecast/">Chromecast</a> Installed, when it tries to access it, the embed throws in excess of ten errors if you do not have the plugin like myself, while there errors are piling up, <strong>huge</strong> lag is present. <br><br>Closing the console window helps, but not enough to make it acceptable, if a fix doesn't present itself, this site will resort to YouTube links as a replacement.<br><br>Images are not the cause, after running extensive testing no lag can be noticed when loading to and from pages with over 30 HD images, but one YouTube embed screws it up.</p>
+							<p>Although, thats not the only thing that can lag the animation, Embedded YouTube videos seem to cause a huge problem. <br>The YouTube embed API assumes you have <a target="_blank" class="anim" href="https://www.google.co.nz/chrome/devices/chromecast/">Chromecast</a> Installed, when it tries to access it, the embed throws in excess of ten errors if you do not have the plugin like myself, while there errors are piling up, <strong>huge</strong> lag is present. <br><br>Closing the console window helps, but not enough to make it acceptable, if a fix doesn't present itself, this site will resort to YouTube links as a replacement.<br><br>Images are not the cause, after running extensive testing no lag can be noticed when loading to and from pages with over 30 HD images, but one YouTube embed screws it up.</p>
 						</section>
 					</div>
 				</main>

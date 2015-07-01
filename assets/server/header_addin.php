@@ -30,7 +30,7 @@
 	function cancel() {
 		$("#loading").fadeOut(500).promise().done(function(){
 			$("html, body").css("overflow-y", "auto");
-			$(window).trigger("scroll")
+			$(window).trigger("scroll");
 		});
 	}
 </script>

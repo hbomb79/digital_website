@@ -5,6 +5,9 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="description" content="Page for HexCode legal information">
+	<meta name="keywords" content="hexcode, legal, license">
+	<meta name="author" content="Harry Felton">
 	<title>License Information</title>
 	<link rel="stylesheet" href="assets/css/main.css">
 	<?php

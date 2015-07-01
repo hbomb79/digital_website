@@ -5,6 +5,9 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="description" content="A review of Heroes and Generals, a new war simulation beta game.">
+	<meta name="keywords" content="hag, heroes, and, generals, author, hexcode, harry">
+	<meta name="author" content="Harry Felton">
 	<title>Heroes And Generals</title>
 	<link rel="stylesheet" href="assets/css/main.css">
 	<?php

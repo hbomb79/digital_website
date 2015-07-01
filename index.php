@@ -3,6 +3,9 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="description" content="HexCode homepage, see all of our games and navigate the site">
+	<meta name="keywords" content="games, game, review, author, harry, article, section">
+	<meta name="author" content="Harry Felton">
 	<title>Home Page</title>
 	<link rel="stylesheet" href="assets/css/main.css">
 	<?php

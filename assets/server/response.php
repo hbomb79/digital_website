@@ -94,7 +94,7 @@
 		$name = isset($_GET["name"]) ? $_GET["name"] : "Unknown";
 		$email = isset($_GET["email"]) ? $_GET["email"] : "Unknown";
 		if ( $name == "Unknown" || $email == "Unknown" ) {
-			die("DIE");
+			die("missing fields");
 		}
 		?>
 		<header>

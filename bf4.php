@@ -6,6 +6,9 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="description" content="Battlefield 4 review">
+	<meta name="keywords" content="bf4, battlefield, 4, review, article">
+	<meta name="author" content="Harry Felton">
 	<title>Battlefield 4</title>
 	<link rel="stylesheet" href="assets/css/main.css">
 	<?php

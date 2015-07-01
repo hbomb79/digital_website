@@ -5,6 +5,9 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="description" content="A review on CS:GO. Discussing performance, textures and gameplay">
+	<meta name="keywords" content="csgo, cs, counter, strike, global, offensive">
+	<meta name="author" content="Harry Felton">
 	<title>Counter Strike: Global Offensive</title>
 	<link rel="stylesheet" href="assets/css/main.css">
 	<?php
