@@ -1,9 +1,12 @@
 #backimg1{
 	background-image: url("../image/skyrim1.jpg");
+	/*The background-image above imports the image to be used in the webpage that is given this id*/
 	background-attachment: fixed;
+	/*the background-attachment above controls how the bacgorund image behaves, because it has fixed afterwards the */
 	background-position: 57% 43%;
 	margin: 0;
 }
+/*the # above represents the creation of a class, classes are used to style all parts of the html that are given the id that is indicated by the text after the #. this is of backimg1 styles the background of the page*/
 #backimg2{
 	background-image: url("../image/ACUnity.jpg");
 	background-attachment: fixed;
@@ -23,8 +26,35 @@
 	background-color: #FFFFFF;
 	padding: 0px 25px;
 }
-body #topimg{
-	float: bottom right;
+#nav2 {
+	max-width: 600px;
+	height: 40px;
+	margin: 0 auto;
+	width: 80%;
+	background-color: lightblue;
+	padding: 0px 25px;
+	font-size: x-large;
+	text-align: center;
+}
+#nav {
+	max-width: 600px;
+	height: 40px;
+	margin: 0 auto;
+	width: 80%;
+	background-color: #191919;
+	padding: 0px 25px;
+	font-size: x-large;
+	color: #FFFFFF;
+	text-align: center;
+}
+a.font{
+		color: #FFFFFF;
+}
+a.font2{
+	color: #000000;
+}
+a.font:visited {
+	display:none;
 }
 body .topimg2{
 	display: block;

@@ -93,11 +93,11 @@
 					<ul>
 						<li><a href="gtav.php" class="ajax_load">Grand Theft Auto V</a></li>
 						<li><a href="ACU.html">Assassin's Creed Unity</a></li>
-						<li><a href="#">Team Fortress 2</a></li>
+						<li><a href="TeamFortress2Pg1.html">Team Fortress 2</a></li>
 						<li><a href="csgo.php" class="ajax_load">Counter Strike: Global Offensive</a></li>
 						<li><a href="skyrim.html">Elder Scrolls V: Skyrim</a></li>
-						<li><a href="#">Portal 2</a></li>
-						<li><a href="#">Left 4 Dead 2</a></li>
+						<li><a href="Portal2Pg2.html">Portal 2</a></li>
+						<li><a href="Left4Dead2Pg3.html">Left 4 Dead 2</a></li>
 						<li><a href="Payday.html">PAYDAY: The Heist</a></li>
 						<li><a href="bf4.php" class="ajax_load">Battlefield 4</a></li>
 						<li><a href="hag.php" class="ajax_load">Heroes And Generals</a></li>
