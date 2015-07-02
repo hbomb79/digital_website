@@ -14,10 +14,21 @@
 	<!-- the title is not seen on the actual page but on the page tab, it is used to name the page so it easily identified if someone had multiple tabs open etc-->
 </head>
 <!-- the /head tag indicates the end of the head-->
+
 <body id="backimg1">
 	<!-- the body tag indicates the start of the body, the body contains all of the media displayed on the page. the id of backimg1 displays the background image and is from the css file -->
+	<!--the id is written in the css and put into the html, they are used to change the style of a specific part of the html, they are inserted in to the opening tag. the id above is used to set the background image of the webpage-->
 	<a id="top"></a>
 	<!--a tags determine which images or text are hyperlinks. this a tag is used in an image which links to the top of the page-->
+	<div id="nav">
+		<nav>
+			<a class="font" href="http://harryfelton.web44.net/digital_website/index.php">Home Page</a> |
+			<a class="font" href="http://harryfelton.web44.net/digital_website/about.php">About Page</a> |
+			<a class="font" href="http://harryfelton.web44.net/digital_website/help.php">Help Page</a> |
+			<a href="http://harryfelton.web44.net/digital_website/license.php">License Page</a> |
+		</nav>
+		<!--nav tags are used to create navigation bars at the top of the screen. these can contain links to other parts of the site or other site/page links-->
+	</div>
 	<div id="main" class="static">
 		<!-- div tags indicate a section in an html document. I used them to make formatting the webpage with css easier.-->
 		<h1 class="font1"> The Elder Scrolls V: Skyrim</h1>
@@ -29,6 +40,7 @@
 		<h1 class="font1"> What is Skyrim? </h1>
 		<!--classes are used to style sections of code with css, they're added into tags-->
 		<p class="font2"> The Elder Scrolls V: Skyrim is an action role-playing video game developed by Bethesda Game Studios and published by Bethesda Softworks. </p>
+		<!--p tags are used to write the main and bulk writing of the webpage. the p tag above is used to write some information that is ciewable and read on the webpage-->
 		<br>
 		<h1 class="font1"> What's the story? </h1>
 		<br>
@@ -41,8 +53,8 @@
 		<h1 class="font1"> Still not pumped? </h1>
 		<p class="font2"> Have a little look a the trailer below, if you still aren't excited about the game then there is no reason for you to continue being on this page </p>
 		<iframe width="560" height="315" src="https://www.youtube.com/embed/PjqsYzBrP-M" frameborder="0" allowfullscreen></iframe>
-		<a href="#top" id="topimg">
-			<img src="assets/image/skyrimmarker.jpg" height="50" title="Back To Top">
+		<a href="#top">
+			<img class="topimg2"src="assets/image/skyrimmarker.jpg" height="50" title="Back To Top">
 		</a>
 	</div>
 </body>
