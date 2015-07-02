@@ -1,0 +1,93 @@
+#backimg1{
+	background-image: url("../image/TF2Back.jpg");
+	background-attachment: fixed;
+	background-position: center;
+	margin: 0;
+}
+
+
+#backimg2{
+	background-image: url("../image/p2bg1.jpg");
+	background-attachment: fixed;
+	background-position: center;
+	margin: 0;
+}
+
+
+#backimg3{
+	background-image: url("../image/l4d2bg2.jpg");
+	background-attachment: fixed;
+	background-position: center;
+	margin: 0;
+}
+
+
+#main {
+	max-width: 600px;
+	margin: 0 auto;
+	width: 80%;
+	background-color: #FFFFFF;
+	padding: 0px 25px;
+}
+
+
+.static{
+	position: static;
+}
+
+.font1{
+	font-family:'Orbitron', sans-serif;
+	margin-top: 0;
+}
+
+.font2{
+	font-family: 'Roboto', sans-serif;
+}
+
+
+.body {
+  margin: 0;
+  padding: 0;
+  background: #ccc;
+}
+ 
+.nav ul {
+  list-style: none;
+  background-color: #444;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+.nav li {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+  line-height: 40px;
+  height: 40px;
+  border-bottom: 1px solid #888;
+}
+ 
+.nav a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  transition: .3s background-color;
+}
+ 
+.nav a:hover {
+  background-color: #D9D9D9;
+}
+ 
+.nav a.active {
+  background-color: #fff;
+  color: #444;
+  cursor: default;
+}
+ 
+ 
+.nav li {
+    width: 120px;
+    border-bottom: none;
+    height: 50px;
+    line-height: 50px;
+    font-size: 1.4em;
+}
