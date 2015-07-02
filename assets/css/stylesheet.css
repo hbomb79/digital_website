@@ -64,6 +64,7 @@
   line-height: 40px;
   height: 40px;
   border-bottom: 1px solid #888;
+  display:inline-block;
 }
  
 .nav a {
