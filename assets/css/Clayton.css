@@ -2,9 +2,11 @@
 	background-image: url("../image/skyrim1.jpg");
 	/*The background-image above imports the image to be used in the webpage that is given this id*/
 	background-attachment: fixed;
-	/*the background-attachment above controls how the bacgorund image behaves, because it has fixed afterwards the */
+	/*the background-attachment above controls how the bacgorund image behaves, because it has fixed afterwards the image stays in the same place*/
 	background-position: 57% 43%;
+	/*the line above controls the position of the background image on the screen.*/
 	margin: 0;
+	/*the margin controls the amount of space left around the outside border*/
 }
 /*the # above represents the creation of a class, classes are used to style all parts of the html that are given the id that is indicated by the text after the #. this is of backimg1 styles the background of the page*/
 #backimg2{
@@ -21,10 +23,26 @@
 }
 #main {
 	max-width: 600px;
+	/*the line above controls the maximum width of the page that can be covered by whatever is given this id */
 	margin: 0 auto;
 	width: 80%;
 	background-color: #FFFFFF;
+	/*the line above controls the color of the background. this line was used to color the box that contains all the media on the page white*/
 	padding: 0px 25px;
+	/*paddding is similar to margins however it is the inside border*/
+}
+#nav {
+	max-width: 600px;
+	height: 40px;
+	margin: 0 auto;
+	width: 80%;
+	background-color: #191919;
+	padding: 0px 25px;
+	font-size: x-large;
+	/*font size controls the size of the text if all that is given the id containing that line, i used this line in my nav bar to make the text more prominant*/
+	color: #FFFFFF;
+	text-align: center;
+	/*text align moves the text and aligns it whever is designated by the words following, again used in the nav bar to make the text more prominant*/
 }
 #nav2 {
 	max-width: 600px;
@@ -36,28 +54,15 @@
 	font-size: x-large;
 	text-align: center;
 }
-#nav {
-	max-width: 600px;
-	height: 40px;
-	margin: 0 auto;
-	width: 80%;
-	background-color: #191919;
-	padding: 0px 25px;
-	font-size: x-large;
-	color: #FFFFFF;
-	text-align: center;
-}
 a.font{
 		color: #FFFFFF;
 }
 a.font2{
 	color: #000000;
 }
-a.font:visited {
-	display:none;
-}
 body .topimg2{
 	display: block;
+	/*display controls how the media is displayed, i used block so that it is displayed similar to that of a p tag in html*/
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -66,6 +71,7 @@ body .topimg2{
 }
 .font1{
 	font-family:'Orbitron', sans-serif;
+	/*font family controls what fon is used, i used this here to change the font and make the text look more appealing*/
 	margin-top: 0;
 }
 .font2{
