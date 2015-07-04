@@ -22,6 +22,14 @@
 }
 
 
+#backimg4{
+	background-image: url("../image/dbbg1.jpg");
+	background-attachment: fixed;
+	background-position: center;
+	margin: 0;
+}
+
+
 #main {
 	max-width: 600px;
 	margin: 0 auto;
