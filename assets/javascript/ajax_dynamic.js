@@ -276,6 +276,7 @@ aj_page = {
 	init: function(){
 		// Unset the ajax_load a tags and reset the click event
 	    $('a.ajax_load').off("click").on('click', function(event) {
+	    	console.warn("hit")
 	        if (event.button === 0) {
 	        	// If the user clicked using the main mouse button
 	            var old, to, self;
@@ -288,9 +289,9 @@ aj_page = {
 	            cg_timer("temp_safe", setTimeout(function(){
 					aj_page.start( old, to, true, self );
 				}, 250));
-				if ( !get_cookie("ajax_disable") ) {
+				//if ( !get_cookie("ajax_disable") ) {
 					event.preventDefault()
-				}
+				//}
 	        }
 	    });
 	    $("a.anchor").on('click', function(e){
@@ -326,16 +327,19 @@ aj_page = {
 			return false;
 			// Return false if the page is currently changing
 		}
-		// First, check if the user has animations enabled, if they dont, then return
-		if ( get_cookie( "ajax_disable" ) ) {
-			return true;
-			// If user has ajax_disable set then return true to load the page normally
-		}
 		// User has animations enabled, continue checks.
 		// Check if new URL matches current.
 		if ( getFileName() == getFileName( to ) && !popstate ) {
 			return false;
 			// Return false if url to matches current page and the start is not a popstate
+		}
+		// First, check if the user has animations enabled, if they dont, then return
+		if ( get_cookie( "ajax_disable" ) && getFileName() != getFileName( to) ) {
+			document.location.href = to
+			return true;
+			// If user has ajax_disable set then return true to load the page normally
+		} else if ( get_cookie( "ajax_disable" ) ) {
+			return true;
 		}
 		this.popstate = popstate ? true : false;
 		// Set this.popstate equal to true or false depending on popstate
@@ -490,18 +494,18 @@ aj_page = {
 			$("#load-container").css({"width":"90%"})
 		}
 		// push new url if it was not a popstate
+		if ( fixer && $(".page-container.current").data("fix-header") ) {
+			fixer.remove_element("all")
+			fixer_init()
+		} else if (fixer) {
+			fixer.remove_element("all")
+		}
 		if (!replace) {
 			//$(".page-container.new").waitForImages(function() {
 				// Scroll user to the top of the page if they are too far down (scroll)
 				$(".page-container.current").removeClass("current").addClass("leave")
 				$(".page-container.new").removeClass("new").addClass("current")
 				$("#load-container").animate({"width": "100%"}, 250)
-				if ( fixer && $(".page-container.current").data("fix-header") ) {
-					fixer.remove_element("all")
-					fixer_init()
-				} else if (fixer) {
-					fixer.remove_element("all")
-				}
 				setTimeout(function(){
 					$(".page-container.leave").remove()
 					$("#load-container").slideUp(250).promise().done(function(){

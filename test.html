@@ -2,21 +2,51 @@
 <html lang="en">
 <head>
 	<script src="assets/javascript/jquery.min.js"></script>
-	<script src="assets/javascript/hexslide.min.js"></script>
-	<link rel="stylesheet" href="assets/css/hexslide.css">
+	<script src="assets/javascript/legacyLoad.js"></script>
 	<meta charset="UTF-8">
 	<title>Test</title>
 	<style>
+		html, body {
+			padding: 0;
+			margin: 0;
+			background: lightgray;
+		}
+		.target {
+			width:100px;
+			height:100px;
+			background:yellow;
+			display: inline-block;
+			margin: 2em;
+			overflow: hidden;
+		}
 
+		.target.other {
+			width:100px;
+			height:100px;
+			background: red !important;
+		}
+
+		.page-container {
+			background: white;
+			width:88%;
+			border: 3px solid crimson;
+			margin: 0 auto;
+		}
 	</style>
 </head>
 <body>
 	<main>
-		<div id="test">
-			<img src="assets/image/slideshow/gta1.jpg" alt="Images of GTA" data-slideshow-src="assets/image/slideshow/gta2.jpg|assets/image/slideshow/gta3.jpg|assets/image/slideshow/gta4.jpg">
-		</div>
-		<div id="test2">
-			<img src="assets/image/slideshow/gta1.jpg" alt="Images of GTA" data-slideshow-src="assets/image/slideshow/gta2.jpg|assets/image/slideshow/gta3.jpg|assets/image/slideshow/gta4.jpg">
+		<div class="page-container" data-legacy-animation="preset:slideLeft" data-legacy-depart="preset:slideLeft" data-legacy-arrive="preset:slideRight">
+			<div class="target other" data-legacy-animation="preset:slideLeft" id="1"></div>
+			<div class="target other" id="2"><a href="gtav.php" class="legacy">Grand Theft Auto</a></div>
+			<div class="target other" id="3"></div>
+			<div class="target other" id="4"></div>
+			<div class="target other" id="5"></div>
+			<div class="target other" id="6"></div>
+			<div class="target other" id="7"></div>
+			<div class="target other" id="8"></div>
+			<div class="target other" id="9"></div>
+			<div class="target other" id="10"></div>
 		</div>
 	</main>
 </body>

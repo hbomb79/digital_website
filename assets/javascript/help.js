@@ -735,48 +735,57 @@ var CF, test_2;
 			$("#step-loading-node").fadeOut().promise().done(function(){
 				$(this).remove();
 				// Fade out then remove the SENDING screen
-			})
-			if ( x.statusText == "timeout" ) {
-				// If the error was casued by a timeout then tell the user
-				self.output({
-					"header": "Connection Timeout",
-					"text": "Sorry, we could not connect to the server in time.",
-					"node_class": "step step-error",
-					"selector": ".step.step-error",
-					"btext": "Back",
-					"resize_param": ".step-error",
-				})
-			} else if ( x.status == 404 ) {
-				// If the error was because the file was not found
-				self.output({
-					"header": "Connection Failed",
-					"text": "It appears as though the mailing system is down. We will fix this as soon as we can. Please try again later",
-					"node_class": "step step-error",
-					"selector": ".step.step-error",
-					"btext": "Back",
-					"resize_param": ".step-error",
-				})
-			} else if ( x.statusText == "error" ) {
-				// If the error was generic ( maybe internet failure )
-				self.output({
-					"header": "Connection Failed",
-					"text": "We could not connect to our servers. Check your internet connection and try again",
-					"node_class": "step step-error",
-					"selector": ".step.step-error",
-					"btext": "Back",
-					"resize_param": ".step-error",
-				})
-			} else {
-				// Otherwise display a generic error message.
-				self.output({
-					"header": "Fatal Error",
-					"text": "A fatal error prevented us from sending your message. Please try again later",
-					"node_class": "step step-error",
-					"selector": ".step.step-error",
-					"btext": "Back",
-					"resize_param": ".step-error",
-				})
-			}
+				if ( x.statusText == "timeout" ) {
+					// If the error was casued by a timeout then tell the user
+					self.output({
+						"header": "Connection Timeout",
+						"text": "Sorry, we could not connect to the server in time. Check your internet connection and try again",
+						"node_class": "step step-error",
+						"selector": ".step.step-error",
+						"btext": "Back",
+						"resize_param": ".step-error",
+					})
+				} else if ( x.status == 404 ) {
+					// If the error was because the file was not found
+					self.output({
+						"header": "Connection Failed",
+						"text": "It appears as though the mailing system is down. We will fix this as soon as we can. Please try again later",
+						"node_class": "step step-error",
+						"selector": ".step.step-error",
+						"btext": "Back",
+						"resize_param": ".step-error",
+					})
+				} else if ( x.statusText == "error" ) {
+					// If the error was generic ( maybe internet failure )
+					self.output({
+						"header": "Connection Failed",
+						"text": "We could not connect to our servers. Check your internet connection and try again",
+						"node_class": "step step-error",
+						"selector": ".step.step-error",
+						"btext": "Back",
+						"resize_param": ".step-error",
+					})
+				} else if ( t == "parsererror" ) {
+					self.output({
+						"header": "Parser Error",
+						"text": "Our mailer system has experienced an error and returned invalid data. Please try again later",
+						"node_class": "step step-error",
+						"selector": ".step.step-error",
+						"btext": "Back",
+						"resize_param": ".step-error",
+					})
+				} else {
+					// Otherwise display a generic error message.
+					self.output({
+						"header": "Fatal Error",
+						"text": "A unknown fatal error prevented us from sending your message. Please try again later",
+						"node_class": "step step-error",
+						"selector": ".step.step-error",
+						"btext": "Back",
+						"resize_param": ".step-error",
+					})
+				}
+			});
 		},
 
 		output: function( settings ){

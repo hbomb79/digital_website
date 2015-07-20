@@ -1,7 +1,11 @@
 <?php
+	// Startup session
 	session_start("mailer");
+	// Gather POST data and store in object
 	$json_obj = array("name" => isset($_POST["name"]) ? $_POST["name"] : "null", "email" => isset($_POST["email"]) ? $_POST["email"] : "null", "type" => isset($_POST["type"]) ? $_POST["type"] : "null", "message" => isset($_POST["message"]) ? $_POST["message"] : "null", "js" => isset($_POST["js"]) && !empty($_POST['js']) ? "true" : "false");
+	// By default set missing to false
 	$missing = false;
+	// Loop through each entry of the JSON, check the key anv value
 	foreach( $json_obj as $key => $obj ) {
 		if ( $key == "type" && $obj == "NONE" ) {
 			// IF NONE then missing
@@ -23,12 +27,17 @@
 	function response( $return ) {
 		global $missing, $json_obj;
 		// Return Ajax Response, mail has been sent
+		// If all fields were filled
 		if ( !$missing ) {
+			// If the messages were sent successfully
 			if ( $return == "OK" ) {
+				// If the messages were already set then return 304
 				if ( isset($_SESSION["mail"]) || isset($_COOKIE["mail"]) ) {
+					// Set JSON status to 304
 					$json_obj["status"] = 304;
 					$json_obj["statusText"] = "already_sent";
 				} else {
+					// If the message was not already sent then return 200 OK
 					$json_obj["status"] = 200;
 					$json_obj["statusText"] = "sent";
 					$_SESSION["mail"] = true;
@@ -38,7 +47,9 @@
 				$json_obj["status"] = 201;
 				$json_obj["statusText"] = "not_sent";
 			}
+		// If a field was missing or invalid
 		} else {
+			// Set the JSON status to 404
 			$json_obj["status"] = 404;
 			$json_obj["statusText"] = "missing_fields";
 		}
@@ -48,9 +59,11 @@
 	function send() {
 		global $missing, $json_obj;
 		if ( isset($_SESSION["mail"]) || isset($_COOKIE["mail"]) ) {
+			// If already sent, just return OK, this is checked again later
 			return "OK";
 		}
 		if ($missing) {
+			// If missing fields return BADßßßß
 			return "BAD";
 		} else {
 			// Send message to HEXCODE

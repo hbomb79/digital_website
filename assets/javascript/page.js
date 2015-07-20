@@ -1,11 +1,13 @@
+// Add class JS to body to be used by CSS
 $("body").addClass("JS")
 
+// When the DOM is ready, bind a click event to the handle (mobile) so we can expand/collapse the menu bar
 $(document).ready(function() {
 	$(".handle").unbind("click").bind("click", function(){
 		$("nav > ul").toggleClass("showing");
 		$("nav > .handle").toggleClass("active");
 	});
-
+	// If the user hovers on dropdown with JS, animate it
 	$("header li.has-drop").on("mouseenter", function(){
 		$(this).children().filter("ul").stop().slideDown(250);
 	}).on("mouseleave", function(){
@@ -18,7 +20,7 @@ $(document).ready(function() {
 		}
 	});
 });
-
+// Create a notification onscreen.
 function notify(message, color, tc, optional){
 	if (!optional) {
 		optional = false;
@@ -31,6 +33,7 @@ function notify(message, color, tc, optional){
 	}
 };
 
+// Remove notification
 function hideNotify(){
 	if ($("#notification").is(":visible"))  {
 		$("#notification").slideUp(500); 
@@ -45,7 +48,7 @@ function hideNotify(){
 $(document).ready(function(){
 	$("html").on("click", "a.js-link", function( e ){
 		if ( get_cookie( "ajax_disable" ) ) {
-			return true;
+			document.location.href=$(this).data("js-link")
 		}
 		e.preventDefault();
 		// Animate
@@ -53,13 +56,14 @@ $(document).ready(function(){
 	})
 })
 
+// Initiate slideshow.
 $(window).on("load aj_done", function(){
-	$("img").hexSlide({
-		height: "41vw",
+	$("img#test").hexSlide({
+		height: "34vw",
 		width: "60vw",
 		shuffle: true,
 		maxwidth: "960px",
-		maxheight: "540px",
+		maxheight: "490px",
 		animation: "slide",
 		additionalCSS:{
 			container:{

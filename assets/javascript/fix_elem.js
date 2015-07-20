@@ -19,6 +19,7 @@ var fixer = {
 		// Creates window events listener
 		var self = this;
 		var res_time;
+		// On window scroll or resize fire an anonymous function
 		$(window).on("scroll", function(){
 			self.scroll.call(self, this)
 		})
@@ -28,12 +29,15 @@ var fixer = {
 			}
 			res_time = setTimeout(function(){
 				for ( var i = 0; i < self.config.elements.length; i++ ) {
+					// Run the callback function of this element
 					var element = self.config.elements[i]
 					element.callback.onresize( element )
 				}
+				// Trigger scroll after to trigger the check
 				$(window).trigger("scroll")
 			}, 500)
 		})
+		// When the user closes an info box resize the page
 		$(".info-box #close").on("click", function(){
 			$(window).trigger("resize")
 		})
@@ -41,6 +45,7 @@ var fixer = {
 
 	remove_element: function( name ){
 		var self = this;
+		// If this is called remove the event listener for this element and set its css to default.
 		if ( !fixer.config ) { return; }
 		for ( var i = 0; i < self.config.elements.length; i++) {
 			var element = self.config.elements[i];
@@ -58,6 +63,7 @@ var fixer = {
 		self = this;
 		for ( var i = 0; i < elements.length; i++ ) {
 			element = elements[i]
+			// Set pos to the result of a function if the type of the pixel is a function, otherwise set it to the string pixel.
 			pos = ( typeof element.pixel == "function" ) ? element.pixel() : element.pixel;
 			if ( $(window).scrollTop() + element.position.offset > pos && $(element.selector).css("position") != element.position.check ) {
 				$( element.selector ).css( element.position.fix )
@@ -74,6 +80,7 @@ $(window).load(function(){
 	if( $(".page-container.current").data("fix-header") ) {
 		if (fixer_init) {
 			fixer_init()
+			// This function is in ajax_dynamic and sets up the current page.
 		}
 	}
 })

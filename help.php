@@ -1,6 +1,10 @@
 <!DOCTYPE html>
-<!-- csgo.php Landing Page HARRY FELTON 
+<!-- help.php Landing Page HARRY FELTON 
 	https://wireframe.cc/kuJIVT
+
+	On the page various PhP imports are used, these add the functionality to the website by revealing imports or important literals.
+	PhP is used so that these important files only have to be edited once and all files with them included will see the changes, as 
+	opposed to changing the information on each page.
 -->
 <?php
 	session_start("mailer");
@@ -8,19 +12,27 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<!-- These meta tags provide information used by search crawlers -->
 	<meta name="description" content="Help content, including trouble shooting and contact form for the website">
 	<meta name="keywords" content="Help, contact, troubleshooting">
 	<meta name="author" content="Harry Felton">
+	<!-- Add title so the user knows what the tab is about if multi tasking -->
 	<title>Help | Contact</title>
+	<!-- Get stylesheet to add style to the page -->
 	<link rel="stylesheet" href="assets/css/main.css">
 	<?php
+	// Import all important files ( jQuery etc... )
 	require_once"assets/_module/imports.php";
 	?>
+	<!-- This meta tag ensures the sites ratio stays the same on mobile devices as opposed to getting very small -->
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<script>
+		// When the window is loaded run the anonymous callback
 		$(window).load(function(){
 			setTimeout(function(){
+				// After 500ms check if #!contact is in the URL
 				hash.check( "#!contact" , function(){ //#! = Hashbang to signify use of AJAX/Javascript related events as opposed to an id on the page.
+					// If the contact script (help.js) is valid then open the contact form.
 					if ( contact_enable ) { contact.trigger_click() }
 				});
 			}, 500)
@@ -29,6 +41,7 @@
 </head>
 <body>
 	<?php
+		// Import header, this includes a nav bar, settings window, loading screen. 
 		require_once"assets/server/header_addin.php";
 	?>
 	<div id="bg-wrapper">
@@ -37,8 +50,10 @@
 	<div class="page-container current" id="help">
 		<!--<script src="assets/javascript/help.js"></script>-->
 		<script>
+		// Set contact_enable to true or false depending on its current value
 		var contact_enable = contact_enable ? true : false;
 		if ( !_G.preserve.done_set ) {
+			// If the done_set preserve was not set, set it now and create an event listener for aj_done
 			_G.preserve.done_set = true;
 			$(window).on( "aj_done", function(){ // Fired when ajax has completed
 				hash.check( "#!contact" , function(){
@@ -46,17 +61,21 @@
 				});
 			} )
 		}
-
-		var contact = contact ? contact : false;
+		// *deprecated* If contact is set, leave it be, otherwise set to false
+		// var contact = contact ? contact : false;
 		$.getScript("assets/javascript/help.js", function(){
+			// Use javascript to load the script asynchronously and then call the function callback containing an object creation of CF.
+			// This object is then initialized.
 			contact = Object.create( CF )
 			contact.init({
+				// Below is the settings for the contact form, these are not commented because they are basic string settings.
+				// These settings are used by the contact form.
 				button: ".contact-send",
 				form_class: ".step-form",
 				trigger: ".contact-trigger",
 				callback: {
 					start: function(){
-						contact_enable = true;
+						contact_enable = true; // Set the variable used earlier to true now because the contact form has been initialized
 					},
 					anim_start: function(){},
 					anim_done: function(){},
@@ -66,12 +85,13 @@
 				animation: {
 					offset: 64
 				},
-				steps: [
+				steps: [ // Below is a definition of all the steps, each step needs a name, cid ( css id ), id and an inputs array. Also optional post.
 					{
 						name: "step1",
 						cid: "#step1",
-						post: "true",
+						post: "true", // If false the field will not be sent during submission.
 						inputs: [
+							// Each input must also be an object that contains a name, id and type. a presets object is optional.
 							{
 								name:"name",
 								id:"#name",
@@ -81,6 +101,7 @@
 								name:"email",
 								id:"#email",
 								type:"email",
+								// presets is optional as there are defaults.
 								presets: {
 									401: "Enter a valid email"
 								}

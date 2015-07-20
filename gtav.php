@@ -23,7 +23,7 @@
 	<div id="bg-wrapper">
 	 	<div class="page-bg" id="gta-page-bg">
 	</div> <!--Faded out and replaced using ajax--> </div>
-	<div class="page-container current two" id="gtav" data-fix-header="fix"> <!-- Slide off screen, slide new page on screen using ajax -->
+	<div class="page-container current two" id="gtav" data-fix-header="fix" data-legacy-arrive="preset:slideRight"> <!-- Slide off screen, slide new page on screen using ajax -->
 		<div id="wrapper">
 			<div id="container-right" class="load-after">
 				<ul id="contents">
@@ -39,6 +39,10 @@
 					<?php
 						require_once("assets/_module/start.php");
 					?>
+					<div class="image-wrapper wide">
+						<img id="test" src="assets/image/gta.jpg" class="img-format center-image" alt="Picture of counter strike: global offensive" data-slideshow-src="assets/image/gta1.jpg|assets/image/slideshow/gta1.jpg|assets/image/slideshow/gta2.jpg|assets/image/slideshow/gta3.jpg|assets/image/slideshow/gta4.jpg"><br>
+						<small>Royalty Free image of GTA V sourced from Rockstar official news feed</small>
+					</div>
 					<div class="image-wrapper wide">
 						<img id="test1" src="assets/image/gta.jpg" class="img-format center-image" alt="Picture of counter strike: global offensive" data-slideshow-src="assets/image/gta1.jpg|assets/image/slideshow/gta1.jpg|assets/image/slideshow/gta2.jpg|assets/image/slideshow/gta3.jpg|assets/image/slideshow/gta4.jpg"><br>
 						<small>Royalty Free image of GTA V sourced from Rockstar official news feed</small>

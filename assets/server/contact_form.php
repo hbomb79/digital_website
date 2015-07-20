@@ -2,9 +2,11 @@
 	$js = isset($js) ? true : false;
 	if (!$js) { session_start("mailer"); }
 	function check_cookie() {
+		// If session or cookie mail is set, then display a error message
 		global $js;
 		if ( isset($_SESSION["mail"]) || isset($_COOKIE["mail"]) ) {
 			if ( !$js ) {
+				// If not javascript, display HTML messge
 			?>
 			<div class="info-box">
 				<h1>Already Sent</h1><br>
@@ -12,6 +14,7 @@
 			</div>
 			<?php
 			} else {
+				// If js then display an HTML step
 				?>
 					<div id="step1" class="step" data-step-name="step1">
 						<h1>Already Sent</h1>
@@ -27,6 +30,7 @@
 	function create_cookie() {
 		$_SESSION["mail"] = true;
 		setcookie("mail","true",time()+86400, "/");
+		// Cookies set to prevent resend
 	}
 	function drawmain() {
 		check_cookie();

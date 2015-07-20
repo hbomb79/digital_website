@@ -1,6 +1,23 @@
-// HexSlide Version beta 2.6 | Copyright (C) 2015 HexCode, Harry Felton.
-
-// If mobile tap is not on button, toggle nav visibility. Use delegation on the body hexslide. Dont toggle if the user clicks off of the slideshow. While visible pause slideshow.
+/*
+ *
+ * HexSlide jQuery Plugin | Version 2.62.3429.4b2
+ *
+ * jQuery 1.11+
+ * Compatible Browsers:
+ * + OS X Yosemite (10.10.3):
+ *   - Google Chrome ( 43.0.2357.124 )
+ *	 - Safari ( 8.0.5 )
+ * + Windows 8.1 (64-Bit):
+ *	 - Google Chrome (43.0.2357.124 m)
+ *	 - Internet Explorer ( 11.0.2 )
+ *	 - Firefox ( 38.0.5 )
+ *	 - Firefox Developer Edition ( 39.0a2 )
+ *
+ * Released under MIT license
+ *
+ * Copyright Harry Felton, HexCode and other contributors
+ * 
+ */
 
 var _G = _G ? _G : {};
 (function( $, window, document, undefined ){
@@ -9,7 +26,6 @@ var _G = _G ? _G : {};
 		_G.preserve = {};
 		_G.variable = {};
 	}
-
 	_G.variable.last_slide_id = 0;
 	_G.preserve.slide_done = _G.preserve.slide_done ? true : false;
 	var timers = [],
@@ -134,7 +150,7 @@ var _G = _G ? _G : {};
 				container = listArray[i];
 				$container = $(container);
 
-				var item = i+lastID;
+				var item = lastID;
 				// Use ITEM so we dont overwrite other settings and so the index matches the ID number.
 				width = $container.outerWidth();
 				height = $container.outerHeight();
@@ -190,7 +206,7 @@ var _G = _G ? _G : {};
 					"data-hexslide-id": 0
 				}).appendTo( currentSlides );
 				cout("originalsrc ready")
-
+				// If additionalCSS or class objects are defined, set their value to the appropriate attribute
 				if ( options.additionalClass.slide ) {
 					img.addClass( options.additionalClass.slide );
 				}
@@ -233,6 +249,7 @@ var _G = _G ? _G : {};
 		}
 
 		function cout( message, mode, id ) {
+			// Output message to the console using mode with settings from id OR options
 			var settings = id ? slide_options[ id ] : options;
 			if ( !settings || !settings.debug ) {
 				return;
@@ -267,17 +284,21 @@ var _G = _G ? _G : {};
 				timers[i] = setInterval(function(){
 					var slide, slideid, ind;
 					slide = slide_cache[i].shuffle.order[ slide_cache[i].shuffle.current ];
+					// Set the slide var to the slide id
 					slideid = $(slide).data("hexslide-id");
+					// If the new shuffle slide is the same as the current one, then advance by one
 					if ( $(slide).parents(".hexslide").children(".hexslide-slide-container").children(".slide:first").data("hexslide-id") == slideid ) {
 						slide_cache[i].shuffle.current++;
 						slide = slide_cache[i].shuffle.order[ slide_cache[i].shuffle.current ];
 						slideid = $(slide).data("hexslide-id");
 						cout("advancing slide ahead by 1")
 					}
+					// Find the indicator that matches the new id and simulate a click
 					ind = $(slide).parents(".hexslide").children(".indicator-container").children(".indicator").filter(function(){
 						return $(this).data("hexslide-id") == slideid
 					})
 					indClick.call( ind )
+					// If the current shuffle has reached the end, regen the shuffle
 					slide_cache[i].shuffle.current++;
 					if ( slide_cache[i].shuffle.current > slide_cache[i].shuffle.order.length-1 ) {
 						slide_cache[i].shuffle.current = 0;
@@ -324,6 +345,7 @@ var _G = _G ? _G : {};
 			options = cfg ? cfg : options;
 			dummy = applyTo ? applyTo : dummy;
 			a = a ? true : false;
+			// If the options want navigation and the dummy or container does not already have one create it
 			if ( options.navigation && dummy.children(".hexslide-control-container").length <= 0 ) {
 				var nextBtn, prevBtn, nextTxt, prevTxt, controls;
 				controls = $("<div></div>", {
@@ -343,6 +365,7 @@ var _G = _G ? _G : {};
 				prevTxt = $("<span></span>", {
 					text: options.text.previous
 				});
+				// jQuery buttons done, append to controls
 				if ( options.additionalCSS.nextBtn ) {
 					nextBtn.css( options.additionalCSS.nextBtn );
 				}
@@ -665,7 +688,7 @@ var _G = _G ? _G : {};
 		// where it is helpful.
 
 	}
-
+	// Default settings, if the user sets a custom setting these are overridden
 	$.fn.hexSlide.defaults = {
 		interval: 3000,
 		speed: 500,

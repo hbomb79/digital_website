@@ -3,17 +3,23 @@ Harry Felton CSS, Usage Under MIT License
 Clayton, Brynn... you must make your own :D
  */
 
+
+/* Import Websafe Fonts from Google Fonts */
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,700,900);
 @import url(http://fonts.googleapis.com/css?family=Orbitron:400,700);
+/* Basic formatting, removes any gap on sides of window and sets default background color to black ( while bgimg is not visible ) */
 html, body {
 	padding: 0;
 	margin: 0;
 	color:black;
 	font-size: 16px;
 	font-family: 'Roboto', sans-serif;
+	/* Stop horizontal scrolling on window */
 	overflow-x: hidden;
 	background: black;
 }
+
+/* Define animation to be used when a tag is loading */
 
 @-webkit-keyframes flash {
 	0%{opacity: 0.5;}
@@ -40,6 +46,8 @@ html, body {
 	50%{opacity: 1;}
 	100%{opacity: 0.5;}
 }
+
+/* define animation to be used by contact form */
 
 @-webkit-keyframes warning{
 	0%{
@@ -97,6 +105,8 @@ html, body {
 	}
 }
 
+/* When an A tag is loading via Ajax, animate the opacity */
+
 a.loading {
 	-webkit-animation: flash 500ms infinite;
 	-moz-animation: flash 500ms infinite;
@@ -105,6 +115,7 @@ a.loading {
 	animation: flash 500ms infinite;
 }
 
+/* Header a tag bg color */
 header li a.loading{
 	background:#B90000;
 }
@@ -112,6 +123,7 @@ header li a.loading{
 /* Pre-Load CSS
 -------------------*/
 #loading {
+	/* Set the #loading to span the entire page and fixed */
 	width:100%;
 	position:fixed;
 	left:0;
@@ -123,9 +135,12 @@ header li a.loading{
 }
 
 #loading #diag {
+	/* Use this to inform the user their content is loading */
+	/* Set basic rules so the window does not get too big or small */
 	width:30%;
 	min-width: 320px;
 	max-width:960px;
+	/* Center in the middle of the page */
 	margin:0 auto;
 	position: absolute;
 	right:0;
@@ -135,43 +150,56 @@ header li a.loading{
 	-ms-transform: translateY(-50%);
 	-o-transform: translateY(-50%);
 	transform: translateY(-50%);
+	/* Set background and border */
 	background:white;
 	border: #FF003F solid 3px;
 	border-radius: 1em;
 	padding: 1em;
+	/* Align text */
 	text-align: center;
 }
 
 /* Loading Progress Bar
 -------------------*/
 #load-container{
+	/* Set to top of window */
 	position: fixed;
 	height:5px;
+	/* animate any changes to width over 500ms */
 	-webkit-transition: width 500ms ease-in-out;
 	-o-transition: width 500ms ease-in-out;
 	transition: width 500ms ease-in-out;
+	/* Set color to white */
 	background:white;
+	/* Set loading over anything else */
 	z-index:1999;
+	/* Defalt width of 0 */
 	width:0%;
+	/* Add a shadow to emulate a layered effect */
 	-webkit-box-shadow: 0 0 5px black;
 	box-shadow: 0 0 5px black;
 }
 #load-progress{
+	/* Set bg to white and width to 100% of parent */
 	position: relative;
 	background: white;
 	width:100%;
 	height:5px;
 }
 #load-progress:before{
+	/* Add a before element to emulate a shadow (angled) */
 	z-index: -1;
 	position: absolute;
 	content: "";
+	/* Position for best appearence */
 	bottom: 14px;
 	right: -8px;
 	width: 100%;
 	top: -20px;
+	/* Max width of 200px to stop shadow being too big */
 	max-width:200px;
 	background: red;
+	/* Set a gray shadow and rotate the shadow by 2deg clockwise */
 	-webkit-box-shadow: 0 13px 10px rgb(66, 48, 48);
 	-moz-box-shadow: 0 13px 10px rgb(66, 48, 48);
 	box-shadow: 0 13px 10px rgb(66, 48, 48);
@@ -185,12 +213,16 @@ header li a.loading{
 /* Settings Screen
 -------------------*/
 #settings {
+	/* Set settings window to 40% of screen with a min width of 300 pixels */
 	width:40%;
 	min-width:300px;
+	/* Again, set above anything else */
 	z-index:1999;
+	/* Set fixed so scrolling has no effect */
 	position: fixed;
 	top:50%;
 	left:50%;
+	/* center vertically and horizontally */
 	-webkit-transform: translate(-50%, -50%);
 	-ms-transform: translate(-50%, -50%);
 	-o-transform: translate(-50%, -50%);
@@ -199,24 +231,29 @@ header li a.loading{
 	display: none;
 }
 #settings #settings-inner {
+	/* Main content of settings page, set background to white (FFF) */
 	background:white;
 }
 
 #settings #top-bar {
+	/* Float this to the right so the close button is in the top right. */
 	float:right;
 }
 
 #settings #top-bar a {
+	/* Position X close button in the top right */
 	line-height: 1em;
 	padding:0.5em;
 }
 
 #settings #pane {
+	/* Contains settings, set width to max and use clear both to remove the effect of floating the top bar */
 	width:100%;
 	clear:both;
 }
 
 #settings #pane #inner{
+	/* Inner settings, basic formatting to make the site easier to read */
 	padding: 1em 0.5em 1em 0.5em;
 	text-align: center;
 }
@@ -241,6 +278,7 @@ header li a.loading{
 /* Overlay Shadow
 -------------------*/
 #shadow {
+	/* The shadow can be used by any window that needs to have a dark background */
 	position: fixed;
 	top:0;
 	left:0;
@@ -248,16 +286,23 @@ header li a.loading{
 	height: 100%;
 	background: rgba(0, 0, 0, 0.8);
 	z-index:1999;
+	/* Set the shadow to take up the whole screen */
 }
 
 .button {
+	/* Used by any button or a tag that wants to appear like a button */
 	padding:1em;
+	/* Set background to white */
 	background: white;
+	/* Set a red border of 3px to separate the button content from the rest of the page */
 	border: 3px solid #FF003F;
+	/* Remove any underlines */
 	text-decoration: none !important;
+	/* Animate the background and color of the button using linear easing */
 	-webkit-transition: background 250ms ease, color 250ms ease;
 	-o-transition: background 250ms ease, color 250ms ease;
 	transition: background 250ms ease, color 250ms ease;
+	/* Remove browser outline, and set cursor to pointer */
 	cursor:pointer;
 	color: #FF003F;
 	display:block;
@@ -265,6 +310,7 @@ header li a.loading{
 }
 
 .button:hover {
+	/* When hovered flip the color scheme */
 	background:#FF003F;
 	color:white;
 }
@@ -272,27 +318,35 @@ header li a.loading{
 /* Page Dynamics And Structure
 -------------------*/
 .page-container{
+	/* Set all .page-container off to the right of the page, this allows the page to be animated */
 	transform: translate(100%, 0);
     -webkit-transform: translate(100%, 0);
     -moz-transform: translate(100%, 0);
+    /* Set animation */
     transition: transform 1s ease, opacity 1s;
     -webkit-transition: -webkit-transform 1s ease, opacity 1s;
     -moz-transition: -moz-transform 1s ease, opacity 1s;
+    /* Set absolute */
     position: absolute;
     width: 100%;
     min-height: 100vh;
+    /* Hide so the page container is faded in during animation */
     opacity: 0;
 }
 
 .page-container.current{
+	/* This should be visible */
+	/* Set transform to none so the page-container returns to the middle of the page */
 	-webkit-transform: none;
 	-ms-transform: none;
 	-o-transform: none;
 	transform: none;
+	/* Set opacity to 1 so the user can see the content */
 	opacity: 1;
 }
 
 .page-container.leave {
+	/* This page needs to leave, set the transform to offset it on the X axis by its width*-1 (-100%) */
     transform: translate(-100%, 0);
     -moz-transform: translate(-100%, 0);
     -webkit-transform: translate(-100%, 0);
@@ -300,44 +354,57 @@ header li a.loading{
 }
 
 #container, footer {
+	/* Main page content */
+	/* Set width of 88% and maxwidth of 960px. maxwidth is used because if the page gets too large the text becomes hard to read */
 	width: 88%;
 	max-width:960px;
+	/* Set background and shadow to add the layered effect */
 	background: white;
 	box-shadow: 0px 0px 5px black;
+	/* Center horizontally */
 	margin:0 auto;
 	padding: 1em;
 	z-index: 2;
 }
 
 .page-container.two #container, .page-container.two footer {
+	/* If this page is a two column layout then change the width to 69% (just under 70 because 79 + 37 + padding and margins = 100 ) */
 	width:69%;
 	margin:0;
 	padding: 1em;
 }
 
 .page-container.two #container-right {
+	/* Set right side to 27%, fix the column so it stays with user */
 	width:27%;
 	position: fixed;
 	right:0;
 	top:2em;
+	/* Set the height to just under 100vh, if the content is > than the height a scroll bar will appear */
 	bottom:5em;
 	overflow-y: auto;
 	word-wrap: break-word;
+	margin-top: 56px;
 }
 
 .page-container.two #container-right #contents {
+	/* Style the contents page */
+	/* Add background so the user can read the contents, also add border for stylistic purposes */
 	background: white;
 	border: 3px solid crimson;
 	border-radius: 1em;
 	overflow: hidden;
 	max-width: 300px;
+	/* Center horizontally */
 	margin-left: auto;
 	margin-right: auto;
 }
 
 .page-container.two #container-right ul {
+	/* Style the unordered list containing the contents */
 	padding: 1em;
 	margin: 0;
+	/* Remove the circle for each LI */
 	list-style-type: none;
 	text-align: center;
 }
@@ -347,44 +414,53 @@ header li a.loading{
 }
 
 .header h1{
+	/* Animate the h1's color and text decoration */
 	-webkit-transition: color 500ms ease-in-out, text-decoration 500ms ease-in-out;
 	-o-transition: color 500ms ease-in-out, text-decoration 500ms ease-in-out;
 	transition: color 500ms ease-in-out, text-decoration 500ms ease-in-out;
 }
 
 .page-container.two .header.fix {
+	/* When the header has been "fixed" via fix_elem.js set its width to 69% so it does not overlap the main content*/
 	width:69%;
 }
 
 .page-container:not(.two) .header.fix {
+	/* If the page is NOT two column but the header is still fixed, then change its width to 88% and the same max width as the container */
 	width: 88%;
 	max-width: 960px;
 }
 
 .header.fix {
+	/* Set z to 2 to prevent overlapping by other elements on the page */
 	z-index:2;
 }
 
 .header.fix h1 {
+	/* Set to top of page */
 	position: fixed;
 	top:0;
+	/* Set width and maxwidth to same as main container */
 	width: inherit;
 	max-width: inherit;
-	background:-moz-linear-gradient(white, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
-	background:-ms-linear-gradient(white, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
-	background:-webkit-linear-gradient(white, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
-	background:-o-linear-gradient(white, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+	/* set background to a linear gradient from white (top) to transparent (bottom - 0 opacity) */
+	background:-moz-linear-gradient(white, white, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+	background:-ms-linear-gradient(white, white, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+	background:-webkit-linear-gradient(white, white, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+	background:-o-linear-gradient(white, white, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+	/* Set text color to red */
 	color: crimson;
 	padding: 0.5em 0;
 	text-decoration: none;
 }
 
-#wrapper, #container-right {
+#wrapper {
 	width:100%;
 	margin-top: 56px;
 }
 
 #bg-wrapper {
+	/* Contains background, set default color of black so faded edges are not white */
 	background: black;
 	width: 100%;
 	height: 100%;
@@ -395,8 +471,11 @@ header li a.loading{
 }
 
 .page-bg#main-page-bg {
+	/* Set background to image via URL, do NOT repeat the image, center it ver and hor */
 	background: url('../image/homepage.jpg') no-repeat center center;
+	/* Stretch image to fit page */
 	background-size:cover;
+	/* Blur the image by 10px to prevent the user getting distracted by overly HD images */
 	-webkit-filter: blur(10px);
 	-o-filter: blur(10px);
 	filter: blur(10px);
@@ -494,10 +573,12 @@ a {
 }
 
 a.anim {
+	/* If this A tag wants its underline animated */
 	position: relative;
 }
 
 a.anim:before {
+	/* Create an invisible rectangle under the text */
 	content: "";
 	position: absolute;
 	width: 100%;
@@ -513,21 +594,25 @@ a.anim:before {
 }
 
 a.anim:hover:before {
+	/* When hovered, set invisible and animate width to that of the text */
 	visibility: visible;
 	-webkit-transform: scaleX(1);
 	transform: scaleX(1);
 }
 
 a:not(.anim):active, a:not(.anim):hover {
+	/* If the a tag is not supposed to be animated and not currently active, set the decoration to underline and color to red */
 	color:red;
 	text-decoration: underline;
 }
 
 h1.large {
+	/* Increase font size to let the user know this IS the title */
 	font-size: 4em;
 }
 
 .large {
+	/* Change font to a more suitable font (bigger char) */
 	font-family: 'Orbitron', sans-serif;
 }
 
